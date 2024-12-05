@@ -1,0 +1,62 @@
+@import './screens.scss';
+@import './vars.scss';
+
+@mixin headerStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    line-height: $fontSize;
+    text-align: $textAlign;
+
+    color: $color;
+    font-family: inherit;
+    margin: 0;
+}
+
+@mixin blockHeader($textAlign: center, $color: $dark-grey) {
+    @include headerStyles(94px, 600, $textAlign, $color);
+    letter-spacing: -0.02em;
+
+    @media (max-width: $laptop) {
+        @include headerStyles(58px, 600, $textAlign, $color);
+    }
+
+    @media (max-width: $tablet) {
+        @include headerStyles(48px, 600, $textAlign, $color);
+        letter-spacing: -0.03em;
+    }
+
+    @media (max-width: $mobile) {
+        @include headerStyles(36px, 600, left, $color);
+        letter-spacing: -0.02em;
+    }
+}
+
+@mixin blockSubtitle($textAlign: center, $color: $dark-grey) {
+    @include headerStyles(16px, 700, $textAlign, $color);
+    letter-spacing: -0.02em;
+    line-height: 19.2px;
+    text-transform: uppercase;
+
+    @media (max-width: $tablet) {
+        @include headerStyles(12px, 700, $textAlign, $color);
+        line-height: 14.4px;
+    }
+
+    @media (max-width: $mobile) {
+        @include headerStyles(12px, 700, left, $color);
+    }
+}
+
+@mixin hover {
+    @media (hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+
+    @media (hover: none) {
+        &:active {
+            @content;
+        }
+    }
+}
