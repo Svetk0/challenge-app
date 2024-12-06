@@ -5,14 +5,14 @@ type Props = {
   text: string;
   color: string;
   type: "submit" | "button";
-  callback?: () => void;
+  onClick?: () => void;
   disabled?: boolean;
 };
 
 export default function Button({
   text,
   color,
-  callback,
+  onClick,
   type,
   disabled = false,
 }: Props) {
@@ -20,7 +20,7 @@ export default function Button({
     <button
       type={type}
       className={cn(styles.button, color && styles[color])}
-      onClick={callback}
+      onClick={onClick}
       disabled={disabled}
     >
       {text}

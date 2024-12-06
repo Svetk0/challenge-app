@@ -1,5 +1,4 @@
-@use "@styles/variables.scss" as *;
-@use "@styles/mixins.scss" as *;
+@import '@styles';
 
 .button {
     width: max-content;
@@ -11,7 +10,7 @@
     border-radius: 12px;
     border: none;
     color: $dark-grey;
-    font-family: 'SF Pro Text', 'Arial', sans-serif;
+    //font-family: 'SF Pro Text', 'Arial', sans-serif;
     font-size: 20px;
     font-weight: 600;
     height: 60px;
@@ -75,7 +74,7 @@
     box-sizing: border-box;
 }
 
-.ton-wallet {
+.sky-blue {
     background-color: $blueButton;
     color: $white;
     border-radius: 40px;
@@ -95,8 +94,4 @@
 
 .green-gradient {
     background: $gradientButton;
-}
-
-.white-green {
-    background-color: $white-green;
 }

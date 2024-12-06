@@ -5,5 +5,29 @@
       "logIn": "Log in",
       "signUp": "Sign Up"
     }
+  },
+  "form_challenge": {
+    "title": "Your goal",
+    "time": [
+      {
+        "value": "day"
+      },
+      {
+        "value": "week"
+      },
+      {
+        "value": "month"
+      },
+      {
+        "value": "year"
+      },
+      {
+        "value": "all time"
+      }
+    ],
+    "buttons": {
+      "back": "Back",
+      "submit": "Create"
+    }
   }
 }

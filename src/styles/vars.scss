@@ -1,0 +1,67 @@
+//colors
+$lightBlueButton90: #e2e3fc;
+$white: #f5fff6;
+$white80: #f5fff6f7;
+$dark-grey: #160e2c;
+$extra-light-green: #dbffdb;
+$light-green: #c9f3c8;
+$pale-green: #e3ffe3;
+$grey: #9b9d9b;
+$light-grey: #e6eee6;
+$green: #00765c;
+$red: #ff3333;
+$black90: #0b0716e7;
+$yellow: #fff6a0;
+$pale-gray: #c8c2da;
+$blue: #00a2ff;
+$deep-green: #1e4620;
+$grey-white: #f5fffa;
+
+$purple: #8b62ff;
+$deep-purple: #6141ba;
+$bright-purple: #6041ba;
+$dark-purple: #150e24;
+$light-purple: #9e9cf4;
+$extra-light-purple: #bda6ff;
+$xx-light-purple: #dcd7ff;
+$grey-purple: #c8c2da;
+$yellow: #fff8b7;
+
+//include opacity
+$dark-grey-7: #160e2c87;
+
+//font color
+$darkFont: $dark-grey;
+$whiteFont: $white;
+$greenFont: $deep-green;
+$failureFont: $red;
+
+//border
+$inputBorder2: 2px solid $bright-purple;
+
+//background
+$modalBackground: $black90;
+
+//gradient
+$gradient-yellow-green: linear-gradient(160deg,
+        rgba(254, 254, 152, 1) 0%,
+        rgba(112, 201, 143, 1) 20%,
+        rgba(0, 118, 92, 1) 100%);
+$gradient-theme: linear-gradient(0deg,
+        rgba(58, 255, 202, 0.1) 0%,
+        rgba(255, 255, 255, 0.1) 50.01%,
+        rgba(58, 255, 202, 0.1) 100%);
+//buttons
+$gradientButton: $gradient-yellow-green;
+$hoverButton: $light-green;
+$blueButton: $blue;
+//box shadow
+$bottomShadow: 1px 4px 4px 0px rgba(13, 38, 12, 0.24);
+$sideShadow: 1px 2px 2px 0px rgba(13, 38, 12, 0.24);
+$sideContrastShadow: 0.6px 1.2px 1.22px 0px rgba(16, 3, 52, 0.4);
+$roundShadow: 1px 1px 2px 0px rgba(13, 38, 12, 0.24),
+    inset 1px 2px 2px 0 rgba(13, 38, 12, 0.24);
+$borderShadow: 1px 4px 4px 0px rgba(35, 34, 32, 0.24),
+    inset 1px 4px 4px 0 rgba(35, 34, 32, 0.24);
+
+$ligthYellowBtnShadow: 2px 4px 4px 0px rgba(16, 3, 52, 0.4);
