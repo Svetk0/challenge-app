@@ -106,7 +106,6 @@ export default function CreateForm() {
             <p className={styles.error}>{errors.amount.message}</p>
           )}
         </div>
-
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor="period">
             per time period
@@ -139,6 +138,7 @@ export default function CreateForm() {
           </div> */}
         </div>
         {/* GOAL PERIOD */}
+        What is duration of your challenge?
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor="datePeriodStart">
             Start
@@ -151,7 +151,7 @@ export default function CreateForm() {
                 id="datePeriodStart"
                 //name="datePeriodStart"
                 type="date"
-                placeholder="Start"
+                //placeholder="Start"
                 {...register("datePeriodStart", {
                   required: "fill it",
 
@@ -199,7 +199,6 @@ export default function CreateForm() {
             </div> */}
           </div>
         </div>
-
         {/* Inputs Container    */}
       </div>
       <div className={styles.buttonsWrapper}>
