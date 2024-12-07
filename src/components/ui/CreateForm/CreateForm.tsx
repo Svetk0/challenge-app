@@ -10,9 +10,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import styles from "./createForm.module.scss";
 
 type FormValues = {
-  sendAmount: number;
-  receiveAmount: number;
-  recipientAddress: string;
+  amount: number;
+  goalTitle: string;
+  period: string;
+  datePeriodStart: string;
+  datePeriodFinish: string;
 };
 
 export default function CreateForm() {
@@ -21,7 +23,7 @@ export default function CreateForm() {
 
   const [receiveAmount, setReceiveAmount] = useState(0);
   const [sendAmount, setSendAmount] = useState(0);
-  const [recipientAddress, setRecipientAddress] = useState("");
+  const [goalTitle, setGoalTitle] = useState("");
 
   const {
     register,
@@ -37,14 +39,13 @@ export default function CreateForm() {
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    setRecipientAddress(data.recipientAddress.trimStart());
-    setSendAmount(data.sendAmount);
-    setReceiveAmount(data.receiveAmount);
+    setGoalTitle(data.goalTitle.trimStart());
+    setSendAmount(data.amount);
+
     console.log(data);
     reset({
-      sendAmount: 0,
-      receiveAmount: 0,
-      recipientAddress: "",
+      amount: 0,
+      goalTitle: "",
     });
   };
 
@@ -61,50 +62,145 @@ export default function CreateForm() {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
-          <label className={styles.label} htmlFor="recipientAddress">
+          <label className={styles.label} htmlFor="goalTitle">
             {dt.title}
           </label>
           <textarea
             className={styles.textarea}
             placeholder={"goal title"}
-            id="recipientAddress"
-            {...register("recipientAddress", {
+            id="goalTitle"
+            {...register("goalTitle", {
               required: "please, enter goal title ",
               validate: {
                 minLength: (v) => v.trim().length >= 1 || "type a goal name",
                 maxLength: (v) => v.length <= 200 || "not more 200 symb",
                 noSpaces: (v) => v.trim().length > 0 || "spaces",
               },
-              ...handleValidation("recipientAddress"),
+              ...handleValidation("goalTitle"),
             })}
           />
-          {errors.recipientAddress && (
-            <p className={styles.error}>{errors.recipientAddress.message}</p>
+          {errors.goalTitle && (
+            <p className={styles.error}>{errors.goalTitle.message}</p>
           )}
         </div>
         <div className={styles.inputWrapper}>
-          <label htmlFor="sendAmount" className={styles.label}>
+          <label htmlFor="amount" className={styles.label}>
             {dt.title}
           </label>
           <input
-            id="sendAmount"
+            id="amount"
             placeholder={`days`}
             className={styles.input}
             type="number"
-            {...register("sendAmount", {
+            {...register("amount", {
               required: "fill it",
               validate: {
                 min: (v) => v >= 1 || "amount should be more than 0",
                 // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
               },
-              ...handleValidation("sendAmount"),
+              ...handleValidation("amount"),
             })}
           />
 
-          {errors.sendAmount && (
-            <p className={styles.error}>{errors.sendAmount.message}</p>
+          {errors.amount && (
+            <p className={styles.error}>{errors.amount.message}</p>
           )}
         </div>
+
+        <div className={styles.inputWrapper}>
+          <label className={styles.label} htmlFor="period">
+            per time period
+          </label>
+          <div>
+            <select
+              id="period"
+              //name="periodId"
+              defaultValue=""
+              aria-describedby="period-error"
+              className={styles.input}
+              {...register("period", {
+                required: "fill it",
+
+                ...handleValidation("period"),
+              })}
+            >
+              {dt.time.map((value) => (
+                <option key={value.value}>{value.value}</option>
+              ))}
+            </select>
+          </div>
+          {/* <div id="period-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.periodId &&
+              state.errors.periodId.map((error: string) => (
+                <p  key={error}>
+                  {error}
+                </p>
+              ))}
+          </div> */}
+        </div>
+        {/* GOAL PERIOD */}
+        <div className={styles.inputWrapper}>
+          <label className={styles.label} htmlFor="datePeriodStart">
+            Start
+          </label>
+          <div>
+            <div>
+              <input
+                className={styles.input}
+                aria-describedby="datePeriodStart-error"
+                id="datePeriodStart"
+                //name="datePeriodStart"
+                type="date"
+                placeholder="Start"
+                {...register("datePeriodStart", {
+                  required: "fill it",
+
+                  ...handleValidation("datePeriodStart"),
+                })}
+              />
+            </div>
+            {/* <div id="datePeriodStart-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.datePeriodStart &&
+                state.errors.datePeriodStart.map((error: string) => (
+                  <p key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div> */}
+          </div>
+        </div>
+        <div className={styles.inputWrapper}>
+          <label className={styles.label} htmlFor="datePeriodFinish">
+            Finish
+          </label>
+          <div>
+            <div>
+              <input
+                className={styles.input}
+                aria-describedby="datePeriodFinish-error"
+                id="datePeriodFinish"
+                //name="datePeriodFinish"
+                type="date"
+                placeholder="Finish"
+                {...register("datePeriodFinish", {
+                  required: "fill it",
+
+                  ...handleValidation("datePeriodFinish"),
+                })}
+              />
+            </div>
+            {/* <div id="datePeriodFinish-error" aria-live="polite" aria-atomic="true">
+              {state.errors?.datePeriodFinish &&
+                state.errors.datePeriodFinish.map((error: string) => (
+                  <p key={error}>
+                    {error}
+                  </p>
+                ))}
+            </div> */}
+          </div>
+        </div>
+
+        {/* Inputs Container    */}
       </div>
       <div className={styles.buttonsWrapper}>
         <Button
