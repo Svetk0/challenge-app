@@ -1,0 +1,154 @@
+@import '@styles';
+
+.form {
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: 0 auto;
+
+    >button {
+        width: 140px;
+    }
+}
+
+.inputsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $white;
+    padding: 24px 16px;
+    gap: 12px;
+    border-radius: 12px;
+
+    >div:nth-child(1),
+    >div:nth-child(3) {
+        margin-bottom: 8px;
+    }
+
+    >div:nth-child(4) {
+        margin-top: 30px;
+    }
+
+    .infoContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        color: $dark-grey;
+        align-self: flex-start;
+        padding: 5px 46px;
+        white-space: nowrap;
+        gap: 8px;
+
+        .comissionWrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .comissionValue {
+                height: 27px;
+                background-color: $extra-light-purple;
+                border-radius: 6px;
+                padding: 4px 12px;
+                box-shadow: $bottomShadow;
+            }
+        }
+
+        & span {
+            font-weight: 600;
+        }
+
+    }
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input,
+.textarea {
+    width: 270px;
+    height: 60px;
+    height: fit-content;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    padding: 15px 24px;
+    border: 4px solid $deep-purple;
+    border-radius: 12px;
+    background-color: transparent;
+    box-shadow: $borderShadow;
+    color: $dark-grey;
+
+    &::placeholder {
+        color: $xx-light-purple;
+    }
+
+    &:focus {
+        border: 4px solid $dark-grey;
+        transition: border-color 0.3s ease;
+    }
+
+    &:read-only {
+        background-color: $light-grey;
+        color: $grey;
+        border-color: $grey;
+        cursor: not-allowed;
+
+        &::placeholder {
+            color: $grey;
+        }
+    }
+}
+
+.textarea {
+    resize: none;
+    height: 84px;
+}
+
+.label {
+    position: absolute;
+    left: 44px;
+    top: -7px;
+    line-height: 19px;
+    padding-bottom: 16px;
+    color: $purple;
+    background-color: $white;
+    padding: 0 10px;
+    font-size: 16px;
+    border-radius: 6px;
+
+    &_readOnly {
+        color: $dark-grey;
+        background-color: $white;
+        opacity: 0.95;
+    }
+}
+
+.error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.buttonsWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 50px;
+
+    &>button {
+        width: 140px;
+    }
+}
