@@ -148,6 +148,10 @@ export default function CreateForm() {
             type="date"
             {...register("datePeriodStart", {
               required: "fill it",
+              validate: {
+                min: (v) => v >= "2010-01-01" || "not early 2010",
+                // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
+              },
 
               ...handleValidation("datePeriodStart"),
             })}
