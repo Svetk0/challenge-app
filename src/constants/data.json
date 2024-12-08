@@ -7,7 +7,8 @@
     }
   },
   "form_challenge": {
-    "title": "Your goal",
+    "title": "Your goal title",
+    "subtitle": "Iterations",
     "time": [
       {
         "value": "day"
