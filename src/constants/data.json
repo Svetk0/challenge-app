@@ -8,7 +8,7 @@
   },
   "create_form": {
     "title": "Create a new Challenge",
-    "goal_title": "Your goal title",
+    "goal_title": "Your Challenge title",
     "subtitle": "Iterations",
     "time": [
       {

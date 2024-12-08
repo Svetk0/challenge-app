@@ -20,7 +20,6 @@ type FormValues = {
 export default function CreateForm() {
   const router = useRouter();
   const dt = staticData.create_form;
-
   const [goalTitle, setGoalTitle] = useState("");
 
   const {
@@ -38,11 +37,13 @@ export default function CreateForm() {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     setGoalTitle(data.goalTitle.trimStart());
-
+    localStorage.setItem("new_challenge", JSON.stringify(data));
     console.log(data);
     reset({
       amount: 0,
       goalTitle: "",
+      period: "",
+      datePeriodStart: "",
     });
   };
 
@@ -54,6 +55,10 @@ export default function CreateForm() {
       }
     },
   });
+
+  //   useEffect(() => {
+  //     localStorage.setItem("favNumber", JSON.stringify(customers[3]));
+  //   }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -123,17 +128,17 @@ export default function CreateForm() {
               {dt.time.map((value) => (
                 <option key={value.value}>{value.value}</option>
               ))}
-              {errors.period && (
-                <p className={styles.error}>{errors.period.message}</p>
-              )}
             </select>
+            {errors.period && (
+              <p className={styles.error}>{errors.period.message}</p>
+            )}
           </div>
         </div>
         {/* GOAL PERIOD */}
 
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor="datePeriodStart">
-            When you will start?
+            When will you start?
           </label>
 
           <input
@@ -182,6 +187,7 @@ export default function CreateForm() {
           type="submit"
           text={"Create"}
           color="sky-blue"
+          disabled={!isValid}
           //onClick={() => router.push("/wallet")}
         />
       </div>
