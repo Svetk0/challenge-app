@@ -19,10 +19,8 @@ type FormValues = {
 
 export default function CreateForm() {
   const router = useRouter();
-  const dt = staticData.form_challenge;
+  const dt = staticData.create_form;
 
-  const [receiveAmount, setReceiveAmount] = useState(0);
-  const [sendAmount, setSendAmount] = useState(0);
   const [goalTitle, setGoalTitle] = useState("");
 
   const {
@@ -40,7 +38,6 @@ export default function CreateForm() {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     setGoalTitle(data.goalTitle.trimStart());
-    setSendAmount(data.amount);
 
     console.log(data);
     reset({
@@ -60,10 +57,11 @@ export default function CreateForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <h2> {dt.title}</h2>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor="goalTitle">
-            {dt.title}
+            {dt.goal_title}
           </label>
           <textarea
             className={styles.textarea}

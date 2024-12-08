@@ -6,8 +6,9 @@
       "signUp": "Sign Up"
     }
   },
-  "form_challenge": {
-    "title": "Your goal title",
+  "create_form": {
+    "title": "Create a new Challenge",
+    "goal_title": "Your goal title",
     "subtitle": "Iterations",
     "time": [
       {
