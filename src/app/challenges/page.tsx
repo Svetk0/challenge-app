@@ -3,12 +3,13 @@
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
+import ListChallenges from "@/components/ListChallenges/ListChallenges";
 export default function Home() {
   const router = useRouter();
   return (
     <>
-      Dashboard
-      <Link href={"/dashboard/create"}>
+      <ListChallenges />
+      <Link href={"/challenges/create"}>
         <Button
           type="button"
           text={"Add new"}

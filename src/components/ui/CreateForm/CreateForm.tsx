@@ -170,6 +170,7 @@ export default function CreateForm() {
               Finish
             </label>
             <input
+              disabled={false}
               className={styles.input}
               aria-describedby="datePeriodFinish-error"
               id="datePeriodFinish"

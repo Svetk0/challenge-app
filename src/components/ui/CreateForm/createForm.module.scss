@@ -101,16 +101,17 @@
         transition: border-color 0.3s ease;
     }
 
-    // &:read-only {
-    //     background-color: $light-grey;
-    //     color: $grey;
-    //     border-color: $grey;
-    //     cursor: not-allowed;
+    &:disabled {
+        background-color: $light-grey;
+        color: $grey;
+        border-color: $grey;
+        cursor: not-allowed;
 
-    //     &::placeholder {
-    //         color: $grey;
-    //     }
-    // }
+        &::placeholder {
+            color: $grey;
+        }
+    }
+
     &_shorts {
         width: 100%;
     }
@@ -156,7 +157,7 @@
     align-items: center;
     justify-content: center;
     gap: 24px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 
     &>button {
         width: 140px;
