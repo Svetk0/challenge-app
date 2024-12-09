@@ -21,7 +21,10 @@ export default function CreateForm() {
   const router = useRouter();
   const dt = staticData.create_form;
   const [goalTitle, setGoalTitle] = useState("");
-
+  const [datePeriodStart, setDatePeriodStart] = useState("");
+  const addChallenge = (newChallenge: FormValues) => {
+    localStorage.setItem("new_challenge", JSON.stringify(newChallenge));
+  };
   const {
     register,
     handleSubmit,
@@ -37,7 +40,7 @@ export default function CreateForm() {
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     setGoalTitle(data.goalTitle.trimStart());
-    localStorage.setItem("new_challenge", JSON.stringify(data));
+    addChallenge(data);
     console.log(data);
     reset({
       amount: 0,
@@ -51,6 +54,8 @@ export default function CreateForm() {
     onBlur: () => trigger(fieldName),
     onChange: () => {
       if (getValues(fieldName)) {
+        setDatePeriodStart(getValues("datePeriodStart"));
+        console.log("datePeriodStart", datePeriodStart);
         clearErrors(fieldName);
       }
     },
@@ -135,49 +140,57 @@ export default function CreateForm() {
           </div>
         </div>
         {/* GOAL PERIOD */}
+        <div className={styles.buttonsWrapper}>
+          <div className={styles.inputWrapper}>
+            <label className={styles.label} htmlFor="datePeriodStart">
+              Start
+            </label>
 
-        <div className={styles.inputWrapper}>
-          <label className={styles.label} htmlFor="datePeriodStart">
-            When will you start?
-          </label>
+            <input
+              className={`${styles.input}`}
+              aria-describedby="datePeriodStart-error"
+              id="datePeriodStart"
+              type="date"
+              {...register("datePeriodStart", {
+                required: "fill it",
+                validate: {
+                  min: (v) => v >= "2010-01-01" || "not early 2010",
+                  // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
+                },
 
-          <input
-            className={`${styles.input}`}
-            aria-describedby="datePeriodStart-error"
-            id="datePeriodStart"
-            type="date"
-            {...register("datePeriodStart", {
-              required: "fill it",
-              validate: {
-                min: (v) => v >= "2010-01-01" || "not early 2010",
-                // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
-              },
+                ...handleValidation("datePeriodStart"),
+              })}
+            />
+            {errors.datePeriodStart && (
+              <p className={styles.error}>{errors.datePeriodStart.message}</p>
+            )}
+          </div>
+          <div className={styles.inputWrapper}>
+            <label className={styles.label} htmlFor="datePeriodFinish">
+              Finish
+            </label>
+            <input
+              className={styles.input}
+              aria-describedby="datePeriodFinish-error"
+              id="datePeriodFinish"
+              type="date"
+              {...register("datePeriodFinish", {
+                required: "fill it",
+                validate: {
+                  min: (v) =>
+                    v > String(datePeriodStart) || "should be later than start",
+                  // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
+                },
 
-              ...handleValidation("datePeriodStart"),
-            })}
-          />
-          {errors.datePeriodStart && (
-            <p className={styles.error}>{errors.datePeriodStart.message}</p>
-          )}
+                ...handleValidation("datePeriodFinish"),
+              })}
+            />
+            {errors.datePeriodFinish && (
+              <p className={styles.error}>{errors.datePeriodFinish.message}</p>
+            )}
+          </div>
         </div>
-        {/* <div className={styles.inputWrapper}>
-          <label className={styles.label} htmlFor="datePeriodFinish">
-            Finish
-          </label>
-          <input
-            className={styles.input}
-            aria-describedby="datePeriodFinish-error"
-            id="datePeriodFinish"
-            //name="datePeriodFinish"
-            type="date"
-            placeholder="Finish"
-            {...register("datePeriodFinish", {
-              required: "fill it",
 
-              ...handleValidation("datePeriodFinish"),
-            })}
-          />
-        </div> */}
         {/* Inputs Container    */}
       </div>
       <div className={styles.buttonsWrapper}>
