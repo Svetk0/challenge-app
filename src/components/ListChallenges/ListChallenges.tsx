@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
 import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
 
@@ -19,17 +21,9 @@ export default function ListChallenges<LocalStorage>() {
   //const MY_CHALLENGES = [{}];
   const router = useRouter();
   const [local, setLocal] = useState([]);
+  const tokenData = useSelector((state: RootState) => state.challenge);
+  console.log("storeRedux", tokenData);
 
-  useEffect(() => {
-    const lastChallenge = JSON.parse(localStorage.getItem("last_challenge"));
-
-    const fullList = [{ ...local, ...lastChallenge }];
-    console.log("fullList", fullList);
-    localStorage.setItem("challenges", JSON.stringify(fullList));
-  }, [local]);
-  //   useEffect(() => {
-  //     updateMyListChallenges();
-  //   }, [local]);
   useEffect(() => {
     const MY_CHALLENGES = JSON.parse(localStorage.getItem("challenges"));
     setLocal(MY_CHALLENGES);

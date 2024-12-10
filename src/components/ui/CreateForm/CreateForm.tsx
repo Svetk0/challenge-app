@@ -4,18 +4,24 @@ import staticData from "@/constants/data.json";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
-
+import { useDispatch } from "react-redux";
+import { addChallenge } from "@/lib/features/challenges/challengeSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ICreateForm } from "@/types";
 import styles from "./createForm.module.scss";
 
+interface AddChallenge {
+  data: ICreateForm;
+}
 export default function CreateForm() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const dt = staticData.create_form;
   const [goalTitle, setGoalTitle] = useState("");
   const [datePeriodStart, setDatePeriodStart] = useState("");
-  const addChallenge = (newChallenge: ICreateForm) => {
+  const addNewChallenge = (newChallenge: ICreateForm) => {
     localStorage.setItem("last_challenge", JSON.stringify(newChallenge));
+    dispatch(addChallenge(newChallenge));
   };
   const {
     register,
@@ -32,7 +38,8 @@ export default function CreateForm() {
 
   const onSubmit: SubmitHandler<ICreateForm> = (data) => {
     setGoalTitle(data.goalTitle.trimStart());
-    addChallenge(data);
+    addNewChallenge(data);
+
     console.log(data);
     reset({
       amount: 0,
