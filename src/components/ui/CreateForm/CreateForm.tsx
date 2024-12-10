@@ -6,24 +6,16 @@ import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
 
 import { useForm, SubmitHandler } from "react-hook-form";
-
+import { ICreateForm } from "@/types";
 import styles from "./createForm.module.scss";
-
-type FormValues = {
-  amount: number;
-  goalTitle: string;
-  period: string;
-  datePeriodStart: string;
-  datePeriodFinish: string;
-};
 
 export default function CreateForm() {
   const router = useRouter();
   const dt = staticData.create_form;
   const [goalTitle, setGoalTitle] = useState("");
   const [datePeriodStart, setDatePeriodStart] = useState("");
-  const addChallenge = (newChallenge: FormValues) => {
-    localStorage.setItem("new_challenge", JSON.stringify(newChallenge));
+  const addChallenge = (newChallenge: ICreateForm) => {
+    localStorage.setItem("last_challenge", JSON.stringify(newChallenge));
   };
   const {
     register,
@@ -34,11 +26,11 @@ export default function CreateForm() {
     getValues,
     setValue,
     clearErrors,
-  } = useForm<FormValues>({
+  } = useForm<ICreateForm>({
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<ICreateForm> = (data) => {
     setGoalTitle(data.goalTitle.trimStart());
     addChallenge(data);
     console.log(data);
@@ -50,7 +42,7 @@ export default function CreateForm() {
     });
   };
 
-  const handleValidation = (fieldName: keyof FormValues) => ({
+  const handleValidation = (fieldName: keyof ICreateForm) => ({
     onBlur: () => trigger(fieldName),
     onChange: () => {
       if (getValues(fieldName)) {
