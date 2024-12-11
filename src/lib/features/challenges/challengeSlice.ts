@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICreateForm, IChallenge } from "@/types";
+import { IChallenge } from "@/types";
 type Props = {
   payload: IChallenge;
 };

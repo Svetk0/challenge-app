@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button/Button";
 import { useDispatch } from "react-redux";
 import { addChallenge } from "@/lib/features/challenges/challengeSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { ICreateForm, IChallenge, AddChallenge } from "@/types";
+import { ICreateForm, IChallenge } from "@/types";
 import styles from "./createForm.module.scss";
 
 export default function CreateForm() {

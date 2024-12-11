@@ -7,7 +7,7 @@ export type IChallenge = {
   datePeriodFinish: string;
 };
 
-export interface AddChallenge {
+export interface NewChallenge {
   id: number;
   data: IChallenge;
 }
