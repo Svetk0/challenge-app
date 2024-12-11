@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ICreateForm } from "@/types";
+import { ICreateForm, IChallenge } from "@/types";
 type Props = {
-  payload: ICreateForm;
+  payload: IChallenge;
 };
-const storage: ICreateForm[] = [
+const storage = [
   {
+    id: 20,
     amount: 20,
     goalTitle: "1st string",
     period: "week",
@@ -12,6 +13,7 @@ const storage: ICreateForm[] = [
     datePeriodFinish: "date end",
   },
   {
+    id: 21,
     amount: 10,
     goalTitle: "2nd string",
     period: "day",
@@ -26,7 +28,7 @@ const challengeSlice = createSlice({
   initialState,
   reducers: {
     addChallenge(state, action: Props) {
-      return { ...state, ...action.payload };
+      return [...state, action.payload];
     },
   },
 });
