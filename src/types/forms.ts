@@ -5,3 +5,7 @@ export type ICreateForm = {
   datePeriodStart: string;
   datePeriodFinish: string;
 };
+
+export type IEditForm = {
+  progress: number;
+} & ICreateForm;

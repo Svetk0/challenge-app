@@ -9,11 +9,12 @@ import { addChallenge } from "@/lib/features/challenges/challengeSlice";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ICreateForm, IChallenge } from "@/types";
 import styles from "./createForm.module.scss";
+import Input from "@/components/ui/Input/Input";
 
 export default function CreateForm() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const dt = staticData.create_form;
+  const dt = staticData.challenge_form;
   const [goalTitle, setGoalTitle] = useState("");
   const [datePeriodStart, setDatePeriodStart] = useState("");
   const addNewChallenge = (newChallenge: IChallenge) => {
@@ -70,11 +71,11 @@ export default function CreateForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h2> {dt.title}</h2>
+      <h2 className={styles.title}> {dt.title_create}</h2>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
           <label className={styles.label} htmlFor="goalTitle">
-            {dt.goal_title}
+            {dt.name.label}
           </label>
           <textarea
             className={styles.textarea}
@@ -97,7 +98,7 @@ export default function CreateForm() {
         <div className={styles.buttonsWrapper}>
           <div className={styles.inputWrapper}>
             <label htmlFor="amount" className={styles.label}>
-              {dt.subtitle}
+              {dt.amount.label}
             </label>
             <input
               id="amount"
@@ -133,7 +134,7 @@ export default function CreateForm() {
                 ...handleValidation("period"),
               })}
             >
-              {dt.time.map((value) => (
+              {dt.period.time.map((value) => (
                 <option key={value.value}>{value.value}</option>
               ))}
             </select>
@@ -196,18 +197,58 @@ export default function CreateForm() {
         </div>
 
         {/* Inputs Container    */}
+
+        <div className={styles.inputWrapper}>
+          <Input
+            label={dt.name.label}
+            placeholder={dt.name.placeholder}
+            id="goalTitle"
+            {...register("goalTitle", {
+              required: dt.name.require_message,
+              validate: {
+                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
+                maxLength: (v) => v.length <= 50 || dt.name.error_message,
+                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
+              },
+              ...handleValidation("goalTitle"),
+            })}
+          />
+        </div>
+        <div className={styles.inputWrapper}>
+          <Input
+            type="date"
+            label={dt.name.label}
+            placeholder={dt.name.placeholder}
+            id="goalTitle"
+            {...register("goalTitle", {
+              required: dt.name.require_message,
+              validate: {
+                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
+                maxLength: (v) => v.length <= 50 || dt.name.error_message,
+                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
+              },
+              ...handleValidation("goalTitle"),
+            })}
+          />
+        </div>
       </div>
       <div className={styles.buttonsWrapper}>
         <Button
           type="button"
           text={"Back"}
-          color="light-purple"
+          color="transparent"
+          onClick={() => router.back()}
+        />
+        <Button
+          type="button"
+          text={"Back"}
+          color="default"
           onClick={() => router.back()}
         />
         <Button
           type="submit"
           text={"Create"}
-          color="sky-blue"
+          color="default"
           disabled={!isValid}
           //onClick={() => router.push("/wallet")}
         />

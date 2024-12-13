@@ -6,24 +6,64 @@
       "signUp": "Sign Up"
     }
   },
-  "create_form": {
-    "title": "Create a new Challenge",
-    "goal_title": "Your Challenge title",
-    "subtitle": "Iterations",
-    "time": [
-      {
-        "value": "day"
-      },
-      {
-        "value": "week"
-      },
-      {
-        "value": "month"
-      }
-    ],
+  "challenge_form": {
+    "title_create": "Create a new Challenge",
+    "title_edit": "Edit Challenge",
+    "name": {
+      "label": "Your Goal",
+      "placeholder": "Describe your challenge",
+      "error_message": "The Goal should contain 2..50 symbols",
+      "require_message": "Please, fill it"
+    },
+    "amount": {
+      "label": "Number",
+      "placeholder": "2",
+      "error_message": "Should be above 0",
+      "require_message": "Please, fill it"
+    },
+    "period": {
+      "label": "period",
+      "placeholder": "week",
+      "time": [
+        {
+          "value": "day"
+        },
+        {
+          "value": "week"
+        },
+        {
+          "value": "month"
+        }
+      ],
+      "error_message": "Choose one",
+      "require_message": "Please, fill it"
+    },
+    "date_start": {
+      "label": "Start",
+      "placeholder": "15.12.2024",
+      "error_message": "Can't be early 2000",
+      "require_message": "Please, fill it"
+    },
+    "date_finish": {
+      "label": "Finish",
+      "placeholder": "20.12.2024",
+      "error_message": "Can't be early than Start",
+      "require_message": "Please, fill it"
+    },
+    "progress": {
+      "label": "Progress",
+      "placeholder": "",
+      "error_message": "",
+      "require_message": "Please, fill it"
+    },
+    "slider": {
+      "label": "all time"
+    },
+
     "buttons": {
       "back": "Back",
-      "submit": "Create"
+      "create": "Create",
+      "edit": "Edit"
     }
   }
 }
