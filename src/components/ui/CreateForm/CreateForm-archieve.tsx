@@ -5,162 +5,71 @@ import staticData from "@/constants/data.json";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button/Button";
-//import { createGoal } from "@/lib/actions";
+import { useDispatch } from "react-redux";
+import { addChallenge } from "@/lib/features/challenges/challengeSlice";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { ICreateForm, IChallenge } from "@/types";
+import styles from "./createForm.module.scss";
+import Input from "@/components/ui/Input/Input";
 
-export type State = {
-  errors?: {
-    customerId?: string[];
-    amount?: string[];
-    status?: string[];
-  };
-  message?: string | null;
-};
-export default function CreateForm() {
-  const createGoal = () => {
-    console.log("form data", state);
+export default function ContactForm() {
+  const dt = staticData.challenge_form;
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    trigger,
+    reset,
+    getValues,
+    clearErrors,
+  } = useForm<ICreateForm>({
+    mode: "onChange",
+  });
+
+  const onSubmit: SubmitHandler<ICreateForm> = (data) => {
+    console.log(data);
+    reset({
+      amount: 0,
+      goalTitle: "",
+      period: "",
+      datePeriodStart: "",
+      datePeriodFinish: "",
+    });
   };
 
-  const [local, setLocal] = useState([]);
-  //console.log("state", state);
-  const dt = staticData.form_challenge;
-  const router = useRouter();
+  const handleValidation = (fieldName: keyof ICreateForm) => ({
+    onBlur: () => trigger(fieldName),
+    onChange: () => {
+      if (getValues(fieldName)) {
+        clearErrors(fieldName);
+      }
+    },
+  });
 
   return (
-    <form onSubmit={createGoal}>
-      {/* GOAL Title */}
-      <div>
-        <label htmlFor="goalTitle">Goal Title</label>
-        <div>
-          <div>
-            <input
-              aria-describedby="goalTitle-error"
-              id="goalTitle"
-              name="goalTitle"
-              type="text"
-              placeholder="Describe your goal"
-            />
-          </div>
-          {/* <div id="goalTitle-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.goalTitle &&
-                state.errors.goalTitle.map((error: string) => (
-                  <p key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div> */}
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+      <h2 className={styles.title}> {dt.title_create}</h2>
+      <div className={styles.inputsContainer}>
+        <div className={styles.inputWrapper}>
+          <Input
+            label={dt.name.label}
+            placeholder={dt.name.placeholder}
+            id="goalTitle"
+            {...register("goalTitle", {
+              required: dt.name.require_message,
+              validate: {
+                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
+                maxLength: (v) => v.length <= 50 || dt.name.error_message,
+                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
+              },
+              ...handleValidation("goalTitle"),
+            })}
+          />
+          {errors.goalTitle && (
+            <p className={styles.error}>{errors.goalTitle.message}</p>
+          )}
         </div>
-      </div>
-      {/* How manн шеукфешщты */}
-      <div>
-        <label htmlFor="amount">Enter your goal</label>
-        <div>
-          <div>
-            <input
-              aria-describedby="amount-error"
-              id="amount"
-              name="amount"
-              type="number"
-              step="0.01"
-              placeholder="Enter a number of"
-            />
-          </div>
-          {/* <div id="amount-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.amount &&
-                state.errors.amount.map((error: string) => (
-                  <p className="mt-2 text-sm text-red-500" key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div> */}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="period">per time period</label>
-        <div>
-          <select
-            id="period"
-            name="periodId"
-            defaultValue=""
-            aria-describedby="period-error"
-          >
-            <option value="" disabled>
-              per
-            </option>
-            {dt.time.map((value) => (
-              <option key={`${value}+ 1`}>{value.value}</option>
-            ))}
-          </select>
-        </div>
-        {/* <div id="period-error" aria-live="polite" aria-atomic="true">
-            {state.errors?.periodId &&
-              state.errors.periodId.map((error: string) => (
-                <p  key={error}>
-                  {error}
-                </p>
-              ))}
-          </div> */}
-      </div>
-
-      {/* GOAL PERIOD */}
-      <div>
-        <label htmlFor="datePeriodStart">Start</label>
-        <div>
-          <div>
-            <input
-              aria-describedby="datePeriodStart-error"
-              id="datePeriodStart"
-              name="datePeriodStart"
-              type="date"
-              placeholder="Start"
-            />
-          </div>
-          {/* <div id="datePeriodStart-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.datePeriodStart &&
-                state.errors.datePeriodStart.map((error: string) => (
-                  <p key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div> */}
-        </div>
-      </div>
-      <div>
-        <label htmlFor="datePeriodFinish">Finish</label>
-        <div>
-          <div>
-            <input
-              aria-describedby="datePeriodFinish-error"
-              id="datePeriodFinish"
-              name="datePeriodFinish"
-              type="date"
-              placeholder="Finish"
-            />
-          </div>
-          {/* <div id="datePeriodFinish-error" aria-live="polite" aria-atomic="true">
-              {state.errors?.datePeriodFinish &&
-                state.errors.datePeriodFinish.map((error: string) => (
-                  <p key={error}>
-                    {error}
-                  </p>
-                ))}
-            </div> */}
-        </div>
-      </div>
-
-      <div>
-        <Button
-          type="button"
-          text={"Back"}
-          color="light-purple"
-          onClick={() => router.back()}
-        />
-        <Button
-          type="submit"
-          text={"Create Goal"}
-          color="sky-blue"
-          //onClick={() => router.push("/wallet")}
-        />
       </div>
     </form>
   );

@@ -51,6 +51,7 @@ export default function CreateForm() {
       goalTitle: "",
       period: "",
       datePeriodStart: "",
+      datePeriodFinish: "",
     });
   };
 
@@ -58,8 +59,7 @@ export default function CreateForm() {
     onBlur: () => trigger(fieldName),
     onChange: () => {
       if (getValues(fieldName)) {
-        setDatePeriodStart(getValues("datePeriodStart"));
-        console.log("datePeriodStart", datePeriodStart);
+        console.log("values:", fieldName, getValues(fieldName));
         clearErrors(fieldName);
       }
     },
@@ -74,19 +74,19 @@ export default function CreateForm() {
       <h2 className={styles.title}> {dt.title_create}</h2>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
-          <label className={styles.label} htmlFor="goalTitle">
+          <label htmlFor="goalTitle" className={styles.label}>
             {dt.name.label}
           </label>
           <textarea
-            className={styles.textarea}
-            placeholder={"goal title"}
+            className={styles.input}
+            placeholder={dt.name.placeholder}
             id="goalTitle"
             {...register("goalTitle", {
-              required: "please, enter goal title ",
+              required: dt.name.require_message,
               validate: {
-                minLength: (v) => v.trim().length >= 1 || "type a goal name",
-                maxLength: (v) => v.length <= 200 || "not more 200 symb",
-                noSpaces: (v) => v.trim().length > 0 || "spaces",
+                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
+                maxLength: (v) => v.length <= 50 || dt.name.error_message,
+                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
               },
               ...handleValidation("goalTitle"),
             })}
@@ -95,7 +95,7 @@ export default function CreateForm() {
             <p className={styles.error}>{errors.goalTitle.message}</p>
           )}
         </div>
-        <div className={styles.buttonsWrapper}>
+        <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
             <label htmlFor="amount" className={styles.label}>
               {dt.amount.label}
@@ -103,7 +103,7 @@ export default function CreateForm() {
             <input
               id="amount"
               placeholder={`number`}
-              className={`${styles.input} ${styles.input_shorts}`}
+              className={`${styles.input} ${styles.input_short}`}
               type="number"
               {...register("amount", {
                 required: "fill it",
@@ -127,7 +127,7 @@ export default function CreateForm() {
               id="period"
               defaultValue=""
               aria-describedby="period-error"
-              className={`${styles.input} ${styles.input_shorts}`}
+              className={`${styles.input} ${styles.input_short}`}
               {...register("period", {
                 required: "fill it",
 
@@ -144,14 +144,14 @@ export default function CreateForm() {
           </div>
         </div>
         {/* GOAL PERIOD */}
-        <div className={styles.buttonsWrapper}>
+        <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor="datePeriodStart">
               Start
             </label>
 
             <input
-              className={`${styles.input}`}
+              className={`${styles.input} ${styles.input_short}`}
               aria-describedby="datePeriodStart-error"
               id="datePeriodStart"
               type="date"
@@ -175,7 +175,7 @@ export default function CreateForm() {
             </label>
             <input
               disabled={false}
-              className={styles.input}
+              className={`${styles.input} ${styles.input_short}`}
               aria-describedby="datePeriodFinish-error"
               id="datePeriodFinish"
               type="date"
@@ -195,44 +195,8 @@ export default function CreateForm() {
             )}
           </div>
         </div>
-
-        {/* Inputs Container    */}
-
-        <div className={styles.inputWrapper}>
-          <Input
-            label={dt.name.label}
-            placeholder={dt.name.placeholder}
-            id="goalTitle"
-            {...register("goalTitle", {
-              required: dt.name.require_message,
-              validate: {
-                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
-                maxLength: (v) => v.length <= 50 || dt.name.error_message,
-                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
-              },
-              ...handleValidation("goalTitle"),
-            })}
-          />
-        </div>
-        <div className={styles.inputWrapper}>
-          <Input
-            type="date"
-            label={dt.name.label}
-            placeholder={dt.name.placeholder}
-            id="goalTitle"
-            {...register("goalTitle", {
-              required: dt.name.require_message,
-              validate: {
-                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
-                maxLength: (v) => v.length <= 50 || dt.name.error_message,
-                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
-              },
-              ...handleValidation("goalTitle"),
-            })}
-          />
-        </div>
       </div>
-      <div className={styles.buttonsWrapper}>
+      <div className={styles.rowWrapper}>
         <Button
           type="button"
           text={"Back"}

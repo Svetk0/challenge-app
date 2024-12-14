@@ -28,9 +28,21 @@
     flex-direction: column;
     align-items: center;
     background-color: $black-70;
-    padding: 60px 30px;
+    padding: 40px 5%;
     gap: 20px;
-    border-radius: 40px;
+    border-radius: 20px;
+}
+
+.rowWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
 }
 
 .inputWrapper {
@@ -38,9 +50,90 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    gap: 10px;
+    gap: 2px;
+
+    input[type="date"] {
+        position: relative;
+        padding-right: 5px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+    }
+
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-clear-button {
+        z-index: -10;
+    }
 }
 
+.input,
+.textarea {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-image: $gradient-main-border;
+    border-image-slice: 1;
+    color: $white;
+    padding: 20px 5px 2px 30px;
+    background: $black-70;
+
+    resize: none;
+    overflow: auto;
+
+    &_short {
+        padding: 0 0 0 0px;
+        text-align: center;
+        overflow: scroll;
+        width: clamp(120px, 100%, 250px);
+
+    }
+
+    &::placeholder {
+        color: $dirty-green-op80;
+        font-size: smaller;
+    }
+
+    &:focus,
+    &:active {
+        border: $border-input-accent;
+        transition: border-color 0.3s ease;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $brown;
+        -webkit-box-shadow: $shadow-box-light;
+    }
+}
+
+.textarea {
+    resize: none;
+    overflow: auto;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 19.36px;
+    text-align: left;
+    color: $grey;
+}
 
 .error {
     position: absolute;

@@ -8,30 +8,34 @@ export type InputProps = {
   JSX.IntrinsicElements["textarea"];
 
 const Input = (props: InputProps) => {
-  const { tagType = "input", label, placeholder, type, ...rest } = props;
+  const {
+    tagType = "input",
+    label,
+    placeholder,
+
+    type,
+    ...rest
+  } = props;
 
   return (
     <>
-      <label className={styles.label}>
-        {tagType === "input" ? (
-          <input
-            className={styles.input}
-            autoComplete="on"
-            placeholder={placeholder}
-            type={type || "text"}
-            {...rest}
-          />
-        ) : (
-          <textarea
-            className={styles.textarea}
-            autoComplete="off"
-            placeholder={placeholder}
-            {...rest}
-          />
-        )}
-
-        <p className="input_placeholder">{placeholder}</p>
-      </label>
+      <label className={styles.label}>{label} </label>
+      {tagType === "input" ? (
+        <input
+          className={styles.input}
+          autoComplete="on"
+          placeholder={placeholder}
+          type={type || "text"}
+          {...rest}
+        />
+      ) : (
+        <textarea
+          className={styles.textarea}
+          autoComplete="off"
+          placeholder={placeholder}
+          {...rest}
+        />
+      )}
     </>
   );
 };
