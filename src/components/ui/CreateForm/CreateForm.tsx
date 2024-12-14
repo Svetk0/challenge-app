@@ -236,7 +236,7 @@ export default function CreateForm() {
         <Button
           type="button"
           text={"Back"}
-          color="transparent"
+          color="black"
           onClick={() => router.back()}
         />
         <Button

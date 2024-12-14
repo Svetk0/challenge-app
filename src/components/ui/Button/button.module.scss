@@ -40,18 +40,11 @@
     }
 }
 
-
-
-
-
-
-
 .default {
     background: $gradient-main-bg;
 }
 
-.transparent {
-    border: 1px solid $gradient-main-border;
-    background-color: transparent;
-    box-sizing: border-box;
+.black {
+    background-color: $black-70;
+    color: $green-neon;
 }
