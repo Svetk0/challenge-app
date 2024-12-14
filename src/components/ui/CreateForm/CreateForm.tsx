@@ -102,13 +102,13 @@ export default function CreateForm() {
             </label>
             <input
               id="amount"
-              placeholder={`number`}
+              placeholder={dt.amount.placeholder}
               className={`${styles.input} ${styles.input_short}`}
               type="number"
               {...register("amount", {
-                required: "fill it",
+                required: dt.amount.require_message,
                 validate: {
-                  min: (v) => v >= 1 || "amount should be more than 0",
+                  min: (v) => v >= 1 || dt.amount.error_message,
                   // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
                 ...handleValidation("amount"),
@@ -120,7 +120,7 @@ export default function CreateForm() {
           </div>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor="period">
-              per
+              {dt.period.label}
             </label>
 
             <select
@@ -129,7 +129,7 @@ export default function CreateForm() {
               aria-describedby="period-error"
               className={`${styles.input} ${styles.input_short}`}
               {...register("period", {
-                required: "fill it",
+                required: dt.period.require_message,
 
                 ...handleValidation("period"),
               })}
@@ -147,7 +147,7 @@ export default function CreateForm() {
         <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor="datePeriodStart">
-              Start
+              {dt.date_start.label}
             </label>
 
             <input
@@ -156,9 +156,9 @@ export default function CreateForm() {
               id="datePeriodStart"
               type="date"
               {...register("datePeriodStart", {
-                required: "fill it",
+                required: dt.date_start.require_message,
                 validate: {
-                  min: (v) => v >= "2010-01-01" || "not early 2010",
+                  min: (v) => v >= "2010-01-01" || dt.date_start.error_message,
                   // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
 
@@ -171,7 +171,7 @@ export default function CreateForm() {
           </div>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor="datePeriodFinish">
-              Finish
+              {dt.date_finish.label}
             </label>
             <input
               disabled={false}
@@ -180,13 +180,12 @@ export default function CreateForm() {
               id="datePeriodFinish"
               type="date"
               {...register("datePeriodFinish", {
-                required: "fill it",
+                required: dt.date_finish.require_message,
                 validate: {
                   min: (v) =>
-                    v > String(datePeriodStart) || "should be later than start",
+                    v > String(datePeriodStart) || dt.date_finish.error_message,
                   // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
-
                 ...handleValidation("datePeriodFinish"),
               })}
             />
@@ -204,17 +203,11 @@ export default function CreateForm() {
           onClick={() => router.back()}
         />
         <Button
-          type="button"
-          text={"Back"}
-          color="default"
-          onClick={() => router.back()}
-        />
-        <Button
           type="submit"
           text={"Create"}
           color="default"
           disabled={!isValid}
-          //onClick={() => router.push("/wallet")}
+          onClick={() => router.push("/challenges")}
         />
       </div>
     </form>

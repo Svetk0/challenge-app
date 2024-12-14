@@ -12,17 +12,17 @@
     "name": {
       "label": "Your Goal",
       "placeholder": "Describe your challenge",
-      "error_message": "The Goal should contain 2..50 symbols",
+      "error_message": "The description should contain 2..50 symbols",
       "require_message": "Please, fill it"
     },
     "amount": {
-      "label": "Number",
-      "placeholder": "2",
+      "label": "Amount",
+      "placeholder": "number",
       "error_message": "Should be above 0",
       "require_message": "Please, fill it"
     },
     "period": {
-      "label": "period",
+      "label": "Period",
       "placeholder": "week",
       "time": [
         {
