@@ -59,7 +59,6 @@ export default function CreateForm() {
     onBlur: () => trigger(fieldName),
     onChange: () => {
       if (getValues(fieldName)) {
-        console.log("values:", fieldName, getValues(fieldName));
         clearErrors(fieldName);
       }
     },
