@@ -13,7 +13,7 @@ export default function Home() {
         <Button
           type="button"
           text={"Add new"}
-          color="sky-blue"
+          color="default"
           //onClick={() => router.push("/dashboard/create")}
         />
       </Link>
