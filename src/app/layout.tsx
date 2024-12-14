@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import StoreProvider from "./StoreProvider";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -25,9 +26,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <StoreProvider>
+        <body className={`${geistSans.className} ${geistMono.className}`}>
+          <main className="main">{children}</main>
+        </body>
+      </StoreProvider>
     </html>
   );
 }

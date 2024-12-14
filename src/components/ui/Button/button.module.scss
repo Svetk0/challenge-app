@@ -1,5 +1,4 @@
-@use "@styles/variables.scss" as *;
-@use "@styles/mixins.scss" as *;
+@import '@styles';
 
 .button {
     width: max-content;
@@ -10,12 +9,12 @@
     position: relative;
     border-radius: 12px;
     border: none;
-    color: $dark-grey;
-    font-family: 'SF Pro Text', 'Arial', sans-serif;
+    color: $black;
+    //font-family: 'SF Pro Text', 'Arial', sans-serif;
     font-size: 20px;
     font-weight: 600;
     height: 60px;
-    box-shadow: $bottomShadow;
+    box-shadow: $shadow-box-button;
     line-height: 28px;
     text-align: center;
     transition: all 0.5s ease;
@@ -41,62 +40,11 @@
     }
 }
 
-.mini {
-    background-color: $deep-purple;
-    color: $white;
-    width: 82px;
-    height: 24px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.assetMenu {
-    width: 50px;
-    height: 44px;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    color: $darkFont;
-    background-color: $yellow;
-    padding: 0;
-}
-
-
 .default {
-    background-color: $deep-purple;
-    color: $white;
+    background: $gradient-main-bg;
 }
 
-
-.transparent {
-    border: 1px solid $white;
-    background-color: transparent;
-    box-sizing: border-box;
-}
-
-.ton-wallet {
-    background-color: $blueButton;
-    color: $white;
-    border-radius: 40px;
-}
-
-.light-green {
-    background-color: $light-green;
-}
-
-.light-purple {
-    background-color: $light-purple;
-}
-
-.yellow {
-    background-color: $yellow;
-}
-
-.green-gradient {
-    background: $gradientButton;
-}
-
-.white-green {
-    background-color: $white-green;
+.black {
+    background-color: $black-70;
+    color: $green-neon;
 }
