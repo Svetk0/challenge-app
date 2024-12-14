@@ -1,15 +1,17 @@
 "use client";
 import { useRouter } from "next/navigation";
-import staticData from "@/constants/data.json";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Button from "@/components/ui/Button/Button";
 import { useDispatch } from "react-redux";
-import { addChallenge } from "@/lib/features/challenges/challengeSlice";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+
+import { addChallenge } from "@/lib/features/challenges/challengeSlice";
+
 import { ICreateForm, IChallenge } from "@/types";
+import staticData from "@/constants/data.json";
+
+import Button from "@/components/ui/Button/Button";
+
 import styles from "./createForm.module.scss";
-import Input from "@/components/ui/Input/Input";
 
 export default function CreateForm() {
   const router = useRouter();
@@ -64,10 +66,6 @@ export default function CreateForm() {
     },
   });
 
-  //   useEffect(() => {
-  //     localStorage.setItem("favNumber", JSON.stringify(customers[3]));
-  //   }, []);
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_create}</h2>
@@ -108,7 +106,6 @@ export default function CreateForm() {
                 required: dt.amount.require_message,
                 validate: {
                   min: (v) => v >= 1 || dt.amount.error_message,
-                  // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
                 ...handleValidation("amount"),
               })}
@@ -158,7 +155,6 @@ export default function CreateForm() {
                 required: dt.date_start.require_message,
                 validate: {
                   min: (v) => v >= "2010-01-01" || dt.date_start.error_message,
-                  // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
 
                 ...handleValidation("datePeriodStart"),
@@ -183,7 +179,6 @@ export default function CreateForm() {
                 validate: {
                   min: (v) =>
                     v > String(datePeriodStart) || dt.date_finish.error_message,
-                  // max: (v) => v <= balance || dt.sendAmount.maxLengthMessage,
                 },
                 ...handleValidation("datePeriodFinish"),
               })}
