@@ -14,7 +14,7 @@ export default function Home() {
           type="button"
           text={"Add new"}
           color="default"
-          //onClick={() => router.push("/dashboard/create")}
+          //onClick={() => router.push("/challenges/create")}
         />
       </Link>
     </>
