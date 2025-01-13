@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IChallenge } from "@/types";
+import { setLocalStorage, getLocalStorage } from "@/utils/localStorage";
 type Props = {
   payload: IChallenge;
 };
@@ -22,13 +23,16 @@ const storage = [
   },
 ];
 
-const initialState = storage;
+const initialState = getLocalStorage("challenges");
 const challengeSlice = createSlice({
   name: "challenge",
   initialState,
   reducers: {
     addChallenge(state, action: Props) {
-      return [...state, action.payload];
+      const newState = [...state, action.payload];
+      //setLocalStorage({ key = "challenges", data = JSON.stringify(newState) });
+      setLocalStorage("challenges", newState);
+      return newState;
     },
   },
 });

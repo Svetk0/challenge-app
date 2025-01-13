@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import Button from "@/components/ui/Button/Button";
 import Link from "next/link";
+import { IChallenge } from "@/types";
 
 type FormValues = {
   amount: number;
@@ -20,19 +21,23 @@ type LocalStorage = {
 export default function ListChallenges<LocalStorage>() {
   //const MY_CHALLENGES = [{}];
   const router = useRouter();
-  const [local, setLocal] = useState([]);
-  const tokenData = useSelector((state: RootState) => state.challenge);
-  console.log("storeRedux", tokenData);
+  const [local, setLocal] = useState<IChallenge[]>([]);
+  const challengeData = useSelector((state: RootState) => state.challenge);
+  console.log("storeRedux", challengeData);
 
   useEffect(() => {
     const MY_CHALLENGES = JSON.parse(localStorage.getItem("challenges"));
     setLocal(MY_CHALLENGES);
   }, []);
 
-  const updateMyListChallenges = () => {
-    console.log("lastChallenge", local);
-    // const fullList = [...MY_CHALLENGES, local];
-    // console.log("fullList", fullList);
-  };
-  return <>My Challenges List</>;
+  return (
+    <>
+      My Challenges List
+      <ol>
+        {challengeData.map((item) => (
+          <li key={item.id}>{item.goalTitle}</li>
+        ))}
+      </ol>
+    </>
+  );
 }
