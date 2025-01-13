@@ -33,7 +33,7 @@ export default function CreateForm() {
     setValue,
     clearErrors,
   } = useForm<ICreateForm>({
-    mode: "onChange",
+    mode: "onSubmit",
   });
 
   const onSubmit: SubmitHandler<ICreateForm> = (data) => {
