@@ -6,7 +6,6 @@
     font-weight: $fontWeight;
     line-height: $fontSize;
     text-align: $textAlign;
-
     color: $color;
     font-family: inherit;
     margin: 0;
@@ -25,6 +24,7 @@
     font-size: $size;
     text-align: $align;
     line-height: $line-height;
+    font-family: inherit;
 }
 
 @mixin Input($align: left) {

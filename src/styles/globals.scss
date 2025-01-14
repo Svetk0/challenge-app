@@ -3,16 +3,10 @@
 :root {
   // --background: #{black-total};
   --background: black;
-  --foreground: $black;
+  --font-color: rgba(246, 255, 251, 1);
+  --font-color-alt: rgba(19, 29, 25, 1);
   --bgOpacity: #ffffff09;
 }
-
-// @media (prefers-color-scheme: dark) {
-//   :root {
-//     --background: #0a0a0a;
-//     --foreground: #ededed;
-//   }
-// }
 
 * {
   box-sizing: border-box;
@@ -37,7 +31,7 @@ body {
   max-width: 430px;
   min-height: 100vh;
   margin: 0 auto;
-  color: var(--foreground);
+  color: var(--font-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -61,10 +55,5 @@ a {
 
 button {
   @include ResetButton;
+  color: var(--font-color-alt);
 }
-
-// @media (prefers-color-scheme: dark) {
-//   html {
-//     color-scheme: dark;
-//   }
-// }

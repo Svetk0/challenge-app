@@ -26,7 +26,9 @@ export default function ListChallenges<LocalStorage>() {
   console.log("storeRedux", challengeData);
 
   useEffect(() => {
-    const MY_CHALLENGES = JSON.parse(localStorage.getItem("challenges"));
+    const MY_CHALLENGES = JSON.parse(
+      localStorage.getItem("challenges") ?? "[]"
+    );
     setLocal(MY_CHALLENGES);
   }, []);
 
@@ -34,7 +36,7 @@ export default function ListChallenges<LocalStorage>() {
     <>
       My Challenges List
       <ol>
-        {challengeData.map((item) => (
+        {challengeData.map((item: IChallenge) => (
           <li key={item.id}>{item.goalTitle}</li>
         ))}
       </ol>
