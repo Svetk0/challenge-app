@@ -1,7 +1,7 @@
 @import './screens.scss';
 @import './vars.scss';
 
-@mixin headerStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
+@mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
     font-size: $fontSize;
     font-weight: $fontWeight;
     line-height: $fontSize;
@@ -12,7 +12,59 @@
     margin: 0;
 }
 
-@mixin blockHeader($textAlign: center, $color: $dark-grey) {
+@mixin ResetButton {
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+@mixin Text($size: 16px, $font-weight: 400, $line-height: 24.2px, $align: center) {
+    font-weight: $font-weight;
+    font-size: $size;
+    text-align: $align;
+    line-height: $line-height;
+}
+
+@mixin Input($align: left) {
+    width: 100%;
+    height: 40px;
+    @include text(16px, 400, 19.36px, $align);
+    border-radius: 13px;
+    border: 1px solid var(--blackTransparent-whiteTransparent);
+    background-color: var(--white-black);
+    color: var(--black-white);
+    padding: 10px;
+    transition: border-color 0.3s ease;
+    caret-color: var(--blue-lightBlue);
+
+    &:focus {
+        outline: none;
+        border-color: var(--blue-lightBlue);
+    }
+
+    &:not(:placeholder-shown) {
+        border-color: var(--black-white);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-text-fill-color: var(--black-white);
+        -webkit-box-shadow: 0 0 0 30px var(--white-black) inset;
+        border: 1px solid var(--black-white);
+    }
+
+    &::-ms-reveal,
+    &::-ms-clear,
+    &::-webkit-clear-button,
+    &::-webkit-password-toggle-button {
+        display: none;
+    }
+}
+
+@mixin BlockHeader($textAlign: center, $color: $dark-grey) {
     @include headerStyles(94px, 600, $textAlign, $color);
     letter-spacing: -0.02em;
 

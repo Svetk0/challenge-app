@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
 import StoreProvider from "./StoreProvider";
 import localFont from "next/font/local";
-import "./globals.scss";
+import "../styles/globals.scss";
 
-const geistSans = localFont({
-  src: "../../public/fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "../../public/fonts/GeistMonoVF.woff",
+const openSans = localFont({
+  src: "../../public/fonts/OpenSans.woff",
   variable: "--font-geist-mono",
-  weight: "100 900",
+  weight: "300 400 600",
 });
 
 export const metadata: Metadata = {
@@ -27,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <StoreProvider>
-        <body className={`${geistSans.className} ${geistMono.className}`}>
+        <body className={`${openSans.className}`}>
           <main className="main">{children}</main>
         </body>
       </StoreProvider>

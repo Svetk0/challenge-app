@@ -1,15 +1,19 @@
+@import './index.scss';
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  // --background: #{black-total};
+  --background: black;
+  --foreground: $black;
   --bgOpacity: #ffffff09;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     --background: #0a0a0a;
+//     --foreground: #ededed;
+//   }
+// }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -23,6 +27,7 @@ html {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: var(--background);
   margin: 0 auto;
   min-height: 100vh;
   -webkit-tap-highlight-color: transparent;
@@ -54,8 +59,12 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+button {
+  @include ResetButton;
 }
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+// }

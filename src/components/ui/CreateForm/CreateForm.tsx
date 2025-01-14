@@ -55,6 +55,7 @@ export default function CreateForm() {
       datePeriodStart: "",
       datePeriodFinish: "",
     });
+    router.push("/challenges");
   };
 
   const handleValidation = (fieldName: keyof ICreateForm) => ({
@@ -200,8 +201,8 @@ export default function CreateForm() {
           type="submit"
           text={"Create"}
           color="default"
-          disabled={!isValid}
-          onClick={() => router.push("/challenges")}
+          //disabled={!isValid}
+          //onClick={() => router.push("/challenges")}
         />
       </div>
     </form>
