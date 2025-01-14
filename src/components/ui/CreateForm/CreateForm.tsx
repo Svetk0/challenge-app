@@ -152,6 +152,8 @@ export default function CreateForm() {
               aria-describedby="datePeriodStart-error"
               id="datePeriodStart"
               type="date"
+              placeholder={dt.date_start.placeholder}
+              defaultValue="" // Добавьте это
               {...register("datePeriodStart", {
                 required: dt.date_start.require_message,
                 validate: {

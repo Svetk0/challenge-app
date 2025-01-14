@@ -28,33 +28,49 @@
 }
 
 @mixin Input($align: left) {
+    @include Text(16px, 400, 21.79px, $align);
     width: 100%;
-    height: 40px;
-    @include text(16px, 400, 19.36px, $align);
-    border-radius: 13px;
-    border: 1px solid var(--blackTransparent-whiteTransparent);
-    background-color: var(--white-black);
-    color: var(--black-white);
-    padding: 10px;
-    transition: border-color 0.3s ease;
-    caret-color: var(--blue-lightBlue);
+    height: 50px;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-image: $gradient-main-border;
+    border-image-slice: 1;
+    color: $white;
+    padding: 20px 5px 2px 30px;
+    background: $black-70;
 
-    &:focus {
-        outline: none;
-        border-color: var(--blue-lightBlue);
+    resize: none;
+    overflow: auto;
+
+    &::placeholder {
+        color: $dirty-green-op80;
+        font-size: smaller;
     }
 
-    &:not(:placeholder-shown) {
-        border-color: var(--black-white);
+    &:focus,
+    &:active {
+        border: $border-input-accent;
+        transition: border-color 0.3s ease;
+        color: $white;
     }
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-        -webkit-text-fill-color: var(--black-white);
-        -webkit-box-shadow: 0 0 0 30px var(--white-black) inset;
-        border: 1px solid var(--black-white);
+        -webkit-text-fill-color: $brown;
+        -webkit-box-shadow: $shadow-box-light;
     }
+
+
+
+
+    &:not(:placeholder-shown) {
+        border-color: var(--black-white);
+    }
+
+
 
     &::-ms-reveal,
     &::-ms-clear,
