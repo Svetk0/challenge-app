@@ -1,8 +1,8 @@
-# Challenge App
+# 🎯 Challenge App
 
 A Next.js application for tracking personal challenges and goals.
 
-## Features
+## ✨ Features
 
 - Create and manage personal challenges
 - Track progress over time
@@ -10,7 +10,7 @@ A Next.js application for tracking personal challenges and goals.
 - Responsive design
 - Local storage persistence
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - Next.js 14
 - TypeScript
@@ -19,14 +19,14 @@ A Next.js application for tracking personal challenges and goals.
 - SCSS Modules
 - ESLint & Prettier
 
-## Getting Started
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
 
 - Node.js 18+
 - npm or yarn
 
-### Installation
+### 💻 Installation
 
 1. Clone the repository:
 
@@ -52,7 +52,7 @@ yarn dev
 
 The application will be available at [http://localhost:3017](http://localhost:3017)
 
-## Available Scripts
+## 📜 Available Scripts
 
 - `npm run dev` - Runs the development server
 - `npm run build` - Creates a production build
@@ -62,11 +62,11 @@ The application will be available at [http://localhost:3017](http://localhost:30
 - `npm run precommit` - Runs lint-staged checks
 - `npm run prepare` - Sets up Husky git hooks
 
-## Code Formatting
+## 🎨 Code Formatting
 
 This project uses ESLint and Prettier for code formatting and maintaining consistent code style.
 
-### ESLint Configuration
+### ⚙️ ESLint Configuration
 
 The ESLint configuration can be found in `.eslintrc.json`. It extends:
 
@@ -74,7 +74,7 @@ The ESLint configuration can be found in `.eslintrc.json`. It extends:
 - next/typescript
 - prettier
 
-### Prettier Configuration
+### 🔧 Prettier Configuration
 
 Prettier settings are defined in `.prettierrc.json` with the following defaults:
 
@@ -83,7 +83,7 @@ Prettier settings are defined in `.prettierrc.json` with the following defaults:
 - 100 characters line length
 - ES5 trailing commas
 
-## Pre-commit Hooks
+## 🔄 Pre-commit Hooks
 
 The project uses Husky and lint-staged to ensure code quality before commits:
 
@@ -91,7 +91,7 @@ The project uses Husky and lint-staged to ensure code quality before commits:
 2. ESLint checks are run
 3. TypeScript compilation is verified
 
-## Manual Formatting
+## ⌨️ Manual Formatting
 
 To manually format code:
 
@@ -107,7 +107,7 @@ npm run format:fix
 npm run lint
 ```
 
-## Project Structure
+## 📁 Project Structure
 
 - `/src` - Application source code
   - `/app` - Next.js app router pages
@@ -117,7 +117,7 @@ npm run lint
   - `/types` - TypeScript type definitions
   - `/utils` - Utility functions
 
-## Contributing
+## 🤝 Contributing
 
 1. Create a new branch from `develop` branch
 2. Name own branch as `taskID-taskType/taskName` <br>
@@ -138,8 +138,9 @@ npm run lint
   npm run build
   ```
 
-5.  Submit a pull request using the PR template 6. After PR approving, perform `Squash and Merge`
+5. Submit a pull request using the PR template
+6. After PR approving, perform `Squash and Merge`
 
-## License
+## 📄 License
 
-[Your License]
+MIT License
