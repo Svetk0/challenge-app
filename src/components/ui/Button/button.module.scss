@@ -1,54 +1,54 @@
 @import '@styles';
 
 .button {
-    width: max-content;
-    padding: 0 24px;
-    margin: 0;
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    border-radius: 12px;
+  width: max-content;
+  padding: 0 24px;
+  margin: 0;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  border: none;
+  color: $black;
+  font-size: 20px;
+  font-weight: 600;
+  height: 60px;
+  box-shadow: $shadow-box-button;
+  line-height: 32.68px;
+  text-align: center;
+  transition: all 0.5s ease;
+
+  &:hover {
+    opacity: 0.6;
     border: none;
-    color: $black;
-    font-size: 20px;
-    font-weight: 600;
-    height: 60px;
-    box-shadow: $shadow-box-button;
-    line-height: 32.68px;
-    text-align: center;
-    transition: all 0.5s ease;
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(1.1);
+    color: $pink;
+  }
+
+  &:disabled {
+    background: transparent;
+    background-color: $grey;
+    color: $white;
+    cursor: default;
 
     &:hover {
-        opacity: 0.6;
-        border: none;
-        transform: scale(1.01);
-        cursor: pointer;
+      background-color: $grey;
+      transform: none;
+      opacity: 1;
     }
-
-    &:active {
-        transform: scale(1.1);
-        color: $pink;
-    }
-
-    &:disabled {
-        background: transparent;
-        background-color: $grey;
-        color: $white;
-        cursor: default;
-
-        &:hover {
-            background-color: $grey;
-            transform: none;
-            opacity: 1;
-        }
-    }
+  }
 }
 
 .default {
-    background: $gradient-main-bg;
+  background: $gradient-main-bg;
 }
 
 .black {
-    background-color: $black-70;
-    color: $green-neon;
+  background-color: $black-70;
+  color: $green-neon;
 }

@@ -12,9 +12,7 @@ const nextConfig = {
     };
     return config;
   },
-  // images: {
-  //   domains: ["bazar-bridge.5dhub.tech", "xtonwallet.com"],
-  // },
+
 };
 
 export default nextConfig;

@@ -1,26 +1,26 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+'use client';
+import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { addChallenge } from "@/lib/features/challenges/challengeSlice";
+import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 
-import { ICreateForm, IChallenge } from "@/types";
-import staticData from "@/constants/data.json";
+import { ICreateForm, IChallenge } from '@/types';
+import staticData from '@/constants/data.json';
 
-import Button from "@/components/ui/Button/Button";
+import Button from '@/components/ui/Button/Button';
 
-import styles from "./createForm.module.scss";
+import styles from './createForm.module.scss';
 
 export default function CreateForm() {
   const router = useRouter();
   const dispatch = useDispatch();
   const dt = staticData.challenge_form;
-  const [goalTitle, setGoalTitle] = useState("");
-  const [datePeriodStart, setDatePeriodStart] = useState("");
+  const [goalTitle, setGoalTitle] = useState('');
+  const [datePeriodStart, setDatePeriodStart] = useState('');
   const addNewChallenge = (newChallenge: IChallenge) => {
-    localStorage.setItem("last_challenge", JSON.stringify(newChallenge));
+    localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
     dispatch(addChallenge(newChallenge));
   };
   const {
@@ -33,7 +33,7 @@ export default function CreateForm() {
     setValue,
     clearErrors,
   } = useForm<ICreateForm>({
-    mode: "onSubmit",
+    mode: 'onSubmit',
   });
 
   const onSubmit: SubmitHandler<ICreateForm> = (data) => {
@@ -50,12 +50,12 @@ export default function CreateForm() {
     console.log(data);
     reset({
       amount: 0,
-      goalTitle: "",
-      period: "",
-      datePeriodStart: "",
-      datePeriodFinish: "",
+      goalTitle: '',
+      period: '',
+      datePeriodStart: '',
+      datePeriodFinish: '',
     });
-    router.push("/challenges");
+    router.push('/challenges');
   };
 
   const handleValidation = (fieldName: keyof ICreateForm) => ({
@@ -72,95 +72,89 @@ export default function CreateForm() {
       <h2 className={styles.title}> {dt.title_create}</h2>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
-          <label htmlFor="goalTitle" className={styles.label}>
+          <label htmlFor='goalTitle' className={styles.label}>
             {dt.name.label}
           </label>
           <textarea
             className={styles.textarea}
             placeholder={dt.name.placeholder}
-            id="goalTitle"
-            {...register("goalTitle", {
+            id='goalTitle'
+            {...register('goalTitle', {
               required: dt.name.require_message,
               validate: {
                 minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
                 maxLength: (v) => v.length <= 50 || dt.name.error_message,
                 noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
               },
-              ...handleValidation("goalTitle"),
+              ...handleValidation('goalTitle'),
             })}
           />
-          {errors.goalTitle && (
-            <p className={styles.error}>{errors.goalTitle.message}</p>
-          )}
+          {errors.goalTitle && <p className={styles.error}>{errors.goalTitle.message}</p>}
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
-            <label htmlFor="amount" className={styles.label}>
+            <label htmlFor='amount' className={styles.label}>
               {dt.amount.label}
             </label>
             <input
-              id="amount"
+              id='amount'
               placeholder={dt.amount.placeholder}
               className={`${styles.input} ${styles.input_short}`}
-              type="number"
-              {...register("amount", {
+              type='number'
+              {...register('amount', {
                 required: dt.amount.require_message,
                 validate: {
                   min: (v) => v >= 1 || dt.amount.error_message,
                 },
-                ...handleValidation("amount"),
+                ...handleValidation('amount'),
               })}
             />
-            {errors.amount && (
-              <p className={styles.error}>{errors.amount.message}</p>
-            )}
+            {errors.amount && <p className={styles.error}>{errors.amount.message}</p>}
           </div>
           <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor="period">
+            <label className={styles.label} htmlFor='period'>
               {dt.period.label}
             </label>
 
             <select
-              id="period"
-              defaultValue=""
-              aria-describedby="period-error"
+              id='period'
+              defaultValue=''
+              aria-describedby='period-error'
               className={`${styles.input} ${styles.input_short}`}
-              {...register("period", {
+              {...register('period', {
                 required: dt.period.require_message,
 
-                ...handleValidation("period"),
+                ...handleValidation('period'),
               })}
             >
               {dt.period.time.map((value) => (
                 <option key={value.value}>{value.value}</option>
               ))}
             </select>
-            {errors.period && (
-              <p className={styles.error}>{errors.period.message}</p>
-            )}
+            {errors.period && <p className={styles.error}>{errors.period.message}</p>}
           </div>
         </div>
         {/* GOAL PERIOD */}
         <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor="datePeriodStart">
+            <label className={styles.label} htmlFor='datePeriodStart'>
               {dt.date_start.label}
             </label>
 
             <input
               className={`${styles.input} ${styles.input_short}`}
-              aria-describedby="datePeriodStart-error"
-              id="datePeriodStart"
-              type="date"
+              aria-describedby='datePeriodStart-error'
+              id='datePeriodStart'
+              type='date'
               placeholder={dt.date_start.placeholder}
-              defaultValue="" // Добавьте это
-              {...register("datePeriodStart", {
+              defaultValue='' // Добавьте это
+              {...register('datePeriodStart', {
                 required: dt.date_start.require_message,
                 validate: {
-                  min: (v) => v >= "2010-01-01" || dt.date_start.error_message,
+                  min: (v) => v >= '2010-01-01' || dt.date_start.error_message,
                 },
 
-                ...handleValidation("datePeriodStart"),
+                ...handleValidation('datePeriodStart'),
               })}
             />
             {errors.datePeriodStart && (
@@ -168,22 +162,21 @@ export default function CreateForm() {
             )}
           </div>
           <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor="datePeriodFinish">
+            <label className={styles.label} htmlFor='datePeriodFinish'>
               {dt.date_finish.label}
             </label>
             <input
               disabled={false}
               className={`${styles.input} ${styles.input_short}`}
-              aria-describedby="datePeriodFinish-error"
-              id="datePeriodFinish"
-              type="date"
-              {...register("datePeriodFinish", {
+              aria-describedby='datePeriodFinish-error'
+              id='datePeriodFinish'
+              type='date'
+              {...register('datePeriodFinish', {
                 required: dt.date_finish.require_message,
                 validate: {
-                  min: (v) =>
-                    v > String(datePeriodStart) || dt.date_finish.error_message,
+                  min: (v) => v > String(datePeriodStart) || dt.date_finish.error_message,
                 },
-                ...handleValidation("datePeriodFinish"),
+                ...handleValidation('datePeriodFinish'),
               })}
             />
             {errors.datePeriodFinish && (
@@ -193,16 +186,11 @@ export default function CreateForm() {
         </div>
       </div>
       <div className={styles.rowWrapper}>
+        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
         <Button
-          type="button"
-          text={"Back"}
-          color="black"
-          onClick={() => router.back()}
-        />
-        <Button
-          type="submit"
-          text={"Create"}
-          color="default"
+          type='submit'
+          text={'Create'}
+          color='default'
           //disabled={!isValid}
           //onClick={() => router.push("/challenges")}
         />
