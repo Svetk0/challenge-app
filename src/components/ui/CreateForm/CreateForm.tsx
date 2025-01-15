@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { addChallenge } from '@/lib/features/challenges/challengeSlice';
-
+import { useAddChallengeMutation } from '@/api/content';
 import { TCreateForm } from '@/types';
 import staticData from '@/constants/data.json';
 
@@ -14,14 +14,17 @@ import Button from '@/components/ui/Button/Button';
 import styles from './createForm.module.scss';
 
 export default function CreateForm() {
+  const TELEGRAM_ID = '111';
   const router = useRouter();
   const dispatch = useDispatch();
   const dt = staticData.challenge_form;
   //const [_description, setDescription] = useState('');
   const [startedDate, _setStartedDate] = useState('');
+  const [createChallenge] = useAddChallengeMutation({});
   const addNewChallenge = (newChallenge: TCreateForm) => {
     localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
     dispatch(addChallenge(newChallenge));
+    createChallenge({ dataAdd: newChallenge, telegramId: TELEGRAM_ID });
   };
   const {
     register,

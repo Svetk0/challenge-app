@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 
-import { IChallenge } from '@/types';
+import { TChallenge } from '@/types';
 
 import { useGetAllChallengeListQuery } from '@/api/content';
 
@@ -12,7 +12,7 @@ export default function ListChallenges() {
 
   const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery(TELEGRAM_ID);
   console.log('fetchData', data, error, isLoading, isSuccess);
-  const [local, setLocal] = useState<IChallenge[]>([]);
+  const [_local, setLocal] = useState<TChallenge[]>([]);
   const challengeData = useSelector((state: RootState) => state.challenge);
   console.log('storeRedux', challengeData);
 
@@ -24,11 +24,7 @@ export default function ListChallenges() {
   return (
     <>
       My Challenges List
-      <ol>
-        {local.map((item: IChallenge) => (
-          <li key={item.id}>{item.goalTitle}</li>
-        ))}
-      </ol>
+      <ol>{data?.map((item: TChallenge) => <li key={item.id}>{item.description}</li>)}</ol>
     </>
   );
 }
