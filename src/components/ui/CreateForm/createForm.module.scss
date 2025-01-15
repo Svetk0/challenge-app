@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: $black-70;
+    background-color: $black;
     padding: 40px 5%;
     gap: 20px;
     border-radius: 20px;
@@ -55,56 +55,13 @@
     gap: 2px;
 
     input[type="date"] {
-        font-family: inherit;
-        position: relative;
-        padding-right: 5px;
-        color: transparent;
+        @include InputDate;
     }
 
-    input[type="date"]:invalid {
-        color: transparent;
-    }
-
-    input[type="date"]::-webkit-calendar-picker-indicator {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-        color: transparent;
-        background: transparent;
-    }
-
-    input[type="date"]::-webkit-inner-spin-button,
-    input[type="date"]::-webkit-clear-button {
-        z-index: -10;
-    }
-
-    input[type="date"]:before {
-        content: attr(placeholder) !important;
-        color: $dirty-green-op80; // Цвет placeholder'а
-        position: absolute;
-        left: 30px; // Соответствует padding-left инпута
-    }
-
-    // Когда значение выбрано или инпут в фокусе
-    input[type="date"]:focus,
-    input[type="date"]:valid {
-        color: $white; // Возвращаем цвет текста
-    }
-
-    input[type="date"]:focus:before,
-    input[type="date"]:valid:before {
-        content: "dd-mm-yyyy" !important;
-    }
-
-
+    // Try to change placeholder styles (unsuccessfully)
     input[type="date"] {
         position: relative;
         background-color: $black-70;
-        padding: 20px 5px 2px 30px;
         color: $white;
 
         &::-webkit-datetime-edit,
@@ -115,42 +72,44 @@
 
         &::-webkit-datetime-edit-fields-wrapper {
             position: relative;
-            opacity: 0.1;
+            opacity: 0.4;
         }
 
         &::-webkit-datetime-edit {
             position: relative;
-            opacity: 0;
+            opacity: 1;
         }
 
-        &::after {
+        &:invalid::before {
             opacity: 1;
             content: attr(placeholder);
             position: absolute;
-            top: 20px;
-            left: 30px;
+            width: 100%;
+            height: 100%;
+            top: 30%;
+            left: 0%;
             color: $dirty-green-op80;
             pointer-events: none;
-
         }
 
         &:focus::before,
         &:valid::before {
-            opacity: 0;
+            opacity: 1;
+            //content: '';
         }
 
-        &:focus::-webkit-datetime-edit,
-        &:valid::-webkit-datetime-edit {
+        // &:focus::-webkit-datetime-edit,
+        // &:valid::-webkit-datetime-edit {
+        //     opacity: 1;
+        //     color: $white;
+        // }
+
+        &:focus::-webkit-datetime-edit-fields-wrapper,
+        &:valid::-webkit-datetime-edit-fields-wrapper {
             opacity: 1;
             color: $white;
         }
-
-        &:focus::-webkit-calendar-picker-indicator,
-        &:valid::-webkit-calendar-picker-indicator {
-            opacity: 0;
-        }
     }
-
 }
 
 .input,

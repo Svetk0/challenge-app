@@ -38,11 +38,8 @@
     border-image: $gradient-main-border;
     border-image-slice: 1;
     color: $white;
-    padding: 20px 5px 2px 30px;
+    padding: 10px;
     background: $black-70;
-
-    resize: none;
-    overflow: auto;
 
     &::placeholder {
         color: $dirty-green-op80;
@@ -63,20 +60,41 @@
         -webkit-box-shadow: $shadow-box-light;
     }
 
-
-
-
-    &:not(:placeholder-shown) {
-        border-color: var(--black-white);
-    }
-
-
-
     &::-ms-reveal,
     &::-ms-clear,
     &::-webkit-clear-button,
     &::-webkit-password-toggle-button {
         display: none;
+    }
+}
+
+
+@mixin InputDate {
+    //full calendar touch field mask
+    font-family: inherit;
+    position: relative;
+    padding-right: 5px;
+    color: transparent;
+
+    &:invalid {
+        color: transparent;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-clear-button {
+        z-index: -10;
     }
 }
 

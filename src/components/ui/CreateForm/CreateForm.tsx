@@ -76,7 +76,7 @@ export default function CreateForm() {
             {dt.name.label}
           </label>
           <textarea
-            className={styles.input}
+            className={styles.textarea}
             placeholder={dt.name.placeholder}
             id="goalTitle"
             {...register("goalTitle", {
