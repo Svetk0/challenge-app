@@ -1,4 +1,4 @@
-import Image from 'next/image';
+//import Image from 'next/image';
 import Button from '@/components/ui/Button/Button';
 import Link from 'next/link';
 import styles from './page.module.scss';
