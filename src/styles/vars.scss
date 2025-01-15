@@ -17,10 +17,19 @@ $pink: rgba(174, 120, 221, 1);
 //box shadow
 $shadow-box-bright: 0px 0px 4px 0px rgba(191, 251, 226, 1);
 $shadow-box-light: 1px 2px 6px 0px rgba(224, 245, 236, 0.2);
-$shadow-box-button: 1px 1px 6px 0px rgba(224, 245, 236, 0.2), 0px 2px 4px 0px rgba(19, 29, 25, 0.4) inset;
+$shadow-box-button:
+  1px 1px 6px 0px rgba(224, 245, 236, 0.2),
+  0px 2px 4px 0px rgba(19, 29, 25, 0.4) inset;
 //gradient
 $gradient-main-bg: linear-gradient(90deg, $lemon-neon 0%, $light-green-neon 49.5%, $cyan-neon 100%);
-$gradient-main-border: linear-gradient(90deg, $white-op10 0%, $lemon-neon 10%, $light-green-neon 49.5%, $cyan-neon 90%, $white-op10 100%);
+$gradient-main-border: linear-gradient(
+  90deg,
+  $white-op10 0%,
+  $lemon-neon 10%,
+  $light-green-neon 49.5%,
+  $cyan-neon 90%,
+  $white-op10 100%
+);
 
 //buttons
 $border-input: 2px solid $gradient-main-border;

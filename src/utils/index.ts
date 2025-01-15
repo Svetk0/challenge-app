@@ -1,2 +1,2 @@
-export * from "./cn";
-export * from "./typeCheck";
+export * from './cn';
+export * from './typeCheck';

@@ -1,15 +1,15 @@
-import { JSX } from "react";
-import styles from "./input.module.scss";
+import { JSX } from 'react';
+import styles from './input.module.scss';
 
 export type InputProps = {
-  tagType?: "input" | "textarea";
+  tagType?: 'input' | 'textarea';
   label?: string;
-} & JSX.IntrinsicElements["input"] &
-  JSX.IntrinsicElements["textarea"];
+} & JSX.IntrinsicElements['input'] &
+  JSX.IntrinsicElements['textarea'];
 
 const Input = (props: InputProps) => {
   const {
-    tagType = "input",
+    tagType = 'input',
     label,
     placeholder,
 
@@ -20,18 +20,18 @@ const Input = (props: InputProps) => {
   return (
     <>
       <label className={styles.label}>{label} </label>
-      {tagType === "input" ? (
+      {tagType === 'input' ? (
         <input
           className={styles.input}
-          autoComplete="on"
+          autoComplete='on'
           placeholder={placeholder}
-          type={type || "text"}
+          type={type || 'text'}
           {...rest}
         />
       ) : (
         <textarea
           className={styles.textarea}
-          autoComplete="off"
+          autoComplete='off'
           placeholder={placeholder}
           {...rest}
         />
