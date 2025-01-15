@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IChallenge } from '@/types';
+import { TCreateForm } from '@/types';
 import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
 type Props = {
-  payload: IChallenge;
+  payload: TCreateForm;
 };
 
 const initialState = getLocalStorage('challenges');

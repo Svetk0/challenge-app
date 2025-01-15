@@ -15,7 +15,7 @@
       "error_message": "The description should contain 2..50 symbols",
       "require_message": "Please, fill it"
     },
-    "amount": {
+    "goal": {
       "label": "Amount",
       "placeholder": "number",
       "error_message": "Should be above 0",

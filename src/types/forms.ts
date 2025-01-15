@@ -9,3 +9,15 @@ export type ICreateForm = {
 export type IEditForm = {
   progress: number;
 } & ICreateForm;
+
+export type TCreateForm = {
+  description: string;
+  goal: number;
+  period: string;
+  started_at: string;
+  finished_at: string;
+};
+
+export type TEditForm = {
+  progress: number;
+} & TCreateForm;

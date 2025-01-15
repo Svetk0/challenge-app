@@ -1,3 +1,5 @@
+import { TEditForm } from '.';
+
 export type IChallenge = {
   id: number;
   amount: number;
@@ -11,3 +13,7 @@ export interface NewChallenge {
   id: number;
   data: IChallenge;
 }
+
+export type TChallenge = {
+  id: number;
+} & TEditForm;
