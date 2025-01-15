@@ -1,18 +1,104 @@
 @import './screens.scss';
 @import './vars.scss';
 
-@mixin headerStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
+@mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
     font-size: $fontSize;
     font-weight: $fontWeight;
     line-height: $fontSize;
     text-align: $textAlign;
-
     color: $color;
     font-family: inherit;
     margin: 0;
 }
 
-@mixin blockHeader($textAlign: center, $color: $dark-grey) {
+@mixin ResetButton {
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+@mixin Text($size: 16px, $font-weight: 400, $line-height: 24.2px, $align: center) {
+    font-weight: $font-weight;
+    font-size: $size;
+    text-align: $align;
+    line-height: $line-height;
+    font-family: inherit;
+}
+
+@mixin Input($align: left) {
+    @include Text(16px, 400, 21.79px, $align);
+    width: 100%;
+    height: 50px;
+    text-align: left;
+    border-radius: 8px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    border-image: $gradient-main-border;
+    border-image-slice: 1;
+    color: $white;
+    padding: 10px;
+    background: $black-70;
+
+    &::placeholder {
+        color: $dirty-green-op80;
+        font-size: smaller;
+    }
+
+    &:focus,
+    &:active {
+        border: $border-input-accent;
+        transition: border-color 0.3s ease;
+        color: $white;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $brown;
+        -webkit-box-shadow: $shadow-box-light;
+    }
+
+    &::-ms-reveal,
+    &::-ms-clear,
+    &::-webkit-clear-button,
+    &::-webkit-password-toggle-button {
+        display: none;
+    }
+}
+
+
+@mixin InputDate {
+    //full calendar touch field mask
+    font-family: inherit;
+    position: relative;
+    padding-right: 5px;
+    color: transparent;
+
+    &:invalid {
+        color: transparent;
+    }
+
+    &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-clear-button {
+        z-index: -10;
+    }
+}
+
+@mixin BlockHeader($textAlign: center, $color: $dark-grey) {
     @include headerStyles(94px, 600, $textAlign, $color);
     letter-spacing: -0.02em;
 

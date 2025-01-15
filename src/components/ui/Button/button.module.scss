@@ -10,12 +10,11 @@
     border-radius: 12px;
     border: none;
     color: $black;
-    //font-family: 'SF Pro Text', 'Arial', sans-serif;
     font-size: 20px;
     font-weight: 600;
     height: 60px;
     box-shadow: $shadow-box-button;
-    line-height: 28px;
+    line-height: 32.68px;
     text-align: center;
     transition: all 0.5s ease;
 
@@ -24,6 +23,11 @@
         border: none;
         transform: scale(1.01);
         cursor: pointer;
+    }
+
+    &:active {
+        transform: scale(1.1);
+        color: $pink;
     }
 
     &:disabled {

@@ -55,6 +55,7 @@ export default function CreateForm() {
       datePeriodStart: "",
       datePeriodFinish: "",
     });
+    router.push("/challenges");
   };
 
   const handleValidation = (fieldName: keyof ICreateForm) => ({
@@ -75,7 +76,7 @@ export default function CreateForm() {
             {dt.name.label}
           </label>
           <textarea
-            className={styles.input}
+            className={styles.textarea}
             placeholder={dt.name.placeholder}
             id="goalTitle"
             {...register("goalTitle", {
@@ -151,6 +152,8 @@ export default function CreateForm() {
               aria-describedby="datePeriodStart-error"
               id="datePeriodStart"
               type="date"
+              placeholder={dt.date_start.placeholder}
+              defaultValue="" // Добавьте это
               {...register("datePeriodStart", {
                 required: dt.date_start.require_message,
                 validate: {
@@ -200,8 +203,8 @@ export default function CreateForm() {
           type="submit"
           text={"Create"}
           color="default"
-          disabled={!isValid}
-          onClick={() => router.push("/challenges")}
+          //disabled={!isValid}
+          //onClick={() => router.push("/challenges")}
         />
       </div>
     </form>

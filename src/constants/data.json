@@ -40,7 +40,7 @@
     },
     "date_start": {
       "label": "Start",
-      "placeholder": "15.12.2024",
+      "placeholder": "17.12.2024",
       "error_message": "Can't be early 2000",
       "require_message": "Please, fill it"
     },
