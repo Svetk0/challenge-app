@@ -17,8 +17,8 @@ export default function CreateForm() {
   const router = useRouter();
   const dispatch = useDispatch();
   const dt = staticData.challenge_form;
-  const [goalTitle, setGoalTitle] = useState('');
-  const [datePeriodStart, setDatePeriodStart] = useState('');
+  const [_goalTitle, setGoalTitle] = useState('');
+  const [datePeriodStart, _setDatePeriodStart] = useState('');
   const addNewChallenge = (newChallenge: IChallenge) => {
     localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
     dispatch(addChallenge(newChallenge));
@@ -26,11 +26,10 @@ export default function CreateForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     trigger,
     reset,
     getValues,
-    setValue,
     clearErrors,
   } = useForm<ICreateForm>({
     mode: 'onSubmit',
