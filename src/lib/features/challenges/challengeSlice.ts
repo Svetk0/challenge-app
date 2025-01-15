@@ -12,7 +12,6 @@ const challengeSlice = createSlice({
   reducers: {
     addChallenge(state, action: Props) {
       const newState = [...state, action.payload];
-      //setLocalStorage({ key = "challenges", data = JSON.stringify(newState) });
       setLocalStorage('challenges', newState);
       return newState;
     },
