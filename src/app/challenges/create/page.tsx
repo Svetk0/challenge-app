@@ -1,4 +1,4 @@
-import CreateForm from '@/components/ui/CreateForm/CreateForm';
+import CreateForm from '@/components/CreateForm/CreateForm';
 
 export default function Page() {
   return <CreateForm />;
