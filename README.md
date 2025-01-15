@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎯 Challenge App
 
-## Getting Started
+A Next.js application for tracking personal challenges and goals.
 
-First, run the development server:
+## ✨ Features
+
+- Create and manage personal challenges
+- Track progress over time
+- Set custom periods and amounts for each challenge
+- Responsive design
+- Local storage persistence
+
+## 🛠️ Tech Stack
+
+- Next.js 14
+- TypeScript
+- Redux Toolkit
+- React Hook Form
+- SCSS Modules
+- ESLint & Prettier
+
+## 🚀 Getting Started
+
+### 📋 Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### 💻 Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Svetk0/challenge-app.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:3017](http://localhost:3017)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📜 Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` - Runs the development server
+- `npm run build` - Creates a production build
+- `npm run start` - Starts the production server
+- `npm run lint` - Runs ESLint to check code
+- `npm run format:fix` - Formats code using Prettier
+- `npm run precommit` - Runs lint-staged checks
+- `npm run prepare` - Sets up Husky git hooks
 
-## Learn More
+## 🎨 Code Formatting
 
-To learn more about Next.js, take a look at the following resources:
+This project uses ESLint and Prettier for code formatting and maintaining consistent code style.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### ⚙️ ESLint Configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The ESLint configuration can be found in `.eslintrc.json`. It extends:
 
-## Deploy on Vercel
+- next/core-web-vitals
+- next/typescript
+- prettier
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 🔧 Prettier Configuration
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Prettier settings are defined in `.prettierrc.json` with the following defaults:
+
+- Single quotes
+- 2 spaces indentation
+- 100 characters line length
+- ES5 trailing commas
+
+## 🔄 Pre-commit Hooks
+
+The project uses Husky and lint-staged to ensure code quality before commits:
+
+1. All staged files are formatted with Prettier
+2. ESLint checks are run
+3. TypeScript compilation is verified
+
+## ⌨️ Manual Formatting
+
+To manually format code:
+
+1. Format all files:
+
+```bash
+npm run format:fix
+```
+
+2. Lint and fix issues manually:
+
+```bash
+npm run lint
+```
+
+## 📁 Project Structure
+
+- `/src` - Application source code
+  - `/app` - Next.js app router pages
+  - `/components` - React components
+  - `/lib` - Redux store and features
+  - `/styles` - Global styles and SCSS modules
+  - `/types` - TypeScript type definitions
+  - `/utils` - Utility functions
+
+## 🤝 Contributing
+
+1. Create a new branch from `develop` branch
+2. Name own branch as `taskID-taskType/taskName` <br>
+   Example: `6-feat/add-redux-toolkit`
+3. Make changes
+4. Check all changes using step by step checking
+
+- Check by ESLint
+  ```bash
+  npm run lint
+  ```
+- Then format all files using prettier
+  ```bash
+  npm run format:fix
+  ```
+- Finally, check on build production
+  ```bash
+  npm run build
+  ```
+
+5. Submit a pull request using the PR template
+6. After PR approving, perform `Squash and Merge`
+
+## 📄 License
+
+MIT License

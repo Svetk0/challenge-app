@@ -1,13 +1,14 @@
-# taskID-taskType/taskName
+# Task Name
 
 ## Task type
 
-- [ ] Feature
-- [ ] Fix
-- [ ] Doc
+- [x] Feature/Fix/Docs/Refactor
 - [ ] Other
 
 ## Describe your changes
+
+1.
+2.
 
 ### Add screenshots
 
