@@ -1,0 +1,13 @@
+name: ✨ Task
+description: Create a new task
+title: '[Task]: '
+labels: ['task']
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: label/tag
+      description: Describe problem statement (full)
+      placeholder: Short description
+    validations:
+      required: true
