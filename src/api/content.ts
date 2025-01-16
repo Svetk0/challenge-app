@@ -1,27 +1,59 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getAuthToken } from '@/utils/auth';
+import { TChallenge, TCreateForm } from '@/types';
+
+interface ResponseUser {
+  dataAdd: TCreateForm;
+  status: number;
+  telegramId: string;
+}
+
 export const contentApi = createApi({
   reducerPath: 'contentApi',
-  //keepUnusedDataFor: 1200,
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://bazar-bridge.5dhub.tech/api/v1/',
+    baseUrl: 'http://193.164.150.86:8098/',
+    prepareHeaders: (headers) => {
+      const token = getAuthToken();
+
+      if (token) {
+        headers.set('Authorization', token);
+      }
+
+      return headers;
+    },
   }),
-  tagTypes: ['TokenBalance', 'UserTokenList'],
+  tagTypes: ['Actual'],
 
   endpoints: (builder) => ({
     //------------   GET   ------------
-
     //user info
     getUserMe: builder.query({
-      query: (telegramId: string) => ({
+      query: () => ({
         url: 'users/me/',
         method: 'GET',
-        headers: {
-          Authorization: telegramId,
-          'Content-Type': 'application/json',
-        },
       }),
+    }),
+
+    //Get list of user's challenges
+    getAllChallengeList: builder.query<TChallenge[], void>({
+      query: () => ({
+        url: '/challenges/in-progress/?limit=100',
+        method: 'GET',
+      }),
+      providesTags: ['Actual'],
+    }),
+
+    //------------   POST   ------------
+
+    //add new token in user's wallet
+    createChallenge: builder.mutation<TCreateForm, Partial<ResponseUser>>({
+      query: ({ dataAdd }) => ({
+        url: `challenges/`,
+        method: 'POST',
+        body: dataAdd,
+      }),
+      invalidatesTags: ['Actual'],
     }),
   }),
 });
-
-export const { useGetUserMeQuery } = contentApi;
+export const { useGetAllChallengeListQuery, useCreateChallengeMutation } = contentApi;

@@ -1,9 +1,12 @@
 //import Image from 'next/image';
+'use client';
 import Button from '@/components/ui/Button/Button';
 import Link from 'next/link';
 import styles from './page.module.scss';
+import { setAuthToken, TELEGRAM_ID } from '@/utils/auth';
 
 export default function Home() {
+  setAuthToken(TELEGRAM_ID);
   return (
     <div className={styles.page}>
       <main className={styles.main}>

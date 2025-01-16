@@ -1,13 +1,19 @@
-export type IChallenge = {
-  id: number;
-  amount: number;
-  goalTitle: string;
-  period: string;
-  datePeriodStart: string;
-  datePeriodFinish: string;
-};
+import { TEditForm } from '.';
 
-export interface NewChallenge {
+// export type IChallenge = {
+//   id: number;
+//   amount: number;
+//   goalTitle: string;
+//   period: string;
+//   datePeriodStart: string;
+//   datePeriodFinish: string;
+// };
+
+// export interface NewChallenge {
+//   id: number;
+//   data: IChallenge;
+// }
+
+export type TChallenge = {
   id: number;
-  data: IChallenge;
-}
+} & TEditForm;

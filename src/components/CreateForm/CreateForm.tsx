@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { addChallenge } from '@/lib/features/challenges/challengeSlice';
-
-import { ICreateForm, IChallenge } from '@/types';
+import { useCreateChallengeMutation } from '@/api/content';
+import { TCreateForm } from '@/types';
 import staticData from '@/constants/data.json';
 
 import Button from '@/components/ui/Button/Button';
@@ -14,52 +14,48 @@ import Button from '@/components/ui/Button/Button';
 import styles from './createForm.module.scss';
 
 export default function CreateForm() {
+  const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
-  const dt = staticData.challenge_form;
-  const [goalTitle, setGoalTitle] = useState('');
-  const [datePeriodStart, setDatePeriodStart] = useState('');
-  const addNewChallenge = (newChallenge: IChallenge) => {
-    localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
-    dispatch(addChallenge(newChallenge));
+  const [startedDate, _setStartedDate] = useState('');
+  const [createChallenge] = useCreateChallengeMutation({});
+
+  const addNewChallenge = async (newChallenge: TCreateForm) => {
+    try {
+      localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
+      dispatch(addChallenge(newChallenge));
+      await createChallenge({ dataAdd: newChallenge }).unwrap();
+    } catch (error) {
+      console.error('Failed to add challenge:', error);
+    }
   };
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     trigger,
     reset,
     getValues,
     setValue,
     clearErrors,
-  } = useForm<ICreateForm>({
+  } = useForm<TCreateForm>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<ICreateForm> = (data) => {
-    setGoalTitle(data.goalTitle.trimStart());
-    addNewChallenge({
-      id: Math.round(Math.random() * 1000),
-      amount: data.amount,
-      goalTitle: data.goalTitle,
-      period: data.period,
-      datePeriodStart: data.datePeriodStart,
-      datePeriodFinish: data.datePeriodFinish,
-    });
-
+  const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
+    await addNewChallenge(data);
     console.log(data);
-    reset({
-      amount: 0,
-      goalTitle: '',
-      period: '',
-      datePeriodStart: '',
-      datePeriodFinish: '',
-    });
+    reset();
     router.push('/challenges');
   };
 
-  const handleValidation = (fieldName: keyof ICreateForm) => ({
-    onBlur: () => trigger(fieldName),
+  const handleValidation = (fieldName: keyof TCreateForm) => ({
+    onBlur: () => {
+      trigger(fieldName);
+      if (getValues('goal') < 1) {
+        setValue('goal', 1);
+      }
+    },
     onChange: () => {
       if (getValues(fieldName)) {
         clearErrors(fieldName);
@@ -72,44 +68,44 @@ export default function CreateForm() {
       <h2 className={styles.title}> {dt.title_create}</h2>
       <div className={styles.inputsContainer}>
         <div className={styles.inputWrapper}>
-          <label htmlFor='goalTitle' className={styles.label}>
+          <label htmlFor='description' className={styles.label}>
             {dt.name.label}
           </label>
           <textarea
             className={styles.textarea}
             placeholder={dt.name.placeholder}
-            id='goalTitle'
-            {...register('goalTitle', {
+            id='description'
+            {...register('description', {
               required: dt.name.require_message,
               validate: {
                 minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
                 maxLength: (v) => v.length <= 50 || dt.name.error_message,
                 noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
               },
-              ...handleValidation('goalTitle'),
+              ...handleValidation('description'),
             })}
           />
-          {errors.goalTitle && <p className={styles.error}>{errors.goalTitle.message}</p>}
+          {errors.description && <p className={styles.error}>{errors.description.message}</p>}
         </div>
         <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
-            <label htmlFor='amount' className={styles.label}>
-              {dt.amount.label}
+            <label htmlFor='goal' className={styles.label}>
+              {dt.goal.label}
             </label>
             <input
-              id='amount'
-              placeholder={dt.amount.placeholder}
+              id='goal'
+              placeholder={dt.goal.placeholder}
               className={`${styles.input} ${styles.input_short}`}
               type='number'
-              {...register('amount', {
-                required: dt.amount.require_message,
+              {...register('goal', {
+                required: dt.goal.require_message,
                 validate: {
-                  min: (v) => v >= 1 || dt.amount.error_message,
+                  min: (v) => v >= 1 || dt.goal.error_message,
                 },
-                ...handleValidation('amount'),
+                ...handleValidation('goal'),
               })}
             />
-            {errors.amount && <p className={styles.error}>{errors.amount.message}</p>}
+            {errors.goal && <p className={styles.error}>{errors.goal.message}</p>}
           </div>
           <div className={styles.inputWrapper}>
             <label className={styles.label} htmlFor='period'>
@@ -134,54 +130,50 @@ export default function CreateForm() {
             {errors.period && <p className={styles.error}>{errors.period.message}</p>}
           </div>
         </div>
-        {/* GOAL PERIOD */}
+        {/* description PERIOD */}
         <div className={styles.rowWrapper}>
           <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor='datePeriodStart'>
+            <label className={styles.label} htmlFor='started_at'>
               {dt.date_start.label}
             </label>
 
             <input
               className={`${styles.input} ${styles.input_short}`}
-              aria-describedby='datePeriodStart-error'
-              id='datePeriodStart'
+              aria-describedby='started_at-error'
+              id='started_at'
               type='date'
               placeholder={dt.date_start.placeholder}
               defaultValue='' // Добавьте это
-              {...register('datePeriodStart', {
+              {...register('started_at', {
                 required: dt.date_start.require_message,
                 validate: {
                   min: (v) => v >= '2010-01-01' || dt.date_start.error_message,
                 },
 
-                ...handleValidation('datePeriodStart'),
+                ...handleValidation('started_at'),
               })}
             />
-            {errors.datePeriodStart && (
-              <p className={styles.error}>{errors.datePeriodStart.message}</p>
-            )}
+            {errors.started_at && <p className={styles.error}>{errors.started_at.message}</p>}
           </div>
           <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor='datePeriodFinish'>
+            <label className={styles.label} htmlFor='finished_at'>
               {dt.date_finish.label}
             </label>
             <input
               disabled={false}
               className={`${styles.input} ${styles.input_short}`}
-              aria-describedby='datePeriodFinish-error'
-              id='datePeriodFinish'
+              aria-describedby='finished_at-error'
+              id='finished_at'
               type='date'
-              {...register('datePeriodFinish', {
+              {...register('finished_at', {
                 required: dt.date_finish.require_message,
                 validate: {
-                  min: (v) => v > String(datePeriodStart) || dt.date_finish.error_message,
+                  min: (v) => v > String(startedDate) || dt.date_finish.error_message,
                 },
-                ...handleValidation('datePeriodFinish'),
+                ...handleValidation('finished_at'),
               })}
             />
-            {errors.datePeriodFinish && (
-              <p className={styles.error}>{errors.datePeriodFinish.message}</p>
-            )}
+            {errors.finished_at && <p className={styles.error}>{errors.finished_at.message}</p>}
           </div>
         </div>
       </div>
