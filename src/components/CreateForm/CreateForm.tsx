@@ -14,7 +14,6 @@ import Button from '@/components/ui/Button/Button';
 import styles from './createForm.module.scss';
 
 export default function CreateForm() {
-  const TELEGRAM_ID = '111';
   const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ export default function CreateForm() {
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
       dispatch(addChallenge(newChallenge));
-      await createChallenge({ dataAdd: newChallenge, telegramId: TELEGRAM_ID }).unwrap();
+      await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {
       console.error('Failed to add challenge:', error);
     }

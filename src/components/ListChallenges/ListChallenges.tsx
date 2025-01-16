@@ -8,9 +8,7 @@ import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 
 export default function ListChallenges() {
-  const TELEGRAM_ID = '111';
-
-  const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery(TELEGRAM_ID);
+  const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery('');
   console.log('fetchData', data, error, isLoading, isSuccess);
   const [local, setLocal] = useState<TChallenge[]>([]);
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
@@ -23,7 +21,7 @@ export default function ListChallenges() {
       setLocal(data);
     }
     console.log('all ', local);
-  }, []);
+  }, [isSuccess]);
 
   return (
     <>
