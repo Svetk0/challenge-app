@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { addChallenge } from '@/lib/features/challenges/challengeSlice';
-import { useAddChallengeMutation } from '@/api/content';
+import { useCreateChallengeMutation } from '@/api/content';
 import { TCreateForm } from '@/types';
 import staticData from '@/constants/data.json';
 
@@ -15,16 +15,22 @@ import styles from './createForm.module.scss';
 
 export default function CreateForm() {
   const TELEGRAM_ID = '111';
+  const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
-  const dt = staticData.challenge_form;
+
   //const [_description, setDescription] = useState('');
   const [startedDate, _setStartedDate] = useState('');
-  const [createChallenge] = useAddChallengeMutation({});
-  const addNewChallenge = (newChallenge: TCreateForm) => {
-    localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
-    dispatch(addChallenge(newChallenge));
-    createChallenge({ dataAdd: newChallenge, telegramId: TELEGRAM_ID });
+  const [createChallenge] = useCreateChallengeMutation({});
+
+  const addNewChallenge = async (newChallenge: TCreateForm) => {
+    try {
+      localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
+      dispatch(addChallenge(newChallenge));
+      await createChallenge({ dataAdd: newChallenge, telegramId: TELEGRAM_ID }).unwrap();
+    } catch (error) {
+      console.error('Failed to add challenge:', error);
+    }
   };
   const {
     register,
@@ -33,21 +39,27 @@ export default function CreateForm() {
     trigger,
     reset,
     getValues,
+    setValue,
     clearErrors,
   } = useForm<TCreateForm>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<TCreateForm> = (data) => {
+  const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
     //setdescription(data.description.trimStart());
-    addNewChallenge(data);
+    await addNewChallenge(data);
     console.log(data);
     reset();
     router.push('/challenges');
   };
 
   const handleValidation = (fieldName: keyof TCreateForm) => ({
-    onBlur: () => trigger(fieldName),
+    onBlur: () => {
+      trigger(fieldName);
+      if (getValues('goal') < 1) {
+        setValue('goal', 1);
+      }
+    },
     onChange: () => {
       if (getValues(fieldName)) {
         clearErrors(fieldName);

@@ -51,7 +51,7 @@ export const contentApi = createApi({
     //------------   POST   ------------
 
     //add new token in user's wallet
-    addChallenge: builder.mutation<AddChallenge, Partial<ResponseUser>>({
+    createChallenge: builder.mutation<AddChallenge, Partial<ResponseUser>>({
       query: ({ dataAdd, telegramId }) => ({
         url: `challenges/`,
         method: 'POST',
@@ -65,4 +65,4 @@ export const contentApi = createApi({
     }),
   }),
 });
-export const { useGetAllChallengeListQuery, useAddChallengeMutation } = contentApi;
+export const { useGetAllChallengeListQuery, useCreateChallengeMutation } = contentApi;

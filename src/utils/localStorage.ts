@@ -1,13 +1,17 @@
-import { IChallenge } from '@/types';
-export const getLocalStorage = (key: string) => {
-  const data = localStorage.getItem(key);
-
-  if (data !== null) {
-    return JSON.parse(data);
+export const setLocalStorage = (key: string, data: unknown): void => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.error('Error saving to localStorage:', error);
   }
-  return {};
 };
 
-export const setLocalStorage = (key: string, data: IChallenge[] | IChallenge | object) => {
-  localStorage.setItem(key, JSON.stringify(data));
+export const getLocalStorage = (key: string) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : [];
+  } catch (error) {
+    console.error('Error reading from localStorage:', error);
+    return [];
+  }
 };
