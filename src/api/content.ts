@@ -10,7 +10,6 @@ interface ResponseUser {
 
 export const contentApi = createApi({
   reducerPath: 'contentApi',
-  //keepUnusedDataFor: 1200,
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://193.164.150.86:8098/',
     prepareHeaders: (headers) => {

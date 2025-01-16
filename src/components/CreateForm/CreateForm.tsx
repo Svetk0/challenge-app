@@ -17,8 +17,6 @@ export default function CreateForm() {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
-
-  //const [_description, setDescription] = useState('');
   const [startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
 
@@ -45,7 +43,6 @@ export default function CreateForm() {
   });
 
   const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
-    //setdescription(data.description.trimStart());
     await addNewChallenge(data);
     console.log(data);
     reset();

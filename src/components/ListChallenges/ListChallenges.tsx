@@ -9,21 +9,20 @@ import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 
 export default function ListChallenges() {
   const dispatch = useDispatch();
-  const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
-  console.log('fetchData', data, error, isLoading, isSuccess);
   const [local, setLocal] = useState<TChallenge[]>([]);
+  const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
+
+  console.log('fetchData', data, error, isLoading, isSuccess);
   console.log('storeRedux', challengeData);
 
   useEffect(() => {
     if (data) {
-      // Сохраняем в localStorage
       setLocalStorage('challenges', data);
-
-      // Обновляем Redux store
       dispatch(setChallenges(data));
     }
   }, [data, dispatch]);
+
   useEffect(() => {
     const MY_CHALLENGES = JSON.parse(localStorage.getItem('challenges') ?? '[]');
     setLocal(MY_CHALLENGES);
