@@ -1,16 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getAuthToken } from '@/utils/auth';
-import { TChallenge } from '@/types';
+import { TChallenge, TCreateForm } from '@/types';
 
-interface AddChallenge {
-  description: string;
-  goal: number;
-  period: string;
-  started_at: string;
-  finished_at: string;
-}
 interface ResponseUser {
-  dataAdd: AddChallenge;
+  dataAdd: TCreateForm;
   status: number;
   telegramId: string;
 }
@@ -35,19 +28,15 @@ export const contentApi = createApi({
   endpoints: (builder) => ({
     //------------   GET   ------------
     //user info
-    // getUserMe: builder.query({
-    //   query: (telegramId: string) => ({
-    //     url: 'users/me/',
-    //     method: 'GET',
-    //     headers: {
-    //       Authorization: telegramId,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   }),
-    // }),
+    getUserMe: builder.query({
+      query: () => ({
+        url: 'users/me/',
+        method: 'GET',
+      }),
+    }),
 
     //Get list of user's challenges
-    getAllChallengeList: builder.query<TChallenge[], string>({
+    getAllChallengeList: builder.query<TChallenge[], void>({
       query: () => ({
         url: '/challenges/in-progress/?limit=100',
         method: 'GET',
@@ -58,7 +47,7 @@ export const contentApi = createApi({
     //------------   POST   ------------
 
     //add new token in user's wallet
-    createChallenge: builder.mutation<AddChallenge, Partial<ResponseUser>>({
+    createChallenge: builder.mutation<TCreateForm, Partial<ResponseUser>>({
       query: ({ dataAdd }) => ({
         url: `challenges/`,
         method: 'POST',
