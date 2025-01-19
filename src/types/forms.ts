@@ -14,3 +14,15 @@ export type TCreateForm = Pick<
 >;
 
 export type TEditForm = Pick<IFormFields, 'progress'> & TCreateForm;
+
+export type FieldConfig = {
+  type?: 'text' | 'number' | 'date' | 'email' | 'tel';
+  label: string;
+  placeholder: string;
+  required: string;
+  isShort?: boolean;
+  // validate?: Record<string, (value: string | number) => boolean | string>;
+  validate?: {
+    [key: string]: (value: string) => string | number | boolean;
+  };
+};

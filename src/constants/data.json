@@ -9,6 +9,13 @@
   "challenge_form": {
     "title_create": "Create a new Challenge",
     "title_edit": "Edit Challenge",
+    "email": {
+      "label": "Email",
+      "placeholder": "example@example.ex",
+      "error_message": "Incorrect email format",
+      "require_message": "Please, fill it",
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    },
     "name": {
       "label": "Your Goal",
       "placeholder": "Describe your challenge",
@@ -22,7 +29,7 @@
       "require_message": "Please, fill it"
     },
     "period": {
-      "label": "Period",
+      "label": "per Period",
       "placeholder": "week",
       "time": [
         {
