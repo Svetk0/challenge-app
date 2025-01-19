@@ -2,7 +2,7 @@
 
 ## Task type
 
-- [x] Feature/Fix/Docs/Refactor
+- [x] Feature/Fix/Docs/Refactor (*choose one, remove other*)
 - [ ] Other
 
 ## Describe your changes
@@ -15,3 +15,4 @@
 ---
 
 ## Describe limitations (optional)
+1. 
