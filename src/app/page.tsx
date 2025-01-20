@@ -1,25 +1,57 @@
-//import Image from 'next/image';
 'use client';
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Button from '@/components/ui/Button/Button';
 import Link from 'next/link';
 import styles from './page.module.scss';
 import { setAuthToken, TELEGRAM_ID } from '@/utils/auth';
 
-export default function Home() {
+const Home: React.FC = () => {
+  const [isLogoVisible, setIsLogoVisible] = useState(true);
+  const [isDivVisible, setIsDivVisible] = useState(false);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {
+      setIsLogoVisible(false);
+      setIsDivVisible(true);
+    }, 3300); // 3000мс анимация и 300мс задержка
+
+    return () => {
+      clearTimeout(timer1);
+    };
+  }, []);
+
   setAuthToken(TELEGRAM_ID);
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Challenge App</h1>
-        <Link href={'/challenges'}>
-          <Button
-            type='button'
-            text={'My challenges'}
-            color='default'
-            //onClick={() => router.push("/challenges/create")}
-          />
-        </Link>
+        {isLogoVisible && (
+          <div className={styles.logoWrapper}>
+            <Image
+              src='/images/logo.svg'
+              alt='Logo'
+              width={180}
+              height={180}
+              className={styles.logo}
+            />
+          </div>
+        )}
+        {isDivVisible && (
+          <div className={styles.textBlock}>
+            <h1>Challenge App</h1>
+            <Link href={'/challenges'}>
+              <Button
+                type='button'
+                text={'My challenges'}
+                color='default'
+                //onClick={() => router.push("/challenges/create")}
+              />
+            </Link>
+          </div>
+        )}
       </main>
     </div>
   );
-}
+};
+
+export default Home;
