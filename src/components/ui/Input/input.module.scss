@@ -1,7 +1,6 @@
 @import '@styles';
 
 .inputWrapper {
-    //width: clamp(100px, 100%, 300px);
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -75,7 +74,6 @@
         padding: 0 0 0 0px;
         text-align: center;
         overflow: scroll;
-        //width: clamp(100px, 100%, 120px);
         width: 120px;
     }
 }
