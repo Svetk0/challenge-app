@@ -11,7 +11,7 @@ import { TCreateForm } from '@/types';
 import staticData from '@/constants/data.json';
 
 import Button from '@/components/ui/Button/Button';
-
+import Input from '@/components/ui/Input/Input';
 import styles from './createForm.module.scss';
 
 export default function CreateForm() {
@@ -75,25 +75,30 @@ export default function CreateForm() {
 
           const { label, placeholder, type, isShort = true, ...fieldRules } = normalizedConfig;
           return (
-            <div key={fieldName} className={styles.inputWrapper}>
-              <label className={styles.label}>{label}</label>
-              <input
-                //id='goal'
-                autoComplete='off'
-                placeholder={placeholder}
-                className={!isShort ? `${styles.input}` : `${styles.input} ${styles.input_short}  `}
-                type={type}
-                {...register(fieldName as keyof TCreateForm, {
-                  required: fieldRules.required,
-                  validate: fieldRules.validate || {},
-                  onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
-                  onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
-                })}
-              />
-              {errors[fieldName as keyof TCreateForm] && (
-                <p className={styles.error}>{errors[fieldName as keyof TCreateForm]?.message}</p>
-              )}
-            </div>
+            // <div key={fieldName} className={styles.fieldWrapper}>
+            <Input
+              key={fieldName}
+              tagType={
+                fieldName === 'period'
+                  ? 'select'
+                  : fieldName === 'description'
+                    ? 'textarea'
+                    : 'input'
+              }
+              label={label}
+              placeholder={placeholder}
+              type={type}
+              isShort={isShort}
+              options={fieldName === 'period' ? staticData.challenge_form.period.time : undefined}
+              error={errors[fieldName as keyof TCreateForm]?.message}
+              registration={register(fieldName as keyof TCreateForm, {
+                required: fieldRules.required,
+                validate: fieldRules.validate || {},
+                onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
+                onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
+              })}
+            />
+            // </div>
           );
         })}
       </div>
