@@ -4,7 +4,7 @@ export interface IFormFields {
   goal: number;
   period: string;
   started_at: string;
-  finished_at: string;
+  finished_at: string | null;
   progress: number;
 }
 
@@ -19,8 +19,9 @@ export type FieldConfig = {
   type?: 'text' | 'number' | 'date' | 'email' | 'tel';
   label: string;
   placeholder: string;
-  required: string;
+  required?: string;
   isShort?: boolean;
+  isDisabled?: boolean;
   // validate?: Record<string, (value: string | number) => boolean | string>;
   validate?: {
     [key: string]: (value: string) => string | number | boolean;

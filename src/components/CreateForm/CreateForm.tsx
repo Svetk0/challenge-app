@@ -21,7 +21,7 @@ export default function CreateForm() {
   const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
-  const [isSwitcher, setIsSwitcher] = useState<boolean>(false);
+  const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
@@ -45,8 +45,11 @@ export default function CreateForm() {
   });
 
   const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
-    await addNewChallenge(data);
+    if (isSwitcher) {
+      data.finished_at = null;
+    }
     console.log(data);
+    await addNewChallenge(data);
     reset();
     router.push('/challenges');
   };
@@ -90,7 +93,8 @@ export default function CreateForm() {
               placeholder={placeholder}
               type={type}
               isShort={isShort}
-              options={fieldName === 'period' ? staticData.challenge_form.period.time : undefined}
+              isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
+              options={fieldName === 'period' ? dt.period.time : undefined}
               error={errors[fieldName as keyof TCreateForm]?.message}
               registration={register(fieldName as keyof TCreateForm, {
                 required: fieldRules.required,
@@ -104,17 +108,9 @@ export default function CreateForm() {
         <Slider label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
       </div>
 
-      {/* WITHOUT MAP */}
-
       <div className={styles.rowWrapper}>
         <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button
-          type='submit'
-          text={'Create'}
-          color='default'
-          //disabled={!isValid}
-          //onClick={() => router.push("/challenges")}
-        />
+        <Button type='submit' text={'Create'} color='default' />
       </div>
     </form>
   );

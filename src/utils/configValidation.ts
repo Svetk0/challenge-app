@@ -9,6 +9,7 @@ type ConfigValidation = {
 export const configValidation: ConfigValidation = {
   description: {
     isShort: false,
+    isDisabled: false,
     label: name.label,
     placeholder: name.placeholder,
     required: name.require_message,
@@ -45,10 +46,11 @@ export const configValidation: ConfigValidation = {
     type: 'date',
     label: date_finish.label,
     placeholder: date_finish.placeholder,
-    required: date_finish.require_message,
-    validate: {
-      min: (v) => v >= '2010-01-01' || date_finish.error_message,
-    },
+    //required: date_finish.require_message,
+    isDisabled: true,
+    // validate: {
+    //   min: (v) => v >= '2010-01-01' || date_finish.error_message,
+    // },
   },
   progress: {
     type: 'number',

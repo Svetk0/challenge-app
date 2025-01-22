@@ -7,6 +7,7 @@ export type InputProps = {
   label?: string;
   error?: string;
   isShort?: boolean;
+  isDisabled?: boolean;
   options?: { value: string }[];
   registration?: UseFormRegisterReturn;
 } & Omit<
@@ -15,7 +16,19 @@ export type InputProps = {
 >;
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, InputProps>(
-  ({ tagType = 'input', label, error, options, registration, className, ...rest }, ref) => {
+  (
+    {
+      tagType = 'input',
+      label,
+      error,
+      options,
+      isDisabled = false,
+      registration,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
     const renderField = () => {
       switch (tagType) {
         case 'textarea':
@@ -49,7 +62,11 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElem
           return (
             <input
               ref={ref as React.RefObject<HTMLInputElement>}
-              className={`${styles.input} ${styles.input_short}`}
+              className={
+                isDisabled
+                  ? `${styles.input} ${styles.input_short} ${styles.input_disabled}`
+                  : `${styles.input} ${styles.input_short}`
+              }
               {...registration}
               {...rest}
             />
