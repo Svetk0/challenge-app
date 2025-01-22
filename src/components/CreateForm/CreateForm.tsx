@@ -92,7 +92,7 @@ export default function CreateForm() {
               label={label}
               placeholder={placeholder}
               type={type}
-              isShort={isShort}
+              shorted={isShort}
               isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
               options={fieldName === 'period' ? dt.period.time : undefined}
               error={errors[fieldName as keyof TCreateForm]?.message}
