@@ -13,6 +13,7 @@ import staticData from '@/constants/data.json';
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
 import styles from './createForm.module.scss';
+import Slider from '../ui/Switcher/Switcher';
 
 export default function CreateForm() {
   const dt = staticData.challenge_form;
@@ -98,9 +99,9 @@ export default function CreateForm() {
                 onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
               })}
             />
-            // </div>
           );
         })}
+        <Slider />
       </div>
 
       {/* WITHOUT MAP */}
