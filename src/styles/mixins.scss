@@ -1,6 +1,12 @@
 @import './screens.scss';
 @import './vars.scss';
 
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 @mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
   font-size: $fontSize;
   font-weight: $fontWeight;
@@ -25,6 +31,14 @@
   text-align: $align;
   line-height: $line-height;
   font-family: inherit;
+}
+
+@mixin Label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  color: $grey;
 }
 
 @mixin Input($align: left) {

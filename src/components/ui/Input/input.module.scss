@@ -85,11 +85,7 @@
 }
 
 .label {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 19.36px;
-    text-align: left;
-    color: $grey;
+    @include Label;
 }
 
 .error {

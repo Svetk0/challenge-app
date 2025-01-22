@@ -1,21 +1,29 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect } from 'react';
 import styles from './switcher.module.scss';
 
-export default function Switcher() {
-  const [isActive, setIsActive] = useState<boolean>(false);
+type Props = {
+  label: string;
+  isActive: boolean;
+  setIsActive: Dispatch<boolean>;
+};
 
+export default function Switcher({ label, isActive = false, setIsActive }: Props) {
   useEffect(() => {}, [isActive]);
   const handleToggle = () => {
     setIsActive(!isActive);
   };
   return (
-    <div
-      className={isActive ? `${styles.switcher} ${styles.switcher_active}` : `${styles.switcher}`}
-      onClick={handleToggle}
-    >
-      <div className={`${styles.switcherThumb} ${isActive ? styles.active : ''}`}> </div>
+    <div className={styles.rowWrapper}>
+      <p className={styles.label}>{label}</p>
+
+      <div
+        className={isActive ? `${styles.switcher} ${styles.switcher_active}` : `${styles.switcher}`}
+        onClick={handleToggle}
+      >
+        <div className={`${styles.switcherThumb} ${isActive ? styles.active : ''}`}> </div>
+      </div>
     </div>
   );
 }

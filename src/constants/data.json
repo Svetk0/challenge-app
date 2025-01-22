@@ -63,8 +63,8 @@
       "error_message": "",
       "require_message": "Please, fill it"
     },
-    "slider": {
-      "label": "all time"
+    "switcher": {
+      "label": "All time"
     },
 
     "buttons": {

@@ -21,7 +21,7 @@ export default function CreateForm() {
   const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
-
+  const [isSwitcher, setIsSwitcher] = useState<boolean>(false);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
@@ -101,7 +101,7 @@ export default function CreateForm() {
             />
           );
         })}
-        <Slider />
+        <Slider label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
       </div>
 
       {/* WITHOUT MAP */}

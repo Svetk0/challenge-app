@@ -40,6 +40,13 @@
   >div:first-child {
     width: 100%;
   }
+
+  >div:last-child {
+
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-right: clamp(5px, 5vw, 25px);
+  }
 }
 
 .rowWrapper {
