@@ -9,8 +9,6 @@
 
     input[type='date'] {
         @include InputDate;
-
-
     }
 
     // Try to change placeholder styles (unsuccessfully)
@@ -76,7 +74,7 @@
         padding: 0 0 0 0px;
         text-align: center;
         overflow: scroll;
-        width: 120px;
+        width: 130px;
     }
 
     &_disabled {

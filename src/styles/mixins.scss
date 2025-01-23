@@ -48,16 +48,19 @@
   text-align: left;
   border-radius: 8px;
   border: none;
-  border-bottom: 1px solid transparent;
-  border-image: $gradient-main-border;
-  border-image-slice: 1;
+  //border-bottom: 1px solid transparent;
+  //border-image: $gradient-main-border;
+  //border-image-slice: 1;
+  background: $black-70;
   color: $white;
   padding: 10px;
-  background: $black-70;
+  border-bottom: 1px solid $purple;
+  //background: rgba(37, 39, 50, 1);
 
   &::placeholder {
     color: $dirty-green-op80;
     font-size: smaller;
+    color: $dirty-purple-op80;
   }
 
   &:focus,
