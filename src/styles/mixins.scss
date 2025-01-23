@@ -1,6 +1,12 @@
 @import './screens.scss';
 @import './vars.scss';
 
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 @mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
   font-size: $fontSize;
   font-weight: $fontWeight;
@@ -27,6 +33,14 @@
   font-family: inherit;
 }
 
+@mixin Label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  color: $grey;
+}
+
 @mixin Input($align: left) {
   @include Text(16px, 400, 21.79px, $align);
   width: 100%;
@@ -34,16 +48,19 @@
   text-align: left;
   border-radius: 8px;
   border: none;
-  border-bottom: 1px solid transparent;
-  border-image: $gradient-main-border;
-  border-image-slice: 1;
+  //border-bottom: 1px solid transparent;
+  //border-image: $gradient-main-border;
+  //border-image-slice: 1;
+  background: $black-70;
   color: $white;
   padding: 10px;
-  background: $black-70;
+  border-bottom: 1px solid $purple;
+  //background: rgba(37, 39, 50, 1);
 
   &::placeholder {
     color: $dirty-green-op80;
     font-size: smaller;
+    color: $dirty-purple-op80;
   }
 
   &:focus,

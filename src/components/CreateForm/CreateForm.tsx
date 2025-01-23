@@ -6,20 +6,22 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useCreateChallengeMutation } from '@/api/content';
+import { configValidation } from '@/utils/configValidation';
 import { TCreateForm } from '@/types';
 import staticData from '@/constants/data.json';
 
 import Button from '@/components/ui/Button/Button';
-
+import Input from '@/components/ui/Input/Input';
 import styles from './createForm.module.scss';
+import Slider from '../ui/Switcher/Switcher';
 
 export default function CreateForm() {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
-  const [startedDate, _setStartedDate] = useState('');
+  const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
-
+  const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
@@ -43,8 +45,11 @@ export default function CreateForm() {
   });
 
   const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
-    await addNewChallenge(data);
+    if (isSwitcher) {
+      data.finished_at = null;
+    }
     console.log(data);
+    await addNewChallenge(data);
     reset();
     router.push('/challenges');
   };
@@ -52,7 +57,7 @@ export default function CreateForm() {
   const handleValidation = (fieldName: keyof TCreateForm) => ({
     onBlur: () => {
       trigger(fieldName);
-      if (getValues('goal') < 1) {
+      if (fieldName === 'goal' && getValues('goal') < 1) {
         setValue('goal', 1);
       }
     },
@@ -67,125 +72,45 @@ export default function CreateForm() {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_create}</h2>
       <div className={styles.inputsContainer}>
-        <div className={styles.inputWrapper}>
-          <label htmlFor='description' className={styles.label}>
-            {dt.name.label}
-          </label>
-          <textarea
-            className={styles.textarea}
-            placeholder={dt.name.placeholder}
-            id='description'
-            {...register('description', {
-              required: dt.name.require_message,
-              validate: {
-                minLength: (v) => v.trim().length >= 2 || dt.name.error_message,
-                maxLength: (v) => v.length <= 50 || dt.name.error_message,
-                noSpaces: (v) => v.trim().length > 0 || dt.name.error_message,
-              },
-              ...handleValidation('description'),
-            })}
-          />
-          {errors.description && <p className={styles.error}>{errors.description.message}</p>}
-        </div>
-        <div className={styles.rowWrapper}>
-          <div className={styles.inputWrapper}>
-            <label htmlFor='goal' className={styles.label}>
-              {dt.goal.label}
-            </label>
-            <input
-              id='goal'
-              placeholder={dt.goal.placeholder}
-              className={`${styles.input} ${styles.input_short}`}
-              type='number'
-              {...register('goal', {
-                required: dt.goal.require_message,
-                validate: {
-                  min: (v) => v >= 1 || dt.goal.error_message,
-                },
-                ...handleValidation('goal'),
+        {['description', 'goal', 'period', 'started_at', 'finished_at'].map((fieldName) => {
+          const config = configValidation[fieldName];
+          if (!config) return null;
+          const normalizedConfig = typeof config === 'function' ? config('') : config;
+
+          const { label, placeholder, type, isShort = true, ...fieldRules } = normalizedConfig;
+          return (
+            // <div key={fieldName} className={styles.fieldWrapper}>
+            <Input
+              key={fieldName}
+              tagType={
+                fieldName === 'period'
+                  ? 'select'
+                  : fieldName === 'description'
+                    ? 'textarea'
+                    : 'input'
+              }
+              label={label}
+              placeholder={placeholder}
+              type={type}
+              shorted={isShort}
+              isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
+              options={fieldName === 'period' ? dt.period.time : undefined}
+              error={errors[fieldName as keyof TCreateForm]?.message}
+              registration={register(fieldName as keyof TCreateForm, {
+                required: fieldRules.required,
+                validate: fieldRules.validate || {},
+                onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
+                onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
               })}
             />
-            {errors.goal && <p className={styles.error}>{errors.goal.message}</p>}
-          </div>
-          <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor='period'>
-              {dt.period.label}
-            </label>
-
-            <select
-              id='period'
-              defaultValue=''
-              aria-describedby='period-error'
-              className={`${styles.input} ${styles.input_short}`}
-              {...register('period', {
-                required: dt.period.require_message,
-
-                ...handleValidation('period'),
-              })}
-            >
-              {dt.period.time.map((value) => (
-                <option key={value.value}>{value.value}</option>
-              ))}
-            </select>
-            {errors.period && <p className={styles.error}>{errors.period.message}</p>}
-          </div>
-        </div>
-        {/* description PERIOD */}
-        <div className={styles.rowWrapper}>
-          <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor='started_at'>
-              {dt.date_start.label}
-            </label>
-
-            <input
-              className={`${styles.input} ${styles.input_short}`}
-              aria-describedby='started_at-error'
-              id='started_at'
-              type='date'
-              placeholder={dt.date_start.placeholder}
-              defaultValue='' // Добавьте это
-              {...register('started_at', {
-                required: dt.date_start.require_message,
-                validate: {
-                  min: (v) => v >= '2010-01-01' || dt.date_start.error_message,
-                },
-
-                ...handleValidation('started_at'),
-              })}
-            />
-            {errors.started_at && <p className={styles.error}>{errors.started_at.message}</p>}
-          </div>
-          <div className={styles.inputWrapper}>
-            <label className={styles.label} htmlFor='finished_at'>
-              {dt.date_finish.label}
-            </label>
-            <input
-              disabled={false}
-              className={`${styles.input} ${styles.input_short}`}
-              aria-describedby='finished_at-error'
-              id='finished_at'
-              type='date'
-              {...register('finished_at', {
-                required: dt.date_finish.require_message,
-                validate: {
-                  min: (v) => v > String(startedDate) || dt.date_finish.error_message,
-                },
-                ...handleValidation('finished_at'),
-              })}
-            />
-            {errors.finished_at && <p className={styles.error}>{errors.finished_at.message}</p>}
-          </div>
-        </div>
+          );
+        })}
+        <Slider label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
       </div>
+
       <div className={styles.rowWrapper}>
         <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button
-          type='submit'
-          text={'Create'}
-          color='default'
-          //disabled={!isValid}
-          //onClick={() => router.push("/challenges")}
-        />
+        <Button type='submit' text={'Create'} color='default' />
       </div>
     </form>
   );
