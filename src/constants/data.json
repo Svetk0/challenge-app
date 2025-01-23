@@ -64,7 +64,8 @@
       "require_message": "Please, fill it"
     },
     "switcher": {
-      "label": "All time"
+      "label": "All time",
+      "label_complete": "Complete this challenge"
     },
 
     "buttons": {

@@ -8,21 +8,20 @@ import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useCreateChallengeMutation } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
 import { TCreateForm } from '@/types';
-
 import staticData from '@/constants/data.json';
 import Switcher from '@/components/ui/Switcher/Switcher';
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
+import styles from './editForm.module.scss';
 
-import styles from './createForm.module.scss';
-
-export default function CreateForm() {
+export default function EditForm() {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
@@ -71,7 +70,7 @@ export default function CreateForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h2 className={styles.title}> {dt.title_create}</h2>
+      <h2 className={styles.title}> {dt.title_edit}</h2>
       <div className={styles.inputsContainer}>
         {['description', 'goal', 'period', 'started_at', 'finished_at'].map((fieldName) => {
           const config = configValidation[fieldName];
@@ -106,12 +105,19 @@ export default function CreateForm() {
             />
           );
         })}
-        <Switcher label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
+        <div className={styles.columnWrapper}>
+          <Switcher label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
+          <Switcher
+            label={dt.switcher.label_complete}
+            isActive={isCompleted}
+            setIsActive={setIsCompleted}
+          />
+        </div>
       </div>
 
       <div className={styles.rowWrapper}>
         <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Create'} color='default' />
+        <Button type='submit' text={'Edit'} color='default' />
       </div>
     </form>
   );
