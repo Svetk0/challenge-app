@@ -8,12 +8,13 @@ import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useCreateChallengeMutation } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
 import { TCreateForm } from '@/types';
-import staticData from '@/constants/data.json';
 
+import staticData from '@/constants/data.json';
+import Switcher from '@/components/ui/Switcher/Switcher';
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
+
 import styles from './createForm.module.scss';
-import Slider from '../ui/Switcher/Switcher';
 
 export default function CreateForm() {
   const dt = staticData.challenge_form;
@@ -105,7 +106,7 @@ export default function CreateForm() {
             />
           );
         })}
-        <Slider label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
+        <Switcher label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
       </div>
 
       <div className={styles.rowWrapper}>

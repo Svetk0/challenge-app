@@ -1,13 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
+import styles from './listChallenges.module.scss';
+import { EditIcon } from '@/components/ui/Icons/EditIcon';
 
 export default function ListChallenges() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const [local, setLocal] = useState<TChallenge[]>([]);
   const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
@@ -32,12 +36,35 @@ export default function ListChallenges() {
     console.log('all ', local);
   }, []);
 
+  const handleEditClick = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    router.push(`/challenges/edit/${id}`);
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <>
-      My Challenges List
-      <ol>
-        {data?.map((item: TChallenge) => <li key={`challenge-${item.id}`}>{item.description}</li>)}
+    <div className={styles.container}>
+      <h2>My Challenges List</h2>
+      <ol className={styles.list}>
+        {data?.map((item: TChallenge) => (
+          <li key={`challenge-${item.id}`} className={styles.listItem}>
+            <span className={styles.description}>{item.description}</span>
+            <button
+              className={styles.editButton}
+              onClick={(e) => handleEditClick(e, item.id)}
+              aria-label={`Edit challenge: ${item.description}`}
+            >
+              <EditIcon
+                id={`editIcon-${item.id}`}
+                color={item.is_finished ? '#6FCF97' : '#9199F3'}
+              />
+            </button>
+          </li>
+        ))}
       </ol>
-    </>
+    </div>
   );
 }
