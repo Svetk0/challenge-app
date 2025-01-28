@@ -1,13 +1,13 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
+//import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { addChallenge } from '@/lib/features/challenges/challengeSlice';
-import { useCreateChallengeMutation } from '@/api/content';
+//import { addChallenge } from '@/lib/features/challenges/challengeSlice';
+//import { useCreateChallengeMutation } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
-import { TCreateForm } from '@/types';
+import { TEditForm } from '@/types';
 import staticData from '@/constants/data.json';
 import Switcher from '@/components/ui/Switcher/Switcher';
 import Button from '@/components/ui/Button/Button';
@@ -17,44 +17,44 @@ import styles from './editForm.module.scss';
 export default function EditForm() {
   const dt = staticData.challenge_form;
   const router = useRouter();
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
-  const [createChallenge] = useCreateChallengeMutation({});
+  //const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
-  const addNewChallenge = async (newChallenge: TCreateForm) => {
-    try {
-      localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
-      dispatch(addChallenge(newChallenge));
-      await createChallenge({ dataAdd: newChallenge }).unwrap();
-    } catch (error) {
-      console.error('Failed to add challenge:', error);
-    }
-  };
+  // const addNewChallenge = async (editChallenge: TEditForm) => {
+  //   try {
+  //     localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
+  //     dispatch(addChallenge(newChallenge));
+  //     await createChallenge({ dataAdd: newChallenge }).unwrap();
+  //   } catch (error) {
+  //     console.error('Failed to add challenge:', error);
+  //   }
+  // };
   const {
     register,
     handleSubmit,
     formState: { errors },
     trigger,
-    reset,
     getValues,
     setValue,
     clearErrors,
-  } = useForm<TCreateForm>({
+  } = useForm<TEditForm>({
     mode: 'onSubmit',
   });
 
-  const onSubmit: SubmitHandler<TCreateForm> = async (data) => {
+  const onSubmit: SubmitHandler<TEditForm> = async (data) => {
     if (isSwitcher) {
       data.finished_at = null;
     }
+    data.is_finished = isCompleted;
+
     console.log(data);
-    await addNewChallenge(data);
-    reset();
+    // await addNewChallenge(data);
     router.push('/challenges');
   };
 
-  const handleValidation = (fieldName: keyof TCreateForm) => ({
+  const handleValidation = (fieldName: keyof TEditForm) => ({
     onBlur: () => {
       trigger(fieldName);
       if (fieldName === 'goal' && getValues('goal') < 1) {
@@ -72,41 +72,41 @@ export default function EditForm() {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_edit}</h2>
       <div className={styles.inputsContainer}>
-        {['description', 'goal', 'period', 'started_at', 'finished_at'].map((fieldName) => {
-          const config = configValidation[fieldName];
-          if (!config) return null;
-          const normalizedConfig = typeof config === 'function' ? config('') : config;
+        {['description', 'goal', 'period', 'started_at', 'finished_at', 'progress'].map(
+          (fieldName) => {
+            const config = configValidation[fieldName];
+            if (!config) return null;
+            const normalizedConfig = typeof config === 'function' ? config('') : config;
 
-          const { label, placeholder, type, isShort = true, ...fieldRules } = normalizedConfig;
-          return (
-            // <div key={fieldName} className={styles.fieldWrapper}>
-            <Input
-              key={fieldName}
-              tagType={
-                fieldName === 'period'
-                  ? 'select'
-                  : fieldName === 'description'
-                    ? 'textarea'
-                    : 'input'
-              }
-              label={label}
-              placeholder={placeholder}
-              type={type}
-              shorted={isShort}
-              isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
-              options={fieldName === 'period' ? dt.period.time : undefined}
-              error={errors[fieldName as keyof TCreateForm]?.message}
-              registration={register(fieldName as keyof TCreateForm, {
-                required: fieldRules.required,
-                validate: fieldRules.validate || {},
-                onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
-                onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
-              })}
-            />
-          );
-        })}
+            const { label, placeholder, type, ...fieldRules } = normalizedConfig;
+            return (
+              <Input
+                key={fieldName}
+                tagType={
+                  fieldName === 'period'
+                    ? 'select'
+                    : fieldName === 'description'
+                      ? 'textarea'
+                      : 'input'
+                }
+                label={label}
+                placeholder={placeholder}
+                type={type}
+                isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
+                options={fieldName === 'period' ? dt.period.time : undefined}
+                error={errors[fieldName as keyof TEditForm]?.message}
+                registration={register(fieldName as keyof TEditForm, {
+                  required: fieldRules.required,
+                  validate: fieldRules.validate || {},
+                  onBlur: () => handleValidation(fieldName as keyof TEditForm).onBlur(),
+                  onChange: () => handleValidation(fieldName as keyof TEditForm).onChange(),
+                })}
+              />
+            );
+          }
+        )}
+        <Switcher label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
         <div className={styles.columnWrapper}>
-          <Switcher label={dt.switcher.label} isActive={isSwitcher} setIsActive={setIsSwitcher} />
           <Switcher
             label={dt.switcher.label_complete}
             isActive={isCompleted}

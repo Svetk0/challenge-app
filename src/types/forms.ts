@@ -6,6 +6,7 @@ export interface IFormFields {
   started_at: string;
   finished_at: string | null;
   progress: number;
+  is_finished: boolean;
 }
 
 export type TCreateForm = Pick<
@@ -13,7 +14,7 @@ export type TCreateForm = Pick<
   'description' | 'goal' | 'period' | 'started_at' | 'finished_at'
 >;
 
-export type TEditForm = Pick<IFormFields, 'progress'> & TCreateForm;
+export type TEditForm = Pick<IFormFields, 'progress' | 'is_finished'> & TCreateForm;
 
 export type FieldConfig = {
   type?: 'text' | 'number' | 'date' | 'email' | 'tel';
