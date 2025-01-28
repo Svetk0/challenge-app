@@ -58,7 +58,6 @@ export default function ListChallenges() {
               aria-label={`Edit challenge: ${item.description}`}
             >
               <EditIcon
-                //title={`Edit challenge: ${item.description}`}
                 id={`editIcon-${item.id}`}
                 color={item.is_finished ? '#6FCF97' : '#9199F3'}
               />

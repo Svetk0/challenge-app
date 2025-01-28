@@ -7,12 +7,13 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 //import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
-import { TEditForm } from '@/types';
+import { TEditForm, TChallenge } from '@/types';
 import staticData from '@/constants/data.json';
 import Switcher from '@/components/ui/Switcher/Switcher';
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
 import styles from './editForm.module.scss';
+import { getLocalStorage } from '@/utils/localStorage';
 
 export default function EditForm({ id }: { id: number }) {
   const dt = staticData.challenge_form;
@@ -33,7 +34,7 @@ export default function EditForm({ id }: { id: number }) {
     setValue,
     clearErrors,
   } = useForm<TEditForm>({
-    defaultValues: async () => {
+    defaultValues: async (): Promise<TEditForm> => {
       if (challengeData) {
         return {
           description: challengeData.description,
@@ -45,9 +46,34 @@ export default function EditForm({ id }: { id: number }) {
           is_finished: challengeData.is_finished,
         };
       }
-      return {};
+
+      // Пробуем получить данные из localStorage
+      const localData = getLocalStorage('challenges')?.find(
+        (challenge: TChallenge) => challenge.id === id
+      );
+      if (localData) {
+        return {
+          description: localData.description,
+          goal: localData.goal,
+          period: localData.period,
+          started_at: localData.started_at,
+          finished_at: localData.finished_at,
+          progress: localData.progress,
+          is_finished: localData.is_finished,
+        };
+      }
+
+      // Если нет данных ни с сервера, ни из localStorage, возвращаем дефолтные значения
+      return {
+        description: '',
+        goal: 1,
+        period: 'week',
+        started_at: '',
+        finished_at: null,
+        progress: 0,
+        is_finished: false,
+      };
     },
-    values: challengeData,
   });
 
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
