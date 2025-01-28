@@ -1,0 +1,47 @@
+@import '@styles';
+
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.listItem {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: $black-70;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid $purple;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.description {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.editButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: $purple;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+        color: $white;
+        background-color: $purple;
+    }
+}

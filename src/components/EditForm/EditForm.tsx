@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 //import { addChallenge } from '@/lib/features/challenges/challengeSlice';
-//import { useCreateChallengeMutation } from '@/api/content';
+import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
 import { TEditForm } from '@/types';
 import staticData from '@/constants/data.json';
@@ -14,23 +14,16 @@ import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
 import styles from './editForm.module.scss';
 
-export default function EditForm() {
+export default function EditForm({ id }: { id: number }) {
   const dt = staticData.challenge_form;
   const router = useRouter();
   //const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
-  //const [createChallenge] = useCreateChallengeMutation({});
-  const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
-  // const addNewChallenge = async (editChallenge: TEditForm) => {
-  //   try {
-  //     localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
-  //     dispatch(addChallenge(newChallenge));
-  //     await createChallenge({ dataAdd: newChallenge }).unwrap();
-  //   } catch (error) {
-  //     console.error('Failed to add challenge:', error);
-  //   }
-  // };
+  const [editChallenge] = useEditChallengeMutation();
+  const { data: challengeData, isLoading } = useGetChallengeByIDQuery({ id });
+  const [isSwitcher, setIsSwitcher] = useState<boolean>(!!challengeData?.finished_at);
+  const [isCompleted, setIsCompleted] = useState<boolean>(!!challengeData?.is_finished);
+
   const {
     register,
     handleSubmit,
@@ -40,19 +33,40 @@ export default function EditForm() {
     setValue,
     clearErrors,
   } = useForm<TEditForm>({
-    mode: 'onSubmit',
+    defaultValues: async () => {
+      if (challengeData) {
+        return {
+          description: challengeData.description,
+          goal: challengeData.goal,
+          period: challengeData.period,
+          started_at: challengeData.started_at,
+          finished_at: challengeData.finished_at,
+          progress: challengeData.progress,
+          is_finished: challengeData.is_finished,
+        };
+      }
+      return {};
+    },
+    values: challengeData,
   });
 
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
-    if (isSwitcher) {
-      data.finished_at = null;
-    }
-    data.is_finished = isCompleted;
+    try {
+      if (isSwitcher) {
+        data.finished_at = null;
+      }
+      data.is_finished = isCompleted;
 
-    console.log(data);
-    // await addNewChallenge(data);
-    router.push('/challenges');
+      await editChallenge({ id, dataEdit: data }).unwrap();
+      router.push('/challenges');
+    } catch (error) {
+      console.error('Failed to edit challenge:', error);
+    }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const handleValidation = (fieldName: keyof TEditForm) => ({
     onBlur: () => {

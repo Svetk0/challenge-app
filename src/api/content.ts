@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getAuthToken } from '@/utils/auth';
-import { TChallenge, TCreateForm } from '@/types';
+import { TChallenge, TCreateForm, TEditForm } from '@/types';
 
 interface ResponseUser {
+  id: number;
+  dataEdit: TEditForm;
   dataAdd: TCreateForm;
   status: number;
   telegramId: string;
@@ -34,7 +36,7 @@ export const contentApi = createApi({
       }),
     }),
 
-    //Get list of user's challenges
+    // GET list of user's challenges
     getAllChallengeList: builder.query<TChallenge[], void>({
       query: () => ({
         url: '/challenges/in-progress/?limit=100',
@@ -42,10 +44,19 @@ export const contentApi = createApi({
       }),
       providesTags: ['Actual'],
     }),
+    // GET challenge by id
+    getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
+      query: ({ id }) => ({
+        url: `challenges/${id}`,
+        method: 'GET',
+        //body: dataEdit,
+      }),
+      providesTags: ['Actual'],
+    }),
 
-    //------------   POST   ------------
+    //------------   MUTUATION   ------------
 
-    //add new token in user's wallet
+    //add new challenge
     createChallenge: builder.mutation<TCreateForm, Partial<ResponseUser>>({
       query: ({ dataAdd }) => ({
         url: `challenges/`,
@@ -54,6 +65,21 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Actual'],
     }),
+
+    //edit challenge by id
+    editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
+      query: ({ id, dataEdit }) => ({
+        url: `challenges/${id}`,
+        method: 'PATCH',
+        body: dataEdit,
+      }),
+      invalidatesTags: ['Actual'],
+    }),
   }),
 });
-export const { useGetAllChallengeListQuery, useCreateChallengeMutation } = contentApi;
+export const {
+  useGetAllChallengeListQuery,
+  useCreateChallengeMutation,
+  useEditChallengeMutation,
+  useGetChallengeByIDQuery,
+} = contentApi;
