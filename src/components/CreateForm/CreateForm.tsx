@@ -78,9 +78,8 @@ export default function CreateForm() {
           if (!config) return null;
           const normalizedConfig = typeof config === 'function' ? config('') : config;
 
-          const { label, placeholder, type, isShort = true, ...fieldRules } = normalizedConfig;
+          const { label, placeholder, type, ...fieldRules } = normalizedConfig;
           return (
-            // <div key={fieldName} className={styles.fieldWrapper}>
             <Input
               key={fieldName}
               tagType={
@@ -93,13 +92,19 @@ export default function CreateForm() {
               label={label}
               placeholder={placeholder}
               type={type}
-              shorted={isShort}
               isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
               options={fieldName === 'period' ? dt.period.time : undefined}
               error={errors[fieldName as keyof TCreateForm]?.message}
               registration={register(fieldName as keyof TCreateForm, {
                 required: fieldRules.required,
-                validate: fieldRules.validate || {},
+                validate: fieldRules.validate
+                  ? (value: string | number | null) => {
+                      if (fieldRules.validate) {
+                        return fieldRules.validate(value);
+                      }
+                      return true; // or handle as needed
+                    }
+                  : undefined,
                 onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
                 onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
               })}

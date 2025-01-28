@@ -8,7 +8,6 @@ type ConfigValidation = {
 
 export const configValidation: ConfigValidation = {
   description: {
-    isShort: false,
     isDisabled: false,
     label: name.label,
     placeholder: name.placeholder,
