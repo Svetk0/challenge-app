@@ -97,14 +97,10 @@ export default function CreateForm() {
               error={errors[fieldName as keyof TCreateForm]?.message}
               registration={register(fieldName as keyof TCreateForm, {
                 required: fieldRules.required,
-                validate: fieldRules.validate
-                  ? (value: string | number | null) => {
-                      if (fieldRules.validate) {
-                        return fieldRules.validate(value);
-                      }
-                      return true; // or handle as needed
-                    }
-                  : undefined,
+                validate: fieldRules.validate as Record<
+                  string,
+                  (value: string | number | boolean | null) => true | string
+                >,
                 onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
                 onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
               })}
