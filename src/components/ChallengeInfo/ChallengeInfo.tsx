@@ -16,6 +16,8 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   const router = useRouter();
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
+  const { id, description, is_finished, goal, _progress, finished_at } = challenge;
+
   const handleEditClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     router.push(`/challenges/edit/${id}`);
@@ -38,17 +40,12 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }}
     >
       <div className={styles.rowWrapper}>
-        <span className={styles.description}>{challenge.description}</span>
+        <span className={styles.description}>{description}</span>
         <Button
           type='button'
-          text={
-            <EditIcon
-              id={`editIcon-${challenge.id}`}
-              color={challenge.is_finished ? '#6FCF97' : '#9199F3'}
-            />
-          }
+          text={<EditIcon id={`editIcon-${id}`} color={is_finished ? '#6FCF97' : '#9199F3'} />}
           color='icon'
-          onClick={(e) => handleEditClick(e, challenge.id)}
+          onClick={(e) => handleEditClick(e, id)}
         />
       </div>
       <div className={styles.rowWrapper}>
@@ -58,7 +55,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           color='round'
           //onClick={() => router.push('/challenges/create')}
         />
-        <ProgressBar daysLeft={17} current={4} total={5} />
+        <ProgressBar finished_at={finished_at} current={4} total={goal} />
         <Button
           type='button'
           text={'+'}
