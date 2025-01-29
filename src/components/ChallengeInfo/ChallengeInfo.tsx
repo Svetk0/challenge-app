@@ -1,8 +1,7 @@
 'use client';
-//import { useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { EditIcon } from '@/components/ui/Icons/';
 import { Button } from '@/components/ui';
@@ -15,18 +14,33 @@ type Props = {
 
 export function ChallengeInfo({ isLoading, challenge }: Props) {
   const router = useRouter();
-
+  const [isChoosen, setIsChoosen] = useState<boolean>(false);
+  const wrapperRef = useOutsideClick(() => setIsChoosen(false));
   const handleEditClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     router.push(`/challenges/edit/${id}`);
   };
+
+  useEffect(() => {
+    console.log('isChoosen', isChoosen);
+  }, [isChoosen]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      ref={wrapperRef}
+      className={isChoosen ? `${styles.wrapper} ${styles.wrapper__active}` : `${styles.wrapper}`}
+      onClick={() => {
+        setIsChoosen(true);
+      }}
+      onBlur={() => {
+        setIsChoosen(false);
+        console.log('onBlur', isChoosen);
+      }}
+    >
       <div className={styles.rowWrapper}>
         <span className={styles.description}>{challenge.description}</span>
         <Button

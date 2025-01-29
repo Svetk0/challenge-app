@@ -11,6 +11,12 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+
+    &__active {
+        box-shadow: $shadow-box-perimeter;
+        border-bottom: 1px solid $light-green-neon;
+    }
 }
 
 .rowWrapper {
@@ -30,22 +36,4 @@
     flex: 1;
     margin-right: 10px;
 
-}
-
-.editButton {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    color: $purple;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-
-    &:hover {
-        color: $white;
-        background-color: $purple;
-    }
 }
