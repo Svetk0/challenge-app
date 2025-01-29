@@ -9,9 +9,9 @@ import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/conten
 import { configValidation } from '@/utils/configValidation';
 import { TEditForm, TChallenge } from '@/types';
 import staticData from '@/constants/data.json';
-import Switcher from '@/components/ui/Switcher/Switcher';
-import Button from '@/components/ui/Button/Button';
-import Input from '@/components/ui/Input/Input';
+
+import { Button, Input, Switcher } from '@/components/ui';
+
 import styles from './editForm.module.scss';
 import { getLocalStorage } from '@/utils/localStorage';
 

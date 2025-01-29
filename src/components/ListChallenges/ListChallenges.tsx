@@ -9,6 +9,7 @@ import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 import { EditIcon } from '@/components/ui/Icons/EditIcon';
 import styles from './listChallenges.module.scss';
+import { Button } from '@/components/ui';
 
 export default function ListChallenges() {
   const router = useRouter();
@@ -62,6 +63,12 @@ export default function ListChallenges() {
                 color={item.is_finished ? '#6FCF97' : '#9199F3'}
               />
             </button>
+            <Button
+              type='button'
+              text={'+'}
+              color='round'
+              //onClick={() => router.push('/challenges/create')}
+            />
           </li>
         ))}
       </ol>

@@ -9,7 +9,7 @@ type Props = {
   disabled?: boolean;
 };
 
-export default function Button({ text, color, onClick, type, disabled = false }: Props) {
+export function Button({ text, color, onClick, type, disabled = false }: Props) {
   return (
     <button
       type={type}
