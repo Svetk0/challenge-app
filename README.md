@@ -1,4 +1,4 @@
-# 🎯 Challenge App
+# <img width='24' height='24' src='./src/app/favicon.ico'> Challenge App
 
 A Next.js application for tracking personal challenges and goals.
 
@@ -137,6 +137,7 @@ npm run lint
   ```bash
   npm run build
   ```
+  Fix all errors and warnings
 
 5. Submit a pull request using the PR template
 6. After PR approving, perform `Squash and Merge`
