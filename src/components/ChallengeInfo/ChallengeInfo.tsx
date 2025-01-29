@@ -26,24 +26,35 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   }
 
   return (
-    <li className={styles.wrapper}>
-      <span className={styles.description}>{challenge.description}</span>
-      <button
-        className={styles.editButton}
-        onClick={(e) => handleEditClick(e, challenge.id)}
-        aria-label={`Edit challenge: ${challenge.description}`}
-      >
-        <EditIcon
-          id={`editIcon-${challenge.id}`}
-          color={challenge.is_finished ? '#6FCF97' : '#9199F3'}
+    <div className={styles.wrapper}>
+      <div className={styles.rowWrapper}>
+        <span className={styles.description}>{challenge.description}</span>
+        <Button
+          type='button'
+          text={
+            <EditIcon
+              id={`editIcon-${challenge.id}`}
+              color={challenge.is_finished ? '#6FCF97' : '#9199F3'}
+            />
+          }
+          color='icon'
+          onClick={(e) => handleEditClick(e, challenge.id)}
         />
-      </button>
-      <Button
-        type='button'
-        text={'+'}
-        color='round'
-        //onClick={() => router.push('/challenges/create')}
-      />
-    </li>
+      </div>
+      <div className={styles.rowWrapper}>
+        <Button
+          type='button'
+          text={'-'}
+          color='round'
+          //onClick={() => router.push('/challenges/create')}
+        />
+        <Button
+          type='button'
+          text={'+'}
+          color='round'
+          //onClick={() => router.push('/challenges/create')}
+        />
+      </div>
+    </div>
   );
 }

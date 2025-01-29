@@ -8,13 +8,28 @@
     transition: all 0.3s ease;
     border-bottom: 1px solid $purple;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
+.rowWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .description {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 19.07px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
     flex: 1;
     margin-right: 10px;
+
 }
 
 .editButton {

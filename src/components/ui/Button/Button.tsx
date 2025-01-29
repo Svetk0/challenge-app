@@ -2,10 +2,10 @@ import { cn } from '@/utils';
 import styles from './button.module.scss';
 
 type Props = {
-  text: string;
+  text: React.ReactNode;
   color: string;
   type: 'submit' | 'button';
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   disabled?: boolean;
 };
 
