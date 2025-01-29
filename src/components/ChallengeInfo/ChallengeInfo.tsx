@@ -36,10 +36,6 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       onClick={() => {
         setIsChoosen(true);
       }}
-      onBlur={() => {
-        setIsChoosen(false);
-        console.log('onBlur', isChoosen);
-      }}
     >
       <div className={styles.rowWrapper}>
         <span className={styles.description}>{challenge.description}</span>
