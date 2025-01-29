@@ -1,3 +1,4 @@
+import { Button } from '@/components';
 import styles from './progressBar.module.scss';
 
 type Props = {
@@ -16,16 +17,30 @@ export function ProgressBar({ finished_at, current, total }: Props) {
   const progress = (current / total) * 100;
   const daysLeft = calculateDaysLeft();
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <span className={styles.daysLeft}>{daysLeft} days left</span>
-        <span className={styles.fraction}>
-          {current} <span>of {total}</span>
-        </span>
+    <div className={styles.rowWrapper}>
+      <Button
+        type='button'
+        text={'-'}
+        color='round'
+        //onClick={() => router.push('/challenges/create')}
+      />
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <span className={styles.daysLeft}>{daysLeft} days left</span>
+          <span className={styles.fraction}>
+            {current} <span>of {total}</span>
+          </span>
+        </div>
+        <div className={styles.progressWrapper}>
+          <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+        </div>
       </div>
-      <div className={styles.progressWrapper}>
-        <div className={styles.progressBar} style={{ width: `${progress}%` }} />
-      </div>
+      <Button
+        type='button'
+        text={'+'}
+        color='round'
+        //onClick={() => router.push('/challenges/create')}
+      />
     </div>
   );
 }

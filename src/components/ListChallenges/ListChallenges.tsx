@@ -1,19 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
-import { EditIcon } from '@/components/ui/Icons/EditIcon';
 import styles from './listChallenges.module.scss';
 
-import { Button, ChallengeInfo } from '@/components/';
+import { ChallengeInfo } from '@/components/';
 
 export default function ListChallenges() {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [local, setLocal] = useState<TChallenge[]>([]);
   const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
@@ -38,11 +35,6 @@ export default function ListChallenges() {
     console.log('local ', local);
   }, [isSuccess, data, local]);
 
-  const handleEditClick = (e: React.MouseEvent, id: number) => {
-    e.stopPropagation();
-    router.push(`/challenges/edit/${id}`);
-  };
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -50,27 +42,10 @@ export default function ListChallenges() {
   return (
     <div className={styles.container}>
       <h2>My Challenges List</h2>
-      <ChallengeInfo challenge={data ? data[0] : undefined} />
       <ol className={styles.list}>
         {data?.map((item: TChallenge) => (
-          <li key={`challenge-${item.id}`} className={styles.listItem}>
-            <span className={styles.description}>{item.description}</span>
-            <button
-              className={styles.editButton}
-              onClick={(e) => handleEditClick(e, item.id)}
-              aria-label={`Edit challenge: ${item.description}`}
-            >
-              <EditIcon
-                id={`editIcon-${item.id}`}
-                color={item.is_finished ? '#6FCF97' : '#9199F3'}
-              />
-            </button>
-            <Button
-              type='button'
-              text={'+'}
-              color='round'
-              //onClick={() => router.push('/challenges/create')}
-            />
+          <li key={`challenge-${item.id}`}>
+            <ChallengeInfo challenge={item} />
           </li>
         ))}
       </ol>

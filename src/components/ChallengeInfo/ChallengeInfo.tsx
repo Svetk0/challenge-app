@@ -48,21 +48,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           onClick={(e) => handleEditClick(e, id)}
         />
       </div>
-      <div className={styles.rowWrapper}>
-        <Button
-          type='button'
-          text={'-'}
-          color='round'
-          //onClick={() => router.push('/challenges/create')}
-        />
-        <ProgressBar finished_at={finished_at} current={4} total={goal} />
-        <Button
-          type='button'
-          text={'+'}
-          color='round'
-          //onClick={() => router.push('/challenges/create')}
-        />
-      </div>
+      <ProgressBar finished_at={finished_at} current={4} total={goal} />
     </div>
   );
 }
