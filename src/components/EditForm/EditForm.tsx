@@ -10,7 +10,7 @@ import { configValidation } from '@/utils/configValidation';
 import { TEditForm, TChallenge } from '@/types';
 import staticData from '@/constants/data.json';
 
-import { Button, Input, Switcher } from '@/components/ui';
+import { Button, Input, Switcher } from '@/components';
 
 import styles from './editForm.module.scss';
 import { getLocalStorage } from '@/utils/localStorage';

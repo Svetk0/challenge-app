@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui';
+import { Button } from '@/components';
 import Link from 'next/link';
 import ListChallenges from '@/components/ListChallenges/ListChallenges';
 export default function Home() {

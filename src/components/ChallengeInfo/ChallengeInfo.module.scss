@@ -1,28 +1,36 @@
 @import '@styles';
 
 .wrapper {
-    padding: 15px;
-    margin: 10px 0;
-    background-color: $black-70;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid $purple;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+    padding: 10px 15px 30px;
+    margin: 10px 0;
+    background-color: $black-70;
+    border-bottom: 1px solid $purple;
+    border-radius: 8px;
+    transition: all 0.3s ease;
     cursor: pointer;
 
     &__active {
         box-shadow: $shadow-box-perimeter;
         border-bottom: 1px solid $light-green-neon;
     }
+
+    >:nth-child(2) {
+        padding: 0 30px;
+        align-items: flex-end;
+    }
 }
 
 .rowWrapper {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 15px;
 }
 
 .description {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { EditIcon } from '@/components/ui/Icons/';
-import { Button } from '@/components/ui';
+import { Button, ProgressBar } from '@/components';
 import styles from './ChallengeInfo.module.scss';
 
 type Props = {
@@ -58,6 +58,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           color='round'
           //onClick={() => router.push('/challenges/create')}
         />
+        <ProgressBar daysLeft={17} current={4} total={5} />
         <Button
           type='button'
           text={'+'}

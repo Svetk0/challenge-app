@@ -10,7 +10,7 @@ import { configValidation } from '@/utils/configValidation';
 import { TCreateForm } from '@/types';
 
 import staticData from '@/constants/data.json';
-import { Button, Input, Switcher } from '@/components/ui';
+import { Button, Input, Switcher } from '@/components';
 
 import styles from './createForm.module.scss';
 

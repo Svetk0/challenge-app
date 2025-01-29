@@ -52,9 +52,13 @@
 .round {
   width: 24px;
   height: 24px;
+  padding: 2px;
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  // align-self: center;
+  // justify-self: center;
   padding: 0;
   background: $lemon-neon;
   color: $deep-dark-purple;
