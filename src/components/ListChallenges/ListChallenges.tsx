@@ -9,7 +9,8 @@ import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 import { EditIcon } from '@/components/ui/Icons/EditIcon';
 import styles from './listChallenges.module.scss';
-import { Button } from '@/components/ui';
+
+import { Button, ChallengeInfo } from '@/components/';
 
 export default function ListChallenges() {
   const router = useRouter();
@@ -49,6 +50,7 @@ export default function ListChallenges() {
   return (
     <div className={styles.container}>
       <h2>My Challenges List</h2>
+      <ChallengeInfo challenge={data ? data[0] : undefined} />
       <ol className={styles.list}>
         {data?.map((item: TChallenge) => (
           <li key={`challenge-${item.id}`} className={styles.listItem}>
