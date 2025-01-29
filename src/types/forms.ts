@@ -21,7 +21,6 @@ export type FieldConfig = {
   label: string;
   placeholder: string;
   required?: string;
-  isShort?: boolean;
   isDisabled?: boolean;
   // validate?: Record<string, (value: string | number) => boolean | string>;
   validate?: {

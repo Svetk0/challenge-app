@@ -23,13 +23,17 @@ export default function CreateForm() {
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
+    setIsSubmitting(true);
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
       dispatch(addChallenge(newChallenge));
       await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {
       console.error('Failed to add challenge:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
   const {
@@ -78,9 +82,8 @@ export default function CreateForm() {
           if (!config) return null;
           const normalizedConfig = typeof config === 'function' ? config('') : config;
 
-          const { label, placeholder, type, isShort = true, ...fieldRules } = normalizedConfig;
+          const { label, placeholder, type, ...fieldRules } = normalizedConfig;
           return (
-            // <div key={fieldName} className={styles.fieldWrapper}>
             <Input
               key={fieldName}
               tagType={
@@ -93,13 +96,15 @@ export default function CreateForm() {
               label={label}
               placeholder={placeholder}
               type={type}
-              shorted={isShort}
               isDisabled={fieldName === 'finished_at' ? isSwitcher : false}
               options={fieldName === 'period' ? dt.period.time : undefined}
               error={errors[fieldName as keyof TCreateForm]?.message}
               registration={register(fieldName as keyof TCreateForm, {
                 required: fieldRules.required,
-                validate: fieldRules.validate || {},
+                validate: fieldRules.validate as Record<
+                  string,
+                  (value: string | number | boolean | null) => true | string
+                >,
                 onBlur: () => handleValidation(fieldName as keyof TCreateForm).onBlur(),
                 onChange: () => handleValidation(fieldName as keyof TCreateForm).onChange(),
               })}
@@ -110,8 +115,12 @@ export default function CreateForm() {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Create'} color='default' />
+        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
+        <Button
+          type='submit'
+          text={isSubmitting ? dt.buttons.create_load : dt.buttons.create}
+          color='default'
+        />
       </div>
     </form>
   );

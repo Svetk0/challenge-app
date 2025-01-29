@@ -6,7 +6,6 @@ export type InputProps = {
   tagType?: 'input' | 'textarea' | 'select';
   label?: string;
   error?: string;
-  shorted?: boolean | '';
   isDisabled?: boolean;
   options?: { value: string }[];
   registration?: UseFormRegisterReturn;

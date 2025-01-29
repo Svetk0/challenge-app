@@ -23,6 +23,7 @@ export default function EditForm({ id }: { id: number }) {
   const [editChallenge] = useEditChallengeMutation();
   const { data: challengeData, isLoading } = useGetChallengeByIDQuery({ id });
   const [isSwitcher, setIsSwitcher] = useState<boolean>(!!challengeData?.finished_at);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(!!challengeData?.is_finished);
 
   const {
@@ -77,6 +78,7 @@ export default function EditForm({ id }: { id: number }) {
   });
 
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
+    setIsSubmitting(true);
     try {
       if (isSwitcher) {
         data.finished_at = null;
@@ -87,6 +89,8 @@ export default function EditForm({ id }: { id: number }) {
       router.push('/challenges');
     } catch (error) {
       console.error('Failed to edit challenge:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -137,7 +141,10 @@ export default function EditForm({ id }: { id: number }) {
                 error={errors[fieldName as keyof TEditForm]?.message}
                 registration={register(fieldName as keyof TEditForm, {
                   required: fieldRules.required,
-                  validate: fieldRules.validate || {},
+                  validate: fieldRules.validate as Record<
+                    string,
+                    (value: string | number | boolean | null) => true | string
+                  >,
                   onBlur: () => handleValidation(fieldName as keyof TEditForm).onBlur(),
                   onChange: () => handleValidation(fieldName as keyof TEditForm).onChange(),
                 })}
@@ -156,8 +163,12 @@ export default function EditForm({ id }: { id: number }) {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Edit'} color='default' />
+        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
+        <Button
+          type='submit'
+          text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
+          color='default'
+        />
       </div>
     </form>
   );

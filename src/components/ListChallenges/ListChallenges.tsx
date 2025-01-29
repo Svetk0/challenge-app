@@ -7,8 +7,8 @@ import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
-import styles from './listChallenges.module.scss';
 import { EditIcon } from '@/components/ui/Icons/EditIcon';
+import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
   const router = useRouter();
@@ -33,8 +33,8 @@ export default function ListChallenges() {
     if (isSuccess) {
       setLocal(data);
     }
-    console.log('all ', local);
-  }, []);
+    console.log('local ', local);
+  }, [isSuccess, data, local]);
 
   const handleEditClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
