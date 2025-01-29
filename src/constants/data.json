@@ -71,7 +71,9 @@
     "buttons": {
       "back": "Back",
       "create": "Create",
-      "edit": "Edit"
+      "create_load": "Creating...",
+      "edit": "Edit",
+      "edit_load": "Editing..."
     }
   }
 }

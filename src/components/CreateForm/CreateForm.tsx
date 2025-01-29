@@ -23,13 +23,17 @@ export default function CreateForm() {
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const addNewChallenge = async (newChallenge: TCreateForm) => {
+    setIsSubmitting(true);
     try {
       localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
       dispatch(addChallenge(newChallenge));
       await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {
       console.error('Failed to add challenge:', error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
   const {
@@ -111,8 +115,12 @@ export default function CreateForm() {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Create'} color='default' />
+        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
+        <Button
+          type='submit'
+          text={isSubmitting ? dt.buttons.create_load : dt.buttons.create}
+          color='default'
+        />
       </div>
     </form>
   );
