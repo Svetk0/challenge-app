@@ -22,7 +22,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <div>Loading...</div>;
   }
-  const { id, description, is_finished, period } = challenge;
+  const { id, description, period } = challenge;
   const handleEditClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     router.push(`/challenges/edit/${id}`);
@@ -40,7 +40,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
         <span className={styles.description}>{description}</span>
         <Button
           type='button'
-          text={<EditIcon id={`editIcon-${id}`} color={is_finished ? '#6FCF97' : '#9199F3'} />}
+          text={<EditIcon id={`editIcon-${id}`} />}
           color='icon'
           onClick={(e) => handleEditClick(e, id)}
         />
