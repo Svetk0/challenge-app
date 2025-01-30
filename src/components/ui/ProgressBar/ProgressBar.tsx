@@ -7,19 +7,18 @@ import { Button } from '@/components';
 import styles from './progressBar.module.scss';
 
 type Props = {
-  finished_at: string | null;
-  current: number;
-  total: number;
   challenge: TChallenge;
+  isMinimal?: boolean;
 };
 
-export function ProgressBar({ finished_at, current, total, challenge }: Props) {
+export function ProgressBar({ challenge, isMinimal = false }: Props) {
+  //challenge.progress = 5;
   const [editChallenge] = useEditChallengeMutation();
-  const [currentProgress, setCurrentProgress] = useState<number>(current);
+  const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
 
   const handleProgressChange = (increment: boolean) => {
     setCurrentProgress((prev) => {
-      const newValue = increment ? prev + 1 : prev - 1;
+      const newValue: number = increment ? prev + 1 : prev - 1;
       if (newValue < 0) return 0;
       return newValue;
     });
@@ -46,26 +45,51 @@ export function ProgressBar({ finished_at, current, total, challenge }: Props) {
   }, 2000);
 
   const calculateDaysLeft = () => {
-    if (finished_at != null) {
+    if (challenge.finished_at != null) {
       const today = new Date();
-      const endDate = new Date(finished_at);
+      const endDate = new Date(challenge.finished_at);
       const diffTime = endDate.getTime() - today.getTime();
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
     return null;
   };
-  const progress = (currentProgress / total) * 100;
+  const progress = (currentProgress / challenge.goal) * 100;
   const daysLeft = calculateDaysLeft();
+
+  if (isMinimal) {
+    return (
+      <div className={styles.minimalContainer}>
+        <div className={styles.header}>
+          <span className={styles.daysLeft}>
+            {challenge.finished_at != null ? `${daysLeft}d` : '∞'}
+          </span>
+          <span className={styles.fraction}>
+            {currentProgress}/{challenge.goal}
+          </span>
+        </div>
+        <div className={styles.progressWrapper}>
+          <div
+            className={styles.progressBar}
+            style={{
+              width: `${progress}%`,
+              backgroundColor: progress >= 100 ? '#6FCF97' : '#9199F3',
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.rowWrapper}>
       <Button type='button' text={'-'} color='round' onClick={() => handleProgressChange(false)} />
       <div className={styles.container}>
         <div className={styles.header}>
           <span className={styles.daysLeft}>
-            {finished_at != null ? `${daysLeft} days left` : 'all time'}
+            {challenge.finished_at != null ? `${daysLeft} days left` : 'all time'}
           </span>
           <span className={styles.fraction}>
-            {currentProgress} <span>of {total}</span>
+            {currentProgress} <span>of {challenge.goal}</span>
           </span>
         </div>
         <div className={styles.progressWrapper}>

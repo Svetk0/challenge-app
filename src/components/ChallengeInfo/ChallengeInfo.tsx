@@ -22,7 +22,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <div>Loading...</div>;
   }
-  const { id, description, is_finished, goal, _progress, finished_at } = challenge;
+  const { id, description, is_finished, period } = challenge;
   const handleEditClick = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     router.push(`/challenges/edit/${id}`);
@@ -45,7 +45,10 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           onClick={(e) => handleEditClick(e, id)}
         />
       </div>
-      <ProgressBar finished_at={finished_at} current={4} total={goal} challenge={challenge} />
+      <div className={styles.rowWrapper}>
+        <div className={styles.period}>{isChoosen ? '' : `every ${period}`}</div>
+        <ProgressBar challenge={challenge} isMinimal={!isChoosen} />
+      </div>
     </div>
   );
 }
