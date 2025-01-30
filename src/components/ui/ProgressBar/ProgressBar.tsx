@@ -60,19 +60,15 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
     return (
       <div className={styles.minimalContainer}>
         <div className={styles.header}>
-          <span className={styles.daysLeft}>
-            {challenge.finished_at != null ? `${daysLeft}d` : '∞'}
-          </span>
           <span className={styles.fraction}>
-            {currentProgress}/{challenge.goal}
+            {currentProgress} of {challenge.goal}
           </span>
         </div>
         <div className={styles.progressWrapper}>
           <div
-            className={styles.progressBar}
+            className={`${styles.progressBar} ${progress >= 100 ? styles.completed : styles.inProgress}`}
             style={{
               width: `${progress}%`,
-              backgroundColor: progress >= 100 ? '#6FCF97' : '#9199F3',
             }}
           />
         </div>
@@ -93,7 +89,12 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
           </span>
         </div>
         <div className={styles.progressWrapper}>
-          <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+          <div
+            className={`${styles.progressBar} ${progress >= 100 ? styles.completed : styles.inProgress}`}
+            style={{
+              width: `${progress}%`,
+            }}
+          />
         </div>
       </div>
       <Button type='button' text={'+'} color='round' onClick={() => handleProgressChange(true)} />

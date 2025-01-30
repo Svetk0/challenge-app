@@ -83,6 +83,15 @@
     .progressBar {
         height: 100%;
         border-radius: 2px;
+
+        &.completed {
+            background-color: $green-light;
+        }
+
+        &.inProgress {
+            background-color: $purple-light;
+        }
+
     }
 }
 
