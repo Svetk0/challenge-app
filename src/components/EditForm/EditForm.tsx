@@ -1,10 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
-//import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-//import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
 import { TEditForm, TChallenge } from '@/types';
@@ -18,7 +15,6 @@ import { getLocalStorage } from '@/utils/localStorage';
 export default function EditForm({ id }: { id: number }) {
   const dt = staticData.challenge_form;
   const router = useRouter();
-  //const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
   const [editChallenge] = useEditChallengeMutation();
   const { data: challengeData, isLoading } = useGetChallengeByIDQuery({ id });

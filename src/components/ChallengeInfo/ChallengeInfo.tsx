@@ -17,9 +17,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
 
-  useEffect(() => {
-    console.log('isChoosen', isChoosen);
-  }, [isChoosen]);
+  useEffect(() => {}, [isChoosen]);
 
   if (isLoading || !challenge) {
     return <div>Loading...</div>;
@@ -47,7 +45,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           onClick={(e) => handleEditClick(e, id)}
         />
       </div>
-      <ProgressBar finished_at={finished_at} current={4} total={goal} />
+      <ProgressBar finished_at={finished_at} current={4} total={goal} challenge={challenge} />
     </div>
   );
 }
