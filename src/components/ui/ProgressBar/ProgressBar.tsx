@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Button } from '@/components';
 import styles from './progressBar.module.scss';
 
@@ -8,6 +9,10 @@ type Props = {
 };
 
 export function ProgressBar({ finished_at, current, total }: Props) {
+  const [currentProgress, setCurrentProgress] = useState<number>(current);
+  useEffect(() => {
+    if (currentProgress < 1) setCurrentProgress(0);
+  }, [currentProgress]);
   const calculateDaysLeft = () => {
     if (finished_at != null) {
       const today = new Date();
@@ -17,7 +22,7 @@ export function ProgressBar({ finished_at, current, total }: Props) {
     }
     return null;
   };
-  const progress = (current / total) * 100;
+  const progress = (currentProgress / total) * 100;
   const daysLeft = calculateDaysLeft();
   return (
     <div className={styles.rowWrapper}>
@@ -25,7 +30,7 @@ export function ProgressBar({ finished_at, current, total }: Props) {
         type='button'
         text={'-'}
         color='round'
-        //onClick={() => router.push('/challenges/create')}
+        onClick={() => setCurrentProgress(currentProgress - 1)}
       />
       <div className={styles.container}>
         <div className={styles.header}>
@@ -33,7 +38,7 @@ export function ProgressBar({ finished_at, current, total }: Props) {
             {finished_at != null ? `${daysLeft} days left` : 'all time'}
           </span>
           <span className={styles.fraction}>
-            {current} <span>of {total}</span>
+            {currentProgress} <span>of {total}</span>
           </span>
         </div>
         <div className={styles.progressWrapper}>
@@ -44,7 +49,7 @@ export function ProgressBar({ finished_at, current, total }: Props) {
         type='button'
         text={'+'}
         color='round'
-        //onClick={() => router.push('/challenges/create')}
+        onClick={() => setCurrentProgress(currentProgress + 1)}
       />
     </div>
   );

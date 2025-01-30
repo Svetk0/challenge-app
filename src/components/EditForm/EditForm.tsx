@@ -48,7 +48,6 @@ export default function EditForm({ id }: { id: number }) {
         };
       }
 
-      // Пробуем получить данные из localStorage
       const localData = getLocalStorage('challenges')?.find(
         (challenge: TChallenge) => challenge.id === id
       );
