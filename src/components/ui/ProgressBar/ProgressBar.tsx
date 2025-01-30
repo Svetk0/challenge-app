@@ -2,17 +2,20 @@ import { Button } from '@/components';
 import styles from './progressBar.module.scss';
 
 type Props = {
-  finished_at: string;
+  finished_at: string | null;
   current: number;
   total: number;
 };
 
 export function ProgressBar({ finished_at, current, total }: Props) {
   const calculateDaysLeft = () => {
-    const today = new Date();
-    const endDate = new Date(finished_at);
-    const diffTime = endDate.getTime() - today.getTime();
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (finished_at != null) {
+      const today = new Date();
+      const endDate = new Date(finished_at);
+      const diffTime = endDate.getTime() - today.getTime();
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+    return null;
   };
   const progress = (current / total) * 100;
   const daysLeft = calculateDaysLeft();
@@ -26,7 +29,9 @@ export function ProgressBar({ finished_at, current, total }: Props) {
       />
       <div className={styles.container}>
         <div className={styles.header}>
-          <span className={styles.daysLeft}>{daysLeft} days left</span>
+          <span className={styles.daysLeft}>
+            {finished_at != null ? `${daysLeft} days left` : 'all time'}
+          </span>
           <span className={styles.fraction}>
             {current} <span>of {total}</span>
           </span>

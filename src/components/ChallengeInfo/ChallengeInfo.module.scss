@@ -11,9 +11,11 @@
     border-bottom: 1px solid $purple;
     border-radius: 8px;
     transition: all 0.3s ease;
+    opacity: 0.65;
     cursor: pointer;
 
     &__active {
+        opacity: 1;
         box-shadow: $shadow-box-perimeter;
         border-bottom: 1px solid $light-green-neon;
     }

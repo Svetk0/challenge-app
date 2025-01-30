@@ -16,20 +16,19 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   const router = useRouter();
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
-  const { id, description, is_finished, goal, _progress, finished_at } = challenge;
-
-  const handleEditClick = (e: React.MouseEvent, id: number) => {
-    e.stopPropagation();
-    router.push(`/challenges/edit/${id}`);
-  };
 
   useEffect(() => {
     console.log('isChoosen', isChoosen);
   }, [isChoosen]);
 
-  if (isLoading) {
+  if (isLoading || !challenge) {
     return <div>Loading...</div>;
   }
+  const { id, description, is_finished, goal, _progress, finished_at } = challenge;
+  const handleEditClick = (e: React.MouseEvent, id: number) => {
+    e.stopPropagation();
+    router.push(`/challenges/edit/${id}`);
+  };
 
   return (
     <div
