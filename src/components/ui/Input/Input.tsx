@@ -14,7 +14,10 @@ export type InputProps = {
   'ref'
 >;
 
-const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, InputProps>(
+export const Input = forwardRef<
+  HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement,
+  InputProps
+>(
   (
     {
       tagType = 'input',
@@ -84,5 +87,3 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElem
 );
 
 Input.displayName = 'Input';
-
-export default Input;

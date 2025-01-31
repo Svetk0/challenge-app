@@ -16,18 +16,14 @@
   box-shadow: $shadow-box-button;
   line-height: 32.68px;
   text-align: center;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:active {
     opacity: 0.6;
     border: none;
     transform: scale(1.01);
     cursor: pointer;
-  }
-
-  &:active {
-    transform: scale(1.1);
-    color: $pink;
   }
 
   &:disabled {
@@ -48,7 +44,65 @@
   background: $gradient-main-bg;
 }
 
+.default-width {
+  width: 310px;
+  background: $gradient-main-bg;
+}
+
 .black {
   background-color: $black-70;
   color: $green-neon;
+}
+
+.round {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: $lemon-neon;
+  color: $deep-dark-purple;
+  border: 1.5px solid $lemon-neon;
+  box-shadow: $shadow-box-bright-mini;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: $deep-dark-purple;
+    color: $lemon-neon;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    //background-color: #02d6fcfb;
+    top: -50%;
+    left: -50%;
+    z-index: 100;
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border-radius: 5px;
+  box-shadow: none;
+}
+
+.mini {
+  width: 100px;
+  height: 40px;
+  font-size: 1.1rem;
+  padding: 0;
+
+  background: $gradient-main-bg;
 }

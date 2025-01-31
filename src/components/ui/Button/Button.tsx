@@ -2,14 +2,14 @@ import { cn } from '@/utils';
 import styles from './button.module.scss';
 
 type Props = {
-  text: string;
+  text: React.ReactNode;
   color: string;
   type: 'submit' | 'button';
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   disabled?: boolean;
 };
 
-export default function Button({ text, color, onClick, type, disabled = false }: Props) {
+export function Button({ text, color, onClick, type, disabled = false }: Props) {
   return (
     <button
       type={type}

@@ -1,18 +1,24 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
-import { EditIcon } from '@/components/ui/Icons/EditIcon';
+import { ChallengeInfo, Button } from '@/components/';
+import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const {
+    title,
+    buttons: { add },
+  } = staticData.challendes;
   const [local, setLocal] = useState<TChallenge[]>([]);
   const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
@@ -32,39 +38,48 @@ export default function ListChallenges() {
     setLocal(MY_CHALLENGES);
     if (isSuccess) {
       setLocal(data);
+    } else {
+      setLocal(MY_CHALLENGES);
     }
     console.log('local ', local);
-  }, [isSuccess, data, local]);
-
-  const handleEditClick = (e: React.MouseEvent, id: number) => {
-    e.stopPropagation();
-    router.push(`/challenges/edit/${id}`);
-  };
+  }, [isSuccess, data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  if (error && local.length === 0) {
+    const errorMessage = 'An unknown error occurred.';
+    const status = 'status' in error ? error.status : undefined;
+    const statusOriginal = 'originalStatus' in error ? error.originalStatus : undefined;
+    return (
+      <div>
+        Error {statusOriginal ? `${statusOriginal}:` : errorMessage}{' '}
+        {status ? `${status}` : errorMessage}
+      </div>
+    );
+  }
   return (
     <div className={styles.container}>
-      <h2>My Challenges List</h2>
-      <ol className={styles.list}>
-        {data?.map((item: TChallenge) => (
-          <li key={`challenge-${item.id}`} className={styles.listItem}>
-            <span className={styles.description}>{item.description}</span>
-            <button
-              className={styles.editButton}
-              onClick={(e) => handleEditClick(e, item.id)}
-              aria-label={`Edit challenge: ${item.description}`}
-            >
-              <EditIcon
-                id={`editIcon-${item.id}`}
-                color={item.is_finished ? '#6FCF97' : '#9199F3'}
-              />
-            </button>
-          </li>
-        ))}
-      </ol>
+      <div className={styles.rowWrapper}>
+        <h2 className={styles.title}>{title}</h2>
+        <Button
+          type='button'
+          text={add}
+          color={local?.length != 0 ? 'mini' : 'default-width'}
+          onClick={() => router.push('/challenges/create')}
+        />
+      </div>
+      {local?.length != 0 && (
+        <ol className={styles.list}>
+          {local?.map((item: TChallenge) => (
+            <li key={`challenge-${item.id}`}>
+              <ChallengeInfo challenge={item} />
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {error && <div className={styles.error}>{`Error updating :(`}</div>}
     </div>
   );
 }

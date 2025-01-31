@@ -22,13 +22,13 @@ html {
   background-position: center;
   background-color: var(--background);
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100vh;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   max-width: 430px;
-  min-height: 100vh;
+  height: 100vh;
   margin: 0 auto;
   color: var(--font-color);
   -webkit-font-smoothing: antialiased;
@@ -44,7 +44,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 5px;
+  padding: 5vh 5px;
 }
 
 a {

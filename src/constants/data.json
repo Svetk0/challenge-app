@@ -6,6 +6,13 @@
       "signUp": "Sign Up"
     }
   },
+  "challendes": {
+    "title": "Daily Routine",
+    "buttons": {
+      "add": "Add new",
+      "back": "Back"
+    }
+  },
   "challenge_form": {
     "title_create": "Create a new Challenge",
     "title_edit": "Edit Challenge",

@@ -1,10 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Button from '@/components/ui/Button/Button';
 import Link from 'next/link';
-import styles from './page.module.scss';
+import Image from 'next/image';
 import { setAuthToken, TELEGRAM_ID } from '@/utils/auth';
+import { Button } from '@/components/';
+
+import styles from './page.module.scss';
 
 const Home: React.FC = () => {
   const [isLogoVisible, setIsLogoVisible] = useState(true);

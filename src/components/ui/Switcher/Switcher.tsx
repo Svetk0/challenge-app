@@ -9,7 +9,7 @@ type Props = {
   setIsActive: Dispatch<boolean>;
 };
 
-export default function Switcher({ label, isActive = false, setIsActive }: Props) {
+export function Switcher({ label, isActive = false, setIsActive }: Props) {
   useEffect(() => {}, [isActive]);
   const handleToggle = () => {
     setIsActive(!isActive);
