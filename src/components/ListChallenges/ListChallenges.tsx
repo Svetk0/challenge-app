@@ -38,6 +38,8 @@ export default function ListChallenges() {
     setLocal(MY_CHALLENGES);
     if (isSuccess) {
       setLocal(data);
+    } else {
+      setLocal(MY_CHALLENGES);
     }
     console.log('local ', local);
   }, [isSuccess, data]);
@@ -45,7 +47,7 @@ export default function ListChallenges() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  if (error) {
+  if (error && local.length === 0) {
     const errorMessage = 'An unknown error occurred.';
     const status = 'status' in error ? error.status : undefined;
     const statusOriginal = 'originalStatus' in error ? error.originalStatus : undefined;
@@ -58,21 +60,26 @@ export default function ListChallenges() {
   }
   return (
     <div className={styles.container}>
-      <h2>{title}</h2>
-      <ol className={styles.list}>
-        {data?.map((item: TChallenge) => (
-          <li key={`challenge-${item.id}`}>
-            <ChallengeInfo challenge={item} />
-          </li>
-        ))}
-      </ol>
+      <div className={styles.rowWrapper}>
+        <h2 className={styles.title}>{title}</h2>
+        <Button
+          type='button'
+          text={add}
+          color={local?.length != 0 ? 'mini' : 'default-width'}
+          onClick={() => router.push('/challenges/create')}
+        />
+      </div>
+      {local?.length != 0 && (
+        <ol className={styles.list}>
+          {local?.map((item: TChallenge) => (
+            <li key={`challenge-${item.id}`}>
+              <ChallengeInfo challenge={item} />
+            </li>
+          ))}
+        </ol>
+      )}
 
-      <Button
-        type='button'
-        text={add}
-        color='default'
-        onClick={() => router.push('/challenges/create')}
-      />
+      {error && <div className={styles.error}>{`Error updating :(`}</div>}
     </div>
   );
 }

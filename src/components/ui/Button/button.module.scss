@@ -44,6 +44,11 @@
   background: $gradient-main-bg;
 }
 
+.default-width {
+  width: 310px;
+  background: $gradient-main-bg;
+}
+
 .black {
   background-color: $black-70;
   color: $green-neon;
@@ -57,8 +62,6 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  // align-self: center;
-  // justify-self: center;
   padding: 0;
   background: $lemon-neon;
   color: $deep-dark-purple;
@@ -93,4 +96,13 @@
   background: transparent;
   border-radius: 5px;
   box-shadow: none;
+}
+
+.mini {
+  width: 100px;
+  height: 40px;
+  font-size: 1.1rem;
+  padding: 0;
+
+  background: $gradient-main-bg;
 }
