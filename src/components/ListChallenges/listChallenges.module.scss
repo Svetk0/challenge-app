@@ -2,15 +2,37 @@
 
 .container {
     width: 100%;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 15px;
+
+    >h2 {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 29.88px;
+        text-align: center;
+        margin-bottom: 1rem;
+
+    }
+
+    >button {
+        width: 310px;
+        margin: 20px 0;
+    }
 }
 
 .list {
+    height: 70vh;
+    overflow-y: auto;
     list-style: none;
-    padding: 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    border-bottom: 1px solid $white-op10;
+    border-top: 1px solid $white-op10;
 }
 
 .listItem {

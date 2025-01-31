@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-//import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
@@ -14,7 +13,7 @@ import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
-  //const router = useRouter();
+  const router = useRouter();
   const dispatch = useDispatch();
   const {
     title,
@@ -41,12 +40,22 @@ export default function ListChallenges() {
       setLocal(data);
     }
     console.log('local ', local);
-  }, [isSuccess, data, local]);
+  }, [isSuccess, data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  if (error) {
+    const errorMessage = 'An unknown error occurred.';
+    const status = 'status' in error ? error.status : undefined;
+    const statusOriginal = 'originalStatus' in error ? error.originalStatus : undefined;
+    return (
+      <div>
+        Error {statusOriginal ? `${statusOriginal}:` : errorMessage}{' '}
+        {status ? `${status}` : errorMessage}
+      </div>
+    );
+  }
   return (
     <div className={styles.container}>
       <h2>{title}</h2>
@@ -57,14 +66,13 @@ export default function ListChallenges() {
           </li>
         ))}
       </ol>
-      <Link href={'/challenges/create'}>
-        <Button
-          type='button'
-          text={add}
-          color='default'
-          //onClick={() => router.push('/challenges/create')}
-        />
-      </Link>
+
+      <Button
+        type='button'
+        text={add}
+        color='default'
+        onClick={() => router.push('/challenges/create')}
+      />
     </div>
   );
 }
