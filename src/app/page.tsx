@@ -56,9 +56,6 @@ const Home: React.FC = () => {
             <h1>Challenge App</h1>
             {authId ? (
               <div className={styles.columnWrapper}>
-                <Link href={'/challenges'}>
-                  <Button type='button' text={'My challenges'} color='default' />
-                </Link>
                 <div className={styles.tip}>
                   All your progress will be saved based on your ID: <br />
                   <span>{authId}</span>
@@ -68,6 +65,9 @@ const Home: React.FC = () => {
                   </i>
                 </div>
                 <Button type='button' text={' New Id'} color='mini' onClick={handleLogout} />
+                <Link href={'/challenges'}>
+                  <Button type='button' text={'My challenges'} color='default' />
+                </Link>
               </div>
             ) : (
               <AuthForm onAuthSuccess={handleAuthSuccess} />
