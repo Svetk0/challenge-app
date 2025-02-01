@@ -20,11 +20,13 @@
 }
 
 @keyframes pulse {
+
   0%,
   10%,
   70% {
     transform: scale(1);
   }
+
   40%,
   100% {
     transform: scale(0.733);
@@ -36,6 +38,7 @@
     transform: scale(1);
     opacity: 1;
   }
+
   100% {
     transform: scale(90);
     opacity: 0;
@@ -49,4 +52,43 @@
   align-items: center;
   gap: 2rem;
   height: 100vh;
+}
+
+.formId {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+
+  >:nth-child(1) {
+    width: 200px;
+
+    >input {
+      width: 100%;
+    }
+  }
+
+  >button {
+    width: 120px;
+    height: 50px;
+  }
+}
+
+.columnRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  .tip {
+    width: 200px;
+    font-size: 14px;
+    color: $grey;
+    text-align: center;
+
+    >span {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
 }

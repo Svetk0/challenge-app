@@ -27,7 +27,7 @@ export const contentApi = createApi({
   tagTypes: ['Actual'],
 
   endpoints: (builder) => ({
-    //------------   GET   ------------
+    //------------   GETS   ------------
     //user info
     getUserMe: builder.query({
       query: () => ({
@@ -49,12 +49,11 @@ export const contentApi = createApi({
       query: ({ id }) => ({
         url: `challenges/${id}`,
         method: 'GET',
-        //body: dataEdit,
       }),
       providesTags: ['Actual'],
     }),
 
-    //------------   MUTUATION   ------------
+    //------------   MUTATIONS   ------------
 
     //add new challenge
     createChallenge: builder.mutation<TCreateForm, Partial<ResponseUser>>({
