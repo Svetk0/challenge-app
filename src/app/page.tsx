@@ -68,6 +68,10 @@ const Home: React.FC = () => {
                 <div className={styles.tip}>
                   All your progress will be saved based on your ID: <br />
                   <span>{authId}</span>
+                  <br />
+                  <i>
+                    or use default ID: <br /> 111
+                  </i>
                 </div>
                 <Button
                   type='button'
