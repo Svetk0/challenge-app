@@ -2,6 +2,8 @@
 
 A Next.js application for tracking personal challenges and goals.
 
+### Deploy on Vercel
+
 ## ✨ Features
 
 - Create and manage personal challenges
