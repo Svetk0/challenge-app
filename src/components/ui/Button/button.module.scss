@@ -96,6 +96,11 @@
   background: transparent;
   border-radius: 5px;
   box-shadow: none;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .mini {
