@@ -10,13 +10,18 @@
     background-color: $black-70;
     border-bottom: 1px solid $purple;
     border-radius: 8px;
-    transition: ease all 0.1s;
+    transition: ease all 0.2s;
     //opacity: 0.6;
     cursor: pointer;
 
     >:nth-child(2) {
         gap: 0;
         padding-inline: clamp(10px, 6vw, 40px);
+    }
+
+    &:hover {
+        transform: scale(1.07);
+        border-bottom: 1px solid $light-green-neon;
     }
 
     &__active {

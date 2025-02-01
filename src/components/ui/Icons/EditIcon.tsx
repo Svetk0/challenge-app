@@ -10,7 +10,7 @@ export const EditIcon = ({
   size = 31,
   color = '#9199F3',
   className,
-  title = 'Edit challenge',
+  title = 'Edit',
   id = 'editIcon',
 }: IconProps) => {
   const titleId = `${id}Title`;
@@ -28,55 +28,20 @@ export const EditIcon = ({
       focusable='false'
     >
       <title id={titleId}>{title}</title>
-      <g filter='url(#filter0_d_301_656)'>
-        <path
-          d='M21.9101 12.1539L14.3833 19.6808C14.1041 19.96 13.7485 20.1503 13.3613 20.2277L10.125 20.875L10.7722 17.6386C10.8497 17.2515 11.04 16.8959 11.3192 16.6167L18.8459 9.08978M21.9101 12.1539L23.5011 10.5629C23.8916 10.1724 23.8916 9.53923 23.5011 9.14871L21.8511 7.49879C21.4606 7.10827 20.8275 7.10827 20.4369 7.49879L18.8459 9.08978M21.9101 12.1539L18.8459 9.08978'
-          stroke={color}
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        />
-        <path
-          d='M7.4165 24.6667H22.5832'
-          stroke={color}
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        />
-      </g>
-      <defs>
-        <filter
-          id='filter0_d_301_656'
-          x='-4'
-          y='-3'
-          width='38'
-          height='38'
-          filterUnits='userSpaceOnUse'
-          colorInterpolationFilters='sRGB'
-        >
-          <feFlood floodOpacity='0' result='BackgroundImageFix' />
-          <feColorMatrix
-            in='SourceAlpha'
-            type='matrix'
-            values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-            result='hardAlpha'
-          />
-          <feOffset />
-          <feGaussianBlur stdDeviation='3' />
-          <feComposite in2='hardAlpha' operator='out' />
-          <feColorMatrix
-            type='matrix'
-            values='0 0 0 0 0.878431 0 0 0 0 0.960784 0 0 0 0 0.92549 0 0 0 0.4 0'
-          />
-          <feBlend mode='normal' in2='BackgroundImageFix' result='effect1_dropShadow_301_656' />
-          <feBlend
-            mode='normal'
-            in='SourceGraphic'
-            in2='effect1_dropShadow_301_656'
-            result='shape'
-          />
-        </filter>
-      </defs>
+      <path
+        d='M18.3785 8.44975L11.4637 15.3647C11.1845 15.6439 10.8289 15.8342 10.4417 15.9117L7.49994 16.5L8.08829 13.5582C8.16572 13.1711 8.35603 12.8155 8.63522 12.5363L15.5501 5.62132M18.3785 8.44975L19.7927 7.03553C20.1832 6.64501 20.1832 6.01184 19.7927 5.62132L18.3785 4.20711C17.988 3.81658 17.3548 3.81658 16.9643 4.20711L15.5501 5.62132M18.3785 8.44975L15.5501 5.62132'
+        stroke={color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
+      <path
+        d='M5 20H19'
+        stroke={color}
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+      />
     </svg>
   );
 };
