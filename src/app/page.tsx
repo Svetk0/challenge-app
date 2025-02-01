@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { setAuthToken, getAuthToken } from '@/utils/auth';
-import { Button } from '@/components/';
-import { AuthForm } from '@/components/AuthForm/AuthForm';
+import { Button, AuthForm } from '@/components/';
+
 import styles from './page.module.scss';
 
 const Home: React.FC = () => {
