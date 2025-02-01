@@ -71,7 +71,7 @@ export default function ListChallenges() {
       </div>
       {local?.length != 0 && (
         <ol className={styles.list}>
-          {local?.map((item: TChallenge) => (
+          {data?.map((item: TChallenge) => (
             <li key={`challenge-${item.id}`}>
               <ChallengeInfo challenge={item} />
             </li>

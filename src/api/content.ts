@@ -10,10 +10,12 @@ interface ResponseUser {
   telegramId: string;
 }
 
+const BASE_URL = '/api';
+
 export const contentApi = createApi({
   reducerPath: 'contentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://193.164.150.86:8098/',
+    baseUrl: BASE_URL,
     prepareHeaders: (headers) => {
       const token = getAuthToken();
 
@@ -38,18 +40,12 @@ export const contentApi = createApi({
 
     // GET list of user's challenges
     getAllChallengeList: builder.query<TChallenge[], void>({
-      query: () => ({
-        url: '/challenges/in-progress/?limit=100',
-        method: 'GET',
-      }),
+      query: () => 'challenges',
       providesTags: ['Actual'],
     }),
     // GET challenge by id
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
-      query: ({ id }) => ({
-        url: `challenges/${id}`,
-        method: 'GET',
-      }),
+      query: ({ id }) => `challenges/${id}`,
       providesTags: ['Actual'],
     }),
 
@@ -58,9 +54,9 @@ export const contentApi = createApi({
     //add new challenge
     createChallenge: builder.mutation<TCreateForm, Partial<ResponseUser>>({
       query: ({ dataAdd }) => ({
-        url: `challenges/`,
+        url: 'challenges',
         method: 'POST',
-        body: dataAdd,
+        body: { dataAdd },
       }),
       invalidatesTags: ['Actual'],
     }),
@@ -70,7 +66,7 @@ export const contentApi = createApi({
       query: ({ id, dataEdit }) => ({
         url: `challenges/${id}`,
         method: 'PATCH',
-        body: dataEdit,
+        body: { dataEdit },
       }),
       invalidatesTags: ['Actual'],
     }),
