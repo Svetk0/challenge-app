@@ -26,11 +26,11 @@ const Home: React.FC = () => {
     };
   }, []);
   useEffect(() => {
-    const token = getAuthToken();
+    const token: string | null = getAuthToken();
     if (token) {
       setAuthId(token);
     }
-  }, []);
+  }, [authId]);
   const { register, handleSubmit, reset } = useForm<Props>({
     mode: 'onSubmit',
   });
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
           <div className={styles.textBlock}>
             <h1>Challenge App</h1>
             {authId != '' ? (
-              <div className={styles.columnRow}>
+              <div className={styles.columnWrapper}>
                 <Link href={'/challenges'}>
                   <Button type='button' text={'My challenges'} color='default' />
                 </Link>
@@ -69,6 +69,15 @@ const Home: React.FC = () => {
                   All your progress will be saved based on your ID: <br />
                   <span>{authId}</span>
                 </div>
+                <Button
+                  type='button'
+                  text={' New Id'}
+                  color='mini'
+                  onClick={() => {
+                    setAuthToken('');
+                    setAuthId('');
+                  }}
+                />
               </div>
             ) : (
               <form className={styles.formId} onSubmit={handleSubmit(onSubmit)}>
