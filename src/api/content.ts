@@ -13,7 +13,7 @@ interface ResponseUser {
 export const contentApi = createApi({
   reducerPath: 'contentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://193.164.150.86:8098/',
+    baseUrl: 'https://193.164.150.86:8098/',
     prepareHeaders: (headers) => {
       const token = getAuthToken();
 
