@@ -54,7 +54,7 @@ const Home: React.FC = () => {
         {isDivVisible && (
           <div className={styles.textBlock}>
             <h1>Challenge App</h1>
-            {authId ? (
+            {authId != '' ? (
               <div className={styles.columnWrapper}>
                 <div className={styles.tip}>
                   All your progress will be saved based on your ID: <br />
