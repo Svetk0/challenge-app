@@ -13,7 +13,7 @@ interface ResponseUser {
 export const contentApi = createApi({
   reducerPath: 'contentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://193.164.150.86:8098/',
+    baseUrl: 'https://challenge-app.site/api/',
     prepareHeaders: (headers) => {
       const token = getAuthToken();
 
@@ -39,7 +39,7 @@ export const contentApi = createApi({
     // GET list of user's challenges
     getAllChallengeList: builder.query<TChallenge[], void>({
       query: () => ({
-        url: '/challenges/in-progress/?limit=100',
+        url: 'challenges/in-progress/?limit=100',
         method: 'GET',
       }),
       providesTags: ['Actual'],
