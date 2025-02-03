@@ -55,15 +55,57 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
     }
     return null;
   };
+  const calculateDeadlinePeriod = () => {
+    if (challenge.period != 'day') {
+      const endDate = new Date(challenge.started_at);
+
+      if (challenge.period === 'week') {
+        const weekDays = [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+        ];
+        return `by ${weekDays[endDate.getDay()]}`;
+      }
+      if (challenge.period === 'month') {
+        const monthNames = [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ];
+        return `${endDate.getDate()}th ${monthNames[endDate.getMonth()]}`;
+      }
+    }
+    return null;
+  };
   const progress = (currentProgress / challenge.goal) * 100;
   const daysLeft = calculateDaysLeft();
+  const deadlinePeriod = calculateDeadlinePeriod();
 
   if (isMinimal) {
     return (
       <div className={styles.minimalContainer}>
         <div className={styles.header}>
-          <span className={styles.fraction}>
-            {currentProgress}/{challenge.goal}
+          <span className={`${styles.fraction} ${progress >= 100 ? styles.completed : ''}`}>
+            {currentProgress} of {challenge.goal}
+          </span>
+          <span
+            className={`${styles.fraction} ${progress >= 100 ? styles.completed : styles.inProgress}`}
+          >
+            {deadlinePeriod}
           </span>
         </div>
         <div className={styles.progressWrapper}>
