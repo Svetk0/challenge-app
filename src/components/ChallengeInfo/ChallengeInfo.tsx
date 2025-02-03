@@ -17,6 +17,18 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
 
+  const scrollToCenter = () => {
+    setTimeout(() => {
+      const element = document.getElementById(`challenge-${challenge?.id}`);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
+    }, 100);
+  };
+
   useEffect(() => {}, [isChoosen]);
 
   if (isLoading || !challenge) {
@@ -31,9 +43,11 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   return (
     <div
       ref={wrapperRef}
+      id={`challenge-${challenge?.id}`}
       className={isChoosen ? `${styles.wrapper} ${styles.wrapper__active}` : `${styles.wrapper}`}
       onClick={() => {
         setIsChoosen(true);
+        scrollToCenter();
       }}
     >
       <div className={styles.rowWrapper}>

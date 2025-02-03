@@ -70,6 +70,15 @@
     .fraction {
         font-size: 10px;
         color: $white;
+
+        &.completed {
+            color: rgb(157, 204, 176);
+        }
+
+        &.inProgress {
+            color: $purple-light;
+            color: $grey;
+        }
     }
 
     .progressWrapper {
