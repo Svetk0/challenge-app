@@ -1,5 +1,5 @@
 //'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/api/content';
 import { TChallenge } from '@/types';
@@ -12,18 +12,17 @@ type Props = {
 };
 
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
-  //challenge.progress = 5;
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
 
   const handleProgressChange = (increment: boolean) => {
-    setCurrentProgress((prev) => {
-      const newValue: number = increment ? prev + 1 : prev - 1;
-      if (newValue < 0) return 0;
-      return newValue;
-    });
-    updateProgress(currentProgress);
+    const newValue: number = increment ? currentProgress + 1 : currentProgress - 1;
+    if (newValue < 0) return 0;
+
+    setCurrentProgress(newValue);
+    return newValue;
   };
+
   const updateProgress = useDebouncedCallback(async (updatedProgress: number) => {
     try {
       await editChallenge({
@@ -38,11 +37,14 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
           is_finished: false,
         },
       }).unwrap();
-      console.log('updateProgress', updatedProgress);
     } catch (error) {
       console.error('Failed to update progress:', error);
     }
   }, 2000);
+
+  useEffect(() => {
+    updateProgress(currentProgress);
+  }, [currentProgress]);
 
   const calculateDaysLeft = () => {
     if (challenge.finished_at != null) {
@@ -61,7 +63,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       <div className={styles.minimalContainer}>
         <div className={styles.header}>
           <span className={styles.fraction}>
-            {currentProgress} of {challenge.goal}
+            {currentProgress}/{challenge.goal}
           </span>
         </div>
         <div className={styles.progressWrapper}>
@@ -89,12 +91,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
           </span>
         </div>
         <div className={styles.progressWrapper}>
-          <div
-            className={`${styles.progressBar} ${progress >= 100 ? styles.completed : styles.inProgress}`}
-            style={{
-              width: `${progress}%`,
-            }}
-          />
+          <div className={styles.progressBar} style={{ width: `${progress}%` }} />
         </div>
       </div>
       <Button type='button' text={'+'} color='round' onClick={() => handleProgressChange(true)} />
