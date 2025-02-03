@@ -18,7 +18,7 @@ export default function EditForm({ id }: { id: number }) {
   const [_startedDate, _setStartedDate] = useState('');
   const [editChallenge] = useEditChallengeMutation();
   const { data: challengeData, isLoading } = useGetChallengeByIDQuery({ id });
-  const [isSwitcher, setIsSwitcher] = useState<boolean>(!!challengeData?.finished_at);
+  const [isSwitcher, setIsSwitcher] = useState<boolean>(challengeData?.finished_at === null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(!!challengeData?.is_finished);
 
