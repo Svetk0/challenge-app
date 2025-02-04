@@ -2,7 +2,7 @@
 
 A Next.js application for tracking personal challenges and goals.
 
-### Deploy on Vercel
+### [Deploy on Vercel](https://challenge-uapp.vercel.app)
 
 ## ✨ Features
 
