@@ -36,7 +36,11 @@ A Next.js application for tracking personal challenges and goals.
 git clone https://github.com/Svetk0/challenge-app.git
 ```
 
-2. Install dependencies:
+2. Install dependencies in `challenge-app` folder:
+
+```bash
+cd challenge-app
+```
 
 ```bash
 npm install
