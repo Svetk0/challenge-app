@@ -130,7 +130,10 @@ export default function EditForm({ id }: { id: number }) {
                 error={errors[fieldName as keyof TEditForm]?.message}
                 registration={register(fieldName as keyof TEditForm, {
                   required: fieldRules.required,
-                  validate: fieldRules.validate || {},
+                  validate: fieldRules.validate as Record<
+                    string,
+                    (value: string | number | boolean | null) => true | string
+                  >,
                   onBlur: () => handleValidation(fieldName as keyof TEditForm).onBlur(),
                   onChange: () => handleValidation(fieldName as keyof TEditForm).onChange(),
                 })}
