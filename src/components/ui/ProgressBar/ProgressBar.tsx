@@ -86,7 +86,8 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
           'Nov',
           'Dec',
         ];
-        return `${endDate.getDate()}th ${monthNames[endDate.getMonth()]}`;
+        const end = endDate.getMonth() + 1 > 11 ? 0 : endDate.getMonth() + 1;
+        return `${endDate.getDate()}th ${monthNames[end]}`;
       }
     }
     return null;
