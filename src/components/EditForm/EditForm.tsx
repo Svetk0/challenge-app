@@ -1,26 +1,37 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
 import { configValidation } from '@/utils/configValidation';
-import { TEditForm, TChallenge } from '@/types';
+import { TEditForm } from '@/types';
 import staticData from '@/constants/data.json';
-
 import { Button, Input, Switcher } from '@/components';
 
 import styles from './editForm.module.scss';
-import { getLocalStorage } from '@/utils/localStorage';
 
 export default function EditForm({ id }: { id: number }) {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const [_startedDate, _setStartedDate] = useState('');
   const [editChallenge] = useEditChallengeMutation();
-  const { data: challengeData, isLoading } = useGetChallengeByIDQuery({ id });
+  const {
+    data: challengeData,
+    isLoading,
+    error,
+  } = useGetChallengeByIDQuery(
+    { id },
+    {
+      refetchOnMountOrArgChange: true,
+    }
+  );
   const [isSwitcher, setIsSwitcher] = useState<boolean>(challengeData?.finished_at === null);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isCompleted, setIsCompleted] = useState<boolean>(!!challengeData?.is_finished);
+
+  useEffect(() => {
+    setIsSwitcher(challengeData?.finished_at === null);
+  }, [challengeData, isLoading, error]);
 
   const {
     register,
@@ -33,6 +44,7 @@ export default function EditForm({ id }: { id: number }) {
   } = useForm<TEditForm>({
     defaultValues: async (): Promise<TEditForm> => {
       if (challengeData) {
+        console.log('Query state:', { challengeData, isLoading, error });
         return {
           description: challengeData.description,
           goal: challengeData.goal,
@@ -44,22 +56,6 @@ export default function EditForm({ id }: { id: number }) {
         };
       }
 
-      const localData = getLocalStorage('challenges')?.find(
-        (challenge: TChallenge) => challenge.id === id
-      );
-      if (localData) {
-        return {
-          description: localData.description,
-          goal: localData.goal,
-          period: localData.period,
-          started_at: localData.started_at,
-          finished_at: localData.finished_at,
-          progress: localData.progress,
-          is_finished: localData.is_finished,
-        };
-      }
-
-      // Если нет данных ни с сервера, ни из localStorage, возвращаем дефолтные значения
       return {
         description: '',
         goal: 1,
@@ -70,10 +66,10 @@ export default function EditForm({ id }: { id: number }) {
         is_finished: false,
       };
     },
+    values: challengeData,
   });
 
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
-    setIsSubmitting(true);
     try {
       if (isSwitcher) {
         data.finished_at = null;
@@ -84,8 +80,6 @@ export default function EditForm({ id }: { id: number }) {
       router.push('/challenges');
     } catch (error) {
       console.error('Failed to edit challenge:', error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -158,12 +152,8 @@ export default function EditForm({ id }: { id: number }) {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
-        <Button
-          type='submit'
-          text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
-          color='default'
-        />
+        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
+        <Button type='submit' text={'Edit'} color='default' />
       </div>
     </form>
   );

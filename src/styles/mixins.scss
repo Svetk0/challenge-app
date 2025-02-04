@@ -48,14 +48,10 @@
   text-align: left;
   border-radius: 8px;
   border: none;
-  //border-bottom: 1px solid transparent;
-  //border-image: $gradient-main-border;
-  //border-image-slice: 1;
   background: $black-70;
-  color: $white;
+  color: $purple;
   padding: 10px;
   border-bottom: 1px solid $purple;
-  //background: rgba(37, 39, 50, 1);
 
   &::placeholder {
     color: $dirty-green-op80;
@@ -64,10 +60,13 @@
   }
 
   &:focus,
-  &:active {
-    border: $border-input-accent;
+  &:active,
+  &:focus-visible {
     transition: border-color 0.3s ease;
     color: $white;
+    outline: 0px;
+    border-bottom: 1px solid $light-green-neon;
+    box-shadow: $shadow-box-perimeter;
   }
 
   &:-webkit-autofill,
