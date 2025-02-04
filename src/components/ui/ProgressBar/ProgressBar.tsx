@@ -14,37 +14,37 @@ type Props = {
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
+  const [initialMount, setInitialMount] = useState(true);
 
   const handleProgressChange = (increment: boolean) => {
     const newValue: number = increment ? currentProgress + 1 : currentProgress - 1;
-    if (newValue < 0) return 0;
-
+    if (newValue < 0) return;
+    console.log('setting new progress', newValue);
     setCurrentProgress(newValue);
-    return newValue;
   };
+
+  useEffect(() => {
+    if (initialMount) {
+      setInitialMount(false);
+      return;
+    }
+
+    updateProgress(currentProgress);
+  }, [currentProgress]);
 
   const updateProgress = useDebouncedCallback(async (updatedProgress: number) => {
     try {
       await editChallenge({
         id: challenge.id,
         dataEdit: {
-          description: challenge.description,
-          goal: challenge.goal,
-          period: challenge.period,
-          started_at: challenge.started_at,
-          finished_at: challenge.finished_at,
+          ...challenge,
           progress: updatedProgress,
-          is_finished: false,
         },
       }).unwrap();
     } catch (error) {
       console.error('Failed to update progress:', error);
     }
-  }, 2000);
-
-  useEffect(() => {
-    updateProgress(currentProgress);
-  }, [currentProgress]);
+  }, 1000);
 
   const calculateDaysLeft = () => {
     if (challenge.finished_at != null) {
