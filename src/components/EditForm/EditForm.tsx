@@ -11,7 +11,7 @@ import { Button, Input, Switcher } from '@/components';
 
 import styles from './editForm.module.scss';
 
-export default function EditForm({ id }: { id: number }) {
+export default function EditForm({ id }: { id: string }) {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const [_startedDate, _setStartedDate] = useState('');
@@ -21,7 +21,7 @@ export default function EditForm({ id }: { id: number }) {
     isLoading,
     error,
   } = useGetChallengeByIDQuery(
-    { id },
+    { uuid: id },
     {
       refetchOnMountOrArgChange: true,
     }
@@ -76,7 +76,7 @@ export default function EditForm({ id }: { id: number }) {
       }
       data.is_finished = isCompleted;
 
-      await editChallenge({ id, dataEdit: data }).unwrap();
+      await editChallenge({ uuid: id, dataEdit: data }).unwrap();
       router.push('/challenges');
     } catch (error) {
       console.error('Failed to edit challenge:', error);

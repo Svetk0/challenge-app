@@ -4,6 +4,7 @@ import { TChallenge, TCreateForm, TEditForm } from '@/types';
 
 interface ResponseUser {
   id: number;
+  uuid: string;
   dataEdit: TEditForm;
   dataAdd: TCreateForm;
   status: number;
@@ -20,7 +21,7 @@ export const contentApi = createApi({
       if (token) {
         headers.set('Authorization', token);
       }
-
+      headers.set('Content-Type', 'application/json');
       return headers;
     },
   }),
@@ -46,8 +47,8 @@ export const contentApi = createApi({
     }),
     // GET challenge by id
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
-      query: ({ id }) => ({
-        url: `challenges/${id}`,
+      query: ({ uuid }) => ({
+        url: `challenges/${uuid}`,
         method: 'GET',
       }),
       providesTags: ['Actual'],
@@ -67,10 +68,18 @@ export const contentApi = createApi({
 
     //edit challenge by id
     editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
-      query: ({ id, dataEdit }) => ({
-        url: `challenges/${id}`,
+      query: ({ uuid, dataEdit }) => ({
+        url: `challenges/${uuid}`,
         method: 'PATCH',
         body: dataEdit,
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     Accept: 'application/json',
+        //     'X-CSRFTOKEN': 'BRXTMy4liQAgmC7I1V52MT3VxhpQ1YbflDGiryyWhNdCrLUFQCkLtj4cGG0d9ijy',
+        //   },
+        //   'x-requested-with': 'XMLHttpRequest',
+        //   'user-agent':
+        //     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       }),
       invalidatesTags: ['Actual'],
     }),

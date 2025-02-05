@@ -19,7 +19,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const handleProgressChange = (increment: boolean) => {
     const newValue: number = increment ? currentProgress + 1 : currentProgress - 1;
     if (newValue < 0) return;
-    console.log('setting new progress', newValue);
+
     setCurrentProgress(newValue);
   };
 
@@ -35,7 +35,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const updateProgress = useDebouncedCallback(async (updatedProgress: number) => {
     try {
       await editChallenge({
-        id: challenge.id,
+        uuid: challenge.uuid,
         dataEdit: {
           ...challenge,
           progress: updatedProgress,

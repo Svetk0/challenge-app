@@ -72,7 +72,7 @@ export default function ListChallenges() {
       {local?.length != 0 && (
         <ol className={styles.list}>
           {data?.map((item: TChallenge) => (
-            <li key={`challenge-${item.id}`}>
+            <li key={`challenge-${item.uuid}`}>
               <ChallengeInfo challenge={item} />
             </li>
           ))}

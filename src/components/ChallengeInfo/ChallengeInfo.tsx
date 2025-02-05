@@ -19,7 +19,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
 
   const scrollToCenter = () => {
     setTimeout(() => {
-      const element = document.getElementById(`challenge-${challenge?.id}`);
+      const element = document.getElementById(`challenge-${challenge?.uuid}`);
       if (element) {
         element.scrollIntoView({
           behavior: 'smooth',
@@ -34,16 +34,16 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <div>Loading...</div>;
   }
-  const { id, description, period } = challenge;
-  const handleEditClick = (e: React.MouseEvent, id: number) => {
+  const { uuid, description, period } = challenge;
+  const handleEditClick = (e: React.MouseEvent, uuid: string) => {
     e.stopPropagation();
-    router.push(`/challenges/edit/${id}`);
+    router.push(`/challenges/edit/${uuid}`);
   };
 
   return (
     <div
       ref={wrapperRef}
-      id={`challenge-${challenge?.id}`}
+      id={`challenge-${challenge?.uuid}`}
       className={isChoosen ? `${styles.wrapper} ${styles.wrapper__active}` : `${styles.wrapper}`}
       onClick={() => {
         setIsChoosen(true);
@@ -54,9 +54,9 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
         <span className={styles.description}>{description}</span>
         <Button
           type='button'
-          text={<EditIcon id={`editIcon-${id}`} />}
+          text={<EditIcon id={`editIcon-${uuid}`} />}
           color='icon'
-          onClick={(e) => handleEditClick(e, id)}
+          onClick={(e) => handleEditClick(e, uuid)}
         />
       </div>
       <div className={styles.rowWrapper}>
