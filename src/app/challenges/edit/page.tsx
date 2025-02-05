@@ -4,7 +4,8 @@ import EditForm from '@/components/EditForm/EditForm';
 
 export default function Page() {
   const params = useParams();
-  const challengeId = params ? parseInt(params.id as string, 10) : 0;
+  console.log('params', params);
+  const challengeId = params ? (params.id as string) : '';
 
   return <EditForm id={challengeId} />;
 }

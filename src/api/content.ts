@@ -4,6 +4,7 @@ import { TChallenge, TCreateForm, TEditForm } from '@/types';
 
 interface ResponseUser {
   id: number;
+  uuid: string;
   dataEdit: TEditForm;
   dataAdd: TCreateForm;
   status: number;
@@ -46,8 +47,8 @@ export const contentApi = createApi({
     }),
     // GET challenge by id
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
-      query: ({ id }) => ({
-        url: `challenges/${id}`,
+      query: ({ uuid }) => ({
+        url: `challenges/${uuid}`,
         method: 'GET',
       }),
       providesTags: ['Actual'],
@@ -67,8 +68,8 @@ export const contentApi = createApi({
 
     //edit challenge by id
     editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
-      query: ({ id, dataEdit }) => ({
-        url: `challenges/${id}`,
+      query: ({ uuid, dataEdit }) => ({
+        url: `challenges/${uuid}`,
         method: 'PATCH',
         body: dataEdit,
       }),
