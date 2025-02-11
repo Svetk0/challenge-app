@@ -20,6 +20,7 @@ $purple: rgba(145, 153, 243, 1);
 $dirty-purple-op80: rgba(145, 140, 163, 0.8);
 $deep-dark-blue: rgba(56, 58, 70, 1);
 $deep-dark-purple: rgba(37, 39, 50, 1);
+$deep-dark-gray: rgba(42, 44, 58, 1);
 //box shadow
 $shadow-box-bright: 0px 0px 4px 0px $light-green-neon;
 $shadow-box-bright-mini: 0px 0px 3px 0px $light-green-neon;
@@ -27,16 +28,19 @@ $drop-shadow-purple: 0px 0px 4px 0px $purple;
 
 $shadow-box-light: 1px 2px 6px 0px rgba(224, 245, 236, 0.2);
 $shadow-box-perimeter: 0px 0px 6px 0px rgba(224, 245, 236, 0.4);
-$shadow-box-button: 1px 1px 6px 0px rgba(224, 245, 236, 0.2),
+$shadow-box-button:
+  1px 1px 6px 0px rgba(224, 245, 236, 0.2),
   0px 2px 4px 0px rgba(19, 29, 25, 0.4) inset;
 //gradient
 $gradient-main-bg: linear-gradient(90deg, $lemon-neon 0%, $light-green-neon 49.5%, $cyan-neon 100%);
-$gradient-main-border: linear-gradient(90deg,
-    $white-op10 0%,
-    $lemon-neon 10%,
-    $light-green-neon 49.5%,
-    $cyan-neon 90%,
-    $white-op10 100%);
+$gradient-main-border: linear-gradient(
+  90deg,
+  $white-op10 0%,
+  $lemon-neon 10%,
+  $light-green-neon 49.5%,
+  $cyan-neon 90%,
+  $white-op10 100%
+);
 
 //buttons
 $border-input: 2px solid $gradient-main-border;
