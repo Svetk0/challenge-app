@@ -42,6 +42,7 @@ export default function ListChallenges() {
       setLocal(MY_CHALLENGES);
     }
     console.log('local ', local);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
 
   if (isLoading) {

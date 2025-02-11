@@ -16,7 +16,7 @@
 html {
   max-width: 100vw;
   overflow-x: hidden;
-  background-image: url('../../public/background.svg');
+  background-image: url('../../public/background_first.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -33,6 +33,10 @@ body {
   color: var(--font-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
   /* visual borders for dev mode */
   //background: var(--bgOpacity);
@@ -44,7 +48,6 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5vh 5px;
 }
 
 a {
