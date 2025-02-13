@@ -14,7 +14,7 @@ export const configValidation: ConfigValidation = {
     required: name.require_message,
     validate: {
       minLength: (v: string) => v.trim().length >= 2 || name.error_message,
-      maxLength: (v: string) => v.length <= 50 || name.error_message,
+      maxLength: (v: string) => v.length <= 100 || name.error_message,
       noSpaces: (v: string) => v.trim().length > 0 || name.error_message,
     },
   },
