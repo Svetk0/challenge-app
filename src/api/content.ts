@@ -40,7 +40,7 @@ export const contentApi = createApi({
     // GET list of user's challenges
     getAllChallengeList: builder.query<TChallenge[], void>({
       query: () => ({
-        url: 'challenges/in-progress/?limit=100',
+        url: 'challenges/in-progress/?limit=100/',
         method: 'GET',
       }),
       providesTags: ['Actual'],
@@ -48,7 +48,7 @@ export const contentApi = createApi({
     // GET challenge by id
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
       query: ({ uuid }) => ({
-        url: `challenges/${uuid}`,
+        url: `challenges/${uuid}/`,
         method: 'GET',
       }),
       providesTags: ['Actual'],
@@ -69,17 +69,9 @@ export const contentApi = createApi({
     //edit challenge by id
     editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
       query: ({ uuid, dataEdit }) => ({
-        url: `challenges/${uuid}`,
+        url: `challenges/${uuid}/`,
         method: 'PATCH',
         body: dataEdit,
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     Accept: 'application/json',
-        //     'X-CSRFTOKEN': 'BRXTMy4liQAgmC7I1V52MT3VxhpQ1YbflDGiryyWhNdCrLUFQCkLtj4cGG0d9ijy',
-        //   },
-        //   'x-requested-with': 'XMLHttpRequest',
-        //   'user-agent':
-        //     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
       }),
       invalidatesTags: ['Actual'],
     }),

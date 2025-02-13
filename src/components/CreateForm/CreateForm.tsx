@@ -25,7 +25,6 @@ export default function CreateForm() {
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     setIsSubmitting(true);
     try {
-      localStorage.setItem('last_challenge', JSON.stringify(newChallenge));
       dispatch(addChallenge(newChallenge));
       await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {

@@ -6,19 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
-import { setLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button } from '@/components/';
 import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
-  const router = useRouter();
-  const dispatch = useDispatch();
   const {
     title,
     buttons: { add },
   } = staticData.challendes;
+  const router = useRouter();
+  const dispatch = useDispatch();
   const [local, setLocal] = useState<TChallenge[]>([]);
   const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
@@ -28,7 +27,6 @@ export default function ListChallenges() {
 
   useEffect(() => {
     if (data) {
-      setLocalStorage('challenges', data);
       dispatch(setChallenges(data));
     }
   }, [data, dispatch]);
@@ -38,12 +36,11 @@ export default function ListChallenges() {
     setLocal(MY_CHALLENGES);
     if (isSuccess) {
       setLocal(data);
-    } else {
+    } else if (error) {
       setLocal(MY_CHALLENGES);
     }
     console.log('local ', local);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, data]);
+  }, [isSuccess, data, error]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -72,7 +69,7 @@ export default function ListChallenges() {
       </div>
       {local?.length != 0 && (
         <ol className={styles.list}>
-          {data?.map((item: TChallenge) => (
+          {local?.map((item: TChallenge) => (
             <li key={`challenge-${item.uuid}`}>
               <ChallengeInfo challenge={item} />
             </li>
