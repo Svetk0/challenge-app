@@ -50,6 +50,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
     if (challenge.finished_at != null) {
       const today = new Date();
       const endDate = new Date(challenge.finished_at);
+
       const diffTime = endDate.getTime() - today.getTime();
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
@@ -72,22 +73,24 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
         return `by ${weekDays[endDate.getDay()]}`;
       }
       if (challenge.period === 'month') {
-        const monthNames = [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ];
-        const end = endDate.getMonth() + 1 > 11 ? 0 : endDate.getMonth() + 1;
-        return `${endDate.getDate()}th ${monthNames[end]}`;
+        if (challenge.period_finished_at) {
+          const monthNames = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+          ];
+          const endDateMonthly = new Date(challenge.period_finished_at) ?? null;
+          return `${endDateMonthly.getDate()}th ${monthNames[endDateMonthly.getMonth()]}`;
+        }
       }
     }
     return null;
