@@ -60,3 +60,29 @@ button {
   @include ResetButton;
   color: var(--font-color-alt);
 }
+
+/* Стилизация скролла */
+::-webkit-scrollbar {
+  width: 4px;
+  /* Ширина скролла */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bgOpacity);
+  /* Цвет фона трека */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--font-color-alt);
+  background: rgba(145, 153, 243, 0.084);
+
+  /* Цвет ползунка */
+  border-radius: 2px;
+  /* Закругление углов ползунка */
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background: var(--background);
+  /* Цвет ползунка при наведении */
+}
