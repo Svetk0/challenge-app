@@ -16,7 +16,7 @@
 html {
   max-width: 100vw;
   overflow-x: hidden;
-  background-image: url('../../public/background.svg');
+  background-image: url('../../public/background_first.svg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -33,6 +33,37 @@ body {
   color: var(--font-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  /* Scroll */
+  /* Scroll for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(145, 153, 243, 0.084) var(--bgOpacity);
+
+  /* Scroll for Chrome, Safari */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bgOpacity);
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(145, 153, 243, 0.084);
+    border-radius: 2px;
+
+    &:hover {
+      background: var(--background);
+    }
+  }
 
   /* visual borders for dev mode */
   //background: var(--bgOpacity);
@@ -40,11 +71,11 @@ body {
 
 main {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5vh 5px;
 }
 
 a {
