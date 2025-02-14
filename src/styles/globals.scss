@@ -38,6 +38,33 @@ body {
   justify-content: space-between;
   align-items: center;
 
+  /* Scroll */
+  /* Scroll for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(145, 153, 243, 0.084) var(--bgOpacity);
+
+  /* Scroll for Chrome, Safari */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bgOpacity);
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(145, 153, 243, 0.084);
+    border-radius: 2px;
+
+    &:hover {
+      background: var(--background);
+    }
+  }
+
   /* visual borders for dev mode */
   //background: var(--bgOpacity);
 }
@@ -59,30 +86,4 @@ a {
 button {
   @include ResetButton;
   color: var(--font-color-alt);
-}
-
-/* Стилизация скролла */
-::-webkit-scrollbar {
-  width: 4px;
-  /* Ширина скролла */
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bgOpacity);
-  /* Цвет фона трека */
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--font-color-alt);
-  background: rgba(145, 153, 243, 0.084);
-
-  /* Цвет ползунка */
-  border-radius: 2px;
-  /* Закругление углов ползунка */
-}
-
-::-webkit-scrollbar-thumb:hover {
-
-  background: var(--background);
-  /* Цвет ползунка при наведении */
 }
