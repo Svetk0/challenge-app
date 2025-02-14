@@ -2,8 +2,6 @@
 
 A Next.js application for tracking personal challenges and goals.
 
-### [Deploy on Vercel](https://challenge-uapp.vercel.app)
-
 ## ✨ Features
 
 - Create and manage personal challenges
@@ -14,12 +12,20 @@ A Next.js application for tracking personal challenges and goals.
 
 ## 🛠️ Tech Stack
 
+### Frontend:
+
 - Next.js 14
 - TypeScript
 - Redux Toolkit
 - React Hook Form
 - SCSS Modules
 - ESLint & Prettier
+
+### [Backend:](https://github.com/Anna-Kolmychek/challenge_app)
+
+- Django
+- Python
+- Docker
 
 ## 🚀 Getting Started
 
@@ -147,6 +153,12 @@ npm run lint
 
 5. Submit a pull request using the PR template
 6. After PR approving, perform `Squash and Merge`
+
+## 🏀 Team
+
+- Frontend: [Svetlana](https://github.com/Svetk0), [Daria](https://github.com/Dari-Dari)
+- Backend: [Anna](https://github.com/Anna-Kolmychek)
+- Design: [Dmitriy](https://www.behance.net/dmitrydemosyuk)
 
 ## 📄 License
 
