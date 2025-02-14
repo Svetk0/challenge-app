@@ -7,6 +7,8 @@ import { Button, AuthForm } from '@/components/';
 
 import styles from './page.module.scss';
 
+import SendInitDataButton from '@/components/SendInitDataButton/SendInitDataButton';
+
 const Home: React.FC = () => {
   const [isLogoVisible, setIsLogoVisible] = useState(true);
   const [isDivVisible, setIsDivVisible] = useState(false);
@@ -72,6 +74,9 @@ const Home: React.FC = () => {
             ) : (
               <AuthForm onAuthSuccess={handleAuthSuccess} />
             )}
+            <div className={styles.initDataRaw}>
+              <SendInitDataButton />
+            </div>
           </div>
         )}
       </main>
