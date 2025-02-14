@@ -5,8 +5,6 @@ import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
 interface ChallengeState {
   challenges: TCreateForm[];
 }
-
-//const initialState = getLocalStorage('challenges');
 const initialState: ChallengeState = {
   challenges: getLocalStorage('challenges') || [],
 };
@@ -15,10 +13,7 @@ const challengeSlice = createSlice({
   initialState,
   reducers: {
     addChallenge(state, action: { payload: TCreateForm }) {
-      //const newState = [...state, action.payload];
       state.challenges.push(action.payload);
-      //setLocalStorage('challenges', state.challenges);
-      //return newState;
     },
     setChallenges: (state, action: { payload: TChallenge[] }) => {
       state.challenges = action.payload;

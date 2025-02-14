@@ -78,6 +78,7 @@
 
   &::-ms-reveal,
   &::-ms-clear,
+  &::-ms-expand,
   &::-webkit-clear-button,
   &::-webkit-password-toggle-button {
     display: none;
@@ -86,6 +87,8 @@
 
 @mixin InputDate {
   //full calendar touch field mask
+  appearance: none;
+  -moz-appearance: none;
   font-family: inherit;
   position: relative;
   padding-right: 5px;

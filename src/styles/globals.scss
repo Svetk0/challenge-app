@@ -38,12 +38,40 @@ body {
   justify-content: space-between;
   align-items: center;
 
+  /* Scroll */
+  /* Scroll for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(145, 153, 243, 0.084) var(--bgOpacity);
+
+  /* Scroll for Chrome, Safari */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bgOpacity);
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(145, 153, 243, 0.084);
+    border-radius: 2px;
+
+    &:hover {
+      background: var(--background);
+    }
+  }
+
   /* visual borders for dev mode */
   //background: var(--bgOpacity);
 }
 
 main {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

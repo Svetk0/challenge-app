@@ -24,19 +24,19 @@
       "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
     },
     "name": {
-      "label": "Your Goal",
+      "label": "Your Challenge",
       "placeholder": "Describe your challenge",
-      "error_message": "The description should contain 2..50 symbols",
+      "error_message": "The description should contain 2..100 symbols",
       "require_message": "Please, fill it"
     },
     "goal": {
-      "label": "Amount",
+      "label": "How many actions",
       "placeholder": "number",
       "error_message": "Should be above 0",
       "require_message": "Please, fill it"
     },
     "period": {
-      "label": "per Period",
+      "label": "per period",
       "placeholder": "week",
       "time": [
         {
