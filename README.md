@@ -24,8 +24,11 @@ A Next.js application for tracking personal challenges and goals.
 ### [Backend:](https://github.com/Anna-Kolmychek/challenge_app)
 
 - Django
+- DRF
+- PostgreSQL
 - Python
 - Docker
+- Docker Compose
 
 ## 🚀 Getting Started
 
