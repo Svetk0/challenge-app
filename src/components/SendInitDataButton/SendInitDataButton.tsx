@@ -2,7 +2,7 @@ import { retrieveLaunchParams } from '@telegram-apps/sdk';
 import { Button } from '../ui/Button/Button';
 
 const SendInitDataButton = () => {
-  const isDevelopment = true; // режим разработки
+  const isDevelopment = false; // режим разработки
 
   const handleClick = async () => {
     let initDataRaw: string;
