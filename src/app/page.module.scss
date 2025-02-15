@@ -20,7 +20,6 @@
 }
 
 @keyframes pulse {
-
   0%,
   10%,
   70% {
@@ -68,17 +67,21 @@
     color: $grey;
     text-align: center;
 
-    >span {
+    > span {
       font-size: 18px;
       font-weight: 600;
     }
 
-    >i {
+    > i {
       font-size: 12px;
     }
   }
 
-  >button {
+  > button {
     margin-bottom: 40px;
   }
+}
+
+.initDataRaw {
+  padding-top: 10vh;
 }
