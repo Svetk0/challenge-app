@@ -40,7 +40,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className={styles.page}>
+    <>
       {isLogoVisible && (
         <div className={styles.logoWrapper}>
           <Image
@@ -78,7 +78,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,10 @@
-import { retrieveLaunchParams } from '@telegram-apps/sdk';
-import { Button } from '../ui/Button/Button';
+import { useState } from 'react';
+import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
+import { Button } from '@/components';
 
 const SendInitDataButton = () => {
   const isDevelopment = false; // режим разработки
-
+  const [isSent, setIsSent] = useState<boolean>(false);
   const handleClick = async () => {
     let initDataRaw: string;
 
@@ -38,12 +39,19 @@ const SendInitDataButton = () => {
 
       const result = await response.json();
       console.log('Ответ сервера:', result);
+      setIsSent(true);
     } catch (error) {
       console.error('Ошибка:', error);
+      setIsSent(false);
     }
   };
 
-  return <Button type='submit' text='Отправить initData' color='default' onClick={handleClick} />;
+  return (
+    <>
+      <Button type='submit' text='Отправить initData' color='default' onClick={handleClick} />
+      {isSent && <p>Init Data was sent</p>}
+    </>
+  );
 };
 
 export default SendInitDataButton;

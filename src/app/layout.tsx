@@ -45,7 +45,7 @@ export default function RootLayout({
       <StoreProvider>
         <body className={`${openSans.className}`}>
           <Root>
-            <main className='main'>{children}</main>
+            <main>{children}</main>
             <Footer />
           </Root>
         </body>
