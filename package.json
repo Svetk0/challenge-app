@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3017",
+    "dev:https": "next dev --port 3017 --experimental-https",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 3017",
     "lint": "next lint",
     "format:fix": "prettier --write --ignore-path .gitignore 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "precommit": "lint-staged",

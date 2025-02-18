@@ -1,14 +1,8 @@
 'use client';
 
 import { type PropsWithChildren } from 'react';
-import {
-  //initData,
-  miniApp,
-  useLaunchParams,
-  useSignal,
-} from '@telegram-apps/sdk-react';
+import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { AppRoot } from '@telegram-apps/telegram-ui';
 
 import { ErrorBoundary, ErrorPage } from '@/components';
 import { useTelegramMock } from '@/hooks/useTelegramMock';
@@ -17,7 +11,7 @@ import { useClientOnce } from '@/hooks/useClientOnce';
 
 import { init } from '@/core/init';
 
-import './styles.css';
+import styles from './Root.module.scss';
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';
@@ -36,18 +30,8 @@ function RootInner({ children }: PropsWithChildren) {
     init(debug);
   });
 
-  const isDark = useSignal(miniApp.isDark);
-  //const initDataUser = useSignal(initData.user);
-
   return (
-    <TonConnectUIProvider manifestUrl='/tonconnect-manifest.json'>
-      <AppRoot
-        appearance={isDark ? 'dark' : 'light'}
-        platform={['macos', 'ios'].includes(lp.platform) ? 'ios' : 'base'}
-      >
-        {children}
-      </AppRoot>
-    </TonConnectUIProvider>
+    <TonConnectUIProvider manifestUrl='/tonconnect-manifest.json'>{children}</TonConnectUIProvider>
   );
 }
 
@@ -62,6 +46,6 @@ export function Root(props: PropsWithChildren) {
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (
-    <div className='root__loading'>Loading</div>
+    <div className={styles.root__loading}>Loading</div>
   );
 }
