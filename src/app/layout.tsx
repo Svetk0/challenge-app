@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
 import Footer from '@/components/Footer/Footer';
+import { Root } from '@/components';
 import '../styles/globals.scss';
 
 const openSans = localFont({
@@ -43,8 +44,10 @@ export default function RootLayout({
     <html lang='en'>
       <StoreProvider>
         <body className={`${openSans.className}`}>
-          <main className='main'>{children}</main>
-          <Footer />
+          <Root>
+            <main>{children}</main>
+            <Footer />
+          </Root>
         </body>
       </StoreProvider>
     </html>
