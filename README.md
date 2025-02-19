@@ -20,6 +20,7 @@ A Next.js application for tracking personal challenges and goals.
 - React Hook Form
 - SCSS Modules
 - ESLint & Prettier
+- Telegram mini App
 
 ### [Backend:](https://github.com/Anna-Kolmychek/challenge_app)
 
