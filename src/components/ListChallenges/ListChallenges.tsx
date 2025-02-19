@@ -45,20 +45,17 @@ export default function ListChallenges() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
 
+  if (error) {
+    if ('status' in error) {
+      throw new Error(`Error ${error.status}: Failed to load challenges`);
+    }
+    throw error;
+  }
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading challenges...</div>;
   }
-  if (error && local.length === 0) {
-    const errorMessage = 'An unknown error occurred.';
-    const status = 'status' in error ? error.status : undefined;
-    const statusOriginal = 'originalStatus' in error ? error.originalStatus : undefined;
-    return (
-      <div>
-        Error {statusOriginal ? `${statusOriginal}:` : errorMessage}{' '}
-        {status ? `${status}` : errorMessage}
-      </div>
-    );
-  }
+
   return (
     <div className={styles.container}>
       <div className={styles.rowWrapper}>

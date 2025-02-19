@@ -2,7 +2,10 @@
 import { useEffect } from 'react';
 import { useGetAuthTestQuery, useGetAllChallengeListQuery } from '@/api/auth';
 export default function Page() {
-  const { data } = useGetAllChallengeListQuery();
+  const {
+    data,
+    //error
+  } = useGetAllChallengeListQuery();
   const listCh = useGetAllChallengeListQuery();
   //   const { data: auth, error: errAuth, isSuccess: isSuccAuth } = useGetAuthTestQuery({});
   const auth = useGetAuthTestQuery();
@@ -16,7 +19,12 @@ export default function Page() {
       console.log('auth:', auth);
     }
   }, [auth]);
-
+  // if (error) {
+  //   if ('status' in error) {
+  //     throw new Error(`Error ${error.status}: Failed to load`);
+  //   }
+  //   throw error;
+  // }
   return (
     <>
       {data && <div>list challenges is loaded:</div>}
