@@ -54,6 +54,7 @@ const Home: React.FC = () => {
       )}
       {isDivVisible && (
         <div className={styles.textBlock}>
+          <p>DEVELOP TEST HOME PAGE</p>
           <div className={styles.initDataRaw}>
             <SendInitDataButton />
             <Link href={'/auth'}>

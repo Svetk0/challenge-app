@@ -47,10 +47,10 @@ const SendInitDataButton = () => {
   };
 
   return (
-    <>
+    <div>
       <Button type='submit' text='Отправить initData' color='default' onClick={handleClick} />
       {isSent && <p>Init Data was sent</p>}
-    </>
+    </div>
   );
 };
 
