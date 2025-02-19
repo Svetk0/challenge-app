@@ -54,6 +54,12 @@ const Home: React.FC = () => {
       )}
       {isDivVisible && (
         <div className={styles.textBlock}>
+          <div className={styles.initDataRaw}>
+            <SendInitDataButton />
+            <Link href={'/auth'}>
+              <Button type='button' text={'Auth'} color='default' />
+            </Link>
+          </div>
           <h1>Challenge App</h1>
           {authId != '' ? (
             <div className={styles.columnWrapper}>
@@ -73,9 +79,6 @@ const Home: React.FC = () => {
           ) : (
             <AuthForm onAuthSuccess={handleAuthSuccess} />
           )}
-          <div className={styles.initDataRaw}>
-            <SendInitDataButton />
-          </div>
         </div>
       )}
     </>

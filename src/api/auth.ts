@@ -5,7 +5,7 @@ import { TChallenge } from '@/types';
 export const authApi = createApi({
   reducerPath: 'contentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://cchallenge-app.site/api/',
+    baseUrl: 'https://challenge-app.site/api/',
     prepareHeaders: (headers) => {
       const { initDataRaw: token } = retrieveLaunchParams();
       if (token) {
@@ -29,7 +29,7 @@ export const authApi = createApi({
       providesTags: ['Actual'],
     }),
 
-    getAuthTest: builder.query({
+    getAuthTest: builder.query<string, void>({
       query: () => ({
         url: 'test-auth/',
         method: 'GET',
