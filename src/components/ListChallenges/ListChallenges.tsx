@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
@@ -19,31 +19,25 @@ export default function ListChallenges() {
     title,
     buttons: { add },
   } = staticData.challendes;
-  const [local, setLocal] = useState<TChallenge[]>([]);
-  const { data, error, isLoading, isSuccess } = useGetAllChallengeListQuery();
-  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
 
-  console.log('fetchData', data, error, isLoading, isSuccess);
-  console.log('storeRedux', challengeData);
+  const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
+    //refetchOnMountOrArgChange: false,
+    //refetchOnFocus: false,
+    skip: false,
+  });
+
+  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
 
   useEffect(() => {
     if (data) {
-      setLocalStorage('challenges', data);
-      dispatch(setChallenges(data));
+      console.log('have data');
+      if (data?.length !== challengeData.length) {
+        setLocalStorage('challenges', data);
+        dispatch(setChallenges(data));
+        console.log('set local');
+      }
     }
-  }, [data, dispatch]);
-
-  useEffect(() => {
-    const MY_CHALLENGES = JSON.parse(localStorage.getItem('challenges') ?? '[]');
-    setLocal(MY_CHALLENGES);
-    if (isSuccess) {
-      setLocal(data);
-    } else {
-      setLocal(MY_CHALLENGES);
-    }
-    console.log('local ', local);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, data]);
+  }, [data, dispatch, challengeData]);
 
   if (error) {
     if ('status' in error) {
@@ -52,9 +46,11 @@ export default function ListChallenges() {
     throw error;
   }
 
-  if (isLoading) {
+  if (isLoading && !challengeData.length) {
     return <div>Loading challenges...</div>;
   }
+
+  const displayData = data || challengeData;
 
   return (
     <div className={styles.container}>
@@ -63,21 +59,19 @@ export default function ListChallenges() {
         <Button
           type='button'
           text={add}
-          color={local?.length != 0 ? 'mini' : 'default-width'}
+          color={displayData?.length !== 0 ? 'mini' : 'default-width'}
           onClick={() => router.push('/challenges/create')}
         />
       </div>
-      {local?.length != 0 && (
+      {displayData?.length !== 0 && (
         <ol className={styles.list}>
-          {data?.map((item: TChallenge) => (
+          {displayData?.map((item: TChallenge) => (
             <li key={`challenge-${item.uuid}`}>
               <ChallengeInfo challenge={item} />
             </li>
           ))}
         </ol>
       )}
-
-      {error && <div className={styles.error}>{`Error updating :(`}</div>}
     </div>
   );
 }
