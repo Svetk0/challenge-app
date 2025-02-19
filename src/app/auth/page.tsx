@@ -1,7 +1,10 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useGetAuthTestQuery, useGetAllChallengeListQuery } from '@/api/auth';
+import { Button } from '@/components';
 export default function Page() {
+  const router = useRouter();
   const {
     data,
     //error
@@ -29,6 +32,7 @@ export default function Page() {
     <>
       {data && <div>list challenges is loaded:</div>}
       <div>auth is sent {auth.data}</div>
+      <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
     </>
   );
 }
