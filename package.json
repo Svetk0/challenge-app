@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3017",
+    "dev:https": "next dev --port 3017 --experimental-https",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 3017",
     "lint": "next lint",
     "format:fix": "prettier --write --ignore-path .gitignore 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "precommit": "lint-staged",
@@ -19,16 +20,15 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
-    "@telegram-apps/sdk": "^3.4.0",
-    "@types/react-select": "^5.0.1",
+    "@telegram-apps/sdk-react": "^2.0.22",
+    "@tonconnect/ui-react": "^2.0.5",
+    "eruda": "^3.0.1",
     "next": "^14.2.15",
     "react": "^18",
-    "react-country-flag": "^3.1.0",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",
     "react-redux": "^9.1.2",
-    "use-debounce": "^10.0.4",
-    "zod": "^3.23.8"
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@types/node": "^20",

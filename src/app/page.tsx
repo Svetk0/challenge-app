@@ -40,47 +40,49 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        {isLogoVisible && (
-          <div className={styles.logoWrapper}>
-            <Image
-              src='/images/logo.svg'
-              alt='Logo'
-              width={180}
-              height={180}
-              className={styles.logo}
-            />
+    <>
+      {isLogoVisible && (
+        <div className={styles.logoWrapper}>
+          <Image
+            src='/images/logo.svg'
+            alt='Logo'
+            width={180}
+            height={180}
+            className={styles.logo}
+          />
+        </div>
+      )}
+      {isDivVisible && (
+        <div className={styles.textBlock}>
+          <p>DEVELOP TEST HOME PAGE</p>
+          <div className={styles.initDataRaw}>
+            <SendInitDataButton />
+            <Link href={'/auth'}>
+              <Button type='button' text={'Auth'} color='default' />
+            </Link>
           </div>
-        )}
-        {isDivVisible && (
-          <div className={styles.textBlock}>
-            <h1>Challenge App</h1>
-            {authId != '' ? (
-              <div className={styles.columnWrapper}>
-                <div className={styles.tip}>
-                  All your progress will be saved based on your ID: <br />
-                  <span>{authId}</span>
-                  <br />
-                  <i>
-                    or use default ID: <br /> 111
-                  </i>
-                </div>
-                <Button type='button' text={' New Id'} color='mini' onClick={handleLogout} />
-                <Link href={'/challenges'}>
-                  <Button type='button' text={'My challenges'} color='default' />
-                </Link>
+          <h1>Challenge App</h1>
+          {authId != '' ? (
+            <div className={styles.columnWrapper}>
+              <div className={styles.tip}>
+                All your progress will be saved based on your ID: <br />
+                <span>{authId}</span>
+                <br />
+                <i>
+                  or use default ID: <br /> 111
+                </i>
               </div>
-            ) : (
-              <AuthForm onAuthSuccess={handleAuthSuccess} />
-            )}
-            <div className={styles.initDataRaw}>
-              <SendInitDataButton />
+              <Button type='button' text={' New Id'} color='mini' onClick={handleLogout} />
+              <Link href={'/challenges'}>
+                <Button type='button' text={'My challenges'} color='default' />
+              </Link>
             </div>
-          </div>
-        )}
-      </main>
-    </div>
+          ) : (
+            <AuthForm onAuthSuccess={handleAuthSuccess} />
+          )}
+        </div>
+      )}
+    </>
   );
 };
 

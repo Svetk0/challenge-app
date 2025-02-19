@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TCreateForm, TChallenge } from '@/types';
+import { TChallenge } from '@/types';
 import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
 
 interface ChallengeState {
-  challenges: TCreateForm[];
+  //challenges: (TChallenge | TCreateForm)[];
+  challenges: TChallenge[];
 }
 const initialState: ChallengeState = {
   challenges: getLocalStorage('challenges') || [],
@@ -12,14 +13,17 @@ const challengeSlice = createSlice({
   name: 'challenge',
   initialState,
   reducers: {
-    addChallenge(state, action: { payload: TCreateForm }) {
-      state.challenges.push(action.payload);
-    },
+    // addChallenge(state, action: { payload: TCreateForm }) {
+    //   state.challenges.push(action.payload);
+    // },
     setChallenges: (state, action: { payload: TChallenge[] }) => {
       state.challenges = action.payload;
       setLocalStorage('challenges', action.payload);
     },
   },
 });
-export const { addChallenge, setChallenges } = challengeSlice.actions;
+export const {
+  //addChallenge,
+  setChallenges,
+} = challengeSlice.actions;
 export default challengeSlice.reducer;

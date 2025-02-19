@@ -1,4 +1,4 @@
-//'use client';
+'use client';
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/api/content';
