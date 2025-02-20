@@ -8,14 +8,3 @@ export function CardSkeleton() {
     </div>
   );
 }
-
-export function CardsSkeleton() {
-  return (
-    <>
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-      <CardSkeleton />
-    </>
-  );
-}
