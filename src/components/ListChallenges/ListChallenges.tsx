@@ -18,8 +18,9 @@ export default function ListChallenges() {
   const dispatch = useDispatch();
   const {
     title,
+    loading,
     buttons: { add },
-  } = staticData.challendes;
+  } = staticData.challenges;
   const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
     skip: false,
   });
@@ -76,7 +77,7 @@ export default function ListChallenges() {
               <CardSkeleton key={`challenge-${item.uuid}`} />
             ))
           ) : (
-            <span>Loading Challenges...</span>
+            <span>{loading}</span>
           )}
         </div>
       ) : (
