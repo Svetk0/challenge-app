@@ -12,6 +12,8 @@ import { ChallengeInfo, Button } from '@/components/';
 import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
+import { CardsSkeleton } from '../ui/Skeletons/Skeletons';
+
 export default function ListChallenges() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -19,14 +21,19 @@ export default function ListChallenges() {
     title,
     buttons: { add },
   } = staticData.challendes;
-
-  const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
+  const isLoading = true;
+  const {
+    data,
+    error,
+    //isLoading
+  } = useGetAllChallengeListQuery(undefined, {
     //refetchOnMountOrArgChange: false,
     //refetchOnFocus: false,
     skip: false,
   });
 
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
+  //const challengeData = [];
 
   useEffect(() => {
     if (data) {
@@ -47,7 +54,12 @@ export default function ListChallenges() {
   }
 
   if (isLoading && !challengeData.length) {
-    return <div>Loading challenges...</div>;
+    return (
+      <div className={styles.list}>
+        Loading challenges...
+        <CardsSkeleton />
+      </div>
+    );
   }
 
   const displayData = data || challengeData;
@@ -63,8 +75,10 @@ export default function ListChallenges() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
+
       {displayData?.length !== 0 && (
         <ol className={styles.list}>
+          <CardsSkeleton />
           {displayData?.map((item: TChallenge) => (
             <li key={`challenge-${item.uuid}`}>
               <ChallengeInfo challenge={item} />
