@@ -6,6 +6,8 @@ import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
 import { EditIcon } from '@/components/ui/Icons/';
 import { Button, ProgressBar } from '@/components';
+import { CompleteChallengeButton, DeleteChallengeButton } from '@/shared/entities/ManageChallenge';
+
 import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
 
@@ -17,7 +19,6 @@ type Props = {
 export function ChallengeInfo({ isLoading, challenge }: Props) {
   const {
     loading,
-    buttons: { complete, remove },
     period: { every, starts_at },
   } = staticData.challenge_info;
   const router = useRouter();
@@ -97,18 +98,8 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       </div>
       {isChoosen ? (
         <div className={styles.rowWrapper}>
-          <Button
-            type='button'
-            text={complete}
-            color='control'
-            //onClick={(e) => handleEditClick(e, uuid)}
-          />
-          <Button
-            type='button'
-            text={remove}
-            color='control_red'
-            //onClick={(e) => handleEditClick(e, uuid)}
-          />
+          <CompleteChallengeButton challenge={challenge} />
+          <DeleteChallengeButton challenge={challenge} />
         </div>
       ) : null}
     </div>
