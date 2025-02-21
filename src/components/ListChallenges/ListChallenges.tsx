@@ -21,6 +21,7 @@ export default function ListChallenges() {
     loading,
     buttons: { add },
   } = staticData.challenges;
+
   const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
     skip: false,
   });
@@ -49,13 +50,19 @@ export default function ListChallenges() {
     throw error;
   }
 
-  // if (isLoading && !challengeData.length) {
-  //   return (
-  //     <div className={styles.list}>
-  //       <CardsSkeleton />
-  //     </div>
-  //   );
-  // }
+  if (isLoading && !challengeData.length) {
+    return (
+      <div className={styles.list}>
+        {localChallenges?.length !== 0 ? (
+          localChallenges?.map((item: TChallenge) => (
+            <CardSkeleton key={`challenge-${item.uuid}`} />
+          ))
+        ) : (
+          <span>{loading}</span>
+        )}
+      </div>
+    );
+  }
 
   const displayData = data || challengeData;
 
@@ -70,26 +77,15 @@ export default function ListChallenges() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
-      {isLoading && !challengeData.length ? (
-        <div className={styles.list}>
-          {localChallenges?.length !== 0 ? (
-            localChallenges?.map((item: TChallenge) => (
-              <CardSkeleton key={`challenge-${item.uuid}`} />
-            ))
-          ) : (
-            <span>{loading}</span>
-          )}
-        </div>
-      ) : (
-        displayData?.length !== 0 && (
-          <ol className={styles.list}>
-            {displayData?.map((item: TChallenge) => (
-              <li key={`challenge-${item.uuid}`}>
-                <ChallengeInfo challenge={item} />
-              </li>
-            ))}
-          </ol>
-        )
+
+      {displayData?.length !== 0 && (
+        <ol className={styles.list}>
+          {displayData?.map((item: TChallenge) => (
+            <li key={`challenge-${item.uuid}`}>
+              <ChallengeInfo challenge={item} />
+            </li>
+          ))}
+        </ol>
       )}
     </div>
   );
