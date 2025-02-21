@@ -6,6 +6,7 @@ import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
 import { EditIcon } from '@/components/ui/Icons/';
 import { Button, ProgressBar } from '@/components';
+import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
 
 type Props = {
@@ -14,6 +15,11 @@ type Props = {
 };
 
 export function ChallengeInfo({ isLoading, challenge }: Props) {
+  const {
+    loading,
+    buttons: { complete, remove },
+    period: { every, starts_at },
+  } = staticData.challenge_info;
   const router = useRouter();
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
@@ -42,7 +48,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     }
   }, [challenge]);
   if (isLoading || !challenge) {
-    return <div>Loading...</div>;
+    return <div>{loading}</div>;
   }
   const { uuid, description, period } = challenge;
   const handleEditClick = (e: React.MouseEvent, uuid: string) => {
@@ -80,15 +86,31 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           {isChoosen ? (
             ''
           ) : isStarted ? (
-            `every ${period}`
+            `${every} ${period}`
           ) : (
             <>
-              starts at <br /> {formatDate(challenge.started_at)}
+              {starts_at} <br /> {formatDate(challenge.started_at)}
             </>
           )}
         </div>
         <ProgressBar challenge={challenge} isMinimal={!isChoosen} />
       </div>
+      {isChoosen ? (
+        <div className={styles.rowWrapper}>
+          <Button
+            type='button'
+            text={complete}
+            color='control'
+            //onClick={(e) => handleEditClick(e, uuid)}
+          />
+          <Button
+            type='button'
+            text={remove}
+            color='control_red'
+            //onClick={(e) => handleEditClick(e, uuid)}
+          />
+        </div>
+      ) : null}
     </div>
   );
 }

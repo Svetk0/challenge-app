@@ -19,6 +19,14 @@
         padding-inline: clamp(10px, 6vw, 40px);
     }
 
+    > :nth-child(3) {
+        gap: 30px;
+        align-items: flex-end;
+        justify-content: center;
+        margin-top: 20px;
+
+    }
+
     &:hover {
         transform: scale(1.07);
         border-bottom: 1px solid $light-green-neon;
@@ -27,7 +35,7 @@
     &__active {
         box-shadow: $shadow-box-perimeter;
         border-bottom: 1px solid $light-green-neon;
-        padding-block: 25px;
+        padding-block: 25px 10px;
 
         > :nth-child(2) {
             gap: 0;

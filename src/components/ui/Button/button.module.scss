@@ -108,6 +108,25 @@
   height: 40px;
   font-size: 1.1rem;
   padding: 0;
-
   background: $gradient-main-bg;
+}
+
+.control,
+.control_red {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: $white;
+  padding: 5px;
+  background: $logo-blue;
+  box-shadow: none;
+
+}
+
+.control_red {
+  background: $red;
 }

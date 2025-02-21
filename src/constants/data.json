@@ -15,6 +15,17 @@
       "back": "Back"
     }
   },
+  "challenge_info": {
+    "loading": "Please, wait...",
+    "buttons": {
+      "complete": "Complete",
+      "remove": "Delete"
+    },
+    "period": {
+      "every": "every",
+      "starts_at": "starts at"
+    }
+  },
   "challenge_form": {
     "title_create": "Create a new Challenge",
     "title_edit": "Edit Challenge",
@@ -81,7 +92,7 @@
       "back": "Back",
       "create": "Create",
       "create_load": "Creating...",
-      "edit": "Edit",
+      "edit": "Save",
       "edit_load": "Editing..."
     }
   }
