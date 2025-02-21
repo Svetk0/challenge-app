@@ -1,11 +1,10 @@
 'use client';
 import { useEffect, useState } from 'react';
-
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
 
-import { ProgressBar } from '@/components';
+import { ProgressBar, Modal } from '@/components';
 import {
   CompleteChallengeButton,
   DeleteChallengeButton,
@@ -97,6 +96,16 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
           <DeleteChallengeButton challenge={challenge} />
         </div>
       ) : null}
+      <Modal
+        isOpen={isChoosen}
+        onClose={() => {
+          console.log('modal is open');
+        }}
+        width='260px'
+        height='360px'
+      >
+        MODAL
+      </Modal>
     </div>
   );
 }
