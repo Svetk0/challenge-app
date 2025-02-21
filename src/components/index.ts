@@ -8,3 +8,4 @@ export { Switcher } from './ui/Switcher/Switcher';
 export { ProgressBar } from './ui/ProgressBar/ProgressBar';
 export { ErrorBoundary } from './ui/Errors/ErrorBoundary';
 export { ErrorPage } from './ui/Errors/ErrorPage';
+export { CardSkeleton } from './ui/Skeletons/Skeletons';

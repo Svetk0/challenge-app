@@ -1,13 +1,15 @@
 {
   "home": {
     "title": "Challenge App",
+
     "buttons": {
       "logIn": "Log in",
       "signUp": "Sign Up"
     }
   },
-  "challendes": {
+  "challenges": {
     "title": "Daily Routine",
+    "loading": "Your Challenges is loading...",
     "buttons": {
       "add": "Add new",
       "back": "Back"
