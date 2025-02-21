@@ -1,12 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
-import { EditIcon } from '@/components/ui/Icons/';
-import { Button, ProgressBar } from '@/components';
-import { CompleteChallengeButton, DeleteChallengeButton } from '@/shared/entities/ManageChallenge';
+
+import { ProgressBar } from '@/components';
+import {
+  CompleteChallengeButton,
+  DeleteChallengeButton,
+  EditChallengeIconButton,
+} from '@/shared/entities/ControlChallenge';
 
 import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
@@ -21,7 +25,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     loading,
     period: { every, starts_at },
   } = staticData.challenge_info;
-  const router = useRouter();
+
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
@@ -51,11 +55,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <div>{loading}</div>;
   }
-  const { uuid, description, period } = challenge;
-  const handleEditClick = (e: React.MouseEvent, uuid: string) => {
-    e.stopPropagation();
-    router.push(`/challenges/edit/${uuid}`);
-  };
+  const { description, period } = challenge;
 
   return (
     <div
@@ -75,12 +75,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     >
       <div className={styles.rowWrapper}>
         <span className={styles.description}>{description}</span>
-        <Button
-          type='button'
-          text={<EditIcon id={`editIcon-${uuid}`} />}
-          color='icon'
-          onClick={(e) => handleEditClick(e, uuid)}
-        />
+        <EditChallengeIconButton challenge={challenge} />
       </div>
       <div className={styles.rowWrapper}>
         <div className={styles.period}>

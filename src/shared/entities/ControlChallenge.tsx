@@ -1,6 +1,8 @@
+import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/api/content';
 import { TChallenge } from '@/types';
 import { Button } from '@/components';
+import { EditIcon } from '@/components/ui/Icons/';
 import staticData from '@/constants/data.json';
 type Props = {
   challenge: TChallenge;
@@ -63,6 +65,22 @@ export function DeleteChallengeButton({ challenge }: Props) {
       text={remove}
       color='control_red'
       onClick={(e) => handleDeleteChallenge(e)}
+    />
+  );
+}
+
+export function EditChallengeIconButton({ challenge }: Props) {
+  const router = useRouter();
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    router.push(`/challenges/edit/${challenge.uuid}`);
+  };
+  return (
+    <Button
+      type='button'
+      text={<EditIcon id={`editIcon-${challenge.uuid}`} />}
+      color='icon'
+      onClick={(e) => handleEditClick(e)}
     />
   );
 }
