@@ -11,9 +11,10 @@ type ButtonProps = {
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'ref'>;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ text, color, onClick, type, disabled = false }) => {
+  ({ text, color, onClick, type, disabled = false }, ref) => {
     return (
       <button
+        ref={ref as React.RefObject<HTMLButtonElement>}
         type={type}
         className={cn(styles.button, color && styles[color])}
         onClick={onClick}
