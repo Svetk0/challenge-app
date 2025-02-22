@@ -7,10 +7,10 @@ export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  width?: string;
-  height?: string;
+  // width?: string;
+  // height?: string;
 }
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, width, height }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -52,7 +52,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, width, 
       ref={dialogRef}
       className={styles.dialog}
       onClick={onClose}
-      style={{ width: width || 'auto', height: height || 'auto' }}
+      //style={{ width: width || 'auto', height: height || 'auto' }}
     >
       <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <Button

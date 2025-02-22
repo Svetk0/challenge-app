@@ -13,6 +13,7 @@ import {
 
 import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
+import { ModalDelete } from '../ModalDelete/ModalDelete';
 
 type Props = {
   isLoading?: boolean;
@@ -101,10 +102,10 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
         onClose={() => {
           console.log('modal is open');
         }}
-        width='260px'
-        height='360px'
+        // width='260px'
+        // height='360px'
       >
-        MODAL
+        <ModalDelete challenge={challenge} />
       </Modal>
     </div>
   );

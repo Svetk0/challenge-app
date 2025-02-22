@@ -1,6 +1,8 @@
 @import '@styles';
 
 .dialog {
+  width: 280px;
+  height: 360px;
   position: fixed;
   inset: 50% auto auto 50%;
   margin: 0;
@@ -33,7 +35,7 @@
   max-width: 1000px;
   height: 100%;
   max-height: calc(100vh - 32px);
-  padding: 50px;
+  padding: 40px 20px 20px;
   box-shadow: 0 0 20px $black-70;
 
 
