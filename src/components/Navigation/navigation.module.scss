@@ -53,11 +53,12 @@
 
 .navigation ul li.active a .icon {
   color: $green-neon;
-}
-
-.navigation ul li.active a .icon {
   transform: translateY(-36px);
 }
+
+// .navigation ul li.active a .icon {
+//   transform: translateY(-36px);
+// }
 
 .navigation ul li a .text {
   position: absolute;
@@ -112,22 +113,22 @@
   box-shadow: 0 -10px 0 0 var(--background);
 }
 
-.navigation ul li:nth-child(1).active ~ .indicator {
+.navigation ul li:nth-child(1).active~.indicator {
   transform: translateX(calc(100px * 0));
 }
 
-.navigation ul li:nth-child(2).active ~ .indicator {
+.navigation ul li:nth-child(2).active~.indicator {
   transform: translateX(calc(100px * 1));
 }
 
-.navigation ul li:nth-child(3).active ~ .indicator {
+.navigation ul li:nth-child(3).active~.indicator {
   transform: translateX(calc(100px * 2));
 }
 
-.navigation ul li:nth-child(4).active ~ .indicator {
+.navigation ul li:nth-child(4).active~.indicator {
   transform: translateX(calc(100px * 3));
 }
 
-.navigation ul li:nth-child(5).active ~ .indicator {
+.navigation ul li:nth-child(5).active~.indicator {
   transform: translateX(calc(100px * 4));
 }

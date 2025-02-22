@@ -57,12 +57,11 @@
 .round {
   width: 24px;
   height: 24px;
-  padding: 2px;
+  padding: 0;
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  padding: 0;
   background: $lemon-neon;
   color: $deep-dark-purple;
   border: 1.5px solid $lemon-neon;

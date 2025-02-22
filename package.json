@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start --port 3017",
     "lint": "next lint",
+    "lint:scss": "stylelint '**/*.scss'",
     "format:fix": "prettier --write --ignore-path .gitignore 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "precommit": "lint-staged",
     "prepare": "husky"
@@ -42,6 +43,8 @@
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
+    "stylelint": "^16.14.1",
+    "stylelint-config-standard-scss": "^14.0.0",
     "typescript": "^5"
   }
 }
