@@ -7,8 +7,8 @@ import { TChallenge } from '@/types';
 import staticData from '@/constants/data.json';
 
 import styles from './Modals.module.scss';
-const { title, text_1, text_2 } = staticData.modals.modal_delete;
 
+const { title, text_1, text_2 } = staticData.modals.modal_delete;
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
