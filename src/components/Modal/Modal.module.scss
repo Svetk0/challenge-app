@@ -5,18 +5,14 @@
   height: 360px;
   position: fixed;
   inset: 50% auto auto 50%;
-  margin: 0;
-  border: none;
+  border: 2px solid $purple;
+  border-radius: 20px;
   color: $white;
   background-color: $black-70;
-  border: 2px solid $purple;
-  transform: translate(-50%, -50%);
-  animation-name: show;
-  animation-timing-function: linear;
-  animation-duration: 250ms;
-  border-radius: 20px;
   backdrop-filter: blur(50px);
+  transform: translate(-50%, -50%);
 
+  animation: show 0.2s ease all;
 
   &[open] {
     display: flex;
@@ -31,17 +27,9 @@
   flex-direction: column;
   align-items: stretch;
   gap: 20px;
-  width: 100%;
-  max-width: 1000px;
   height: 100%;
-  max-height: calc(100vh - 32px);
   padding: 40px 20px 20px;
-  box-shadow: 0 0 20px $black-70;
 
-
-  &:focus {
-    outline: none;
-  }
 
   >Button {
     position: absolute;

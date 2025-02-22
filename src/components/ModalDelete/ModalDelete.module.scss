@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 
     span {
 
@@ -22,5 +22,10 @@
     p {
         width: 100%;
         margin: 20px;
+    }
+
+    Button {
+        margin-top: auto;
+        padding: 15px;
     }
 }

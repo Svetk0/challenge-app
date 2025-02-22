@@ -15,7 +15,7 @@ export function ModalDelete({ challenge }: Props) {
         The challenge <br />
         <span>{challenge.description}</span>
         <br />
-        and all its related progress will be removed. This action is unstored!
+        and all its related progress will be removed. This action is irreversible!
       </p>
 
       <DeleteChallengeButton challenge={challenge} />

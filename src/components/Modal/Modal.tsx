@@ -16,13 +16,13 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    const closeButton = closeButtonRef.current;
+    //const closeButton = closeButtonRef.current;
 
     if (!dialog) return;
 
     if (isOpen) {
       dialog.showModal();
-      closeButton?.focus();
+      //closeButton?.focus();
 
       document.body.style.overflow = 'hidden';
     } else {
