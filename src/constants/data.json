@@ -44,7 +44,7 @@
     },
     "goal": {
       "label": "How many actions",
-      "placeholder": "number",
+      "placeholder": "5",
       "error_message": "Should be above 0",
       "require_message": "Please, fill it"
     },
@@ -94,6 +94,13 @@
       "create_load": "Creating...",
       "edit": "Save",
       "edit_load": "Editing..."
+    }
+  },
+  "modals": {
+    "modal_delete": {
+      "title": "Delete Challenge?",
+      "text_1": "The challenge",
+      "text_2": "and all its related progress will be removed. This action is irreversible!"
     }
   }
 }

@@ -4,28 +4,26 @@ import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
 
-import { ProgressBar, Modal } from '@/components';
+import { Button, ProgressBar, ModalDelete } from '@/components';
 import {
   CompleteChallengeButton,
-  DeleteChallengeButton,
   EditChallengeIconButton,
 } from '@/shared/entities/ControlChallenge';
 
 import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
-import { ModalDelete } from '../ModalDelete/ModalDelete';
 
 type Props = {
   isLoading?: boolean;
   challenge?: TChallenge;
 };
-
+const {
+  loading,
+  period: { every, starts_at },
+  buttons: { remove },
+} = staticData.challenge_info;
 export function ChallengeInfo({ isLoading, challenge }: Props) {
-  const {
-    loading,
-    period: { every, starts_at },
-  } = staticData.challenge_info;
-
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
@@ -42,7 +40,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     }, 100);
   };
 
-  useEffect(() => {}, [isChoosen, isStarted]);
+  useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
     if (challenge) {
       const today = new Date();
@@ -94,19 +92,22 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       {isChoosen ? (
         <div className={styles.rowWrapper}>
           <CompleteChallengeButton challenge={challenge} />
-          <DeleteChallengeButton challenge={challenge} />
+          <Button
+            type='button'
+            text={remove}
+            color='control_red'
+            onClick={() => setIsModalOpened(true)}
+          />
         </div>
       ) : null}
-      <Modal
-        isOpen={isChoosen}
+
+      <ModalDelete
+        isOpen={isModalOpened}
         onClose={() => {
-          console.log('modal is open');
+          setIsModalOpened(false);
         }}
-        // width='260px'
-        // height='360px'
-      >
-        <ModalDelete challenge={challenge} />
-      </Modal>
+        challenge={challenge}
+      />
     </div>
   );
 }
