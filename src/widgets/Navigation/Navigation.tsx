@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import ListItem from './NavigationItem';
+import { NavigationItem } from './NavigationItem';
 import { ChartIcon, ClipboardIcon, HomeIcon } from '@/shared/ui/Icons';
-import styles from './navigation.module.scss';
+import styles from './NNavigation.module.scss';
 
-const Navigation = () => {
+export const Navigation = () => {
   const pathname = usePathname();
   const [selected, setSelected] = useState(pathname);
 
@@ -23,7 +23,7 @@ const Navigation = () => {
     <div className={styles.navContainer}>
       <div className={styles.navigation}>
         <ul>
-          <ListItem
+          <NavigationItem
             href='/challenges'
             icon={<HomeIcon size={20} />}
             text='Challenges'
@@ -31,7 +31,7 @@ const Navigation = () => {
             isSelected={selected === '/challenges'}
             dataListItem='/challenges'
           />
-          <ListItem
+          <NavigationItem
             href='/dashboards'
             icon={<ChartIcon size={20} />}
             text='Progress'
@@ -39,7 +39,7 @@ const Navigation = () => {
             isSelected={selected === '/dashboards'}
             dataListItem='/dashboards'
           />
-          <ListItem
+          <NavigationItem
             href='/history'
             icon={<ClipboardIcon size={20} />}
             text='Completed'
@@ -69,5 +69,3 @@ const Navigation = () => {
     </div>
   );
 };
-
-export default Navigation;

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import styles from './navigation.module.scss';
+import styles from './NNavigation.module.scss';
 
 type ListItemProps = {
   href: string;
@@ -12,7 +12,14 @@ type ListItemProps = {
   dataListItem: string;
 };
 
-const ListItem = ({ href, icon, text, onClick, isSelected, dataListItem }: ListItemProps) => {
+export const NavigationItem = ({
+  href,
+  icon,
+  text,
+  onClick,
+  isSelected,
+  dataListItem,
+}: ListItemProps) => {
   return (
     <li
       className={`${styles.list} ${isSelected ? styles.active : ''}`}
@@ -28,5 +35,3 @@ const ListItem = ({ href, icon, text, onClick, isSelected, dataListItem }: ListI
     </li>
   );
 };
-
-export default ListItem;

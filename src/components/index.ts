@@ -1,7 +1,10 @@
-export { ChallengeInfo } from './ChallengeInfo/ChallengeInfo';
+export { ChallengeInfo } from '../widgets/ChallengeInfo/ChallengeInfo';
 export { AuthForm } from './AuthForm/AuthForm';
-//export { Root } from '../core/Root/Root';
-
+export { Footer } from '../widgets/Footer/Footer';
+export { Navigation } from '../widgets/Navigation/Navigation';
+export { ListChallenges } from '../widgets/ListChallenges/ListChallenges';
+export { CreateForm } from '../widgets/CreateForm/CreateForm';
+export { EditForm } from '../widgets/EditForm/EditForm';
 //UI
 export { Button } from '../shared/ui/Button/Button';
 export { Input } from '../shared/ui/Input/Input';

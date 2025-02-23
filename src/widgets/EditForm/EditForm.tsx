@@ -9,9 +9,9 @@ import { TEditForm } from '@/shared/types';
 import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
-import styles from './editForm.module.scss';
+import styles from './EEditForm.module.scss';
 
-export default function EditForm({ id }: { id: string }) {
+export function EditForm({ id }: { id: string }) {
   const dt = staticData.challenge_form;
   const router = useRouter();
   const [_startedDate, _setStartedDate] = useState('');

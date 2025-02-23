@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navigation from '@/components/Navigation/Navigation';
+import { Navigation } from '@/components';
 
-const Footer = () => {
+export const Footer = () => {
   const pathname = usePathname();
 
   const showFooterPaths = ['/challenges', '/dashboards', '/history'];
@@ -18,5 +18,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

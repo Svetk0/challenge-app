@@ -7,7 +7,7 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { ErrorBoundary, ErrorPage } from '@/components';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
-import { init } from '@/core';
+import { init } from '@/shared/core';
 
 import styles from './Root.module.scss';
 

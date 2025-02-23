@@ -10,9 +10,9 @@ import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/shared/constants/data.json';
-import styles from './listChallenges.module.scss';
+import styles from './LListChallenges.module.scss';
 
-export default function ListChallenges() {
+export function ListChallenges() {
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
   const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();

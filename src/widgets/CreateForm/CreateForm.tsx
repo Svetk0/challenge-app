@@ -12,9 +12,9 @@ import { TCreateForm } from '@/shared/types';
 import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
-import styles from './createForm.module.scss';
+import styles from './CCreateForm.module.scss';
 
-export default function CreateForm() {
+export function CreateForm() {
   const dt = staticData.challenge_form;
   const router = useRouter();
   //const dispatch = useDispatch();
