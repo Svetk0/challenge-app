@@ -10,7 +10,21 @@ type Props = {
   challenge: TChallenge;
   isMinimal?: boolean;
 };
-
+const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
@@ -22,7 +36,9 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
 
     setCurrentProgress(newValue);
   };
-
+  useEffect(() => {
+    setCurrentProgress(challenge.progress);
+  }, [challenge.progress]);
   useEffect(() => {
     if (initialMount) {
       setInitialMount(false);
@@ -61,33 +77,10 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       const endDate = new Date(challenge.started_at);
 
       if (challenge.period === 'week') {
-        const weekDays = [
-          'Sunday',
-          'Monday',
-          'Tuesday',
-          'Wednesday',
-          'Thursday',
-          'Friday',
-          'Saturday',
-        ];
         return `by ${weekDays[endDate.getDay()]}`;
       }
       if (challenge.period === 'month') {
         if (challenge.period_finished_at) {
-          const monthNames = [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec',
-          ];
           const endDateMonthly = new Date(challenge.period_finished_at) ?? null;
           return `${endDateMonthly.getDate()}th ${monthNames[endDateMonthly.getMonth()]}`;
         }

@@ -46,6 +46,6 @@ export function Root(props: PropsWithChildren) {
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (
-    <div className={styles.root__loading}>Loading</div>
+    <div className={styles.root__loading}>...Loading...</div>
   );
 }

@@ -1,16 +1,29 @@
 {
   "home": {
     "title": "Challenge App",
+
     "buttons": {
       "logIn": "Log in",
       "signUp": "Sign Up"
     }
   },
-  "challendes": {
+  "challenges": {
     "title": "Daily Routine",
+    "loading": "Your Challenges is loading...",
     "buttons": {
       "add": "Add new",
       "back": "Back"
+    }
+  },
+  "challenge_info": {
+    "loading": "please, wait...",
+    "buttons": {
+      "complete": "Complete",
+      "remove": "Delete"
+    },
+    "period": {
+      "every": "every",
+      "starts_at": "starts at"
     }
   },
   "challenge_form": {
@@ -19,21 +32,21 @@
     "email": {
       "label": "Email",
       "placeholder": "example@example.ex",
-      "error_message": "Incorrect email format",
-      "require_message": "Please, fill it",
+      "error_message": "incorrect email format",
+      "require_message": "please, fill it",
       "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
     },
     "name": {
       "label": "Your Challenge",
       "placeholder": "Describe your challenge",
-      "error_message": "The description should contain 2..100 symbols",
-      "require_message": "Please, fill it"
+      "error_message": "the description should contain 2..100 symbols",
+      "require_message": "please, fill it"
     },
     "goal": {
       "label": "How many actions",
-      "placeholder": "number",
-      "error_message": "Should be above 0",
-      "require_message": "Please, fill it"
+      "placeholder": "5",
+      "error_message": "should be above 0",
+      "require_message": "please, fill it"
     },
     "period": {
       "label": "per period",
@@ -49,26 +62,26 @@
           "value": "month"
         }
       ],
-      "error_message": "Choose one",
-      "require_message": "Please, fill it"
+      "error_message": "choose one",
+      "require_message": "please, fill it"
     },
     "date_start": {
       "label": "Start",
       "placeholder": "17.12.2024",
-      "error_message": "Can't be early 2000",
-      "require_message": "Please, fill it"
+      "error_message": "can't be early 2000",
+      "require_message": "please, fill it"
     },
     "date_finish": {
       "label": "Finish",
       "placeholder": "20.12.2024",
-      "error_message": "Can't be early than Start",
-      "require_message": "Please, fill it"
+      "error_message": "can't be early than Start",
+      "require_message": "please, fill it"
     },
     "progress": {
       "label": "Progress",
       "placeholder": "current result",
-      "error_message": "",
-      "require_message": "Please, fill it"
+      "error_message": "should be above 0",
+      "require_message": "please, fill it"
     },
     "switcher": {
       "label": "All time",
@@ -79,8 +92,15 @@
       "back": "Back",
       "create": "Create",
       "create_load": "Creating...",
-      "edit": "Edit",
+      "edit": "Save",
       "edit_load": "Editing..."
+    }
+  },
+  "modals": {
+    "modal_delete": {
+      "title": "Delete Challenge?",
+      "text_1": "The challenge",
+      "text_2": "and all its related progress will be removed. This action is irreversible!"
     }
   }
 }

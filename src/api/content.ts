@@ -75,6 +75,14 @@ export const contentApi = createApi({
       }),
       invalidatesTags: ['Actual'],
     }),
+    //delete challenge by id
+    deleteChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
+      query: ({ uuid }) => ({
+        url: `challenges/${uuid}/`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Actual'],
+    }),
   }),
 });
 export const {
@@ -82,4 +90,5 @@ export const {
   useCreateChallengeMutation,
   useEditChallengeMutation,
   useGetChallengeByIDQuery,
+  useDeleteChallengeMutation,
 } = contentApi;

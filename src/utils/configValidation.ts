@@ -56,5 +56,8 @@ export const configValidation: ConfigValidation = {
     label: progress.label,
     placeholder: progress.placeholder,
     required: progress.require_message,
+    validate: {
+      min: (v) => Number(v) >= 0 || progress.error_message,
+    },
   },
 };

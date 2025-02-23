@@ -6,9 +6,9 @@
   flex-direction: column;
   margin: 0 auto;
   padding-inline: clamp(5px, 5vw, 30px);
-  gap: 30px;
+  gap: 20px;
 
-  Button {
+  button {
     width: 100%;
     margin-top: 10px;
   }
@@ -31,7 +31,7 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: $deep-dark-purple-30;
-  padding: 40px 5%;
+  padding: 5%;
   row-gap: 25px;
   column-gap: clamp(5px, 5vw, 20px);
   border-radius: 20px;

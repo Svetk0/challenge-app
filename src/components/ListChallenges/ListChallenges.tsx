@@ -1,41 +1,41 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
-import { setLocalStorage } from '@/utils/localStorage';
+import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
-import { ChallengeInfo, Button } from '@/components/';
+import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
+  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
+  const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const {
     title,
+    loading,
     buttons: { add },
-  } = staticData.challendes;
+  } = staticData.challenges;
 
   const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
-    //refetchOnMountOrArgChange: false,
-    //refetchOnFocus: false,
     skip: false,
   });
 
-  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-
+  useEffect(() => {
+    setLocalChallenges(getLocalStorage('challenges'));
+    console.log('get local', localChallenges);
+  }, [isLoading]);
   useEffect(() => {
     if (data) {
       console.log('have data');
-      if (data?.length !== challengeData.length) {
-        setLocalStorage('challenges', data);
-        dispatch(setChallenges(data));
-        console.log('set local');
-      }
+      setLocalStorage('challenges', data);
+      dispatch(setChallenges(data));
     }
   }, [data, dispatch, challengeData]);
 
@@ -47,10 +47,21 @@ export default function ListChallenges() {
   }
 
   if (isLoading && !challengeData.length) {
-    return <div>Loading challenges...</div>;
+    return (
+      <div className={styles.list}>
+        {localChallenges?.length !== 0 ? (
+          localChallenges?.map((item: TChallenge) => (
+            <CardSkeleton key={`challenge-${item.uuid}`} />
+          ))
+        ) : (
+          <span>{loading}</span>
+        )}
+      </div>
+    );
   }
 
   const displayData = data || challengeData;
+  console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
     <div className={styles.container}>
@@ -63,6 +74,7 @@ export default function ListChallenges() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
+
       {displayData?.length !== 0 && (
         <ol className={styles.list}>
           {displayData?.map((item: TChallenge) => (
