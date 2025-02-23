@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { cn } from '@/shared/utils';
-import styles from './BButton.module.scss';
+import styles from './Button.module.scss';
 
 type ButtonProps = {
   text: React.ReactNode;

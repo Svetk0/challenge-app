@@ -1,7 +1,7 @@
 'use client';
 
 import { Dispatch, useEffect } from 'react';
-import styles from './Sswitcher.module.scss';
+import styles from './Switcher.module.scss';
 
 type Props = {
   label: string;
