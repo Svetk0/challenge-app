@@ -1,4 +1,4 @@
- @import '@styles';
+ @use '@/shared/styles' as *;
 
  .dialog {
      width: 280px;

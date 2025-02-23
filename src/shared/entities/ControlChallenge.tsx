@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/api/content';
-import { TChallenge } from '@/types';
+import { TChallenge } from '@/shared/types';
 import { Button } from '@/components';
 import { EditIcon } from '@/components/ui/Icons/';
 import staticData from '@/constants/data.json';

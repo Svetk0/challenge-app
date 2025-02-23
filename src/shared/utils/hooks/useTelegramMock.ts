@@ -1,4 +1,4 @@
-import { useClientOnce } from '@/hooks/useClientOnce';
+import { useClientOnce } from '@/shared/utils/hooks/useClientOnce';
 import {
   isTMA,
   type LaunchParams,

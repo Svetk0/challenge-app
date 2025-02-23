@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@/utils';
+import { cn } from '@/shared/utils';
 import styles from './button.module.scss';
 
 type ButtonProps = {

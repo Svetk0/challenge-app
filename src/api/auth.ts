@@ -1,6 +1,6 @@
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TChallenge } from '@/types';
+import { TChallenge } from '@/shared/types';
 
 export const authApi = createApi({
   reducerPath: 'contentApi',

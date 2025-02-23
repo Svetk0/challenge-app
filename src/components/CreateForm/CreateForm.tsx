@@ -6,8 +6,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 //import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useCreateChallengeMutation } from '@/api/content';
-import { configValidation } from '@/utils/configValidation';
-import { TCreateForm } from '@/types';
+import { configValidation } from '@/shared/utils/configValidation';
+import { TCreateForm } from '@/shared/types';
 
 import staticData from '@/constants/data.json';
 import { Button, Input, Switcher } from '@/components';

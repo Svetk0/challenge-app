@@ -3,11 +3,11 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/lib/store';
-import { TChallenge } from '@/types';
+import { RootState } from '@/shared/lib/store';
+import { TChallenge } from '@/shared/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
-import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
-import { setChallenges } from '@/lib/features/challenges/challengeSlice';
+import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
+import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';

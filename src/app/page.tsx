@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { setAuthToken, getAuthToken } from '@/utils/auth';
+import { setAuthToken, getAuthToken } from '@/shared/utils/auth';
 import { Button, AuthForm } from '@/components/';
 
 import styles from './page.module.scss';

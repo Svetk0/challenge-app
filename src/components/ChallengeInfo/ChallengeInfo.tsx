@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useOutsideClick } from '@/hooks/useOutsideClick';
-import { TChallenge } from '@/types';
-import { formatDate } from '@/utils';
+import { useOutsideClick } from '@/shared/utils/hooks/useOutsideClick';
+import { TChallenge } from '@/shared/types';
+import { formatDate } from '@/shared/utils';
 
 import { Button, ProgressBar, ModalDelete } from '@/components';
 import {

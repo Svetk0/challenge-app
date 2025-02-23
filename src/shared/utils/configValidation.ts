@@ -1,6 +1,6 @@
 import staticData from '@/constants/data.json';
 const { name, goal, period, date_start, date_finish, progress } = staticData.challenge_form;
-import { FieldConfig } from '@/types';
+import { FieldConfig } from '@/shared/types';
 
 type ConfigValidation = {
   [key: string]: FieldConfig | ((password: string) => FieldConfig);

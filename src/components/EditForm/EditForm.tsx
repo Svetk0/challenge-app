@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
-import { configValidation } from '@/utils/configValidation';
-import { TEditForm } from '@/types';
+import { configValidation } from '@/shared/utils/configValidation';
+import { TEditForm } from '@/shared/types';
 import staticData from '@/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 

@@ -1,4 +1,4 @@
-import { IconProps } from '@/types';
+import { IconProps } from '@/shared/types';
 
 export const CloseIcon = ({
   size = 44,

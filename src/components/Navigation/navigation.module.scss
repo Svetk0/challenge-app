@@ -1,4 +1,4 @@
-@import '@styles';
+@use '@/shared/styles' as *;
 
 .navContainer {
   width: 100vw;

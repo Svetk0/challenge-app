@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getAuthToken } from '@/utils/auth';
-import { TChallenge, TCreateForm, TEditForm } from '@/types';
+import { getAuthToken } from '@/shared/utils/auth';
+import { TChallenge, TCreateForm, TEditForm } from '@/shared/types';
 
 interface ResponseUser {
   id: number;

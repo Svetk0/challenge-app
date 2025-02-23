@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { Button } from '@/components';
 import { CloseIcon } from '@/components/ui/Icons/';
 import { DeleteChallengeButton } from '@/shared/entities/ControlChallenge';
-import { TChallenge } from '@/types';
+import { TChallenge } from '@/shared/types';
 import staticData from '@/constants/data.json';
 
 import styles from './Modals.module.scss';

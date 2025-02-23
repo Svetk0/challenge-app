@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TChallenge } from '@/types';
-import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
+import { TChallenge } from '@/shared/types';
+import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
 
 interface ChallengeState {
   //challenges: (TChallenge | TCreateForm)[];

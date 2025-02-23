@@ -1,4 +1,4 @@
-import { IconProps } from '@/types';
+import { IconProps } from '@/shared/types';
 
 export const EditIcon = ({
   size = 31,

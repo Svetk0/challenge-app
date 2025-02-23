@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
+import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
 
 export const AUTH_TOKEN_KEY = 'telegram_id';
 export const TELEGRAM_ID = '111';
