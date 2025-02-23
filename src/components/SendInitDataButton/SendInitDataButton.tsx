@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
-import { Button } from '@/components';
+import { Button } from '@/shared/ui';
 
 const SendInitDataButton = () => {
   const isDevelopment = false; // режим разработки

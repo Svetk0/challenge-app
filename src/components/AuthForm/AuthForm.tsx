@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button, Input } from '@/components/';
+import { Button, Input } from '@/shared/ui';
 import { setAuthToken } from '@/shared/utils/auth';
 import styles from './authForm.module.scss';
 

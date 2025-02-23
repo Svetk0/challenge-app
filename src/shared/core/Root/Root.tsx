@@ -4,7 +4,7 @@ import { type PropsWithChildren } from 'react';
 import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-import { ErrorBoundary, ErrorPage } from '@/components';
+import { ErrorBoundary, ErrorPage } from '@/shared/ui';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
 import { init } from '@/shared/core';

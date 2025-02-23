@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useRef } from 'react';
-import { Button } from '@/components';
+import { Button } from '@/shared/ui';
 import { CloseIcon } from '@/shared/ui/Icons';
-import { DeleteChallengeButton } from '@/features/ManageChallenge';
+import { DeleteChallengeButton } from '@/features/ManageChallenge/ManageChallenge';
 import { TChallenge } from '@/shared/types';
 import staticData from '@/shared/constants/data.json';
 

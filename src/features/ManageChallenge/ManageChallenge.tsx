@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/api/content';
 import { TChallenge } from '@/shared/types';
-import { Button } from '@/components';
+import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
 type Props = {

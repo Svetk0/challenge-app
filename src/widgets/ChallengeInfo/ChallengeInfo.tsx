@@ -4,8 +4,12 @@ import { useOutsideClick } from '@/shared/utils/hooks/useOutsideClick';
 import { TChallenge } from '@/shared/types';
 import { formatDate } from '@/shared/utils';
 
-import { Button, ProgressBar, ModalDelete } from '@/components';
-import { CompleteChallengeButton, EditChallengeIconButton } from '@/features/ManageChallenge';
+import { Button } from '@/shared/ui';
+import { ProgressBar, ModalDelete } from '@/features';
+import {
+  CompleteChallengeButton,
+  EditChallengeIconButton,
+} from '@/features/ManageChallenge/ManageChallenge';
 
 import staticData from '@/shared/constants/data.json';
 import styles from './ChallengeInfo.module.scss';

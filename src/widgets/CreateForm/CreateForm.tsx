@@ -7,7 +7,7 @@ import { configValidation } from '@/shared/utils/configValidation';
 import { TCreateForm } from '@/shared/types';
 
 import staticData from '@/shared/constants/data.json';
-import { Button, Input, Switcher } from '@/components';
+import { Button, Input, Switcher } from '@/shared/ui';
 
 import styles from './CreateForm.module.scss';
 

@@ -8,7 +8,8 @@ import { TChallenge } from '@/shared/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
-import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
+import { Button, CardSkeleton } from '@/shared/ui';
+import { ChallengeInfo } from '@/widgets/';
 import staticData from '@/shared/constants/data.json';
 import styles from './ListChallenges.module.scss';
 

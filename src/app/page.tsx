@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { setAuthToken, getAuthToken } from '@/shared/utils/auth';
-import { Button, AuthForm } from '@/components/';
+import { Button } from '@/shared/ui';
 
 import styles from './page.module.scss';
 
+import { AuthForm } from '@/components/';
 import SendInitDataButton from '@/components/SendInitDataButton/SendInitDataButton';
 
 const Home: React.FC = () => {
