@@ -9,7 +9,7 @@ import { TEditForm } from '@/types';
 import staticData from '@/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
-import styles from './editForm.module.scss';
+import styles from './EditForm.module.scss';
 
 export default function EditForm({ id }: { id: string }) {
   const dt = staticData.challenge_form;
@@ -92,6 +92,9 @@ export default function EditForm({ id }: { id: string }) {
       trigger(fieldName);
       if (fieldName === 'goal' && getValues('goal') < 1) {
         setValue('goal', 1);
+      }
+      if (fieldName === 'progress' && getValues('progress') < 0) {
+        setValue('progress', 0);
       }
     },
     onChange: () => {
