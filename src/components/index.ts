@@ -1,10 +1,10 @@
 export { ChallengeInfo } from '../widgets/ChallengeInfo/ChallengeInfo';
 export { AuthForm } from './AuthForm/AuthForm';
-export { Footer } from '../widgets/Footer/Footer';
-export { Navigation } from '../widgets/Navigation/Navigation';
-export { ListChallenges } from '../widgets/ListChallenges/ListChallenges';
-export { CreateForm } from '../widgets/CreateForm/CreateForm';
-export { EditForm } from '../widgets/EditForm/EditForm';
+// export { Footer } from '../widgets/Footer/Footer';
+// export { Navigation } from '../widgets/Navigation/Navigation';
+// export { ListChallenges } from '../widgets/ListChallenges/ListChallenges';
+// export { CreateForm } from '../widgets/CreateForm/CreateForm';
+// export { EditForm } from '../widgets/EditForm/EditForm';
 //UI
 export { Button } from '../shared/ui/Button/Button';
 export { Input } from '../shared/ui/Input/Input';

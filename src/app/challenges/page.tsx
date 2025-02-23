@@ -1,5 +1,5 @@
 'use client';
-import { ListChallenges } from '@/components';
+import { ListChallenges } from '@/widgets';
 export default function Page() {
   return (
     <>

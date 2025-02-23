@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
-import { Footer } from '@/components';
+import { Footer } from '@/widgets';
 import { Root } from '@/shared/core';
 import '../shared/styles/globals.scss';
 
