@@ -23,6 +23,7 @@ const {
   buttons: { remove },
 } = staticData.challenge_info;
 export function ChallengeInfo({ isLoading, challenge }: Props) {
+  console.log('challenge rende', challenge?.description);
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);

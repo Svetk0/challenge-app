@@ -6,14 +6,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
-import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
+import {
+  setLocalStorage,
+  //getLocalStorage
+} from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
-  const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
+  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
+  const [localChallenges, _setLocalChallenges] = useState<TChallenge[] | null>(null);
+  //const [displayData, setDisplayData] = useState<TChallenge[] | null>(challengeData);
   const router = useRouter();
   const dispatch = useDispatch();
   const {
@@ -26,22 +31,24 @@ export default function ListChallenges() {
     skip: false,
   });
 
-  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-
-  useEffect(() => {
-    console.log('get local');
-    setLocalChallenges(getLocalStorage('challenges'));
-  }, [isLoading]);
+  // useEffect(() => {
+  //   setLocalChallenges(getLocalStorage('challenges'));
+  //   console.log('get local', localChallenges);
+  // }, [isLoading]);
   useEffect(() => {
     if (data) {
       console.log('have data');
-      if (data?.length !== challengeData.length) {
-        setLocalStorage('challenges', data);
-        dispatch(setChallenges(data));
-        console.log('set local');
-      }
+      setLocalStorage('challenges', data);
+      dispatch(setChallenges(data));
+      console.log('set local');
+      //setDisplayData(data);
+      // if (data?.length !== challengeData.length) {
+      //   setLocalStorage('challenges', data);
+      //   dispatch(setChallenges(data));
+      //   console.log('set local');
+      // }
     }
-  }, [data, dispatch, challengeData]);
+  }, [data, dispatch]);
 
   if (error) {
     if ('status' in error) {
@@ -65,6 +72,7 @@ export default function ListChallenges() {
   }
 
   const displayData = data || challengeData;
+  console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
     <div className={styles.container}>
