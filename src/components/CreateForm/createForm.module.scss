@@ -8,7 +8,7 @@
   padding-inline: clamp(5px, 5vw, 30px);
   gap: 30px;
 
-  Button {
+  button {
     width: 100%;
     margin-top: 10px;
   }
@@ -20,7 +20,6 @@
     line-height: 29.05px;
     text-align: center;
     color: $white;
-    //margin-top: 50px;
   }
 }
 
@@ -32,7 +31,7 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: $deep-dark-purple-30;
-  //background-color: $deep-dark-blue;
+
   padding: 40px 5%;
   row-gap: 25px;
   column-gap: clamp(5px, 5vw, 20px);

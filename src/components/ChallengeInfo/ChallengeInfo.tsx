@@ -1,20 +1,30 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { TChallenge } from '@/types';
 import { formatDate } from '@/utils';
-import { EditIcon } from '@/components/ui/Icons/';
-import { Button, ProgressBar } from '@/components';
+
+import { Button, ProgressBar, ModalDelete } from '@/components';
+import {
+  CompleteChallengeButton,
+  EditChallengeIconButton,
+} from '@/shared/entities/ControlChallenge';
+
+import staticData from '@/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
 
 type Props = {
   isLoading?: boolean;
   challenge?: TChallenge;
 };
-
+const {
+  loading,
+  period: { every, starts_at },
+  buttons: { remove },
+} = staticData.challenge_info;
 export function ChallengeInfo({ isLoading, challenge }: Props) {
-  const router = useRouter();
+  //console.log('challenge render', challenge?.description);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
@@ -31,7 +41,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     }, 100);
   };
 
-  useEffect(() => {}, [isChoosen, isStarted]);
+  useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
     if (challenge) {
       const today = new Date();
@@ -42,13 +52,9 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     }
   }, [challenge]);
   if (isLoading || !challenge) {
-    return <div>Loading...</div>;
+    return <div>{loading}</div>;
   }
-  const { uuid, description, period } = challenge;
-  const handleEditClick = (e: React.MouseEvent, uuid: string) => {
-    e.stopPropagation();
-    router.push(`/challenges/edit/${uuid}`);
-  };
+  const { description, period } = challenge;
 
   return (
     <div
@@ -68,27 +74,41 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     >
       <div className={styles.rowWrapper}>
         <span className={styles.description}>{description}</span>
-        <Button
-          type='button'
-          text={<EditIcon id={`editIcon-${uuid}`} />}
-          color='icon'
-          onClick={(e) => handleEditClick(e, uuid)}
-        />
+        <EditChallengeIconButton challenge={challenge} />
       </div>
       <div className={styles.rowWrapper}>
         <div className={styles.period}>
           {isChoosen ? (
             ''
           ) : isStarted ? (
-            `every ${period}`
+            `${every} ${period}`
           ) : (
             <>
-              starts at <br /> {formatDate(challenge.started_at)}
+              {starts_at} <br /> {formatDate(challenge.started_at)}
             </>
           )}
         </div>
         <ProgressBar challenge={challenge} isMinimal={!isChoosen} />
       </div>
+      {isChoosen ? (
+        <div className={styles.rowWrapper}>
+          <CompleteChallengeButton challenge={challenge} />
+          <Button
+            type='button'
+            text={remove}
+            color='control_red'
+            onClick={() => setIsModalOpened(true)}
+          />
+        </div>
+      ) : null}
+
+      <ModalDelete
+        isOpen={isModalOpened}
+        onClose={() => {
+          setIsModalOpened(false);
+        }}
+        challenge={challenge}
+      />
     </div>
   );
 }

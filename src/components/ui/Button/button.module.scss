@@ -57,12 +57,11 @@
 .round {
   width: 24px;
   height: 24px;
-  padding: 2px;
+  padding: 0;
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  padding: 0;
   background: $lemon-neon;
   color: $deep-dark-purple;
   border: 1.5px solid $lemon-neon;
@@ -108,6 +107,24 @@
   height: 40px;
   font-size: 1.1rem;
   padding: 0;
-
   background: $gradient-main-bg;
+}
+
+.control,
+.control_red {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: $white;
+  padding: 5px;
+  background: $deep-dark-gray;
+  box-shadow: none;
+}
+
+.control_red {
+  background: $red-dark;
 }

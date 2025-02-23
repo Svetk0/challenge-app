@@ -1,10 +1,4 @@
-type IconProps = {
-  size?: number;
-  color?: string;
-  className?: string;
-  title?: string;
-  id?: string;
-};
+import { IconProps } from '@/types';
 
 export const EditIcon = ({
   size = 31,

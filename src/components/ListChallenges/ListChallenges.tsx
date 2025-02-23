@@ -13,6 +13,7 @@ import staticData from '@/constants/data.json';
 import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
+  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
   const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -26,22 +27,17 @@ export default function ListChallenges() {
     skip: false,
   });
 
-  const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-
   useEffect(() => {
-    console.log('get local');
     setLocalChallenges(getLocalStorage('challenges'));
+    console.log('get local', localChallenges);
   }, [isLoading]);
   useEffect(() => {
     if (data) {
       console.log('have data');
-      if (data?.length !== challengeData.length) {
-        setLocalStorage('challenges', data);
-        dispatch(setChallenges(data));
-        console.log('set local');
-      }
+      setLocalStorage('challenges', data);
+      dispatch(setChallenges(data));
     }
-  }, [data, dispatch, challengeData]);
+  }, [data, dispatch]);
 
   if (error) {
     if ('status' in error) {
@@ -65,6 +61,7 @@ export default function ListChallenges() {
   }
 
   const displayData = data || challengeData;
+  console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
     <div className={styles.container}>

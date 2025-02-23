@@ -93,6 +93,9 @@ export default function EditForm({ id }: { id: string }) {
       if (fieldName === 'goal' && getValues('goal') < 1) {
         setValue('goal', 1);
       }
+      if (fieldName === 'progress' && getValues('progress') < 0) {
+        setValue('progress', 0);
+      }
     },
     onChange: () => {
       if (getValues(fieldName)) {
