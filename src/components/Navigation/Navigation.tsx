@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import ListItem from './NavigationItem';
-import { ChartIcon, ClipboardIcon, HomeIcon } from '@/components/ui/Icons';
+import { ChartIcon, ClipboardIcon, HomeIcon } from '@/shared/ui/Icons';
 import styles from './navigation.module.scss';
 
 const Navigation = () => {

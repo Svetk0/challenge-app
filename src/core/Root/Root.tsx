@@ -5,11 +5,9 @@ import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
 import { ErrorBoundary, ErrorPage } from '@/components';
-import { useTelegramMock } from '@/shared/utils/hooks/useTelegramMock';
-import { useDidMount } from '@/shared/utils/hooks/useDidMount';
-import { useClientOnce } from '@/shared/utils/hooks/useClientOnce';
+import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
-import { init } from '@/core/init';
+import { init } from '@/core';
 
 import styles from './Root.module.scss';
 

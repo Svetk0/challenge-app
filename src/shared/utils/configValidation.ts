@@ -1,4 +1,4 @@
-import staticData from '@/constants/data.json';
+import staticData from '@/shared/constants/data.json';
 const { name, goal, period, date_start, date_finish, progress } = staticData.challenge_form;
 import { FieldConfig } from '@/shared/types';
 

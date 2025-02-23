@@ -9,7 +9,7 @@ import { useCreateChallengeMutation } from '@/api/content';
 import { configValidation } from '@/shared/utils/configValidation';
 import { TCreateForm } from '@/shared/types';
 
-import staticData from '@/constants/data.json';
+import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
 import styles from './createForm.module.scss';

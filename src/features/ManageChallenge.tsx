@@ -2,8 +2,8 @@ import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/api/content';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/components';
-import { EditIcon } from '@/components/ui/Icons/';
-import staticData from '@/constants/data.json';
+import { EditIcon } from '@/shared/ui/Icons';
+import staticData from '@/shared/constants/data.json';
 type Props = {
   challenge: TChallenge;
 };

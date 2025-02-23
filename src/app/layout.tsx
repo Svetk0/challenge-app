@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
 import Footer from '@/components/Footer/Footer';
-import { Root } from '@/components';
+import { Root } from '@/core';
 import '../shared/styles/globals.scss';
 
 const openSans = localFont({

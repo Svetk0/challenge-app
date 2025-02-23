@@ -4,7 +4,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/api/content';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/components';
-import styles from './progressBar.module.scss';
+import styles from './PProgressBar.module.scss';
 
 type Props = {
   challenge: TChallenge;

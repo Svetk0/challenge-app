@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/api/content';
 import { configValidation } from '@/shared/utils/configValidation';
 import { TEditForm } from '@/shared/types';
-import staticData from '@/constants/data.json';
+import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
 import styles from './editForm.module.scss';

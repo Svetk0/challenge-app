@@ -1,10 +1,10 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { Button } from '@/components';
-import { CloseIcon } from '@/components/ui/Icons/';
-import { DeleteChallengeButton } from '@/shared/entities/ControlChallenge';
+import { CloseIcon } from '@/shared/ui/Icons';
+import { DeleteChallengeButton } from '@/features/ManageChallenge';
 import { TChallenge } from '@/shared/types';
-import staticData from '@/constants/data.json';
+import staticData from '@/shared/constants/data.json';
 
 import styles from './Modals.module.scss';
 

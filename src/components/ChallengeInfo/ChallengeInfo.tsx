@@ -5,12 +5,9 @@ import { TChallenge } from '@/shared/types';
 import { formatDate } from '@/shared/utils';
 
 import { Button, ProgressBar, ModalDelete } from '@/components';
-import {
-  CompleteChallengeButton,
-  EditChallengeIconButton,
-} from '@/shared/entities/ControlChallenge';
+import { CompleteChallengeButton, EditChallengeIconButton } from '@/features/ManageChallenge';
 
-import staticData from '@/constants/data.json';
+import staticData from '@/shared/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
 
 type Props = {

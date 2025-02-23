@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
-import styles from './input.module.scss';
+import styles from './IInput.module.scss';
 
 export type InputProps = {
   tagType?: 'input' | 'textarea' | 'select';
