@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
@@ -37,7 +37,7 @@ export default function ListChallenges() {
       setLocalStorage('challenges', data);
       dispatch(setChallenges(data));
     }
-  }, [data, dispatch]);
+  }, [data, dispatch, challengeData]);
 
   if (error) {
     if ('status' in error) {
