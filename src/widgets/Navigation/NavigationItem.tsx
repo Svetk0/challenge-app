@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import styles from './NNavigation.module.scss';
+import styles from './Navigation.module.scss';
 
 type ListItemProps = {
   href: string;

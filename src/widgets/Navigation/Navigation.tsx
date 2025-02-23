@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { NavigationItem } from './NavigationItem';
 import { ChartIcon, ClipboardIcon, HomeIcon } from '@/shared/ui/Icons';
-import styles from './NNavigation.module.scss';
+import styles from './Navigation.module.scss';
 
 export const Navigation = () => {
   const pathname = usePathname();

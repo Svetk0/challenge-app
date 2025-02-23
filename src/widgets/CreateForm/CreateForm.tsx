@@ -1,10 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
-//import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
-//import { addChallenge } from '@/lib/features/challenges/challengeSlice';
 import { useCreateChallengeMutation } from '@/api/content';
 import { configValidation } from '@/shared/utils/configValidation';
 import { TCreateForm } from '@/shared/types';
@@ -12,7 +9,7 @@ import { TCreateForm } from '@/shared/types';
 import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
-import styles from './CCreateForm.module.scss';
+import styles from './CreateForm.module.scss';
 
 export function CreateForm() {
   const dt = staticData.challenge_form;

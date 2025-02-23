@@ -10,7 +10,7 @@ import { setLocalStorage, getLocalStorage } from '@/shared/utils/localStorage';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/shared/constants/data.json';
-import styles from './LListChallenges.module.scss';
+import styles from './ListChallenges.module.scss';
 
 export function ListChallenges() {
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
