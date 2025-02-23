@@ -56,10 +56,6 @@
   transform: translateY(-36px);
 }
 
-// .navigation ul li.active a .icon {
-//   transform: translateY(-36px);
-// }
-
 .navigation ul li a .text {
   position: absolute;
   color: $green-neon;
@@ -86,7 +82,7 @@
   border: 6px solid var(--background);
   transition: 0.5s;
   margin: 0 15px;
-  box-shadow: inset 0px 0px 4px 0px $light-green-neon;
+  box-shadow: inset 0 0 4px 0 $light-green-neon;
 }
 
 .indicator::before {

@@ -1,5 +1,4 @@
-@import './screens.scss';
-@import './vars.scss';
+@import './vars';
 
 @mixin flexRow {
   display: flex;
@@ -63,7 +62,7 @@
   &:focus-visible {
     transition: border-color 0.3s ease;
     color: $white;
-    outline: 0px;
+    outline: 0;
     border-bottom: 1px solid $light-green-neon;
     box-shadow: $shadow-box-perimeter;
   }
@@ -99,10 +98,7 @@
 
   &::-webkit-calendar-picker-indicator {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: auto;
     height: auto;
     color: transparent;

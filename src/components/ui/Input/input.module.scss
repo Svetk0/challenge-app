@@ -10,28 +10,29 @@
     input[type='date'] {
         @include InputDate;
         color: $purple;
-    }
 
-    // Try to change placeholder styles (unsuccessfully)
-    input[type='date'] {
-        position: relative;
-        background-color: $black-70;
-        color: $white;
+        // Try to change placeholder styles (unsuccessfully)
+        // position: relative;
+        // background-color: $black-70;
+        // color: $white;
 
         &::-webkit-datetime-edit,
         &::-webkit-inner-spin-button,
         &::-webkit-calendar-picker-indicator {
             opacity: 0;
+            color: $purple;
         }
 
         &::-webkit-datetime-edit-fields-wrapper {
             position: relative;
             opacity: 0.4;
+
         }
 
         &::-webkit-datetime-edit {
             position: relative;
             opacity: 1;
+            color: $white;
         }
 
         &:invalid::before {
@@ -49,14 +50,9 @@
         &:focus::before,
         &:valid::before {
             opacity: 1;
+            color: $white;
             //content: '';
         }
-
-        // &:focus::-webkit-datetime-edit,
-        // &:valid::-webkit-datetime-edit {
-        //     opacity: 1;
-        //     color: $white;
-        // }
 
         &:focus::-webkit-datetime-edit-fields-wrapper,
         &:valid::-webkit-datetime-edit-fields-wrapper {
@@ -71,7 +67,7 @@
     @include Input;
 
     &_short {
-        padding: 0 0 0 0;
+        padding: 0;
         text-align: center;
         overflow: scroll;
         width: 130px;
