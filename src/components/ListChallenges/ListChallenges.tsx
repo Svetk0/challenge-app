@@ -6,10 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/store';
 import { TChallenge } from '@/types';
 import { useGetAllChallengeListQuery } from '@/api/content';
-import {
-  setLocalStorage,
-  //getLocalStorage
-} from '@/utils/localStorage';
+import { setLocalStorage, getLocalStorage } from '@/utils/localStorage';
 import { setChallenges } from '@/lib/features/challenges/challengeSlice';
 import { ChallengeInfo, Button, CardSkeleton } from '@/components/';
 import staticData from '@/constants/data.json';
@@ -17,8 +14,7 @@ import styles from './listChallenges.module.scss';
 
 export default function ListChallenges() {
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-  const [localChallenges, _setLocalChallenges] = useState<TChallenge[] | null>(null);
-  //const [displayData, setDisplayData] = useState<TChallenge[] | null>(challengeData);
+  const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const {
@@ -31,22 +27,15 @@ export default function ListChallenges() {
     skip: false,
   });
 
-  // useEffect(() => {
-  //   setLocalChallenges(getLocalStorage('challenges'));
-  //   console.log('get local', localChallenges);
-  // }, [isLoading]);
+  useEffect(() => {
+    setLocalChallenges(getLocalStorage('challenges'));
+    console.log('get local', localChallenges);
+  }, [isLoading]);
   useEffect(() => {
     if (data) {
       console.log('have data');
       setLocalStorage('challenges', data);
       dispatch(setChallenges(data));
-      console.log('set local');
-      //setDisplayData(data);
-      // if (data?.length !== challengeData.length) {
-      //   setLocalStorage('challenges', data);
-      //   dispatch(setChallenges(data));
-      //   console.log('set local');
-      // }
     }
   }, [data, dispatch]);
 
