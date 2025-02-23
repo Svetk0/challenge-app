@@ -9,7 +9,7 @@ import { TEditForm } from '@/types';
 import staticData from '@/constants/data.json';
 import { Button, Input, Switcher } from '@/components';
 
-import styles from './EditForm.module.scss';
+import styles from './editForm.module.scss';
 
 export default function EditForm({ id }: { id: string }) {
   const dt = staticData.challenge_form;
