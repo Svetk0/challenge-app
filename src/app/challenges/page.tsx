@@ -1,9 +1,9 @@
 'use client';
-import { ListChallenges } from '@/widgets';
+import { InProgressChallengesList } from '@/widgets';
 export default function Page() {
   return (
     <>
-      <ListChallenges />
+      <InProgressChallengesList />
     </>
   );
 }

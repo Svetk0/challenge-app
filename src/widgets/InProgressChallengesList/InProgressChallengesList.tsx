@@ -10,23 +10,21 @@ import { useGetAllChallengeListQuery } from '@/api/content';
 import { setLocalStorage, getLocalStorage } from '@/shared/utils';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 
-import { Button, CardSkeleton } from '@/shared/ui';
-import { ChallengeInfo } from '@/widgets/';
+import { Button, ListChallenges } from '@/shared/ui';
+import { ChallengeInfo } from '@/widgets';
 
 import staticData from '@/shared/constants/data.json';
-import styles from './ListChallenges.module.scss';
+import styles from './InProgressChallengesList.module.scss';
+const {
+  title,
+  buttons: { add },
+} = staticData.challenges;
 
-export function ListChallenges() {
+export function InProgressChallengesList() {
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
   const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
-  const {
-    title,
-    loading,
-    buttons: { add },
-  } = staticData.challenges;
-
   const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
     skip: false,
   });
@@ -50,20 +48,6 @@ export function ListChallenges() {
     throw error;
   }
 
-  if (isLoading && !challengeData.length) {
-    return (
-      <div className={styles.list}>
-        {localChallenges?.length !== 0 ? (
-          localChallenges?.map((item: TChallenge) => (
-            <CardSkeleton key={`challenge-${item.uuid}`} />
-          ))
-        ) : (
-          <span>{loading}</span>
-        )}
-      </div>
-    );
-  }
-
   const displayData = data || challengeData;
   console.log('displayData, data:', data, 'store:', challengeData);
 
@@ -79,15 +63,9 @@ export function ListChallenges() {
         />
       </div>
 
-      {displayData?.length !== 0 && (
-        <ol className={styles.list}>
-          {displayData?.map((item: TChallenge) => (
-            <li key={`challenge-${item.uuid}`}>
-              <ChallengeInfo challenge={item} />
-            </li>
-          ))}
-        </ol>
-      )}
+      <ListChallenges displayData={displayData}>
+        <ChallengeInfo />
+      </ListChallenges>
     </div>
   );
 }

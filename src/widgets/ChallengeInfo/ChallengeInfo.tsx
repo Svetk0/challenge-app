@@ -4,7 +4,7 @@ import { useOutsideClick } from '@/shared/utils/hooks/useOutsideClick';
 import { TChallenge } from '@/shared/types';
 import { formatDate } from '@/shared/utils';
 
-import { Button } from '@/shared/ui';
+import { Button, CardSkeleton } from '@/shared/ui';
 import { ProgressBar, ModalDelete } from '@/features';
 import {
   CompleteChallengeButton,
@@ -19,7 +19,6 @@ type Props = {
   challenge?: TChallenge;
 };
 const {
-  loading,
   period: { every, starts_at },
   buttons: { remove },
 } = staticData.challenge_info;
@@ -41,7 +40,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }
     }, 100);
   };
-
+  useEffect(() => {}, [challenge]);
   useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
     if (challenge) {
@@ -53,7 +52,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
     }
   }, [challenge]);
   if (isLoading || !challenge) {
-    return <div>{loading}</div>;
+    return <CardSkeleton />;
   }
   const { description, period } = challenge;
 
