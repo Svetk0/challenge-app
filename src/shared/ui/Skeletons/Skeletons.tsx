@@ -1,4 +1,3 @@
-// Loading animation
 import styles from './Skeletons.module.scss';
 
 export function CardSkeleton() {

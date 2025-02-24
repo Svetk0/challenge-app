@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useOutsideClick } from '@/shared/utils/hooks/useOutsideClick';
+import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { formatDate } from '@/shared/utils';
 
@@ -22,6 +22,7 @@ const {
   period: { every, starts_at },
   buttons: { remove },
 } = staticData.challenge_info;
+
 export function ChallengeInfo({ isLoading, challenge }: Props) {
   //console.log('challenge render', challenge?.description);
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
-import { contentApi } from '@/api/content';
+import { contentApi } from '@/shared/api/content';
 import challengeSlice from './features/challenges/challengeSlice';
 
 export const makeStore = () => {
@@ -13,11 +13,6 @@ export const makeStore = () => {
   });
 };
 setupListeners(makeStore);
-
-// makeStore.subscribe(() => {
-//   //setLocalStorage('store', store.getState().favoriteReducer);
-//   console.log(makeStore);
-// });
 
 // Infer the type of makeStore
 export type AppStore = ReturnType<typeof makeStore>;

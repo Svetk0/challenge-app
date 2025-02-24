@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '@/shared/lib/store';
 import { TChallenge } from '@/shared/types';
-import { useGetAllChallengeListQuery } from '@/api/content';
+import { useGetAllChallengeListQuery } from '@/shared/api/content';
 import { setLocalStorage, getLocalStorage } from '@/shared/utils';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 

@@ -2,19 +2,18 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useCreateChallengeMutation } from '@/api/content';
-import { configValidation } from '@/shared/utils/configValidation';
+import { useCreateChallengeMutation } from '@/shared/api/content';
+import { configValidation } from '@/shared/utils';
 import { TCreateForm } from '@/shared/types';
-
-import staticData from '@/shared/constants/data.json';
 import { Button, Input, Switcher } from '@/shared/ui';
 
+import staticData from '@/shared/constants/data.json';
 import styles from './CreateForm.module.scss';
 
+const dt = staticData.challenge_form;
+
 export function CreateForm() {
-  const dt = staticData.challenge_form;
   const router = useRouter();
-  //const dispatch = useDispatch();
   const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
@@ -22,7 +21,6 @@ export function CreateForm() {
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     setIsSubmitting(true);
     try {
-      //dispatch(addChallenge(newChallenge));
       await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {
       console.error('Failed to add challenge:', error);
