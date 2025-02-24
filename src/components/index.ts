@@ -1,13 +1,18 @@
-export { ChallengeInfo } from './ChallengeInfo/ChallengeInfo';
+//export { ChallengeInfo } from '../widgets/ChallengeInfo/ChallengeInfo';
+// export { ProgressBar } from '../features/ProgressBar/ProgressBar';
+// export { ModalDelete } from '../features/Modals/Modals';
 export { AuthForm } from './AuthForm/AuthForm';
-export { Root } from './Root/Root';
 
+// export { Footer } from '../widgets/Footer/Footer';
+// export { Navigation } from '../widgets/Navigation/Navigation';
+// export { ListChallenges } from '../widgets/ListChallenges/ListChallenges';
+// export { CreateForm } from '../widgets/CreateForm/CreateForm';
+// export { EditForm } from '../widgets/EditForm/EditForm';
 //UI
-export { Button } from './ui/Button/Button';
-export { Input } from './ui/Input/Input';
-export { Switcher } from './ui/Switcher/Switcher';
-export { ProgressBar } from './ui/ProgressBar/ProgressBar';
-export { ErrorBoundary } from './ui/Errors/ErrorBoundary';
-export { ErrorPage } from './ui/Errors/ErrorPage';
-export { CardSkeleton } from './ui/Skeletons/Skeletons';
-export { ModalDelete } from './ui/Modals/Modals';
+// export { Button } from '../shared/ui/Button/Button';
+// export { Input } from '../shared/ui/Input/Input';
+// export { Switcher } from '../shared/ui/Switcher/Switcher';
+
+// export { ErrorBoundary } from '../shared/ui/Errors/ErrorBoundary';
+// export { ErrorPage } from '../shared/ui/Errors/ErrorPage';
+// export { CardSkeleton } from '../shared/ui/Skeletons/Skeletons';

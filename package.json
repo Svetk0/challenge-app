@@ -9,7 +9,6 @@
     "start": "next start --port 3017",
     "lint": "next lint",
     "lint:scss": "stylelint '**/*.scss'",
-    "format:fix": "prettier --write --ignore-path .gitignore 'src/**/*.{js,jsx,ts,tsx,css,scss,md}'",
     "precommit": "lint-staged",
     "prepare": "husky"
   },

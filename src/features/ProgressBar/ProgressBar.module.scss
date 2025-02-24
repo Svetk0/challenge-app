@@ -1,0 +1,112 @@
+@use '@/shared/styles' as *;
+
+.rowWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 15px;
+    padding: 0 20px;
+}
+
+.container {
+    width: 100%;
+    padding: 5px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.daysLeft {
+    font-size: 12px;
+    color: $grey;
+}
+
+.fraction {
+    font-size: 16px;
+    color: $white;
+
+    >span {
+        font-size: 12px;
+    }
+}
+
+.progressWrapper {
+    width: 100%;
+    height: 8px;
+    background-color: $black-70;
+    border: 0.5px solid $purple;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    background-color: $purple;
+    border-radius: 4px;
+    transition: width 0.3s ease-in-out;
+}
+
+.minimalContainer {
+    width: 100%;
+    padding: 5px 0;
+    max-width: 120px;
+    margin-left: auto;
+
+    .header {
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .daysLeft {
+        font-size: 10px;
+        color: $grey;
+    }
+
+    .fraction {
+        font-size: 10px;
+        color: $white;
+
+        &.completed {
+            color: rgb(157, 204, 176);
+        }
+
+        &.inProgress {
+            color: $purple-light;
+            color: $grey;
+        }
+    }
+
+    .progressWrapper {
+        height: 3px;
+        background-color: $black-70;
+        border: 0.2px solid $purple;
+        border-radius: 4px;
+    }
+
+    .progressBar {
+        height: 100%;
+        border-radius: 2px;
+
+        &.completed {
+            background-color: $green-light;
+        }
+
+        &.inProgress {
+            background-color: $purple-light;
+        }
+
+    }
+}
+
+.container,
+.minimalContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

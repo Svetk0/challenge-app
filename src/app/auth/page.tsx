@@ -1,8 +1,8 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useGetAuthTestQuery, useGetAllChallengeListQuery } from '@/api/auth';
-import { Button } from '@/components';
+import { useGetAuthTestQuery, useGetAllChallengeListQuery } from '@/shared/api/auth';
+import { Button } from '@/shared/ui';
 export default function Page() {
   const router = useRouter();
   const {

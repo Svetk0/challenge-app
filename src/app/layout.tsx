@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
-import Footer from '@/components/Footer/Footer';
-import { Root } from '@/components';
-import '../styles/globals.scss';
+import { Footer } from '@/widgets';
+import { Root } from '@/shared/core';
+import '../shared/styles/globals.scss';
 
 const openSans = localFont({
   src: '../../public/fonts/OpenSans.woff',

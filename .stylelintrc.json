@@ -9,11 +9,6 @@
     ],
     "block-no-empty": true,
     "color-no-invalid-hex": true,
-    "declaration-block-trailing-semicolon": "always",
-    "declaration-colon-space-after": "always",
-    "declaration-colon-space-before": "never",
-    "indentation": 2,
-    "max-empty-lines": 1,
     "no-duplicate-selectors": true,
     "property-no-unknown": [
       true,
@@ -26,6 +21,14 @@
       {
         "ignoreTypes": ["custom-element"]
       }
-    ]
+    ],
+    "selector-class-pattern": null,
+    "rule-empty-line-before": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "scss/double-slash-comment-whitespace-inside": null,
+    "scss/double-slash-comment-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "scss/at-mixin-pattern": null
   }
 }
