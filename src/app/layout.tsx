@@ -12,27 +12,11 @@ const openSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Challenge App',
+  title: {
+    template: '%s | My Challenges',
+    default: 'Challenge App',
+  },
   description: 'Track your personal challenges and goals',
-  openGraph: {
-    title: 'Challenge App',
-    description: 'Track your personal challenges and goals',
-    images: [
-      {
-        url: '/images/og_image.png',
-        width: 1200,
-        height: 730,
-        alt: 'Challenge App Preview',
-      },
-    ],
-    siteName: 'Challenge App',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Challenge App',
-    description: 'Track your personal challenges and goals',
-    images: ['/images/og_image.png'],
-  },
 };
 
 export default function RootLayout({
