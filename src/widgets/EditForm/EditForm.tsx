@@ -83,10 +83,6 @@ export function EditForm({ id }: { id: string }) {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   const handleValidation = (fieldName: keyof TEditForm) => ({
     onBlur: () => {
       trigger(fieldName);

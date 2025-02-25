@@ -5,9 +5,7 @@ const { loading } = staticData.root;
 export function Loading() {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.logoWrapper}>
-        <Image src='/images/logo.svg' alt='Logo' width={150} height={150} className={styles.logo} />
-      </div>
+      <Image src='/images/logo.svg' alt='Logo' width={100} height={100} className={styles.logo} />
       <h2>{loading}</h2>
     </div>
   );
