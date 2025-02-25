@@ -4,12 +4,10 @@ import { type PropsWithChildren } from 'react';
 import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-import { ErrorBoundary, ErrorPage } from '@/shared/ui';
+import { ErrorBoundary, ErrorPage, Loading } from '@/shared/ui';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
 import { init } from '@/shared/core';
-
-import styles from './Root.module.scss';
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';
@@ -44,6 +42,7 @@ export function Root(props: PropsWithChildren) {
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (
-    <div className={styles.root__loading}>...Loading...</div>
+    // <div className={styles.root__loading}>...Loading...</div>
+    <Loading />
   );
 }

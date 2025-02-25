@@ -1,7 +1,9 @@
 {
+  "root": {
+    "loading": "   Loading..."
+  },
   "home": {
     "title": "Challenge App",
-
     "buttons": {
       "logIn": "Log in",
       "signUp": "Sign Up"
