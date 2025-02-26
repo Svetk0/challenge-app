@@ -18,7 +18,7 @@ export function ErrorApi({
       <HeroAstonishedIcon />
       <div className={styles.wrapper}>
         <h2>Something went wrong!</h2>
-        <blockquote>
+        <blockquote className={styles.content}>
           <code>{error.message}</code>
         </blockquote>
       </div>
