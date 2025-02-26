@@ -16,7 +16,6 @@ export function EditForm({ id }: { id: string }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
-  //const [_startedDate, _setStartedDate] = useState('');
   const [editChallenge] = useEditChallengeMutation();
   const {
     data: challengeData,
@@ -34,9 +33,7 @@ export function EditForm({ id }: { id: string }) {
   useEffect(() => {
     setIsSwitcher(challengeData?.finished_at === null);
   }, [challengeData, isLoading, error]);
-  useEffect(() => {
-    console.log('err state', errorCatched);
-  }, [errorCatched]);
+  useEffect(() => {}, [errorCatched]);
   const {
     register,
     handleSubmit,
@@ -77,7 +74,7 @@ export function EditForm({ id }: { id: string }) {
     if ('status' in error) {
       throw new Error(`Error ${error.status}: Failed to load challenge`);
     }
-    setErrorCatched(`Failed to load data challenge for editing`);
+    setErrorCatched(dt.errors.get_id);
     throw error;
   }
 
@@ -95,7 +92,7 @@ export function EditForm({ id }: { id: string }) {
       setIsSubmitting(false);
       console.warn(error);
       if (typeof error === 'object' && error !== null && 'status' in error) {
-        setErrorCatched(`Failed to save changes`);
+        setErrorCatched(dt.errors.save_changes);
       }
 
       throw error;

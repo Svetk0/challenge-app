@@ -59,6 +59,11 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       }).unwrap();
     } catch (error) {
       console.error('Failed to update progress:', error);
+
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Failed to update progress');
     }
   }, 1000);
 

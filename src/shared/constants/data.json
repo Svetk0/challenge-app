@@ -89,13 +89,17 @@
       "label": "All time",
       "label_complete": "Complete this challenge"
     },
-
     "buttons": {
       "back": "Back",
       "create": "Create",
       "create_load": "Creating...",
       "edit": "Save",
       "edit_load": "Saving..."
+    },
+    "errors": {
+      "get_id": "Failed to load data challenge for editing",
+      "save_changes": "Failed to save changes",
+      "create_new": "Failed to create challenge"
     }
   },
   "modals": {

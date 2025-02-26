@@ -15,7 +15,6 @@ const dt = staticData.challenge_form;
 export function CreateForm() {
   const router = useRouter();
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
-  // const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -28,7 +27,7 @@ export function CreateForm() {
       setIsSubmitting(false);
       console.warn(error);
       if (typeof error === 'object' && error !== null && 'status' in error) {
-        setErrorCatched(`Failed to create challenge`);
+        setErrorCatched(dt.errors.create_new);
       }
 
       throw error;
