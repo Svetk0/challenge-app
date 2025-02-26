@@ -14,7 +14,7 @@ export function ErrorApi({
   useEffect(() => {}, [error]);
   const router = useRouter();
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <HeroAstonishedIcon />
       <div className={styles.wrapper}>
         <h2>Oops, something went wrong!</h2>
@@ -32,6 +32,6 @@ export function ErrorApi({
         />
         {reset && <Button type='button' text='Try again' color='mini' onClick={reset} />}
       </div>
-    </div>
+    </section>
   );
 }

@@ -7,3 +7,4 @@ export { ErrorApi } from './Errors/ErrorApi';
 export { CardSkeleton } from './Skeletons/Skeletons';
 export { ListChallenges } from './ListChallenges/ListChallenges';
 export { Loading } from './Loading/Loading';
+export { NotFound404 } from './NotFound404/NotFound404';

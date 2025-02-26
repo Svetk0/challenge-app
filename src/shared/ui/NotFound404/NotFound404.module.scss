@@ -1,0 +1,89 @@
+@use '@/shared/styles' as *;
+
+.container {
+    max-width: 350px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+
+    >button {
+        width: 120px;
+        font-size: 0.9rem;
+    }
+
+    >svg {
+
+        //body
+        & path:nth-child(2) {
+            fill: $logo-yellow;
+        }
+
+        & path:nth-child(9) {
+            stroke: $logo-yellow;
+        }
+
+        //questions
+        & path:nth-child(10) {
+            animation: scale 1.5s infinite;
+            animation-delay: 0s;
+        }
+
+        & path:nth-child(8) {
+            animation: scale 1.5s infinite;
+            animation-delay: 0.8s;
+        }
+
+        & path:nth-child(11) {
+            animation: scale 1.5s infinite;
+            animation-delay: 1.5s;
+        }
+
+        & path:nth-child(12) {
+            animation: scale 1.5s infinite;
+            animation-delay: 2s;
+        }
+
+        //eyes
+        & rect:nth-child(5) {
+            transform-origin: 20px 40px;
+            animation: pulse-scale 1.5s infinite;
+            animation-delay: 1.5s;
+        }
+
+        & rect:nth-child(6) {
+            transform-origin: 40px 40px;
+            animation: pulse-scale-reverse 1.5s infinite;
+            animation-delay: 0s;
+        }
+    }
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 50px;
+    gap: 20px;
+    background-color: $black-50;
+    border-radius: 12px;
+    border-bottom: 1px solid $purple;
+    box-shadow: $shadow-box-bright;
+
+    >h2 {
+        font-weight: 600;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .content {
+        font-weight: 400;
+        font-size: 16px;
+        text-align: center;
+    }
+}
