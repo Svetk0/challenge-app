@@ -1,8 +1,6 @@
 'use client';
-
 import { type PropsWithChildren } from 'react';
 import { useLaunchParams } from '@telegram-apps/sdk-react';
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
 import { ErrorBoundary, Loading, ErrorApi } from '@/shared/ui';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
@@ -26,9 +24,7 @@ function RootInner({ children }: PropsWithChildren) {
     init(debug);
   });
 
-  return (
-    <TonConnectUIProvider manifestUrl='/tonconnect-manifest.json'>{children}</TonConnectUIProvider>
-  );
+  return <>{children}</>;
 }
 
 export function Root(props: PropsWithChildren) {

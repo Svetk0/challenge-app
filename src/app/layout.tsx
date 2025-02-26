@@ -4,6 +4,8 @@ import localFont from 'next/font/local';
 import { Footer } from '@/widgets';
 import { Root } from '@/shared/core';
 import '../shared/styles/globals.scss';
+import { Suspense } from 'react';
+import { Loading } from '@/shared/ui';
 
 const openSans = localFont({
   src: '../../public/fonts/OpenSans.woff',
@@ -29,8 +31,10 @@ export default function RootLayout({
       <StoreProvider>
         <body className={`${openSans.className}`}>
           <Root>
-            <main>{children}</main>
-            <Footer />
+            <Suspense fallback={<Loading />}>
+              <main>{children}</main>
+              <Footer />
+            </Suspense>
           </Root>
         </body>
       </StoreProvider>

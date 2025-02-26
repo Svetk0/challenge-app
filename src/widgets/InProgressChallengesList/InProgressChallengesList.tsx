@@ -54,7 +54,7 @@ export function InProgressChallengesList() {
   console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.rowWrapper}>
         <h2 className={styles.title}>{title}</h2>
         <Button
@@ -68,6 +68,6 @@ export function InProgressChallengesList() {
       <ListChallenges displayData={displayData}>
         <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
-    </div>
+    </section>
   );
 }
