@@ -3,7 +3,12 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '@/shared/ui';
 import { HeroAstonishedIcon } from '@/shared/ui/Icons';
+import staticData from '@/shared/constants/data.json';
 import styles from './Errors.module.scss';
+const {
+  error: { title },
+  buttons: { my_challenges, try_again },
+} = staticData.root;
 export function ErrorApi({
   error,
   reset,
@@ -17,7 +22,7 @@ export function ErrorApi({
     <section className={styles.container}>
       <HeroAstonishedIcon />
       <div className={styles.wrapper}>
-        <h2>Oops, something went wrong!</h2>
+        <h2>{title}</h2>
         <blockquote className={styles.content}>
           <code>{error.message}</code>
         </blockquote>
@@ -26,11 +31,11 @@ export function ErrorApi({
       <div className={styles.rowWrapper}>
         <Button
           type='button'
-          text={'My Challenges'}
+          text={my_challenges}
           color='mini_black'
           onClick={() => router.push('/challenges')}
         />
-        {reset && <Button type='button' text='Try again' color='mini' onClick={reset} />}
+        {reset && <Button type='button' text={try_again} color='mini' onClick={reset} />}
       </div>
     </section>
   );

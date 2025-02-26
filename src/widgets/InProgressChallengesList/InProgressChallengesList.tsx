@@ -44,7 +44,7 @@ export function InProgressChallengesList() {
   useEffect(() => {
     if (error) {
       if ('status' in error) {
-        throw new Error(`Error ${error.status}: Failed to load challenges`);
+        throw new Error(`${error.status}: Failed to load challenges`);
       }
       throw error;
     }

@@ -1,6 +1,18 @@
 {
   "root": {
-    "loading": "Loading"
+    "loading": "Loading",
+    "error": {
+      "title": "Oops, something went wrong!"
+    },
+    "not_found": {
+      "title": "404 | Page Not Found",
+      "message": "Oops! The page you're looking for doesn't exist"
+    },
+    "buttons": {
+      "home": "Home",
+      "try_again": "Try again",
+      "my_challenges": "My Challenges"
+    }
   },
   "home": {
     "title": "Challenge App",

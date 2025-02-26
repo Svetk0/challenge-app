@@ -14,7 +14,7 @@ interface ResponseUser {
 export const contentApi = createApi({
   reducerPath: 'contentApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://challenge-app.site/api/',
+    baseUrl: 'https://cchallenge-app.site/api/',
     prepareHeaders: (headers) => {
       const token = getAuthToken();
 
