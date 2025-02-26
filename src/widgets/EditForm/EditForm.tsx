@@ -69,6 +69,13 @@ export function EditForm({ id }: { id: string }) {
     values: challengeData,
   });
 
+  if (error) {
+    if ('status' in error) {
+      throw new Error(`Error ${error.status}: Failed to load challenge`);
+    }
+    throw error;
+  }
+
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
     try {
       if (isSwitcher) {
@@ -79,7 +86,10 @@ export function EditForm({ id }: { id: string }) {
       await editChallenge({ uuid: id, dataEdit: data }).unwrap();
       router.push('/challenges');
     } catch (error) {
-      console.error('Failed to edit challenge:', error);
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Failed to edit challenge');
     }
   };
 

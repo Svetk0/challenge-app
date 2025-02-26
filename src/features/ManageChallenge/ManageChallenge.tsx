@@ -17,19 +17,18 @@ export function CompleteChallengeButton({ challenge }: Props) {
   const handleFinishChallenge = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      const response = await editChallenge({
+      await editChallenge({
         uuid: challenge.uuid,
         dataEdit: {
           ...challenge,
           is_finished: true,
         },
       }).unwrap();
-
-      console.log('Challenge marked as finished:', response);
-      return response;
     } catch (error) {
-      console.error('Failed to mark challenge as finished:', error);
-      throw error;
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Failed to complete challenge');
     }
   };
   return (
@@ -48,15 +47,14 @@ export function DeleteChallengeButton({ challenge }: Props) {
   const handleDeleteChallenge = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      const response = await deleteChallenge({
+      await deleteChallenge({
         uuid: challenge.uuid,
       }).unwrap();
-
-      console.log('Challenge was deleted:', response);
-      return response;
     } catch (error) {
-      console.error('Failed to delete challenge:', error);
-      throw error;
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error('Failed to delete challenge');
     }
   };
   return (

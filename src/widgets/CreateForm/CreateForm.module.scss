@@ -50,6 +50,7 @@
 }
 
 .rowWrapper {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -62,4 +63,15 @@
     flex-wrap: wrap-reverse;
     gap: 8px;
   }
+}
+
+
+.error {
+  position: absolute;
+  top: -30px;
+  left: 30%;
+  color: $red;
+  font-size: 14px;
+  margin-block: 5px;
+  text-align: center;
 }

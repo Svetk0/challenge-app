@@ -41,12 +41,14 @@ export function InProgressChallengesList() {
     }
   }, [data, dispatch, challengeData]);
 
-  if (error) {
-    if ('status' in error) {
-      throw new Error(`Error ${error.status}: Failed to load challenges`);
+  useEffect(() => {
+    if (error) {
+      if ('status' in error) {
+        throw new Error(`Error ${error.status}: Failed to load challenges`);
+      }
+      throw error;
     }
-    throw error;
-  }
+  }, [error]);
 
   const displayData = data || challengeData;
   console.log('displayData, data:', data, 'store:', challengeData);
