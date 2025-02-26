@@ -17,7 +17,7 @@ export function ErrorApi({
     <div className={styles.container}>
       <HeroAstonishedIcon />
       <div className={styles.wrapper}>
-        <h2>Something went wrong!</h2>
+        <h2>Oops, something went wrong!</h2>
         <blockquote className={styles.content}>
           <code>{error.message}</code>
         </blockquote>
@@ -27,10 +27,10 @@ export function ErrorApi({
         <Button
           type='button'
           text={'My Challenges'}
-          color='black'
+          color='mini_black'
           onClick={() => router.push('/challenges')}
         />
-        <Button type='button' text='Try again' color='default' onClick={reset} />
+        {reset && <Button type='button' text='Try again' color='mini' onClick={reset} />}
       </div>
     </div>
   );

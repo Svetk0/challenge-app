@@ -31,7 +31,7 @@ export function InProgressChallengesList() {
 
   useEffect(() => {
     setLocalChallenges(getLocalStorage('challenges'));
-    console.log('get local', localChallenges);
+    console.log('get local', isLoading, localChallenges);
   }, [isLoading]);
   useEffect(() => {
     if (data) {
@@ -66,7 +66,7 @@ export function InProgressChallengesList() {
       </div>
 
       <ListChallenges displayData={displayData}>
-        <ChallengeInfo />
+        <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
     </div>
   );

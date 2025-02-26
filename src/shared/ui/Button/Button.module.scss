@@ -102,12 +102,18 @@
   }
 }
 
-.mini {
+.mini,
+.mini_black {
   width: 100px;
   height: 40px;
   font-size: 1.1rem;
   padding: 0;
   background: $gradient-main-bg;
+}
+
+.mini_black {
+  background: $black-70;
+  color: $green-neon;
 }
 
 .control,

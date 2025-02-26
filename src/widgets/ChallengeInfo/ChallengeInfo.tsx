@@ -24,7 +24,6 @@ const {
 } = staticData.challenge_info;
 
 export function ChallengeInfo({ isLoading, challenge }: Props) {
-  //console.log('challenge render', challenge?.description);
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
@@ -41,7 +40,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }
     }, 100);
   };
-  useEffect(() => {}, [challenge]);
+  useEffect(() => {}, [challenge, isLoading]);
   useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
     if (challenge) {
