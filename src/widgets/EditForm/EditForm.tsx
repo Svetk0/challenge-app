@@ -14,7 +14,9 @@ const dt = staticData.challenge_form;
 
 export function EditForm({ id }: { id: string }) {
   const router = useRouter();
-  const [_startedDate, _setStartedDate] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [errorCatched, setErrorCatched] = useState<string | null>(null);
+  //const [_startedDate, _setStartedDate] = useState('');
   const [editChallenge] = useEditChallengeMutation();
   const {
     data: challengeData,
@@ -32,7 +34,9 @@ export function EditForm({ id }: { id: string }) {
   useEffect(() => {
     setIsSwitcher(challengeData?.finished_at === null);
   }, [challengeData, isLoading, error]);
-
+  useEffect(() => {
+    console.log('err state', errorCatched);
+  }, [errorCatched]);
   const {
     register,
     handleSubmit,
@@ -73,11 +77,13 @@ export function EditForm({ id }: { id: string }) {
     if ('status' in error) {
       throw new Error(`Error ${error.status}: Failed to load challenge`);
     }
+    setErrorCatched(`Failed to load data challenge for editing`);
     throw error;
   }
 
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
     try {
+      setIsSubmitting(true);
       if (isSwitcher) {
         data.finished_at = null;
       }
@@ -86,10 +92,13 @@ export function EditForm({ id }: { id: string }) {
       await editChallenge({ uuid: id, dataEdit: data }).unwrap();
       router.push('/challenges');
     } catch (error) {
-      if (error instanceof Error) {
-        throw error;
+      setIsSubmitting(false);
+      console.warn(error);
+      if (typeof error === 'object' && error !== null && 'status' in error) {
+        setErrorCatched(`Failed to save changes`);
       }
-      throw new Error('Failed to edit challenge');
+
+      throw error;
     }
   };
 
@@ -161,8 +170,13 @@ export function EditForm({ id }: { id: string }) {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Edit'} color='default' />
+        {errorCatched && <div className={styles.error}> {errorCatched}</div>}
+        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
+        <Button
+          type='submit'
+          text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
+          color='default'
+        />
       </div>
     </form>
   );

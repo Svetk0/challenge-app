@@ -15,10 +15,11 @@ const dt = staticData.challenge_form;
 export function CreateForm() {
   const router = useRouter();
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
-  const [_startedDate, _setStartedDate] = useState('');
+  // const [_startedDate, _setStartedDate] = useState('');
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     setIsSubmitting(true);
     try {

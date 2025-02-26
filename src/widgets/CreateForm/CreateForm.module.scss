@@ -65,11 +65,11 @@
   }
 }
 
-
 .error {
   position: absolute;
+  width: 100%;
   top: -30px;
-  left: 30%;
+  left: 0;
   color: $red;
   font-size: 14px;
   margin-block: 5px;
