@@ -18,6 +18,7 @@ import styles from './InProgressChallengesList.module.scss';
 const {
   title,
   buttons: { add },
+  errors: { get_all },
 } = staticData.challenges;
 
 export function InProgressChallengesList() {
@@ -44,7 +45,7 @@ export function InProgressChallengesList() {
   useEffect(() => {
     if (error) {
       if ('status' in error) {
-        throw new Error(`${error.status}: Failed to load challenges`);
+        throw new Error(`${error.status}: ${get_all}`);
       }
       throw error;
     }

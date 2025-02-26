@@ -6,7 +6,7 @@ import { HeroAstonishedIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
 import styles from './Errors.module.scss';
 const {
-  error: { title },
+  error_global: { title },
   buttons: { my_challenges, try_again },
 } = staticData.root;
 export function ErrorApi({

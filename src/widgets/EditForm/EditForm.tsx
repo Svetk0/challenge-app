@@ -72,7 +72,7 @@ export function EditForm({ id }: { id: string }) {
 
   if (error) {
     if ('status' in error) {
-      throw new Error(`Error ${error.status}: Failed to load challenge`);
+      throw new Error(` ${error.status}: ${dt.errors.get_id}`);
     }
     setErrorCatched(dt.errors.get_id);
     throw error;

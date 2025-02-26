@@ -1,7 +1,7 @@
 {
   "root": {
     "loading": "Loading",
-    "error": {
+    "error_global": {
       "title": "Oops, something went wrong!"
     },
     "not_found": {
@@ -25,8 +25,10 @@
     "title": "Daily Routine",
     "loading": "Your Challenges is loading...",
     "buttons": {
-      "add": "Add new",
-      "back": "Back"
+      "add": "Add new"
+    },
+    "errors": {
+      "get_all": "Failed to load list of challenges"
     }
   },
   "challenge_info": {
