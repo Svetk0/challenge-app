@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
+import { Suspense } from 'react';
 import { Footer } from '@/widgets';
 import { Root } from '@/shared/core';
-import '../shared/styles/globals.scss';
-import { Suspense } from 'react';
 import { Loading } from '@/shared/ui';
+
+import './_assets/globals.scss';
 
 const openSans = localFont({
   src: '../../public/fonts/OpenSans.woff',
