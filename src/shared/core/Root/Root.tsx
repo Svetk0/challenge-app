@@ -4,7 +4,7 @@ import { type PropsWithChildren } from 'react';
 import { useLaunchParams } from '@telegram-apps/sdk-react';
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-import { ErrorBoundary, ErrorPage, Loading } from '@/shared/ui';
+import { ErrorBoundary, Loading, ErrorApi } from '@/shared/ui';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
 import { init } from '@/shared/core';
@@ -38,7 +38,7 @@ export function Root(props: PropsWithChildren) {
   const didMount = useDidMount();
 
   return didMount ? (
-    <ErrorBoundary fallback={ErrorPage}>
+    <ErrorBoundary fallback={ErrorApi}>
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (

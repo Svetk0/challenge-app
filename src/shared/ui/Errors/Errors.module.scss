@@ -1,0 +1,67 @@
+@use '@/shared/styles' as *;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    >svg {
+        margin-left: auto;
+        margin-right: 30px;
+    }
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 30px;
+    gap: 20px;
+    background-color: $black-50;
+    border-radius: 12px;
+    border-bottom: 1px solid $purple;
+    box-shadow: $shadow-box-bright;
+
+    >h2 {
+        font-weight: 600;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    >p {
+        font-weight: 400;
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+.rowWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+
+    @media (max-width: 374px) {
+        flex-wrap: wrap-reverse;
+        gap: 8px;
+    }
+}
+
+.error {
+    position: absolute;
+    width: 100%;
+    top: -30px;
+    left: 0;
+    color: $red;
+    font-size: 14px;
+    margin-block: 5px;
+    text-align: center;
+}

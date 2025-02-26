@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Button } from '@/shared/ui';
+import { ErrorApi } from '@/shared/ui';
 
 export default function GlobalError({
   error,
@@ -17,9 +17,7 @@ export default function GlobalError({
 
   return (
     <div className='error-container'>
-      <h2>Something went wrong!</h2>
-      <p>{error.message}</p>
-      <Button type='button' text='Try again' color='default' onClick={reset} />
+      <ErrorApi error={error} reset={reset} />
     </div>
   );
 }

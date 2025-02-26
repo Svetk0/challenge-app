@@ -3,6 +3,7 @@ export { Input } from './Input/Input';
 export { Switcher } from './Switcher/Switcher';
 export { ErrorBoundary } from './Errors/ErrorBoundary';
 export { ErrorPage } from './Errors/ErrorPage';
+export { ErrorApi } from './Errors/ErrorApi';
 export { CardSkeleton } from './Skeletons/Skeletons';
 export { ListChallenges } from './ListChallenges/ListChallenges';
 export { Loading } from './Loading/Loading';
