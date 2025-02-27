@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/shared/api/content';
+import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import styles from './ProgressBar.module.scss';
-import { useErrorHandler } from '@/shared/lib/hooks/useErrorHandler';
 
 type Props = {
   challenge: TChallenge;

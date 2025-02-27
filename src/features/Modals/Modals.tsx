@@ -1,5 +1,7 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/shared/lib/store';
 import { Button } from '@/shared/ui';
 import { CloseIcon } from '@/shared/ui/Icons';
 import { DeleteChallengeButton } from '@/features/ManageChallenge/ManageChallenge';
@@ -72,6 +74,8 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 };
 
 export function ModalDelete({ onClose, isOpen, challenge }: Props) {
+  const errorData = useSelector((state: RootState) => state.error.error);
+  //const [errorCatched, setErrorCatched] = useState<string | null | undefined>(null);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.wrapper}>
@@ -82,7 +86,7 @@ export function ModalDelete({ onClose, isOpen, challenge }: Props) {
           <br />
           {text_2}
         </p>
-
+        {errorData && <div className={styles.error}> {errorData.user_message}</div>}
         <DeleteChallengeButton challenge={challenge} />
       </div>
     </Modal>

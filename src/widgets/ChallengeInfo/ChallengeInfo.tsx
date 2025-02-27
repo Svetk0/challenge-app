@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import { useErrorHandler } from '@/shared/utils/hooks';
 import { RootState } from '@/shared/lib/store';
 import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
@@ -28,13 +28,13 @@ const {
 
 export function ChallengeInfo({ isLoading, challenge }: Props) {
   const errorData = useSelector((state: RootState) => state.error.error);
+  const { clearCurrentError } = useErrorHandler();
 
-  const [errorCatched, setErrorCatched] = useState<string | null | undefined>(null);
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
-
+  console.log('challenge render');
   const scrollToCenter = () => {
     setTimeout(() => {
       const element = document.getElementById(`challenge-${challenge?.uuid}`);
@@ -46,10 +46,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }
     }, 100);
   };
-  useEffect(() => {
-    console.log('errorData', errorData);
-    setErrorCatched(errorData?.user_message);
-  }, [errorData]);
+  //useEffect(() => {}, [errorData]);
   useEffect(() => {}, [challenge, isLoading]);
   useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
@@ -80,7 +77,8 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       onClick={() => {
         setIsChoosen(true);
         scrollToCenter();
-        setErrorCatched(null);
+
+        clearCurrentError();
       }}
     >
       <div className={styles.rowWrapper}>
@@ -103,7 +101,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       </div>
       {isChoosen ? (
         <div className={styles.rowWrapper}>
-          {errorCatched && <div className={styles.error}> {errorCatched}</div>}
+          {errorData && <div className={styles.error}> {errorData.user_message}</div>}
           <CompleteChallengeButton challenge={challenge} />
           <Button
             type='button'

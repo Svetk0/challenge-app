@@ -67,9 +67,12 @@ export const contentApi = createApi({
     }),
 
     //edit challenge by id
-    editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
+    editChallenge: builder.mutation<
+      Partial<TEditForm>,
+      { uuid: string; dataEdit: Partial<TEditForm> }
+    >({
       query: ({ uuid, dataEdit }) => ({
-        url: `challenges/${uuid}/`,
+        url: `cchallenges/${uuid}/`,
         method: 'PATCH',
         body: dataEdit,
       }),
@@ -78,7 +81,7 @@ export const contentApi = createApi({
     //delete challenge by id
     deleteChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
       query: ({ uuid }) => ({
-        url: `challenges/${uuid}/`,
+        url: `cchallenges/${uuid}/`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Actual'],

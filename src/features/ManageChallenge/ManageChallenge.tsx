@@ -1,10 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/shared/api/content';
+import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
-import { useErrorHandler } from '@/shared/lib/hooks/useErrorHandler';
 
 type Props = {
   challenge: TChallenge;
