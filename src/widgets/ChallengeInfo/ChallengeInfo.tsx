@@ -34,7 +34,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
-  console.log('challenge render');
+
   const scrollToCenter = () => {
     setTimeout(() => {
       const element = document.getElementById(`challenge-${challenge?.uuid}`);

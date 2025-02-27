@@ -40,6 +40,11 @@
     "period": {
       "every": "every",
       "starts_at": "starts at"
+    },
+    "errors": {
+      "progress": "Failed to update progress",
+      "complete": "Failed to complete challenge",
+      "delete": "Failed to DELETE challenge"
     }
   },
   "challenge_form": {

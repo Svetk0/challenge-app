@@ -5,6 +5,7 @@ import { useEditChallengeMutation } from '@/shared/api/content';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
+import staticData from '@/shared/constants/data.json';
 import styles from './ProgressBar.module.scss';
 
 type Props = {
@@ -26,6 +27,10 @@ const monthNames = [
   'Nov',
   'Dec',
 ];
+const {
+  errors: { progress: progress_error },
+} = staticData.challenge_info;
+
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
@@ -59,7 +64,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
         },
       }).unwrap();
     } catch (error) {
-      handleError(error, 'Failed to update progress');
+      handleError(error, progress_error);
       setCurrentProgress(challenge.progress);
       throw error;
     }

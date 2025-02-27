@@ -11,6 +11,7 @@ type Props = {
 };
 const {
   buttons: { complete, remove },
+  errors: { complete: complete_error, delete: delete_error },
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
@@ -27,7 +28,7 @@ export function CompleteChallengeButton({ challenge }: Props) {
         },
       }).unwrap();
     } catch (error) {
-      handleError(error, 'Failed to complete challenge');
+      handleError(error, complete_error);
       throw error;
     }
   };
@@ -52,7 +53,7 @@ export function DeleteChallengeButton({ challenge }: Props) {
         uuid: challenge.uuid,
       }).unwrap();
     } catch (error) {
-      handleError(error, 'Failed to DELETE challenge');
+      handleError(error, delete_error);
       throw error;
     }
   };
