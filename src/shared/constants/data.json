@@ -101,7 +101,7 @@
     "progress": {
       "label": "Progress",
       "placeholder": "current result",
-      "error_message": "should be above 0",
+      "error_message": "should be positive or 0",
       "require_message": "please, fill it"
     },
     "switcher": {

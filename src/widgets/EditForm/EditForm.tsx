@@ -37,7 +37,7 @@ export function EditForm({ id }: { id: string }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields, isDirty },
     trigger,
     getValues,
     setValue,
@@ -59,7 +59,7 @@ export function EditForm({ id }: { id: string }) {
 
       return {
         description: '',
-        goal: 1,
+        goal: 0,
         period: 'week',
         started_at: '',
         finished_at: null,
@@ -81,12 +81,26 @@ export function EditForm({ id }: { id: string }) {
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
     try {
       setIsSubmitting(true);
-      if (isSwitcher) {
-        data.finished_at = null;
-      }
-      data.is_finished = isCompleted;
 
-      await editChallenge({ uuid: id, dataEdit: data }).unwrap();
+      const changedFields = Object.fromEntries(
+        Object.entries(data).filter(([key]) => key in dirtyFields)
+      ) as Partial<TEditForm>;
+
+      if (isSwitcher !== (challengeData?.finished_at === null)) {
+        changedFields.finished_at = isSwitcher ? null : data.finished_at;
+      }
+
+      if (isCompleted !== challengeData?.is_finished) {
+        changedFields.is_finished = isCompleted;
+      }
+
+      if (Object.keys(changedFields).length > 0) {
+        await editChallenge({
+          uuid: id,
+          dataEdit: changedFields,
+        }).unwrap();
+      }
+
       router.push('/challenges');
     } catch (error) {
       setIsSubmitting(false);
@@ -173,6 +187,7 @@ export function EditForm({ id }: { id: string }) {
           type='submit'
           text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
           color='default'
+          disabled={!isDirty}
         />
       </div>
     </form>
