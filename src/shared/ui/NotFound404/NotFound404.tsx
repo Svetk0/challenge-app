@@ -13,15 +13,16 @@ export function NotFound404() {
   const router = useRouter();
   return (
     <div className={styles.container}>
-      <HeroAstonishedIcon />
       <section className={styles.wrapper}>
         <h2>{title}</h2>
         <blockquote className={styles.content}>
           <code>{message}</code>
         </blockquote>
       </section>
-
-      <Button type='button' text={home} color='mini' onClick={() => router.push('/')} />
+      <div className={styles.columnWrapper}>
+        <HeroAstonishedIcon />
+        <Button type='button' text={home} color='mini' onClick={() => router.push('/')} />
+      </div>
     </div>
   );
 }

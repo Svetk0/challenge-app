@@ -9,55 +9,84 @@
     justify-content: center;
     padding: 20px;
 
-    >button {
-        width: 120px;
-        font-size: 0.9rem;
+    .columnWrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        >button {
+            width: 120px;
+            font-size: 0.9rem;
+        }
+
+        >svg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            animation: move 4s infinite;
+
+            //body
+            & path:nth-child(2) {
+                fill: $logo-yellow;
+            }
+
+            & path:nth-child(9) {
+                stroke: $logo-yellow;
+            }
+
+            //questions
+            & path:nth-child(10) {
+                animation: scale 1.5s infinite;
+                animation-delay: 0s;
+            }
+
+            & path:nth-child(8) {
+                animation: scale 1.5s infinite;
+                animation-delay: 0.8s;
+            }
+
+            & path:nth-child(11) {
+                animation: scale 1.5s infinite;
+                animation-delay: 1.5s;
+            }
+
+            & path:nth-child(12) {
+                animation: scale 1.5s infinite;
+                animation-delay: 2s;
+            }
+
+            //eyes
+            & rect:nth-child(5) {
+                transform-origin: 20px 40px;
+                animation: pulse-scale 1.5s infinite;
+                animation-delay: 1.5s;
+            }
+
+            & rect:nth-child(6) {
+                transform-origin: 40px 40px;
+                animation: pulse-scale-reverse 1.5s infinite;
+                animation-delay: 0s;
+            }
+        }
+
     }
 
-    >svg {
+}
 
-        //body
-        & path:nth-child(2) {
-            fill: $logo-yellow;
-        }
+@keyframes move {
 
-        & path:nth-child(9) {
-            stroke: $logo-yellow;
-        }
+    0%,
+    100% {
+        transform: translateY(-20px);
+    }
 
-        //questions
-        & path:nth-child(10) {
-            animation: scale 1.5s infinite;
-            animation-delay: 0s;
-        }
-
-        & path:nth-child(8) {
-            animation: scale 1.5s infinite;
-            animation-delay: 0.8s;
-        }
-
-        & path:nth-child(11) {
-            animation: scale 1.5s infinite;
-            animation-delay: 1.5s;
-        }
-
-        & path:nth-child(12) {
-            animation: scale 1.5s infinite;
-            animation-delay: 2s;
-        }
-
-        //eyes
-        & rect:nth-child(5) {
-            transform-origin: 20px 40px;
-            animation: pulse-scale 1.5s infinite;
-            animation-delay: 1.5s;
-        }
-
-        & rect:nth-child(6) {
-            transform-origin: 40px 40px;
-            animation: pulse-scale-reverse 1.5s infinite;
-            animation-delay: 0s;
-        }
+    40%,
+    50%,
+    60% {
+        transform: translateY(-50px);
     }
 }
 
@@ -68,12 +97,13 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     gap: 20px;
     background-color: $black-50;
     border-radius: 12px;
     border-bottom: 1px solid $purple;
     box-shadow: $shadow-box-bright;
+    z-index: 100;
 
     >h2 {
         font-weight: 600;
