@@ -5,6 +5,7 @@ import { useEditChallengeMutation } from '@/shared/api/content';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import styles from './ProgressBar.module.scss';
+import { useErrorHandler } from '@/shared/lib/hooks/useErrorHandler';
 
 type Props = {
   challenge: TChallenge;
@@ -29,6 +30,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
   const [initialMount, setInitialMount] = useState(true);
+  const { handleError } = useErrorHandler();
 
   const handleProgressChange = (increment: boolean) => {
     const newValue: number = increment ? currentProgress + 1 : currentProgress - 1;
@@ -53,17 +55,13 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       await editChallenge({
         uuid: challenge.uuid,
         dataEdit: {
-          ...challenge,
           progress: updatedProgress,
         },
       }).unwrap();
     } catch (error) {
-      console.error('Failed to update progress:', error);
-
-      if (error instanceof Error) {
-        throw error;
-      }
-      throw new Error('Failed to update progress');
+      handleError(error, 'Failed to update progress');
+      setCurrentProgress(challenge.progress);
+      throw error;
     }
   }, 1000);
 

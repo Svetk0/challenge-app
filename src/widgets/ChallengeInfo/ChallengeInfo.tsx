@@ -1,15 +1,18 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '@/shared/lib/store';
 import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { formatDate } from '@/shared/utils';
 
-import { Button, CardSkeleton } from '@/shared/ui';
 import { ProgressBar, ModalDelete } from '@/features';
 import {
   CompleteChallengeButton,
   EditChallengeIconButton,
 } from '@/features/ManageChallenge/ManageChallenge';
+import { Button, CardSkeleton } from '@/shared/ui';
 
 import staticData from '@/shared/constants/data.json';
 import styles from './ChallengeInfo.module.scss';
@@ -24,6 +27,9 @@ const {
 } = staticData.challenge_info;
 
 export function ChallengeInfo({ isLoading, challenge }: Props) {
+  const errorData = useSelector((state: RootState) => state.error.error);
+
+  const [errorCatched, setErrorCatched] = useState<string | null | undefined>(null);
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(true);
@@ -40,6 +46,10 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }
     }, 100);
   };
+  useEffect(() => {
+    console.log('errorData', errorData);
+    setErrorCatched(errorData?.user_message);
+  }, [errorData]);
   useEffect(() => {}, [challenge, isLoading]);
   useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
   useEffect(() => {
@@ -70,6 +80,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       onClick={() => {
         setIsChoosen(true);
         scrollToCenter();
+        setErrorCatched(null);
       }}
     >
       <div className={styles.rowWrapper}>
@@ -92,6 +103,7 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       </div>
       {isChoosen ? (
         <div className={styles.rowWrapper}>
+          {errorCatched && <div className={styles.error}> {errorCatched}</div>}
           <CompleteChallengeButton challenge={challenge} />
           <Button
             type='button'

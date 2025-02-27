@@ -4,6 +4,8 @@ import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
+import { useErrorHandler } from '@/shared/lib/hooks/useErrorHandler';
+
 type Props = {
   challenge: TChallenge;
 };
@@ -12,6 +14,7 @@ const {
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
   const [editChallenge] = useEditChallengeMutation();
 
   const handleFinishChallenge = async (e: React.MouseEvent) => {
@@ -20,15 +23,12 @@ export function CompleteChallengeButton({ challenge }: Props) {
       await editChallenge({
         uuid: challenge.uuid,
         dataEdit: {
-          ...challenge,
           is_finished: true,
         },
       }).unwrap();
     } catch (error) {
-      if (error instanceof Error) {
-        throw error;
-      }
-      throw new Error('Failed to complete challenge');
+      handleError(error, 'Failed to complete challenge');
+      throw error;
     }
   };
   return (
@@ -42,6 +42,7 @@ export function CompleteChallengeButton({ challenge }: Props) {
 }
 
 export function DeleteChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
   const [deleteChallenge] = useDeleteChallengeMutation();
 
   const handleDeleteChallenge = async (e: React.MouseEvent) => {
@@ -51,10 +52,8 @@ export function DeleteChallengeButton({ challenge }: Props) {
         uuid: challenge.uuid,
       }).unwrap();
     } catch (error) {
-      if (error instanceof Error) {
-        throw error;
-      }
-      throw new Error('Failed to delete challenge');
+      handleError(error, 'Failed to DELETE challenge');
+      throw error;
     }
   };
   return (
