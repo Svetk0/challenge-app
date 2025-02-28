@@ -125,6 +125,17 @@
     }
 }
 
+@keyframes scale-stars {
+
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(2);
+    }
+}
+
 @keyframes swing {
 
     0%,
@@ -150,5 +161,30 @@
     50% {
         transform: rotate(15deg);
         opacity: 0.7;
+    }
+}
+
+@keyframes move {
+
+    0%,
+    100% {
+        transform: translateX(-80px);
+
+    }
+
+    50% {
+        transform: translateX(80px);
+    }
+}
+
+@keyframes pendulum {
+
+    0%,
+    100% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(-5deg);
     }
 }

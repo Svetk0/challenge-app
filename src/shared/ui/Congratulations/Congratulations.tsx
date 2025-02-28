@@ -13,16 +13,15 @@ export function Congratulations() {
   const router = useRouter();
   return (
     <div className={styles.container}>
+      <HeroHappyIcon />
       <section className={styles.wrapper}>
         <h2>{title}</h2>
         <blockquote className={styles.content}>
           <code>{message}</code>
         </blockquote>
       </section>
-      <div className={styles.columnWrapper}>
-        <HeroHappyIcon />
-        <Button type='button' text={congrats} color='mini' onClick={() => router.push('/')} />
-      </div>
+
+      <Button type='button' text={congrats} color='mini' onClick={() => router.push('/')} />
     </div>
   );
 }
