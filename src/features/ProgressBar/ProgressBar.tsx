@@ -54,8 +54,15 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       setInitialMount(false);
       return;
     }
-
     updateProgress(currentProgress);
+    const timer = setTimeout(() => {
+      if (currentProgress >= challenge.goal) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    }, 600);
+    return () => clearTimeout(timer);
   }, [currentProgress]);
 
   const updateProgress = useDebouncedCallback(async (updatedProgress: number) => {
@@ -71,7 +78,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       setCurrentProgress(challenge.progress);
       throw error;
     }
-  }, 1000);
+  }, 500);
 
   const calculateDaysLeft = () => {
     if (challenge.finished_at != null) {
@@ -102,16 +109,6 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const progress = (currentProgress / challenge.goal) * 100;
   const daysLeft = calculateDaysLeft();
   const deadlinePeriod = calculateDeadlinePeriod();
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (progress > 99) {
-        setIsOpen(true);
-      } else {
-        setIsOpen(false);
-      }
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [progress]);
 
   if (isMinimal) {
     return (
