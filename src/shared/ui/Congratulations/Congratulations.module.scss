@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    //padding: 20px;
 
     >button {
         width: 120px;
@@ -14,13 +14,14 @@
     }
 
     >svg {
-        animation: move 4s infinite;
+        animation: move 3s infinite;
+
 
         //body
         & path:nth-child(2) {
             transform-origin: center center;
             animation:
-                pendulum 1s infinite;
+                pendulum 0.8s infinite;
         }
 
         //stars

@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/store';
+import { cn } from '@/shared/utils';
 import { Button } from '@/shared/ui';
 import { CloseIcon } from '@/shared/ui/Icons';
 import { DeleteChallengeButton } from '@/features';
@@ -13,6 +14,7 @@ import styles from './Modals.module.scss';
 const { title, text_1, text_2 } = staticData.modals.modal_delete;
 export interface ModalProps {
   isOpen: boolean;
+  color?: string;
   onClose: () => void;
   children?: React.ReactNode;
 }
@@ -20,7 +22,7 @@ type Props = {
   challenge: TChallenge;
 } & ModalProps;
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, color, children }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -55,7 +57,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
-    <dialog ref={dialogRef} className={styles.dialog} onClick={onClose}>
+    <dialog ref={dialogRef} className={cn(styles.dialog, color && styles[color])} onClick={onClose}>
       <section className={styles.content} onClick={(e) => e.stopPropagation()}>
         <Button
           ref={closeButtonRef}
@@ -66,7 +68,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           aria-label='close'
           onClick={onClose}
         />
-
         {children}
       </section>
     </dialog>

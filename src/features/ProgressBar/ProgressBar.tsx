@@ -4,9 +4,10 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/shared/api/content';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
-import { Button } from '@/shared/ui';
+import { Button, Congratulations } from '@/shared/ui';
 import staticData from '@/shared/constants/data.json';
 import styles from './ProgressBar.module.scss';
+import { Modal } from '..';
 
 type Props = {
   challenge: TChallenge;
@@ -34,7 +35,8 @@ const {
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
-  const [initialMount, setInitialMount] = useState(true);
+  const [initialMount, setInitialMount] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const { handleError } = useErrorHandler();
 
   const handleProgressChange = (increment: boolean) => {
@@ -46,6 +48,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   useEffect(() => {
     setCurrentProgress(challenge.progress);
   }, [challenge.progress]);
+
   useEffect(() => {
     if (initialMount) {
       setInitialMount(false);
@@ -142,6 +145,9 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
         </div>
       </div>
       <Button type='button' text={'+'} color='round' onClick={() => handleProgressChange(true)} />
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} color='transparent'>
+        <Congratulations />
+      </Modal>
     </div>
   );
 }
