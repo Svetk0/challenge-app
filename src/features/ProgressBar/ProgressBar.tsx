@@ -4,10 +4,10 @@ import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/shared/api/content';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
-import { Button, Congratulations } from '@/shared/ui';
+import { Button } from '@/shared/ui';
+import { ModalCongrats } from '@/features';
 import staticData from '@/shared/constants/data.json';
 import styles from './ProgressBar.module.scss';
-import { Modal } from '..';
 
 type Props = {
   challenge: TChallenge;
@@ -36,7 +36,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
   const [initialMount, setInitialMount] = useState<boolean>(true);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { handleError } = useErrorHandler();
 
   const handleProgressChange = (increment: boolean) => {
@@ -102,6 +102,16 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const progress = (currentProgress / challenge.goal) * 100;
   const daysLeft = calculateDaysLeft();
   const deadlinePeriod = calculateDeadlinePeriod();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (progress > 99) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [progress]);
 
   if (isMinimal) {
     return (
@@ -145,9 +155,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
         </div>
       </div>
       <Button type='button' text={'+'} color='round' onClick={() => handleProgressChange(true)} />
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} color='transparent'>
-        <Congratulations />
-      </Modal>
+      <ModalCongrats isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }

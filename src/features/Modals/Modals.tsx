@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/store';
 import { cn } from '@/shared/utils';
-import { Button } from '@/shared/ui';
+import { Button, Congratulations } from '@/shared/ui';
 import { CloseIcon } from '@/shared/ui/Icons';
 import { DeleteChallengeButton } from '@/features';
 import { TChallenge } from '@/shared/types';
@@ -89,6 +89,14 @@ export function ModalDelete({ onClose, isOpen, challenge }: Props) {
         {errorData && <div className={styles.error}> {errorData.user_message}</div>}
         <DeleteChallengeButton challenge={challenge} />
       </div>
+    </Modal>
+  );
+}
+
+export function ModalCongrats({ onClose, isOpen }: ModalProps) {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} color='transparent'>
+      <Congratulations onClose={onClose} />
     </Modal>
   );
 }
