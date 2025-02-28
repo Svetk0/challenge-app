@@ -5,6 +5,7 @@ import { useEditChallengeMutation } from '@/shared/api/content';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
+import { ModalCongrats } from '@/features';
 import staticData from '@/shared/constants/data.json';
 import styles from './ProgressBar.module.scss';
 
@@ -34,7 +35,8 @@ const {
 export function ProgressBar({ challenge, isMinimal = false }: Props) {
   const [editChallenge] = useEditChallengeMutation();
   const [currentProgress, setCurrentProgress] = useState<number>(challenge.progress);
-  const [initialMount, setInitialMount] = useState(true);
+  const [initialMount, setInitialMount] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { handleError } = useErrorHandler();
 
   const handleProgressChange = (increment: boolean) => {
@@ -46,13 +48,21 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
   useEffect(() => {
     setCurrentProgress(challenge.progress);
   }, [challenge.progress]);
+
   useEffect(() => {
     if (initialMount) {
       setInitialMount(false);
       return;
     }
-
     updateProgress(currentProgress);
+    const timer = setTimeout(() => {
+      if (currentProgress >= challenge.goal) {
+        setIsOpen(true);
+      } else {
+        setIsOpen(false);
+      }
+    }, 600);
+    return () => clearTimeout(timer);
   }, [currentProgress]);
 
   const updateProgress = useDebouncedCallback(async (updatedProgress: number) => {
@@ -68,7 +78,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       setCurrentProgress(challenge.progress);
       throw error;
     }
-  }, 1000);
+  }, 500);
 
   const calculateDaysLeft = () => {
     if (challenge.finished_at != null) {
@@ -142,6 +152,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
         </div>
       </div>
       <Button type='button' text={'+'} color='round' onClick={() => handleProgressChange(true)} />
+      <ModalCongrats isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </div>
   );
 }
