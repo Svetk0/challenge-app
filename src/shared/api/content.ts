@@ -67,7 +67,10 @@ export const contentApi = createApi({
     }),
 
     //edit challenge by id
-    editChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
+    editChallenge: builder.mutation<
+      Partial<TEditForm>,
+      { uuid: string; dataEdit: Partial<TEditForm> }
+    >({
       query: ({ uuid, dataEdit }) => ({
         url: `challenges/${uuid}/`,
         method: 'PATCH',

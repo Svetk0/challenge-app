@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { contentApi } from '@/shared/api/content';
 import challengeSlice from './features/challenges/challengeSlice';
+import errorSlice from './features/errors/errorSlice';
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       challenge: challengeSlice,
+      error: errorSlice,
       [contentApi.reducerPath]: contentApi.reducer,
     },
     middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(contentApi.middleware),

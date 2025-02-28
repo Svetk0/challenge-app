@@ -14,18 +14,23 @@ const dt = staticData.challenge_form;
 
 export function CreateForm() {
   const router = useRouter();
-  const [_startedDate, _setStartedDate] = useState('');
+  const [errorCatched, setErrorCatched] = useState<string | null>(null);
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const addNewChallenge = async (newChallenge: TCreateForm) => {
     setIsSubmitting(true);
     try {
       await createChallenge({ dataAdd: newChallenge }).unwrap();
     } catch (error) {
-      console.error('Failed to add challenge:', error);
-    } finally {
       setIsSubmitting(false);
+      console.warn(error);
+      if (typeof error === 'object' && error !== null && 'status' in error) {
+        setErrorCatched(dt.errors.create_new);
+      }
+
+      throw error;
     }
   };
   const {
@@ -45,7 +50,6 @@ export function CreateForm() {
     if (isSwitcher) {
       data.finished_at = null;
     }
-    console.log(data);
     await addNewChallenge(data);
     reset();
     router.push('/challenges');
@@ -107,6 +111,7 @@ export function CreateForm() {
       </div>
 
       <div className={styles.rowWrapper}>
+        {errorCatched && <div className={styles.error}> {errorCatched}</div>}
         <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
         <Button
           type='submit'

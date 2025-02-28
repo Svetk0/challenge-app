@@ -1,15 +1,11 @@
 'use client';
-
 import { type PropsWithChildren } from 'react';
 import { useLaunchParams } from '@telegram-apps/sdk-react';
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
 
-import { ErrorBoundary, ErrorPage } from '@/shared/ui';
+import { ErrorBoundary, Loading, ErrorApi } from '@/shared/ui';
 import { useTelegramMock, useDidMount, useClientOnce } from '@/shared/utils/hooks';
 
 import { init } from '@/shared/core';
-
-import styles from './Root.module.scss';
 
 function RootInner({ children }: PropsWithChildren) {
   const isDev = process.env.NODE_ENV === 'development';
@@ -28,9 +24,7 @@ function RootInner({ children }: PropsWithChildren) {
     init(debug);
   });
 
-  return (
-    <TonConnectUIProvider manifestUrl='/tonconnect-manifest.json'>{children}</TonConnectUIProvider>
-  );
+  return <>{children}</>;
 }
 
 export function Root(props: PropsWithChildren) {
@@ -40,10 +34,10 @@ export function Root(props: PropsWithChildren) {
   const didMount = useDidMount();
 
   return didMount ? (
-    <ErrorBoundary fallback={ErrorPage}>
+    <ErrorBoundary fallback={ErrorApi}>
       <RootInner {...props} />
     </ErrorBoundary>
   ) : (
-    <div className={styles.root__loading}>...Loading...</div>
+    <Loading />
   );
 }

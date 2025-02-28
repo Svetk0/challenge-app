@@ -1,0 +1,21 @@
+@use '@/shared/styles/animations' as *;
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    >h2 {
+        animation:
+            swing-15 1.7s infinite,
+    }
+}
+
+.logo {
+    animation:
+        swing 1.7s infinite,
+}

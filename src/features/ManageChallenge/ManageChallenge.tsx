@@ -1,34 +1,34 @@
 import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/shared/api/content';
+import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
+
 type Props = {
   challenge: TChallenge;
 };
 const {
   buttons: { complete, remove },
+  errors: { complete: complete_error, delete: delete_error },
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
   const [editChallenge] = useEditChallengeMutation();
 
   const handleFinishChallenge = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      const response = await editChallenge({
+      await editChallenge({
         uuid: challenge.uuid,
         dataEdit: {
-          ...challenge,
           is_finished: true,
         },
       }).unwrap();
-
-      console.log('Challenge marked as finished:', response);
-      return response;
     } catch (error) {
-      console.error('Failed to mark challenge as finished:', error);
+      handleError(error, complete_error);
       throw error;
     }
   };
@@ -43,19 +43,17 @@ export function CompleteChallengeButton({ challenge }: Props) {
 }
 
 export function DeleteChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
   const [deleteChallenge] = useDeleteChallengeMutation();
 
   const handleDeleteChallenge = async (e: React.MouseEvent) => {
     e.stopPropagation();
     try {
-      const response = await deleteChallenge({
+      await deleteChallenge({
         uuid: challenge.uuid,
       }).unwrap();
-
-      console.log('Challenge was deleted:', response);
-      return response;
     } catch (error) {
-      console.error('Failed to delete challenge:', error);
+      handleError(error, delete_error);
       throw error;
     }
   };

@@ -14,7 +14,8 @@ const dt = staticData.challenge_form;
 
 export function EditForm({ id }: { id: string }) {
   const router = useRouter();
-  const [_startedDate, _setStartedDate] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [errorCatched, setErrorCatched] = useState<string | null>(null);
   const [editChallenge] = useEditChallengeMutation();
   const {
     data: challengeData,
@@ -32,11 +33,11 @@ export function EditForm({ id }: { id: string }) {
   useEffect(() => {
     setIsSwitcher(challengeData?.finished_at === null);
   }, [challengeData, isLoading, error]);
-
+  useEffect(() => {}, [errorCatched]);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields, isDirty },
     trigger,
     getValues,
     setValue,
@@ -58,7 +59,7 @@ export function EditForm({ id }: { id: string }) {
 
       return {
         description: '',
-        goal: 1,
+        goal: 0,
         period: 'week',
         started_at: '',
         finished_at: null,
@@ -69,23 +70,48 @@ export function EditForm({ id }: { id: string }) {
     values: challengeData,
   });
 
+  if (error) {
+    if ('status' in error) {
+      throw new Error(` ${error.status}: ${dt.errors.get_id}`);
+    }
+    setErrorCatched(dt.errors.get_id);
+    throw error;
+  }
+
   const onSubmit: SubmitHandler<TEditForm> = async (data) => {
     try {
-      if (isSwitcher) {
-        data.finished_at = null;
-      }
-      data.is_finished = isCompleted;
+      setIsSubmitting(true);
 
-      await editChallenge({ uuid: id, dataEdit: data }).unwrap();
+      const changedFields = Object.fromEntries(
+        Object.entries(data).filter(([key]) => key in dirtyFields)
+      ) as Partial<TEditForm>;
+
+      if (isSwitcher !== (challengeData?.finished_at === null)) {
+        changedFields.finished_at = isSwitcher ? null : data.finished_at;
+      }
+
+      if (isCompleted !== challengeData?.is_finished) {
+        changedFields.is_finished = isCompleted;
+      }
+
+      if (Object.keys(changedFields).length > 0) {
+        await editChallenge({
+          uuid: id,
+          dataEdit: changedFields,
+        }).unwrap();
+      }
+
       router.push('/challenges');
     } catch (error) {
-      console.error('Failed to edit challenge:', error);
+      setIsSubmitting(false);
+      console.warn(error);
+      if (typeof error === 'object' && error !== null && 'status' in error) {
+        setErrorCatched(dt.errors.save_changes);
+      }
+
+      throw error;
     }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   const handleValidation = (fieldName: keyof TEditForm) => ({
     onBlur: () => {
@@ -155,8 +181,14 @@ export function EditForm({ id }: { id: string }) {
       </div>
 
       <div className={styles.rowWrapper}>
-        <Button type='button' text={'Back'} color='black' onClick={() => router.back()} />
-        <Button type='submit' text={'Edit'} color='default' />
+        {errorCatched && <div className={styles.error}> {errorCatched}</div>}
+        <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
+        <Button
+          type='submit'
+          text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
+          color='default'
+          disabled={!isDirty}
+        />
       </div>
     </form>
   );

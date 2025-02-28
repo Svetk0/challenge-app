@@ -1,7 +1,21 @@
 {
+  "root": {
+    "loading": "Loading",
+    "error_global": {
+      "title": "Oops, something went wrong!"
+    },
+    "not_found": {
+      "title": "404 | Page Not Found",
+      "message": "Oops! The page you're looking for doesn't exist"
+    },
+    "buttons": {
+      "home": "Home",
+      "try_again": "Try again",
+      "my_challenges": "My Challenges"
+    }
+  },
   "home": {
     "title": "Challenge App",
-
     "buttons": {
       "logIn": "Log in",
       "signUp": "Sign Up"
@@ -11,8 +25,10 @@
     "title": "Daily Routine",
     "loading": "Your Challenges is loading...",
     "buttons": {
-      "add": "Add new",
-      "back": "Back"
+      "add": "Add new"
+    },
+    "errors": {
+      "get_all": "Failed to load list of challenges"
     }
   },
   "challenge_info": {
@@ -24,6 +40,11 @@
     "period": {
       "every": "every",
       "starts_at": "starts at"
+    },
+    "errors": {
+      "progress": "Failed to update progress",
+      "complete": "Failed to complete challenge",
+      "delete": "Failed to DELETE challenge"
     }
   },
   "challenge_form": {
@@ -80,20 +101,24 @@
     "progress": {
       "label": "Progress",
       "placeholder": "current result",
-      "error_message": "should be above 0",
+      "error_message": "should be positive or 0",
       "require_message": "please, fill it"
     },
     "switcher": {
       "label": "All time",
       "label_complete": "Complete this challenge"
     },
-
     "buttons": {
       "back": "Back",
       "create": "Create",
       "create_load": "Creating...",
       "edit": "Save",
-      "edit_load": "Editing..."
+      "edit_load": "Saving..."
+    },
+    "errors": {
+      "get_id": "Failed to load data challenge for editing",
+      "save_changes": "Failed to save changes",
+      "create_new": "Failed to create challenge"
     }
   },
   "modals": {

@@ -18,6 +18,7 @@ import styles from './InProgressChallengesList.module.scss';
 const {
   title,
   buttons: { add },
+  errors: { get_all },
 } = staticData.challenges;
 
 export function InProgressChallengesList() {
@@ -31,7 +32,7 @@ export function InProgressChallengesList() {
 
   useEffect(() => {
     setLocalChallenges(getLocalStorage('challenges'));
-    console.log('get local', localChallenges);
+    console.log('get local', isLoading, localChallenges);
   }, [isLoading]);
   useEffect(() => {
     if (data) {
@@ -41,18 +42,20 @@ export function InProgressChallengesList() {
     }
   }, [data, dispatch, challengeData]);
 
-  if (error) {
-    if ('status' in error) {
-      throw new Error(`Error ${error.status}: Failed to load challenges`);
+  useEffect(() => {
+    if (error) {
+      if ('status' in error) {
+        throw new Error(`${error.status}: ${get_all}`);
+      }
+      throw error;
     }
-    throw error;
-  }
+  }, [error]);
 
   const displayData = data || challengeData;
   console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.rowWrapper}>
         <h2 className={styles.title}>{title}</h2>
         <Button
@@ -64,8 +67,8 @@ export function InProgressChallengesList() {
       </div>
 
       <ListChallenges displayData={displayData}>
-        <ChallengeInfo />
+        <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
-    </div>
+    </section>
   );
 }

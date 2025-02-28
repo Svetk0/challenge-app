@@ -42,7 +42,9 @@ const SendInitDataButton = () => {
       setIsSent(true);
     } catch (error) {
       console.error('Ошибка:', error);
+
       setIsSent(false);
+      throw error;
     }
   };
 
