@@ -6,7 +6,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    //padding: 20px;
 
     >button {
         width: 120px;
@@ -16,7 +15,6 @@
     >svg {
         animation: move 3s infinite;
 
-
         //body
         & path:nth-child(2) {
             transform-origin: center center;
@@ -25,39 +23,34 @@
         }
 
         //stars
-        & path:nth-child(10) {
-            transform-origin: center center;
-            animation: scale-stars 1.5s infinite,
-                disco 1s infinite;
-            animation-delay: 1s;
-        }
-
-        & path:nth-child(9) {
-            transform-origin: center center;
-            animation: scale-stars 1.5s infinite,
-                disco 1s infinite;
-            animation-delay: 2s;
-        }
-
-        & path:nth-child(8) {
-            transform-origin: center center;
-            animation: scale-stars 1.5s infinite,
-                disco 1s infinite;
-            animation-delay: 0.8s;
-        }
-
-        & path:nth-child(11) {
-            transform-origin: center center;
-            animation: scale-stars 1.5s infinite,
-                disco 1s infinite;
-            animation-delay: 1.5s;
-        }
-
+        & path:nth-child(8),
+        & path:nth-child(9),
+        & path:nth-child(10),
+        & path:nth-child(11),
         & path:nth-child(12) {
             transform-origin: center center;
             animation: scale-stars 1.5s infinite,
                 disco 1s infinite;
-            animation-delay: 2s;
+        }
+
+        & path:nth-child(8) {
+            animation-delay: 0.8s;
+        }
+
+        & path:nth-child(9) {
+            animation-delay: 0.1s;
+        }
+
+        & path:nth-child(10) {
+            animation-delay: 1s;
+        }
+
+        & path:nth-child(11) {
+            animation-delay: 0.6s;
+        }
+
+        & path:nth-child(12) {
+            animation-delay: 0.3s;
         }
     }
 }

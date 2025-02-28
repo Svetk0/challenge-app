@@ -2,8 +2,6 @@ import { IconProps } from '@/shared/types';
 
 export const HeroHappyIcon = ({
   size = 200,
-  //   color = '#BFFBE2',
-
   title = 'Hero-happy',
   id = 'heroHappyIcon',
 }: IconProps) => {
