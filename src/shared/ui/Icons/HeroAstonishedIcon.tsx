@@ -4,8 +4,8 @@ export const HeroAstonishedIcon = ({
   size = 65,
   //   color = '#BFFBE2',
 
-  title = 'Hero',
-  id = 'homeIcon',
+  title = 'Hero-astonished',
+  id = 'heroAstonishedIcon',
 }: IconProps) => {
   const titleId = `${id}Title`;
 

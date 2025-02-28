@@ -1,5 +1,5 @@
-import { Loading } from '@/shared/ui/';
+import { Congratulations } from '@/shared/ui/';
 
 export default function TestPage() {
-  return <Loading />;
+  return <Congratulations />;
 }
