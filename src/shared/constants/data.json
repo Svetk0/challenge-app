@@ -123,7 +123,12 @@
     "errors": {
       "get_id": "Failed to load data challenge for editing",
       "save_changes": "Failed to save changes",
-      "create_new": "Failed to create challenge"
+      "create_new": "Failed to create challenge",
+      "dates_comparing": "End date should be older then Start date"
+    },
+    "warnings": {
+      "end_required": "Fill the 'Finish date' of challenge",
+      "all_time": "Your challenge is endless"
     }
   },
   "modals": {

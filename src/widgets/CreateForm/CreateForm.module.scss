@@ -65,7 +65,8 @@
   }
 }
 
-.error {
+.error,
+.warning {
   position: absolute;
   width: 100%;
   top: -30px;
@@ -74,4 +75,9 @@
   font-size: 14px;
   margin-block: 5px;
   text-align: center;
+  backdrop-filter: blur(40px);
+}
+
+.warning {
+  color: $logo-yellow;
 }

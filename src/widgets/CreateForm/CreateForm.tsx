@@ -1,9 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateChallengeMutation } from '@/shared/api/content';
-import { configValidation } from '@/shared/utils';
+import { configValidation, validateAndAdjustDates } from '@/shared/utils';
 import { TCreateForm } from '@/shared/types';
 import { Button, Input, Switcher } from '@/shared/ui';
 
@@ -15,6 +15,7 @@ const dt = staticData.challenge_form;
 export function CreateForm() {
   const router = useRouter();
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
+  const [warning, setWarning] = useState<string | null>(null);
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -51,28 +52,57 @@ export function CreateForm() {
       data.finished_at = null;
     }
     await addNewChallenge(data);
-    reset();
     router.push('/challenges');
+    reset();
   };
 
   const handleValidation = (fieldName: keyof TCreateForm) => ({
     onBlur: () => {
       trigger(fieldName);
+      setErrorCatched(null);
       if (fieldName === 'goal' && getValues('goal') < 1) {
         setValue('goal', 1);
       }
     },
+
     onChange: () => {
       if (getValues(fieldName)) {
         clearErrors(fieldName);
       }
+      if ((fieldName === 'started_at' || fieldName === 'finished_at') && getValues('finished_at')) {
+        setValue(
+          'finished_at',
+          validateAndAdjustDates({
+            started_at: getValues('started_at'),
+            finished_at: getValues('finished_at'),
+            setUserErrorMessage: setErrorCatched,
+          })
+        );
+      }
     },
   });
+  useEffect(() => {
+    if ((getValues('finished_at') === '' || !getValues('finished_at')) && !isSwitcher) {
+      setWarning(dt.warnings.end_required);
+    }
+    if (isSwitcher && getValues('finished_at')) {
+      setWarning(dt.warnings.all_time);
+    }
+    if (!isSwitcher && getValues('finished_at')) {
+      setWarning(null);
+    }
+  }, [warning, isSwitcher, getValues('finished_at')]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_create}</h2>
-      <div className={styles.inputsContainer}>
+      <div
+        className={styles.inputsContainer}
+        onClick={() => {
+          setErrorCatched(null);
+          setWarning(null);
+        }}
+      >
         {['description', 'goal', 'period', 'started_at', 'finished_at'].map((fieldName) => {
           const config = configValidation[fieldName];
           if (!config) return null;
@@ -112,6 +142,7 @@ export function CreateForm() {
 
       <div className={styles.rowWrapper}>
         {errorCatched && <div className={styles.error}> {errorCatched}</div>}
+        {warning && <div className={styles.warning}> {warning}</div>}
         <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
         <Button
           type='submit'
