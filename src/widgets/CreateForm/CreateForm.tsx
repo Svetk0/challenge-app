@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateChallengeMutation } from '@/shared/api/content';
 import { configValidation } from '@/shared/utils';
@@ -15,6 +15,7 @@ const dt = staticData.challenge_form;
 export function CreateForm() {
   const router = useRouter();
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
+  const [warning, setWarning] = useState<string | null>(null);
   const [createChallenge] = useCreateChallengeMutation({});
   const [isSwitcher, setIsSwitcher] = useState<boolean>(true);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -51,8 +52,8 @@ export function CreateForm() {
       data.finished_at = null;
     }
     await addNewChallenge(data);
-    reset();
     router.push('/challenges');
+    reset();
   };
 
   const handleValidation = (fieldName: keyof TCreateForm) => ({
@@ -62,13 +63,24 @@ export function CreateForm() {
         setValue('goal', 1);
       }
     },
+
     onChange: () => {
       if (getValues(fieldName)) {
         clearErrors(fieldName);
       }
     },
   });
-
+  useEffect(() => {
+    if ((getValues('finished_at') === '' || !getValues('finished_at')) && !isSwitcher) {
+      setWarning('Fill the "Finish date" of challenge');
+    }
+    if (isSwitcher && getValues('finished_at')) {
+      setWarning('Your challenge is endless');
+    }
+    if (!isSwitcher && getValues('finished_at')) {
+      setWarning(null);
+    }
+  }, [warning, isSwitcher, getValues('finished_at')]);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_create}</h2>
@@ -112,6 +124,7 @@ export function CreateForm() {
 
       <div className={styles.rowWrapper}>
         {errorCatched && <div className={styles.error}> {errorCatched}</div>}
+        {warning && <div className={styles.warning}> {warning}</div>}
         <Button type='button' text={dt.buttons.back} color='black' onClick={() => router.back()} />
         <Button
           type='submit'

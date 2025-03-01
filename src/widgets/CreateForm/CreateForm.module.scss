@@ -65,7 +65,8 @@
   }
 }
 
-.error {
+.error,
+.warning {
   position: absolute;
   width: 100%;
   top: -30px;
@@ -74,4 +75,8 @@
   font-size: 14px;
   margin-block: 5px;
   text-align: center;
+}
+
+.warning {
+  color: $logo-yellow;
 }
