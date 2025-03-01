@@ -11,33 +11,19 @@ import staticData from '@/shared/constants/data.json';
 
 import styles from './Modals.module.scss';
 
-const { title, text_1, text_2 } = staticData.modals.modal_delete;
 export interface ModalProps {
   isOpen: boolean;
   color?: string;
   onClose: () => void;
   children?: React.ReactNode;
 }
-type Props = {
-  challenge: TChallenge;
-} & ModalProps;
 
-export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, color, children }) => {
+export const Modal = ({ isOpen, onClose, color, children }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-
     if (!dialog) return;
-
-    if (isOpen) {
-      dialog.showModal();
-      document.body.style.overflow = 'hidden';
-    } else {
-      dialog.close();
-      document.body.style.overflow = '';
-    }
 
     const handleClose = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -45,12 +31,26 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, color, children }
       }
     };
 
+    if (isOpen) {
+      if (!dialog.open) {
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      }
+    } else {
+      if (dialog.open) {
+        dialog.close();
+        document.body.style.overflow = '';
+      }
+    }
+
     dialog.addEventListener('keydown', handleClose);
 
     return () => {
       dialog.removeEventListener('keydown', handleClose);
+      if (dialog.open) {
+        dialog.close();
+      }
       document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
     };
   }, [isOpen, onClose]);
 
@@ -60,7 +60,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, color, children }
     <dialog ref={dialogRef} className={cn(styles.dialog, color && styles[color])} onClick={onClose}>
       <section className={styles.content} onClick={(e) => e.stopPropagation()}>
         <Button
-          ref={closeButtonRef}
           className={styles.closeButton}
           type='button'
           text={<CloseIcon />}
@@ -73,6 +72,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, color, children }
     </dialog>
   );
 };
+
+// Delete Confirmation
+type Props = {
+  challenge: TChallenge;
+} & ModalProps;
+const { title, text_1, text_2 } = staticData.modals.modal_delete;
 
 export function ModalDelete({ onClose, isOpen, challenge }: Props) {
   const errorData = useSelector((state: RootState) => state.error.error);

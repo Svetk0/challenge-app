@@ -51,6 +51,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
 
   useEffect(() => {
     if (initialMount) {
+      setIsOpen(false);
       setInitialMount(false);
       return;
     }
