@@ -38,7 +38,7 @@ export function EditForm({ id }: { id: string }) {
   const {
     register,
     handleSubmit,
-    formState: { errors, dirtyFields, isDirty },
+    formState: { errors, dirtyFields },
     trigger,
     getValues,
     setValue,
@@ -216,7 +216,6 @@ export function EditForm({ id }: { id: string }) {
           type='submit'
           text={isSubmitting ? dt.buttons.edit_load : dt.buttons.edit}
           color='default'
-          disabled={!isDirty}
         />
       </div>
     </form>
