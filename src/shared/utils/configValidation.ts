@@ -38,7 +38,7 @@ export const configValidation: ConfigValidation = {
     placeholder: date_start.placeholder,
     required: date_start.require_message,
     validate: {
-      min: (v) => v >= '2000-01-01' || date_start.error_message,
+      min: (v) => v >= '2001-01-01' || date_start.error_message,
     },
   },
   finished_at: {
@@ -48,7 +48,7 @@ export const configValidation: ConfigValidation = {
     //required: date_finish.require_message,
     isDisabled: true,
     validate: {
-      min: (v) => v >= '2000-01-01' || date_finish.error_message,
+      min: (v) => v >= '2001-01-01' || date_finish.error_message,
     },
   },
   progress: {

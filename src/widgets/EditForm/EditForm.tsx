@@ -143,10 +143,10 @@ export function EditForm({ id }: { id: string }) {
 
   useEffect(() => {
     if ((getValues('finished_at') === '' || !getValues('finished_at')) && !isSwitcher) {
-      setWarning('Fill the "Finish date" of challenge');
+      setWarning(dt.warnings.end_required);
     }
     if (isSwitcher && getValues('finished_at')) {
-      setWarning('Your challenge is endless');
+      setWarning(dt.warnings.all_time);
     }
     if (!isSwitcher && getValues('finished_at')) {
       setWarning(null);

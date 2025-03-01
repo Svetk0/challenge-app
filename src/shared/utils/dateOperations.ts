@@ -1,5 +1,6 @@
 import { Dispatch } from 'react';
 import { IFormFields } from '@/shared/types';
+import staticData from '@/shared/constants/data.json';
 
 export function formatDate(dateString: string, includeYear = true) {
   const date = new Date(dateString);
@@ -26,7 +27,9 @@ export function formatDate(dateString: string, includeYear = true) {
 type Props = {
   setUserErrorMessage: Dispatch<string>;
 } & Pick<IFormFields, 'started_at' | 'finished_at'>;
-
+const {
+  errors: { dates_comparing },
+} = staticData.challenge_form;
 export const validateAndAdjustDates = ({ started_at, finished_at, setUserErrorMessage }: Props) => {
   if (!finished_at) return null;
   const startDate = new Date(started_at);
@@ -35,7 +38,7 @@ export const validateAndAdjustDates = ({ started_at, finished_at, setUserErrorMe
   if (endDate < startDate) {
     const newEndDate = new Date(startDate);
     newEndDate.setDate(newEndDate.getDate() + 1);
-    setUserErrorMessage('End date should be older then Start date');
+    setUserErrorMessage(dates_comparing);
     return newEndDate.toISOString().split('T')[0];
   }
 
