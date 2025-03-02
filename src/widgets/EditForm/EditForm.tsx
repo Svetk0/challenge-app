@@ -144,14 +144,14 @@ export function EditForm({ id }: { id: string }) {
   useEffect(() => {
     if ((getValues('finished_at') === '' || !getValues('finished_at')) && !isSwitcher) {
       setWarning(dt.warnings.end_required);
-    }
-    if (isSwitcher && getValues('finished_at')) {
+    } else if (isCompleted) {
+      setWarning(dt.warnings.complete_today);
+    } else if (isSwitcher && getValues('finished_at')) {
       setWarning(dt.warnings.all_time);
-    }
-    if (!isSwitcher && getValues('finished_at')) {
+    } else {
       setWarning(null);
     }
-  }, [warning, isSwitcher, getValues('finished_at')]);
+  }, [warning, isSwitcher, isCompleted, getValues('finished_at')]);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h2 className={styles.title}> {dt.title_edit}</h2>

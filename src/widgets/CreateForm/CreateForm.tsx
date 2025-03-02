@@ -84,11 +84,9 @@ export function CreateForm() {
   useEffect(() => {
     if ((getValues('finished_at') === '' || !getValues('finished_at')) && !isSwitcher) {
       setWarning(dt.warnings.end_required);
-    }
-    if (isSwitcher && getValues('finished_at')) {
+    } else if (isSwitcher && getValues('finished_at')) {
       setWarning(dt.warnings.all_time);
-    }
-    if (!isSwitcher && getValues('finished_at')) {
+    } else {
       setWarning(null);
     }
   }, [warning, isSwitcher, getValues('finished_at')]);
