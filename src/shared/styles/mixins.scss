@@ -19,6 +19,15 @@
   backdrop-filter: blur(40px);
 }
 
+@mixin Title($size: 24px, $font-weight: 600, $line-height: 29px, $align: center) {
+  font-weight: $font-weight;
+  font-size: $size;
+  text-align: $align;
+  line-height: $line-height;
+  font-family: inherit;
+  color: $white;
+}
+
 @mixin Text($size: 16px, $font-weight: 400, $line-height: 24.2px, $align: center) {
   font-weight: $font-weight;
   font-size: $size;

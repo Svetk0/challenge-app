@@ -14,12 +14,7 @@
   }
 
   .title {
-    font-family: inherit;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 29.05px;
-    text-align: center;
-    color: $white;
+    @include Title;
   }
 }
 
@@ -31,7 +26,6 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: $deep-dark-purple-30;
-
   padding: 40px 5%;
   row-gap: 25px;
   column-gap: clamp(5px, 5vw, 20px);
@@ -42,7 +36,6 @@
   }
 
   >div:last-child {
-
     justify-self: flex-end;
     margin-left: auto;
     margin-right: clamp(5px, 5vw, 25px);

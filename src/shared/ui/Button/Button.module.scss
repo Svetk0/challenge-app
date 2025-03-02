@@ -1,21 +1,18 @@
 @use '@/shared/styles' as *;
 
 .button {
+  position: relative;
   width: max-content;
-  padding: 0 24px;
-  margin: 0;
+  height: 60px;
   display: inline-block;
   overflow: hidden;
-  position: relative;
+  padding: 0 24px;
+  margin: 0;
   border-radius: 12px;
   border: none;
+  @include Title ($size: 20px, $line-height: 32.68px);
   color: $black;
-  font-size: 20px;
-  font-weight: 600;
-  height: 60px;
   box-shadow: $shadow-box-button;
-  line-height: 32.68px;
-  text-align: center;
   transition: all 0.2s ease;
 
   &:hover,
