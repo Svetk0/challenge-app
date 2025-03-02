@@ -91,10 +91,11 @@
 }
 
 .error {
-    position: absolute;
+    @include ErrorMessage($size: 10px, $align: left);
+    //position: absolute;
     top: 100%;
     left: 0;
-    color: $red;
-    font-size: 10px;
-    margin-top: 5px;
+    // color: $red;
+    // font-size: 10px;
+    // margin-top: 5px;
 }

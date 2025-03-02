@@ -79,12 +79,7 @@
 }
 
 .error {
-    position: absolute;
-    width: 100%;
+    @include ErrorMessage;
     top: -30px;
     left: 0;
-    color: $red;
-    font-size: 12px;
-    margin-block: 5px;
-    text-align: center;
 }

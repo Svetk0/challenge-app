@@ -2,7 +2,7 @@
 
  .dialog {
      width: 280px;
-     height: 360px;
+     min-height: 360px;
      position: fixed;
      padding: 30px;
      inset: 50% auto auto 50%;
@@ -83,18 +83,12 @@
      }
 
      button {
-         margin-top: auto;
+         margin-top: clamp(20px, 50px, 100px);
          padding: 15px;
      }
  }
 
  .error {
-     position: absolute;
-     width: 100%;
-     bottom: 50px;
-     left: 0;
-     color: $red;
-     font-size: 12px;
-     margin-block: 5px;
-     text-align: center;
+     @include ErrorMessage;
+     bottom: 70px;
  }
