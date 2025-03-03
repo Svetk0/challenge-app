@@ -1,11 +1,8 @@
 @use '@/shared/styles' as *;
 
 .container {
+    @include Flex;
     max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
     >button {
         width: 120px;
@@ -77,11 +74,8 @@
 }
 
 .wrapper {
+    @include Flex;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 20px;
     margin-bottom: 40px;
     gap: 20px;

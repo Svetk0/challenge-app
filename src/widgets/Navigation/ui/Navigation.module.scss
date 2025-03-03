@@ -6,16 +6,13 @@
 }
 
 .navigation {
+  @include Flex($direction: row);
   position: relative;
   width: 85%;
   height: 70px;
   background: $deep-dark-gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 20px;
   margin: 0 auto;
-  // box-shadow: inset 0px -2px 4px 0px $light-green-neon;
 }
 
 .navigation ul {
@@ -31,11 +28,8 @@
 }
 
 .navigation ul li a {
+  @include Flex;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
   text-align: center;
   font-weight: 400;

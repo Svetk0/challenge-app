@@ -1,5 +1,20 @@
 @import './vars';
 
+@mixin Form ($gap: 20px) {
+  width: clamp(200px, 100%, 420px);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-inline: clamp(5px, 5vw, 30px);
+  gap: 30px;
+}
+
+@mixin Flex ($direction: column, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
 
 @mixin ResetButton {
   background-color: inherit;
