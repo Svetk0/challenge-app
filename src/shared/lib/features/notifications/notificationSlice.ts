@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface NotificationState {
   notification: {
-    status: 'success' | 'error' | 'info' | 'warning';
+    status?: 'success' | 'error' | 'info' | 'warning';
     user_message: string;
   } | null;
 }
@@ -18,7 +18,7 @@ const notificationSlice = createSlice({
     setNotification: (
       state,
       action: PayloadAction<{
-        status: 'success' | 'error' | 'info' | 'warning';
+        //status: 'success' | 'error' | 'info' | 'warning';
         user_message: string;
       }>
     ) => {

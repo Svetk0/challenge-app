@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEditChallengeMutation, useDeleteChallengeMutation } from '@/shared/api/content';
-import { useErrorHandler } from '@/shared/utils/hooks';
+import { useErrorHandler, useNotificationHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { EditIcon } from '@/shared/ui/Icons';
@@ -16,6 +16,7 @@ const {
 
 export function CompleteChallengeButton({ challenge }: Props) {
   const { handleError } = useErrorHandler();
+  const { handleNotification } = useNotificationHandler();
   const [editChallenge] = useEditChallengeMutation();
 
   const handleFinishChallenge = async (e: React.MouseEvent) => {
@@ -27,6 +28,7 @@ export function CompleteChallengeButton({ challenge }: Props) {
           is_finished: true,
         },
       }).unwrap();
+      handleNotification('The challenge was completed successfully');
     } catch (error) {
       handleError(error, complete_error);
       throw error;
@@ -44,6 +46,7 @@ export function CompleteChallengeButton({ challenge }: Props) {
 
 export function DeleteChallengeButton({ challenge }: Props) {
   const { handleError } = useErrorHandler();
+  const { handleNotification } = useNotificationHandler();
   const [deleteChallenge] = useDeleteChallengeMutation();
 
   const handleDeleteChallenge = async (e: React.MouseEvent) => {
@@ -52,6 +55,7 @@ export function DeleteChallengeButton({ challenge }: Props) {
       await deleteChallenge({
         uuid: challenge.uuid,
       }).unwrap();
+      handleNotification('The challenge was deleted successfully');
     } catch (error) {
       handleError(error, delete_error);
       throw error;

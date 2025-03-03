@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { setError, clearError } from '../../lib/features/errors/errorSlice';
+import { setError, clearError } from '@/shared/lib/features/errors/errorSlice';
 
 export const useErrorHandler = () => {
   const dispatch = useDispatch();

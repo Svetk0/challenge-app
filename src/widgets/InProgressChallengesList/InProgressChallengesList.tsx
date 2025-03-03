@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '@/shared/lib/store';
@@ -22,6 +23,7 @@ const {
 } = staticData.challenges;
 
 export function InProgressChallengesList() {
+  const notificationData = useSelector((state: RootState) => state.notification.notification);
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
   const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
@@ -30,6 +32,12 @@ export function InProgressChallengesList() {
     skip: false,
   });
 
+  useEffect(() => {
+    const notify = () => toast.success(`${notificationData?.user_message}`);
+    if (notificationData) {
+      notify();
+    }
+  }, [notificationData]);
   useEffect(() => {
     setLocalChallenges(getLocalStorage('challenges'));
     console.log('get local', isLoading, localChallenges);
@@ -65,10 +73,11 @@ export function InProgressChallengesList() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
-
+      {/* <Button type='button' text={'toast'} color={'mini'} onClick={() => notify()} /> */}
       <ListChallenges displayData={displayData}>
         <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
+      <Toaster />
     </section>
   );
 }
