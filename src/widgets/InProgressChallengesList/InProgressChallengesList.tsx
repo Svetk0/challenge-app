@@ -11,7 +11,7 @@ import { useGetAllChallengeListQuery } from '@/shared/api/content';
 import { setLocalStorage, getLocalStorage } from '@/shared/utils';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 
-import { Button, ListChallenges } from '@/shared/ui';
+import { Button, ListChallenges, ToastSuccess } from '@/shared/ui';
 import { ChallengeInfo } from '@/widgets';
 
 import staticData from '@/shared/constants/data.json';
@@ -21,7 +21,7 @@ const {
   buttons: { add },
   errors: { get_all },
 } = staticData.challenges;
-
+const notify = () => toast.custom(<ToastSuccess message='my very tasty toast' />);
 export function InProgressChallengesList() {
   const notificationData = useSelector((state: RootState) => state.notification.notification);
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
@@ -73,11 +73,17 @@ export function InProgressChallengesList() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
-      {/* <Button type='button' text={'toast'} color={'mini'} onClick={() => notify()} /> */}
+      <Button type='button' text={'toast'} color={'mini'} onClick={() => notify()} />
       <ListChallenges displayData={displayData}>
         <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
-      <Toaster />
+      <Toaster
+        containerClassName={styles.toastsWrapper}
+        toastOptions={{
+          duration: 6000,
+          position: 'bottom-center',
+        }}
+      />
     </section>
   );
 }
