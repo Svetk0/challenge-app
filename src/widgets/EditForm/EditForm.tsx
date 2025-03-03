@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/shared/api/content';
+import { useNotificationHandler } from '@/shared/utils/hooks';
 import { configValidation, validateAndAdjustDates } from '@/shared/utils';
 import { TEditForm } from '@/shared/types';
 import { Button, Input, Switcher } from '@/shared/ui';
@@ -14,6 +15,7 @@ const dt = staticData.challenge_form;
 
 export function EditForm({ id }: { id: string }) {
   const router = useRouter();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
@@ -101,8 +103,10 @@ export function EditForm({ id }: { id: string }) {
           dataEdit: changedFields,
         }).unwrap();
       }
+      handleNotification(dt.toasts.edit);
       router.push('/challenges');
     } catch (error) {
+      clearCurrentNotification();
       setIsSubmitting(false);
       console.warn(error);
       if (typeof error === 'object' && error !== null && 'status' in error) {

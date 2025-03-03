@@ -15,9 +15,9 @@ export const useNotificationHandler = () => {
     );
   };
 
-  const clearCurrentError = () => {
+  const clearCurrentNotification = () => {
     dispatch(clearNotification());
   };
 
-  return { handleNotification, clearCurrentError };
+  return { handleNotification, clearCurrentNotification };
 };

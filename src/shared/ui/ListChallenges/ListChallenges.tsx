@@ -14,7 +14,6 @@ export function ListChallenges({ children, displayData }: Props) {
   useEffect(() => {
     setCurrentData(displayData);
   }, [displayData]);
-  console.log('currentData', currentData);
   return (
     <>
       {currentData?.length !== 0 && (

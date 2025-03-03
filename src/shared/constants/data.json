@@ -50,6 +50,10 @@
       "progress": "Failed to update progress",
       "complete": "Failed to complete challenge",
       "delete": "Failed to DELETE challenge"
+    },
+    "toasts": {
+      "complete": "The challenge was completed successfully",
+      "delete": "The challenge was deleted successfully"
     }
   },
   "challenge_form": {
@@ -130,6 +134,10 @@
       "end_required": "Fill the 'Finish date' of challenge",
       "complete_today": "This challenge will be completed today",
       "all_time": "Your challenge is endless"
+    },
+    "toasts": {
+      "create": "The challenge was created successfully",
+      "edit": "All changes were saved successfully"
     }
   },
   "modals": {

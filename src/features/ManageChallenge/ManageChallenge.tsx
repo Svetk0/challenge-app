@@ -12,11 +12,12 @@ type Props = {
 const {
   buttons: { complete, remove },
   errors: { complete: complete_error, delete: delete_error },
+  toasts: { complete: complete_toast, delete: delete_toast },
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
   const { handleError } = useErrorHandler();
-  const { handleNotification } = useNotificationHandler();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
   const [editChallenge] = useEditChallengeMutation();
 
   const handleFinishChallenge = async (e: React.MouseEvent) => {
@@ -28,8 +29,9 @@ export function CompleteChallengeButton({ challenge }: Props) {
           is_finished: true,
         },
       }).unwrap();
-      handleNotification('The challenge was completed successfully');
+      handleNotification(complete_toast);
     } catch (error) {
+      clearCurrentNotification();
       handleError(error, complete_error);
       throw error;
     }
@@ -46,7 +48,7 @@ export function CompleteChallengeButton({ challenge }: Props) {
 
 export function DeleteChallengeButton({ challenge }: Props) {
   const { handleError } = useErrorHandler();
-  const { handleNotification } = useNotificationHandler();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
   const [deleteChallenge] = useDeleteChallengeMutation();
 
   const handleDeleteChallenge = async (e: React.MouseEvent) => {
@@ -55,8 +57,9 @@ export function DeleteChallengeButton({ challenge }: Props) {
       await deleteChallenge({
         uuid: challenge.uuid,
       }).unwrap();
-      handleNotification('The challenge was deleted successfully');
+      handleNotification(delete_toast);
     } catch (error) {
+      clearCurrentNotification();
       handleError(error, delete_error);
       throw error;
     }

@@ -2,11 +2,13 @@
 
 .wrapper {
     @include Flex ($direction: row);
-    height: 40px;
+    min-height: 40px;
+    max-width: 70vw;
     padding: 20px 10px;
+    text-align: center;
     border-radius: 12px;
-    border: 2px solid $logo-green;
-    color: $logo-green;
+    border: 2px solid $logo-yellow;
+    color: $logo-yellow;
     background-color: $black-deep;
     box-shadow: 0px 0px 10px 0px $white;
 }

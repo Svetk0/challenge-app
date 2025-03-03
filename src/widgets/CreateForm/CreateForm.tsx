@@ -2,7 +2,9 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+
 import { useCreateChallengeMutation } from '@/shared/api/content';
+import { useNotificationHandler } from '@/shared/utils/hooks';
 import { configValidation, validateAndAdjustDates } from '@/shared/utils';
 import { TCreateForm } from '@/shared/types';
 import { Button, Input, Switcher } from '@/shared/ui';
@@ -14,6 +16,7 @@ const dt = staticData.challenge_form;
 
 export function CreateForm() {
   const router = useRouter();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
   const [errorCatched, setErrorCatched] = useState<string | null>(null);
   const [warning, setWarning] = useState<string | null>(null);
   const [createChallenge] = useCreateChallengeMutation({});
@@ -24,7 +27,9 @@ export function CreateForm() {
     setIsSubmitting(true);
     try {
       await createChallenge({ dataAdd: newChallenge }).unwrap();
+      handleNotification(dt.toasts.create);
     } catch (error) {
+      clearCurrentNotification();
       setIsSubmitting(false);
       console.warn(error);
       if (typeof error === 'object' && error !== null && 'status' in error) {
