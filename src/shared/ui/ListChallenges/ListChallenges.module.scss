@@ -1,7 +1,7 @@
 @use '@/shared/styles' as *;
 
 .list {
-    @include Flex ($align: stretch, $justify: space-evenly);
+    @include Flex ($align: stretch, $justify: flex-start);
     width: 100%;
     height: calc(100vh - 200px);
     gap: 30px;
