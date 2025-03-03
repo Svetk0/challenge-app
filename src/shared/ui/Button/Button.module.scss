@@ -1,21 +1,18 @@
 @use '@/shared/styles' as *;
 
 .button {
+  position: relative;
   width: max-content;
-  padding: 0 24px;
-  margin: 0;
+  height: 60px;
   display: inline-block;
   overflow: hidden;
-  position: relative;
+  padding: 0 24px;
+  margin: 0;
   border-radius: 12px;
   border: none;
+  @include Title ($size: 20px, $line-height: 32.68px);
   color: $black;
-  font-size: 20px;
-  font-weight: 600;
-  height: 60px;
   box-shadow: $shadow-box-button;
-  line-height: 32.68px;
-  text-align: center;
   transition: all 0.2s ease;
 
   &:hover,
@@ -55,13 +52,11 @@
 }
 
 .round {
+  @include Flex($direction: row);
   width: 24px;
   height: 24px;
   padding: 0;
-  display: flex;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
   background: $lemon-neon;
   color: $deep-dark-purple;
   border: 1.5px solid $lemon-neon;
@@ -78,7 +73,6 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    //background-color: #02d6fcfb;
     top: -50%;
     left: -50%;
     z-index: 100;
@@ -86,11 +80,9 @@
 }
 
 .icon {
+  @include Flex($direction: row);
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
   background: transparent;
   border-radius: 5px;
@@ -118,11 +110,9 @@
 
 .control,
 .control_red {
+  @include Flex($direction: row);
   width: 100px;
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 0.8rem;
   font-weight: 400;
   color: $white;

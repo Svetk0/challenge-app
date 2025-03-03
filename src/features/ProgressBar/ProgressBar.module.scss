@@ -1,10 +1,8 @@
 @use '@/shared/styles' as *;
 
 .rowWrapper {
+    @include Flex($direction: row, $align: flex-end, $justify: space-evenly);
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
     gap: 15px;
     padding: 0 20px;
 }
@@ -15,10 +13,8 @@
 }
 
 .header {
+    @include Flex($direction: row, $justify: space-between);
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .daysLeft {

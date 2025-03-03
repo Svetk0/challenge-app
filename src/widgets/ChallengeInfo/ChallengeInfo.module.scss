@@ -1,11 +1,8 @@
 @use '@/shared/styles' as *;
 
 .wrapper {
+    @include Flex($justify: space-between);
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
     gap: 10px;
     padding: 10px 15px 20px;
     background-color: $black-70;
@@ -50,11 +47,9 @@
 }
 
 .rowWrapper {
+    @include Flex($direction: row, $justify: space-between);
     position: relative;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     gap: 15px;
 }
 
@@ -79,12 +74,7 @@
 }
 
 .error {
-    position: absolute;
-    width: 100%;
+    @include ErrorMessage;
     top: -30px;
     left: 0;
-    color: $red;
-    font-size: 12px;
-    margin-block: 5px;
-    text-align: center;
 }

@@ -1,10 +1,9 @@
 @use '@/shared/styles' as *;
 
 .list {
+    @include Flex ($align: stretch, $justify: space-evenly);
     width: 100%;
     height: calc(100vh - 200px);
-    display: flex;
-    flex-direction: column;
     gap: 30px;
     overflow-y: auto;
     list-style: none;

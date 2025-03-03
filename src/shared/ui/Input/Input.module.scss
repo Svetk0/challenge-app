@@ -1,10 +1,10 @@
 @use '@/shared/styles' as *;
 
 .inputWrapper {
+    position: relative;
     width: fit-content;
     display: flex;
     flex-direction: column;
-    position: relative;
     gap: 2px;
 
     input[type='date'] {
@@ -26,7 +26,6 @@
         &::-webkit-datetime-edit-fields-wrapper {
             position: relative;
             opacity: 0.4;
-
         }
 
         &::-webkit-datetime-edit {
@@ -91,10 +90,7 @@
 }
 
 .error {
-    position: absolute;
+    @include ErrorMessage($size: 10px, $align: left);
     top: 100%;
     left: 0;
-    color: $red;
-    font-size: 10px;
-    margin-top: 5px;
 }

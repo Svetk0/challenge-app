@@ -13,20 +13,14 @@
 }
 
 .textBlock {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include Flex;
   gap: 2rem;
   height: 100vh;
 }
 
 // remove after real TELEGRAM AUTH
 .columnWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include Flex;
   gap: 20px;
 
   .tip {

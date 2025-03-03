@@ -128,6 +128,7 @@
     },
     "warnings": {
       "end_required": "Fill the 'Finish date' of challenge",
+      "complete_today": "This challenge will be completed today",
       "all_time": "Your challenge is endless"
     }
   },

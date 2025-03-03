@@ -1,19 +1,19 @@
 @import './vars';
 
-@mixin flexRow {
+@mixin Form ($gap: 20px) {
+  width: clamp(200px, 100%, 420px);
   display: flex;
-  flex-direction: row;
-  gap: 5px;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-inline: clamp(5px, 5vw, 30px);
+  gap: 30px;
 }
 
-@mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-  line-height: $fontSize;
-  text-align: $textAlign;
-  color: $color;
-  font-family: inherit;
-  margin: 0;
+@mixin Flex ($direction: column, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
 }
 
 @mixin ResetButton {
@@ -22,6 +22,25 @@
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
+}
+
+@mixin ErrorMessage ($size: 12px, $align: center) {
+  position: absolute;
+  width: 100%;
+  color: $red;
+  font-size: $size;
+  margin-block: 5px;
+  text-align: $align;
+  backdrop-filter: blur(40px);
+}
+
+@mixin Title($size: 24px, $font-weight: 600, $line-height: 29px, $align: center) {
+  font-weight: $font-weight;
+  font-size: $size;
+  text-align: $align;
+  line-height: $line-height;
+  font-family: inherit;
+  color: $white;
 }
 
 @mixin Text($size: 16px, $font-weight: 400, $line-height: 24.2px, $align: center) {
@@ -108,54 +127,5 @@
   &::-webkit-inner-spin-button,
   &::-webkit-clear-button {
     z-index: -10;
-  }
-}
-
-@mixin BlockHeader($textAlign: center, $color: $dark-grey) {
-  @include headerStyles(94px, 600, $textAlign, $color);
-  letter-spacing: -0.02em;
-
-  @media (max-width: $laptop) {
-    @include headerStyles(58px, 600, $textAlign, $color);
-  }
-
-  @media (max-width: $tablet) {
-    @include headerStyles(48px, 600, $textAlign, $color);
-    letter-spacing: -0.03em;
-  }
-
-  @media (max-width: $mobile) {
-    @include headerStyles(36px, 600, left, $color);
-    letter-spacing: -0.02em;
-  }
-}
-
-@mixin blockSubtitle($textAlign: center, $color: $dark-grey) {
-  @include headerStyles(16px, 700, $textAlign, $color);
-  letter-spacing: -0.02em;
-  line-height: 19.2px;
-  text-transform: uppercase;
-
-  @media (max-width: $tablet) {
-    @include headerStyles(12px, 700, $textAlign, $color);
-    line-height: 14.4px;
-  }
-
-  @media (max-width: $mobile) {
-    @include headerStyles(12px, 700, left, $color);
-  }
-}
-
-@mixin hover {
-  @media (hover: hover) {
-    &:hover {
-      @content;
-    }
-  }
-
-  @media (hover: none) {
-    &:active {
-      @content;
-    }
   }
 }

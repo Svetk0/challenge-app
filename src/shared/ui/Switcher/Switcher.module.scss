@@ -1,23 +1,18 @@
 @use '@/shared/styles' as *;
 
 .rowWrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    @include Flex($direction: row);
     gap: 10px;
 }
 
 .switcher {
+    @include Flex($direction: row, $justify: space-between);
+    position: relative;
     width: 60px;
     height: 30px;
     background-color: $black-70;
     border-radius: 15px;
-    position: relative;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 5px;
     transition: background-color 0.3s;
 
