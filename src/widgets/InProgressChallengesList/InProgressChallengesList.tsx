@@ -1,16 +1,17 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '@/shared/lib/store';
-import { TChallenge } from '@/shared/types';
 import { useGetAllChallengeListQuery } from '@/shared/api/content';
-import { setLocalStorage, getLocalStorage } from '@/shared/utils';
+import { setLocalStorage } from '@/shared/utils';
+import { useNotificationHandler } from '@/shared/utils/hooks';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 
-import { Button, ListChallenges } from '@/shared/ui';
+import { Button, ListChallenges, ToastSuccess } from '@/shared/ui';
 import { ChallengeInfo } from '@/widgets';
 
 import staticData from '@/shared/constants/data.json';
@@ -22,21 +23,29 @@ const {
 } = staticData.challenges;
 
 export function InProgressChallengesList() {
+  const { clearCurrentNotification } = useNotificationHandler();
+  const notificationData = useSelector(
+    (state: RootState) => state.notification.notification?.user_message
+  );
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-  const [localChallenges, setLocalChallenges] = useState<TChallenge[] | null>(null);
   const router = useRouter();
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
     skip: false,
   });
+  useEffect(() => {
+    const notify = () => toast.custom(<ToastSuccess message={notificationData || ''} />);
+    const timer = setTimeout(() => {
+      if (notificationData) {
+        notify();
+        clearCurrentNotification();
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [notificationData]);
 
   useEffect(() => {
-    setLocalChallenges(getLocalStorage('challenges'));
-    console.log('get local', isLoading, localChallenges);
-  }, [isLoading]);
-  useEffect(() => {
     if (data) {
-      console.log('have data');
       setLocalStorage('challenges', data);
       dispatch(setChallenges(data));
     }
@@ -52,7 +61,6 @@ export function InProgressChallengesList() {
   }, [error]);
 
   const displayData = data || challengeData;
-  console.log('displayData, data:', data, 'store:', challengeData);
 
   return (
     <section className={styles.container}>
@@ -65,10 +73,16 @@ export function InProgressChallengesList() {
           onClick={() => router.push('/challenges/create')}
         />
       </div>
-
       <ListChallenges displayData={displayData}>
         <ChallengeInfo isLoading={isLoading} />
       </ListChallenges>
+      <Toaster
+        containerClassName={styles.toastsWrapper}
+        toastOptions={{
+          duration: 2000,
+          position: 'bottom-center',
+        }}
+      />
     </section>
   );
 }

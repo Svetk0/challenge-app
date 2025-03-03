@@ -4,3 +4,4 @@ export { useOutsideClick } from './useOutsideClick';
 export { useTelegramAuth } from './useTelegramAuth';
 export { useTelegramMock } from './useTelegramMock';
 export { useErrorHandler } from './useErrorHandler';
+export { useNotificationHandler } from './useNotificationHandler';
