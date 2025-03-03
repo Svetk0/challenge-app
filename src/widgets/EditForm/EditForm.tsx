@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { useEditChallengeMutation, useGetChallengeByIDQuery } from '@/shared/api/content';
 import { configValidation, validateAndAdjustDates } from '@/shared/utils';
@@ -11,6 +12,7 @@ import staticData from '@/shared/constants/data.json';
 import styles from './EditForm.module.scss';
 
 const dt = staticData.challenge_form;
+const notify = () => toast('Here is your toast.');
 
 export function EditForm({ id }: { id: string }) {
   const router = useRouter();
@@ -101,7 +103,7 @@ export function EditForm({ id }: { id: string }) {
           dataEdit: changedFields,
         }).unwrap();
       }
-
+      notify();
       router.push('/challenges');
     } catch (error) {
       setIsSubmitting(false);
@@ -218,6 +220,7 @@ export function EditForm({ id }: { id: string }) {
           color='default'
         />
       </div>
+      <Toaster />
     </form>
   );
 }
