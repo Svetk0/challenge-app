@@ -5,7 +5,7 @@ import staticData from '@/shared/constants/data.json';
 export function formatDate(dateString: string, includeYear = true) {
   const date = new Date(dateString);
   const day = date.getDate();
-  const month = date.toLocaleString('en-US', { month: 'short' }); // Получаем сокращенное название месяца
+  const month = date.toLocaleString('en-US', { month: 'short' });
 
   let suffix = 'th';
   if (day === 1 || day === 21 || day === 31) {
