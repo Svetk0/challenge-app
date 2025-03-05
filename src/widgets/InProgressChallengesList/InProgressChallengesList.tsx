@@ -34,9 +34,9 @@ export function InProgressChallengesList() {
     skip: false,
   });
   useEffect(() => {
-    const notify = () => toast.custom(<ToastSuccess message={notificationData || ''} />);
     const timer = setTimeout(() => {
       if (notificationData) {
+        const notify = () => toast.custom(<ToastSuccess message={notificationData || ''} />);
         notify();
         clearCurrentNotification();
       }

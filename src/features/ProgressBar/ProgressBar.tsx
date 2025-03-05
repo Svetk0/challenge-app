@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useEditChallengeMutation } from '@/shared/api/content';
+import { formatDate } from '@/shared/utils';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
@@ -14,20 +15,6 @@ type Props = {
   isMinimal?: boolean;
 };
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const monthNames = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
 const {
   errors: { progress: progress_error },
 } = staticData.challenge_info;
@@ -92,24 +79,21 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
     return null;
   };
   const calculateDeadlinePeriod = () => {
-    if (challenge.period != 'day') {
-      const endDate = new Date(challenge.started_at);
-
-      if (challenge.period === 'week') {
-        return `by ${weekDays[endDate.getDay()]}`;
-      }
+    if (challenge.period_finished_at) {
       if (challenge.period === 'month') {
-        if (challenge.period_finished_at) {
-          const endDateMonthly = new Date(challenge.period_finished_at) ?? null;
-          return `${endDateMonthly.getDate()}th ${monthNames[endDateMonthly.getMonth()]}`;
-        }
+        return formatDate(challenge.period_finished_at, false);
+      }
+      if (challenge.period === 'week') {
+        const endDatePeriod = new Date(challenge.period_finished_at) ?? null;
+        return `by ${weekDays[endDatePeriod.getDay()]}`;
       }
     }
     return null;
   };
-  const progress = (currentProgress / challenge.goal) * 100;
-  const daysLeft = calculateDaysLeft();
-  const deadlinePeriod = calculateDeadlinePeriod();
+
+  const progress: number = (currentProgress / challenge.goal) * 100;
+  const daysLeft: number | null = calculateDaysLeft();
+  const deadlinePeriod: string | null = calculateDeadlinePeriod();
 
   if (isMinimal) {
     return (
