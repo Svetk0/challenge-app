@@ -10,21 +10,23 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import ChartDataLabels, { Context as DataLabelsContext } from 'chartjs-plugin-datalabels';
 import dataset from './mockDatasets.json';
 
 import styles from './Dashboard.module.scss';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ChartDataLabels);
+type ExtendedContext = DataLabelsContext & {
+  dataIndex: number;
+};
 export const options = {
   plugins: {
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart - Stacked',
-    },
     legend: {
       display: false,
       position: 'bottom' as const,
+    },
+    datalabels: {
+      display: false,
     },
   },
   responsive: true,
@@ -58,7 +60,22 @@ export const data = {
       barPercentage: 0.8,
       borderRadius: 5,
       stack: 'Stack 1',
-      barAlign: 'start',
+      datalabels: {
+        display: true,
+        anchor: 'end' as const,
+        align: 'end' as const,
+        textAlign: 'center' as const,
+        formatter: (value: number, context: ExtendedContext) => {
+          const allData = context.chart.data.datasets.find((dataset) => dataset.label === 'all');
+          if (allData) {
+            const total = allData.data[context.dataIndex];
+            const successRate = total ? (value / +total) * 100 : 0;
+            return `${successRate.toFixed(0)}%`;
+          }
+          return value;
+        },
+        color: '#fff',
+      },
     },
 
     {
