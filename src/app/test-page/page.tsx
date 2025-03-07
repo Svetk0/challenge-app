@@ -1,5 +1,6 @@
-import { ToastSuccess } from '@/shared/ui/';
+'use client';
+import { Dashboard } from '@/widgets/Dashboard/Dashboard';
 
 export default function TestPage() {
-  return <ToastSuccess message='my toast success' />;
+  return <Dashboard />;
 }
