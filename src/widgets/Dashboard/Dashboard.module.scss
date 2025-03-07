@@ -1,4 +1,7 @@
+@use '@/shared/styles/mixins' as *;
+
 .container {
+    @include Flex;
     width: 100%;
     height: 50vh;
     padding: 20px;

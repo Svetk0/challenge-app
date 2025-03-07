@@ -38,6 +38,9 @@ export const options = {
     },
     y: {
       stacked: false,
+      ticks: {
+        stepSize: 1,
+      },
     },
   },
 };
@@ -51,18 +54,21 @@ export const data = {
     {
       label: 'successfully',
       data: labels.map((label) => dt.successfully[label as keyof typeof dt.successfully]),
-      backgroundColor: 'rgb(255, 99, 132)',
+      backgroundColor: 'rgb(176, 244, 162)',
       barPercentage: 0.8,
       borderRadius: 5,
       stack: 'Stack 1',
+      barAlign: 'start',
     },
 
     {
       label: 'missed',
       data: labels.map((label) => dt.missed[label as keyof typeof dt.successfully]),
-      backgroundColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgb(198, 133, 255, 0.3)',
       barPercentage: 0.8,
       borderRadius: 5,
+      borderWidth: 0,
+      borderColor: 'rgb(122, 144, 255)',
       stack: 'Stack 0',
     },
     {
@@ -75,6 +81,8 @@ export const data = {
       ),
       backgroundColor: 'rgb(75, 192, 192,0.2)',
       barPercentage: 1,
+      borderRadius: { topRight: 10 },
+
       stack: 'Stack 0',
     },
     {
@@ -87,6 +95,7 @@ export const data = {
       ),
       backgroundColor: 'rgb(75, 192, 192,0.2)',
       barPercentage: 1,
+      borderRadius: { topLeft: 10 },
       stack: 'Stack 1',
     },
   ],
