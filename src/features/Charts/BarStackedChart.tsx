@@ -37,7 +37,7 @@ export const options = {
       stacked: true,
     },
     y: {
-      stacked: false,
+      stacked: true,
       ticks: {
         stepSize: 1,
       },
@@ -57,16 +57,17 @@ export const data = {
       backgroundColor: 'rgb(176, 244, 162)',
       barPercentage: 0.8,
       borderRadius: 5,
-      stack: 'Stack 1',
+      stack: 'Stack 0',
       datalabels: {
         display: true,
         anchor: 'end' as const,
         align: 'end' as const,
         textAlign: 'center' as const,
         formatter: (value: number, context: ExtendedContext) => {
-          const allData = context.chart.data.datasets.find((dataset) => dataset.label === 'all');
+          const allData = context.chart.data.datasets.find((dataset) => dataset.label === 'missed');
           if (allData) {
-            const total = allData.data[context.dataIndex];
+            const total = Number(allData.data[context.dataIndex] || 0) + Number(value);
+            console.log('context.dataIndex', context.dataIndex, 'total', total);
             const successRate = total ? (value / +total) * 100 : 0;
             return `${successRate.toFixed(0)}%`;
           }
@@ -79,39 +80,12 @@ export const data = {
     {
       label: 'missed',
       data: labels.map((label) => dt.missed[label as keyof typeof dt.successfully]),
-      backgroundColor: 'rgb(198, 133, 255, 0.3)',
+      backgroundColor: 'rgb(75, 192, 192,0.2)',
       barPercentage: 0.8,
-      borderRadius: 5,
+      borderRadius: 10,
       borderWidth: 0,
       borderColor: 'rgb(122, 144, 255)',
       stack: 'Stack 0',
-    },
-    {
-      label: 'all',
-      data: labels.map((label) =>
-        String(
-          Number(dt.missed[label as keyof typeof dt.successfully]) +
-            Number(dt.successfully[label as keyof typeof dt.successfully])
-        )
-      ),
-      backgroundColor: 'rgb(75, 192, 192,0.2)',
-      barPercentage: 1,
-      borderRadius: { topRight: 10 },
-
-      stack: 'Stack 0',
-    },
-    {
-      label: 'all',
-      data: labels.map((label) =>
-        String(
-          Number(dt.missed[label as keyof typeof dt.successfully]) +
-            Number(dt.successfully[label as keyof typeof dt.successfully])
-        )
-      ),
-      backgroundColor: 'rgb(75, 192, 192,0.2)',
-      barPercentage: 1,
-      borderRadius: { topLeft: 10 },
-      stack: 'Stack 1',
     },
   ],
 };
