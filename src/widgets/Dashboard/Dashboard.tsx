@@ -5,7 +5,8 @@ import {
 } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { BarStackedChart, BarChart } from '@/features';
-import { ToastError } from '@/shared/ui';
+import { Button, ToastError } from '@/shared/ui';
+import { ArrowIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
 import styles from './Dashboard.module.scss';
 
@@ -47,6 +48,21 @@ export function Dashboard() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
+      <div className={styles.columnWrapper}>
+        <h3 className={styles.subtitle}>Overview</h3>
+        <div className={styles.rowWrapper}>
+          <p className={styles.comments}>The longest challenge:</p>
+          <p className={styles.comments}>92 days</p>
+          <Button
+            type='button'
+            text={<ArrowIcon />}
+            color='icon'
+            //onClick={(e) => handleOpenInfo(e)}
+          />
+        </div>
+
+        <p className={styles.comments}>The most effective challenge:</p>
+      </div>
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>{periods_subtitle}</h3>
         <p className={styles.comments}>{periods_comment}</p>
