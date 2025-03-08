@@ -26,6 +26,7 @@
       "signUp": "Sign Up"
     }
   },
+
   "challenges": {
     "title": "Daily Routine",
     "loading": "Your Challenges is loading...",
@@ -138,6 +139,23 @@
     "toasts": {
       "create": "The challenge was created successfully",
       "edit": "All changes were saved successfully"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "loading": "Your statistics is loading...",
+    "summary": {
+      "periods": {
+        "title": "Summary of periods",
+        "comment": "Your successfully periods in all challenges"
+      },
+      "challenges": {
+        "title": "Summary of challenges",
+        "comment": "Your full statistics"
+      }
+    },
+    "errors": {
+      "get_all": "Failed to load statistics"
     }
   },
   "modals": {
