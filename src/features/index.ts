@@ -5,3 +5,4 @@ export {
   DeleteChallengeButton,
   EditChallengeIconButton,
 } from './ManageChallenge/ManageChallenge';
+export { BarChart, BarStackedChart } from './Charts';

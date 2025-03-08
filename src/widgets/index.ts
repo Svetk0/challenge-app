@@ -5,3 +5,4 @@ export { CreateForm } from './CreateForm/CreateForm';
 export { EditForm } from './EditForm/EditForm';
 export { ChallengeInfo } from './ChallengeInfo/ChallengeInfo';
 export { Greeting } from './Greeting/Greeting';
+export { Dashboard } from './Dashboard/Dashboard';

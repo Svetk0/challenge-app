@@ -1,6 +1,6 @@
 'use client';
-import { Dashboard } from '@/widgets/Dashboard/Dashboard';
+import { Loading } from '@/shared/ui';
 
 export default function TestPage() {
-  return <Dashboard />;
+  return <Loading />;
 }
