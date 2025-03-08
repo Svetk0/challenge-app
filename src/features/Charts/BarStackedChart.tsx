@@ -67,7 +67,6 @@ export const data = {
           const allData = context.chart.data.datasets.find((dataset) => dataset.label === 'missed');
           if (allData) {
             const total = Number(allData.data[context.dataIndex] || 0) + Number(value);
-            console.log('context.dataIndex', context.dataIndex, 'total', total);
             const successRate = total ? (value / +total) * 100 : 0;
             return `${successRate.toFixed(0)}%`;
           }

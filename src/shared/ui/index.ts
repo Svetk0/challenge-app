@@ -9,4 +9,4 @@ export { ListChallenges } from './ListChallenges/ListChallenges';
 export { Loading } from './Loading/Loading';
 export { NotFound404 } from './NotFound404/NotFound404';
 export { Congratulations } from './Congratulations/Congratulations';
-export { ToastSuccess } from './Toasts/Toasts';
+export { ToastSuccess, ToastError } from './Toasts/Toasts';

@@ -37,3 +37,20 @@
         margin-top: 30px;
     }
 }
+
+.bottom {
+    width: 100%;
+    position: relative;
+    z-index: 100;
+}
+
+.error {
+    @include ErrorMessage ($size: 14px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.toastsWrapper {
+    margin-bottom: 10vh;
+}
