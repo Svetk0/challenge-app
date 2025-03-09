@@ -40,29 +40,13 @@ export const Navigation = () => {
             dataListItem='/dashboard'
           />
           <NavigationItem
-            href='/history'
+            href='/finished'
             icon={<ClipboardIcon size={20} />}
-            text='Completed'
+            text='Finished'
             onClick={handleClick}
-            isSelected={selected === '/history'}
-            dataListItem='/history'
+            isSelected={selected === '/finished'}
+            dataListItem='/finished'
           />
-          {/* <ListItem
-          href="/pagefour"
-          icon={<IoCameraOutline />}
-          text="Photos"
-          onClick={handleClick}
-          isSelected={selected === "/pagefour"}
-          dataListItem="/pagefour"
-        />
-        <ListItem
-          href="/pagefive"
-          icon={<IoSettingsOutline />}
-          text="Settings"
-          onClick={handleClick}
-          isSelected={selected === "/pagefive"}
-          dataListItem="/pagefive"
-        /> */}
           <div className={styles.indicator}></div>
         </ul>
       </div>

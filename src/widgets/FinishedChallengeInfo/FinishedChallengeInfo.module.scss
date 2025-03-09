@@ -6,15 +6,10 @@
     gap: 10px;
     padding: 10px 15px 20px;
     background-color: $black-50;
-    border-bottom: 1px solid $logo-pink;
+    border-bottom: 1px solid $logo-yellow;
     border-radius: 8px;
     transition: ease all 0.2s;
     cursor: pointer;
-
-    > :nth-child(2) {
-        gap: 5px;
-        padding-inline: clamp(10px, 6vw, 40px);
-    }
 
     &:hover {
         transform: scale(1.05);
@@ -27,22 +22,12 @@
         padding-block: 25px 15px;
         background: $deep-dark-purple-70;
 
-        > :nth-child(2) {
-            gap: 0;
-            padding-inline: 0;
-        }
-
         > :nth-child(3) {
             gap: 20px;
             align-items: flex-end;
             justify-content: center;
             margin-top: 20px;
         }
-    }
-
-    &__upcoming {
-        opacity: 0.6;
-        border-bottom: 1px solid $grey;
     }
 }
 
@@ -53,24 +38,47 @@
     gap: 15px;
 }
 
-.period {
+.columnWrapper {
+    @include Flex($justify: flex-start, $align: flex-start);
+    width: 100%;
+    gap: 5px;
+
+    &.summary {
+        padding: 15px 10%;
+        border-radius: 8px;
+        background-color: $black-30;
+    }
+}
+
+.comments {
     font-size: 12px;
     color: $grey;
+    padding-left: 15px;
+    margin-bottom: 10px;
+}
+
+.text {
+    font-size: 14px;
 }
 
 .description {
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 19.07px;
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    background-color: $deep-dark-gray;
+    background-color: $black-50;
     border-radius: 8px;
-    padding: 5px 10px;
-
+    padding: 10px;
     flex: 1;
     margin-right: 10px;
+}
+
+.subtitle {
+    @include Text;
+    color: $purple;
+    align-self: center;
 }
 
 .error {
