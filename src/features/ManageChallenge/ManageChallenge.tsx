@@ -89,3 +89,35 @@ export function EditChallengeIconButton({ challenge }: Props) {
     />
   );
 }
+
+export function MakeActiveChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
+  const [editChallenge] = useEditChallengeMutation();
+
+  const handleActiveChallenge = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await editChallenge({
+        uuid: challenge.uuid,
+        dataEdit: {
+          is_finished: false,
+          finished_at: null,
+        },
+      }).unwrap();
+      handleNotification('challenge was moved to active group successfully');
+    } catch (error) {
+      clearCurrentNotification();
+      handleError(error, 'Failed to activate challenge');
+      throw error;
+    }
+  };
+  return (
+    <Button
+      type='button'
+      text={'Make Active'}
+      color='control'
+      onClick={(e) => handleActiveChallenge(e)}
+    />
+  );
+}

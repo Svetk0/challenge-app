@@ -4,4 +4,5 @@ export {
   CompleteChallengeButton,
   DeleteChallengeButton,
   EditChallengeIconButton,
+  MakeActiveChallengeButton,
 } from './ManageChallenge/ManageChallenge';
