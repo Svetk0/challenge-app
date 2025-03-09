@@ -1,0 +1,131 @@
+@import './vars';
+
+@mixin Form ($gap: 20px) {
+  width: clamp(200px, 100%, 420px);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-inline: clamp(5px, 5vw, 30px);
+  gap: 30px;
+}
+
+@mixin Flex ($direction: column, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin ResetButton {
+  background-color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+@mixin ErrorMessage ($size: 12px, $align: center) {
+  position: absolute;
+  width: 100%;
+  color: $red;
+  font-size: $size;
+  margin-block: 5px;
+  text-align: $align;
+  backdrop-filter: blur(40px);
+}
+
+@mixin Title($size: 24px, $font-weight: 600, $line-height: 29px, $align: center) {
+  font-weight: $font-weight;
+  font-size: $size;
+  text-align: $align;
+  line-height: $line-height;
+  font-family: inherit;
+  color: $white;
+}
+
+@mixin Text($size: 16px, $font-weight: 400, $line-height: 24.2px, $align: center) {
+  font-weight: $font-weight;
+  font-size: $size;
+  text-align: $align;
+  line-height: $line-height;
+  font-family: inherit;
+}
+
+@mixin Label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 19.36px;
+  text-align: left;
+  color: $grey;
+}
+
+@mixin Input($align: left) {
+  @include Text(16px, 400, 21.79px, $align);
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  border-radius: 8px;
+  border: none;
+  background: $black-70;
+  color: $purple;
+  padding: 10px;
+  border-bottom: 1px solid $purple;
+
+  &::placeholder {
+    color: $dirty-green-op80;
+    font-size: smaller;
+  }
+
+  &:focus,
+  &:active,
+  &:focus-visible {
+    transition: border-color 0.3s ease;
+    color: $white;
+    outline: 0;
+    border-bottom: 1px solid $light-green-neon;
+    box-shadow: $shadow-box-perimeter;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: $brown;
+    -webkit-box-shadow: $shadow-box-light;
+  }
+
+  &::-ms-reveal,
+  &::-ms-clear,
+  &::-ms-expand,
+  &::-webkit-clear-button,
+  &::-webkit-password-toggle-button {
+    display: none;
+  }
+}
+
+@mixin InputDate {
+  //full calendar touch field mask
+  appearance: none;
+  -moz-appearance: none;
+  font-family: inherit;
+  position: relative;
+  padding-right: 5px;
+  color: transparent;
+
+  &:invalid {
+    color: transparent;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    inset: 0;
+    width: auto;
+    height: auto;
+    color: transparent;
+    background: transparent;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-clear-button {
+    z-index: -10;
+  }
+}

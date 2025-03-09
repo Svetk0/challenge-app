@@ -1,0 +1,80 @@
+@use '@/shared/styles' as *;
+
+.wrapper {
+    @include Flex($justify: space-between);
+    width: 100%;
+    gap: 10px;
+    padding: 10px 15px 20px;
+    background-color: $black-50;
+    border-bottom: 1px solid $logo-pink;
+    border-radius: 8px;
+    transition: ease all 0.2s;
+    cursor: pointer;
+
+    > :nth-child(2) {
+        gap: 5px;
+        padding-inline: clamp(10px, 6vw, 40px);
+    }
+
+    &:hover {
+        transform: scale(1.05);
+        border-bottom: 1px solid $light-green-neon;
+    }
+
+    &__active {
+        box-shadow: $shadow-box-perimeter;
+        border-bottom: 1px solid $light-green-neon;
+        padding-block: 25px 15px;
+        background: $deep-dark-purple-70;
+
+        > :nth-child(2) {
+            gap: 0;
+            padding-inline: 0;
+        }
+
+        > :nth-child(3) {
+            gap: 20px;
+            align-items: flex-end;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    }
+
+    &__upcoming {
+        opacity: 0.6;
+        border-bottom: 1px solid $grey;
+    }
+}
+
+.rowWrapper {
+    @include Flex($direction: row, $justify: space-between);
+    position: relative;
+    width: 100%;
+    gap: 15px;
+}
+
+.period {
+    font-size: 12px;
+    color: $grey;
+}
+
+.description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.07px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    background-color: $deep-dark-gray;
+    border-radius: 8px;
+    padding: 5px 10px;
+
+    flex: 1;
+    margin-right: 10px;
+}
+
+.error {
+    @include ErrorMessage;
+    top: -30px;
+    left: 0;
+}

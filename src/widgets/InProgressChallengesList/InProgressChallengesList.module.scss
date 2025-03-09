@@ -1,0 +1,23 @@
+@use '@/shared/styles' as *;
+
+.container {
+    width: 100%;
+    @include Flex;
+    padding-inline: 5px;
+    padding-top: 2vh;
+}
+
+.rowWrapper {
+    @include Flex($direction: row);
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 1rem;
+}
+
+.title {
+    @include Title;
+}
+
+.toastsWrapper {
+    margin-bottom: 10vh;
+}

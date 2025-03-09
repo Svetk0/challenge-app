@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import StoreProvider from './StoreProvider';
 import localFont from 'next/font/local';
-import Footer from '@/components/Footer/Footer';
-import { Root } from '@/components';
-import '../styles/globals.scss';
+import { Suspense } from 'react';
+import { Footer } from '@/widgets';
+import { Root } from '@/shared/core';
+import { Loading } from '@/shared/ui';
+
+import './_assets/globals.scss';
 
 const openSans = localFont({
   src: '../../public/fonts/OpenSans.woff',
@@ -12,27 +15,11 @@ const openSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Challenge App',
+  title: {
+    template: '%s | My Challenges',
+    default: 'Challenge App',
+  },
   description: 'Track your personal challenges and goals',
-  openGraph: {
-    title: 'Challenge App',
-    description: 'Track your personal challenges and goals',
-    images: [
-      {
-        url: '/images/og_image.png',
-        width: 1200,
-        height: 730,
-        alt: 'Challenge App Preview',
-      },
-    ],
-    siteName: 'Challenge App',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Challenge App',
-    description: 'Track your personal challenges and goals',
-    images: ['/images/og_image.png'],
-  },
 };
 
 export default function RootLayout({
@@ -45,8 +32,10 @@ export default function RootLayout({
       <StoreProvider>
         <body className={`${openSans.className}`}>
           <Root>
-            <main>{children}</main>
-            <Footer />
+            <Suspense fallback={<Loading />}>
+              <main>{children}</main>
+              <Footer />
+            </Suspense>
           </Root>
         </body>
       </StoreProvider>

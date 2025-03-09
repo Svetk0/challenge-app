@@ -1,7 +1,9 @@
-'use client';
+import { EditForm } from '@/widgets';
+import { Metadata } from 'next';
 
-import EditForm from '@/components/EditForm/EditForm';
-
+export const metadata: Metadata = {
+  title: 'Edit',
+};
 export default function EditChallengePage({ params }: { params: { id: string } }) {
   return <EditForm id={params.id} />;
 }

@@ -1,9 +1,13 @@
-'use client';
-import ListChallenges from '@/components/ListChallenges/ListChallenges';
+import { InProgressChallengesList } from '@/widgets';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Actual',
+};
 export default function Page() {
   return (
     <>
-      <ListChallenges />
+      <InProgressChallengesList />
     </>
   );
 }

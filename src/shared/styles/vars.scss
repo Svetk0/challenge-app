@@ -1,0 +1,52 @@
+//colors
+$white: rgba(246, 255, 251, 1);
+$white-op10: rgba(249, 246, 255, 0.2);
+$black: rgba(19, 29, 25, 1);
+$black-30: rgba(19, 29, 25, 0.4);
+$black-deep: rgba(37, 39, 50, 1);
+$black-70: rgba(30, 36, 33, 0.8);
+$black-50: rgba(40, 42, 56, 0.5);
+$lemon-neon: rgba(221, 251, 208, 1);
+$light-green-neon: rgba(191, 251, 226, 1);
+$green-neon: rgba(164, 245, 211, 1);
+$cyan-neon: rgba(169, 244, 250, 1);
+$brown: rgba(255, 228, 228, 1);
+$brown-light: rgba(224, 245, 236, 0.4);
+$grey: rgb(178, 176, 176);
+$dirty-green-op80: rgba(140, 163, 154, 0.8);
+$purple-light: rgb(145, 153, 243);
+$green-light: rgb(111, 207, 151);
+$purple: rgba(145, 153, 243, 1);
+
+$deep-dark-blue: rgba(56, 58, 70, 1);
+$deep-dark-purple: rgb(26, 17, 38);
+$deep-dark-purple-70: rgba(19, 11, 31, 0.7);
+$deep-dark-purple-30: rgba(37, 39, 50, 0.292);
+$deep-dark-gray: rgba(42, 44, 58, 1);
+$red: red;
+$red-dark: rgb(145, 14, 14);
+
+
+//logo colors
+$logo-purple: rgba(122, 144, 255, 1);
+$logo-blue: rgba(98, 242, 252, 1);
+$logo-pink: rgba(198, 133, 255, 1);
+$logo-green: rgba(176, 244, 162, 1);
+$logo-yellow: rgba(254, 216, 146, 1);
+
+
+//box shadow
+$shadow-box-bright: 0px 0px 4px 0px $light-green-neon;
+$shadow-box-bright-orange: 0px 0px 40px 0px $logo-yellow;
+$shadow-box-bright-mini: 0px 0px 3px 0px $light-green-neon;
+$drop-shadow-purple: 0px 0px 30px 0px $purple;
+$shadow-box-light: 1px 2px 6px 0px $brown-light;
+$shadow-box-perimeter: 0px 0px 6px 0px $brown-light;
+$shadow-box-button: 1px 1px 6px 0px $brown-light,
+  0px 2px 4px 0px $black-30 inset;
+
+//gradient
+$gradient-main-bg: linear-gradient(90deg, $lemon-neon 0%, $light-green-neon 49.5%, $cyan-neon 100%);
+
+//fields
+$black-fields: $black-deep;

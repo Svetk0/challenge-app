@@ -1,0 +1,42 @@
+@use '@/shared/styles' as *;
+
+.rowWrapper {
+    @include Flex($direction: row);
+    gap: 10px;
+}
+
+.switcher {
+    @include Flex($direction: row, $justify: space-between);
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background-color: $black-70;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 5px;
+    transition: background-color 0.3s;
+
+    &_active {
+        background-color: $purple;
+    }
+}
+
+.switcherThumb {
+    width: 24px;
+    height: 24px;
+    background-color: $purple;
+    box-shadow: $drop-shadow-purple;
+    border-radius: 20px;
+    position: absolute;
+    transition: transform 0.3s;
+    z-index: 10;
+
+    &.active {
+        transform: translateX(30px);
+        background-color: $white;
+    }
+}
+
+.label {
+    @include Label;
+}

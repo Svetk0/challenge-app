@@ -1,0 +1,60 @@
+@use '@/shared/styles' as *;
+
+.form {
+  @include Form($gap: 30px);
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .title {
+    @include Title;
+  }
+}
+
+.inputsContainer {
+  @include Flex($direction: row, $justify: space-evenly);
+  width: 100%;
+  flex-wrap: wrap;
+  background-color: $deep-dark-purple-30;
+  padding: 40px 5%;
+  row-gap: 25px;
+  column-gap: clamp(5px, 5vw, 20px);
+  border-radius: 20px;
+
+  >div:first-child {
+    width: 100%;
+  }
+
+  >div:last-child {
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-right: clamp(5px, 5vw, 25px);
+  }
+}
+
+.rowWrapper {
+  position: relative;
+  width: 100%;
+  @include Flex($direction: row);
+  flex-wrap: nowrap;
+  gap: 16px;
+
+  @media (max-width: 374px) {
+    flex-wrap: wrap-reverse;
+    gap: 8px;
+  }
+}
+
+.error,
+.warning {
+  @include ErrorMessage ($size: 14px);
+  position: absolute;
+  top: -30px;
+  left: 0;
+}
+
+.warning {
+  color: $logo-yellow;
+}

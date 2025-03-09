@@ -1,0 +1,89 @@
+ @use '@/shared/styles' as *;
+
+ .dialog {
+     width: 280px;
+     min-height: 360px;
+     position: fixed;
+     padding: 30px;
+     inset: 50% auto auto 50%;
+     border: 2px solid $purple;
+     border-radius: 20px;
+     color: $white;
+     background-color: $black-70;
+     backdrop-filter: blur(50px);
+     box-shadow: $drop-shadow-purple;
+     transform: translate(-50%, -50%);
+     z-index: 100;
+
+     &[open] {
+         @include Flex($direction: row);
+     }
+
+     .content {
+         padding-top: 30px;
+         width: 100%;
+         height: 100%;
+     }
+
+     >section>button {
+         position: absolute;
+         max-width: 50px;
+         top: 10px;
+         right: 10px;
+         border: none;
+         background: none;
+         cursor: pointer;
+
+         &:focus {
+             outline: none;
+         }
+
+         &:hover {
+             transform: scale(1.1);
+         }
+     }
+
+ }
+
+ .transparent {
+     width: auto;
+     height: auto;
+     border: 1px solid $logo-yellow;
+     background: transparent;
+     box-shadow: $shadow-box-bright-orange;
+
+     .content {
+         margin-bottom: 30px;
+     }
+ }
+
+ // DELETE
+ .wrapper {
+     @include Flex($justify: space-around);
+     width: 100%;
+     height: 100%;
+
+     span {
+         color: $purple;
+
+         &::after,
+         &::before {
+             content: '"';
+         }
+     }
+
+     p {
+         width: 100%;
+         margin: 20px;
+     }
+
+     button {
+         margin-top: clamp(20px, 50px, 100px);
+         padding: 15px;
+     }
+ }
+
+ .error {
+     @include ErrorMessage;
+     bottom: 70px;
+ }

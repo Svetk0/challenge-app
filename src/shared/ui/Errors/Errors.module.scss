@@ -1,0 +1,93 @@
+@use '@/shared/styles' as *;
+
+.container {
+    @include Flex;
+    height: 100%;
+    padding: 20px;
+
+    >svg {
+        margin-left: auto;
+        margin-right: 30px;
+
+        & path:nth-child(10) {
+            animation: scale 1.5s infinite;
+            animation-delay: 0s;
+        }
+
+        & path:nth-child(8) {
+            animation: scale 1.5s infinite;
+            animation-delay: 0.8s;
+        }
+
+        & path:nth-child(11) {
+            animation: scale 1.5s infinite;
+            animation-delay: 1.5s;
+        }
+
+        & path:nth-child(12) {
+            animation: scale 1.5s infinite;
+            animation-delay: 2s;
+        }
+
+    }
+}
+
+.wrapper {
+    @include Flex;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 50px;
+    gap: 20px;
+    background-color: $black-50;
+    border-radius: 12px;
+    border-bottom: 1px solid $purple;
+    box-shadow: $shadow-box-bright;
+
+    >h2 {
+        font-weight: 600;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .content {
+        max-height: 20vh;
+        overflow: auto;
+        font-weight: 400;
+        font-size: 14px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        scrollbar-width: none;
+    }
+}
+
+.rowWrapper {
+    @include Flex($direction: row);
+    position: relative;
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 30px;
+
+    >button {
+        width: 120px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 374px) {
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+
+.error {
+    position: absolute;
+    width: 100%;
+    top: -30px;
+    left: 0;
+    color: $red;
+    font-size: 14px;
+    margin-block: 5px;
+    text-align: center;
+}
