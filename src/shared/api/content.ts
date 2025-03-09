@@ -25,7 +25,7 @@ export const contentApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Actual'],
+  tagTypes: ['Actual', 'Finished'],
 
   endpoints: (builder) => ({
     //------------   GETS   ------------
@@ -45,13 +45,21 @@ export const contentApi = createApi({
       }),
       providesTags: ['Actual'],
     }),
+    // GET list of user's FINISHED challenges
+    getAllFinishedChallengeList: builder.query<TChallenge[], void>({
+      query: () => ({
+        url: 'challenges/finished/?limit=100/',
+        method: 'GET',
+      }),
+      providesTags: ['Finished'],
+    }),
     // GET challenge by id
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
       query: ({ uuid }) => ({
         url: `challenges/${uuid}/`,
         method: 'GET',
       }),
-      providesTags: ['Actual'],
+      providesTags: ['Actual', 'Finished'],
     }),
 
     //------------   MUTATIONS   ------------
@@ -76,7 +84,7 @@ export const contentApi = createApi({
         method: 'PATCH',
         body: dataEdit,
       }),
-      invalidatesTags: ['Actual'],
+      invalidatesTags: ['Actual', 'Finished'],
     }),
     //delete challenge by id
     deleteChallenge: builder.mutation<TEditForm, Partial<ResponseUser>>({
@@ -84,12 +92,13 @@ export const contentApi = createApi({
         url: `challenges/${uuid}/`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Actual'],
+      invalidatesTags: ['Actual', 'Finished'],
     }),
   }),
 });
 export const {
   useGetAllChallengeListQuery,
+  useGetAllFinishedChallengeListQuery,
   useCreateChallengeMutation,
   useEditChallengeMutation,
   useGetChallengeByIDQuery,

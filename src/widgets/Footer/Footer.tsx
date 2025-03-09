@@ -6,7 +6,7 @@ import { Navigation } from '@/widgets';
 export const Footer = () => {
   const pathname = usePathname();
 
-  const showFooterPaths = ['/challenges', '/dashboards', '/history'];
+  const showFooterPaths = ['/challenges', '/dashboards', '/finished'];
 
   const shouldShowFooter = showFooterPaths.includes(pathname);
 

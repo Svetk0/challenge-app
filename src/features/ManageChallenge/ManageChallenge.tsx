@@ -10,9 +10,9 @@ type Props = {
   challenge: TChallenge;
 };
 const {
-  buttons: { complete, remove },
-  errors: { complete: complete_error, delete: delete_error },
-  toasts: { complete: complete_toast, delete: delete_toast },
+  buttons: { complete, remove, incomplete },
+  errors: { complete: complete_error, incomplete: incomplete_error, delete: delete_error },
+  toasts: { complete: complete_toast, incomplete: incomplete_toast, delete: delete_toast },
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
@@ -86,6 +86,38 @@ export function EditChallengeIconButton({ challenge }: Props) {
       text={<EditIcon id={`editIcon-${challenge.uuid}`} />}
       color='icon'
       onClick={(e) => handleEditClick(e)}
+    />
+  );
+}
+
+export function MakeActiveChallengeButton({ challenge }: Props) {
+  const { handleError } = useErrorHandler();
+  const { handleNotification, clearCurrentNotification } = useNotificationHandler();
+  const [editChallenge] = useEditChallengeMutation();
+
+  const handleActiveChallenge = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await editChallenge({
+        uuid: challenge.uuid,
+        dataEdit: {
+          is_finished: false,
+          finished_at: null,
+        },
+      }).unwrap();
+      handleNotification(incomplete_toast);
+    } catch (error) {
+      clearCurrentNotification();
+      handleError(error, incomplete_error);
+      throw error;
+    }
+  };
+  return (
+    <Button
+      type='button'
+      text={incomplete}
+      color='control_green'
+      onClick={(e) => handleActiveChallenge(e)}
     />
   );
 }
