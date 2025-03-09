@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { contentApi } from '@/shared/api/content';
+
 import challengeSlice from './features/challenges/challengeSlice';
+import finishedChallengesSlice from './features/finished_challenges/finishedChallengesSlice';
 import errorSlice from './features/errors/errorSlice';
 import notificationSlice from './features/notifications/notificationSlice';
 
@@ -9,6 +11,7 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       challenge: challengeSlice,
+      finished_challenges: finishedChallengesSlice,
       error: errorSlice,
       notification: notificationSlice,
       [contentApi.reducerPath]: contentApi.reducer,

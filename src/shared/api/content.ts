@@ -1,6 +1,5 @@
 import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-//import { getAuthToken } from '@/shared/utils/auth';
 import { TChallenge, TCreateForm, TEditForm } from '@/shared/types';
 
 interface ResponseUser {
