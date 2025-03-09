@@ -34,7 +34,7 @@ export const Navigation = () => {
           <NavigationItem
             href='/dashboard'
             icon={<ChartIcon size={20} />}
-            text='Progress'
+            text='Dashboard'
             onClick={handleClick}
             isSelected={selected === '/dashboard'}
             dataListItem='/dashboard'
