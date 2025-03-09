@@ -1,8 +1,5 @@
 'use client';
-import {
-  //useState,
-  useEffect,
-} from 'react';
+import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { BarStackedChart, BarChart } from '@/features';
 import { Button, ToastError } from '@/shared/ui';
@@ -26,6 +23,7 @@ const error = {
 
 export function Dashboard() {
   //const [errorCatched, setErrorCatched] = useState<string | null>(null);
+  const [isMore, setIsMore] = useState<boolean>(false);
 
   useEffect(() => {
     if (error) {
@@ -61,7 +59,26 @@ export function Dashboard() {
           />
         </div>
 
-        <p className={styles.comments}>The most effective challenge:</p>
+        <div className={styles.rowWrapper}>
+          <p className={styles.comments}>The most effective challenge:</p>
+          <p className={styles.comments}>89%</p>
+          <Button
+            type='button'
+            text={<ArrowIcon />}
+            color='icon'
+            onClick={() => setIsMore(!isMore)}
+          />
+        </div>
+        {isMore && (
+          <div className={styles.columnWrapper}>
+            <h3 className={styles.subtitle}>Challenge: Gym 2 times per week</h3>
+            <div>
+              Status: in-progress; <br /> Periodicity: weekly;
+              <br /> Successfully periods: 9;
+              <br /> Missed periods: 1;
+            </div>
+          </div>
+        )}
       </div>
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>{periods_subtitle}</h3>

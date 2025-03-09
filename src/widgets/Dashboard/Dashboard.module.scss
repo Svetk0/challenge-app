@@ -23,6 +23,7 @@
     background-color: $deep-dark-purple-30;
     border-radius: 20px;
     padding: 20px 5%;
+    transition: all 0.3s ease;
 
     .subtitle {
         @include Title($size: 18px);

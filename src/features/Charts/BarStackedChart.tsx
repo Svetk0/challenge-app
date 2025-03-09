@@ -63,6 +63,13 @@ export const data = {
         anchor: 'end' as const,
         align: 'end' as const,
         textAlign: 'center' as const,
+        labels: {
+          value: {
+            font: {
+              size: 16,
+            },
+          },
+        },
         formatter: (value: number, context: ExtendedContext) => {
           const allData = context.chart.data.datasets.find((dataset) => dataset.label === 'missed');
           if (allData) {
