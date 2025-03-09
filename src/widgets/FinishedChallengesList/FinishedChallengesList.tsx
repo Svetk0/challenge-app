@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '@/shared/lib/store';
-import { useGetAllChallengeListQuery } from '@/shared/api/content';
+import { useGetAllFinishedChallengeListQuery } from '@/shared/api/content';
 import { setLocalStorage } from '@/shared/utils';
 import { useNotificationHandler } from '@/shared/utils/hooks';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
@@ -30,7 +30,7 @@ export function FinishedChallengesList() {
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
   const router = useRouter();
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetAllChallengeListQuery(undefined, {
+  const { data, error, isLoading } = useGetAllFinishedChallengeListQuery(undefined, {
     skip: false,
   });
   useEffect(() => {

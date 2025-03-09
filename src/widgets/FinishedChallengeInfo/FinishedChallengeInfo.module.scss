@@ -39,11 +39,6 @@
             margin-top: 20px;
         }
     }
-
-    &__upcoming {
-        opacity: 0.6;
-        border-bottom: 1px solid $grey;
-    }
 }
 
 .rowWrapper {
@@ -65,7 +60,7 @@
     text-align: left;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
-    background-color: $deep-dark-gray;
+    background-color: $black-50;
     border-radius: 8px;
     padding: 5px 10px;
 

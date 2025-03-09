@@ -5,9 +5,8 @@ import { useErrorHandler } from '@/shared/utils/hooks';
 import { RootState } from '@/shared/lib/store';
 import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
-import { formatDate } from '@/shared/utils';
 
-import { ProgressBar, ModalDelete } from '@/features';
+import { ModalDelete } from '@/features';
 import {
   MakeActiveChallengeButton,
   EditChallengeIconButton,
@@ -22,7 +21,6 @@ type Props = {
   challenge?: TChallenge;
 };
 const {
-  period: { every, starts_at },
   buttons: { remove },
 } = staticData.challenge_info;
 
@@ -32,7 +30,6 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
 
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [isChoosen, setIsChoosen] = useState<boolean>(false);
-  const [isStarted, setIsStarted] = useState<boolean>(true);
   const wrapperRef = useOutsideClick(() => setIsChoosen(false));
 
   const scrollToCenter = () => {
@@ -46,34 +43,23 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
       }
     }, 100);
   };
-  //useEffect(() => {}, [errorData]);
+  useEffect(() => {}, [errorData]);
   useEffect(() => {}, [challenge, isLoading]);
-  useEffect(() => {}, [isChoosen, isStarted, isModalOpened]);
-  useEffect(() => {
-    if (challenge) {
-      const today = new Date();
-      const startDate = new Date(challenge.started_at);
-      const diff = today.getTime() - startDate.getTime();
-      if (diff < 0) setIsStarted(false);
-      else setIsStarted(true);
-    }
-  }, [challenge]);
+  useEffect(() => {}, [isChoosen, isModalOpened]);
+
   if (isLoading || !challenge) {
     return <CardSkeleton />;
   }
-  const { description, period } = challenge;
+  const {
+    description,
+    //period
+  } = challenge;
 
   return (
     <div
       ref={wrapperRef}
       id={`challenge-${challenge?.uuid}`}
-      className={
-        isChoosen
-          ? `${styles.wrapper} ${styles.wrapper__active}`
-          : isStarted
-            ? `${styles.wrapper}`
-            : `${styles.wrapper} ${styles.wrapper__upcoming}`
-      }
+      className={isChoosen ? `${styles.wrapper} ${styles.wrapper__active}` : `${styles.wrapper}`}
       onClick={() => {
         setIsChoosen(true);
         scrollToCenter();
@@ -85,12 +71,10 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
         <span className={styles.description}>{description}</span>
         <EditChallengeIconButton challenge={challenge} />
       </div>
-      <div className={styles.rowWrapper}>
+      {/* <div className={styles.rowWrapper}>
         <div className={styles.period}>
           {isChoosen ? (
             ''
-          ) : isStarted ? (
-            `${every} ${period}`
           ) : (
             <>
               {starts_at} <br /> {formatDate(challenge.started_at)}
@@ -98,7 +82,7 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
           )}
         </div>
         <ProgressBar challenge={challenge} isMinimal={!isChoosen} />
-      </div>
+      </div> */}
       {isChoosen ? (
         <div className={styles.rowWrapper}>
           {errorData && <div className={styles.error}> {errorData.user_message}</div>}
