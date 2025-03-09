@@ -11,10 +11,10 @@
     transition: ease all 0.2s;
     cursor: pointer;
 
-    > :nth-child(2) {
-        gap: 5px;
-        padding-inline: clamp(10px, 6vw, 40px);
-    }
+    // > :nth-child(2) {
+    //     gap: 5px;
+    //     padding-inline: clamp(10px, 6vw, 40px);
+    // }
 
     &:hover {
         transform: scale(1.05);
@@ -27,10 +27,10 @@
         padding-block: 25px 15px;
         background: $deep-dark-purple-70;
 
-        > :nth-child(2) {
-            gap: 0;
-            padding-inline: 0;
-        }
+        // > :nth-child(2) {
+        //     gap: 0;
+        //     padding-inline: 0;
+        // }
 
         > :nth-child(3) {
             gap: 20px;
@@ -48,13 +48,28 @@
     gap: 15px;
 }
 
-.period {
+.columnWrapper {
+    @include Flex($justify: flex-start, $align: flex-start);
+    width: 100%;
+    gap: 5px;
+
+    &.summary {
+        padding: 5px 10%;
+    }
+}
+
+.comments {
     font-size: 12px;
     color: $grey;
+    padding-left: 15px;
+}
+
+.text {
+    font-size: 14px;
 }
 
 .description {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     line-height: 19.07px;
     text-align: left;
@@ -62,10 +77,16 @@
     text-decoration-skip-ink: none;
     background-color: $black-50;
     border-radius: 8px;
-    padding: 5px 10px;
-
+    padding: 10px;
     flex: 1;
     margin-right: 10px;
+}
+
+.subtitle {
+    @include Text;
+    color: $purple;
+    align-self: center;
+    margin-top: 20px;
 }
 
 .error {

@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,14 +10,13 @@ import { setLocalStorage } from '@/shared/utils';
 import { useNotificationHandler } from '@/shared/utils/hooks';
 import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
 
-import { Button, ListChallenges, ToastSuccess } from '@/shared/ui';
+import { ListChallenges, ToastSuccess } from '@/shared/ui';
 import { FinishedChallengeInfo } from '@/widgets';
 
 import staticData from '@/shared/constants/data.json';
 import styles from './FinishedChallengesList.module.scss';
 const {
   title,
-  buttons: { add },
   errors: { get_all },
 } = staticData.challenges;
 
@@ -28,7 +26,6 @@ export function FinishedChallengesList() {
     (state: RootState) => state.notification.notification?.user_message
   );
   const challengeData = useSelector((state: RootState) => state.challenge.challenges);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetAllFinishedChallengeListQuery(undefined, {
     skip: false,
@@ -66,12 +63,6 @@ export function FinishedChallengesList() {
     <section className={styles.container}>
       <div className={styles.rowWrapper}>
         <h2 className={styles.title}>{title}</h2>
-        <Button
-          type='button'
-          text={add}
-          color={displayData?.length !== 0 ? 'mini' : 'default-width'}
-          onClick={() => router.push('/challenges/create')}
-        />
       </div>
       <ListChallenges displayData={displayData}>
         <FinishedChallengeInfo isLoading={isLoading} />

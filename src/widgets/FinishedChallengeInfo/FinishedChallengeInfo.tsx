@@ -50,11 +50,8 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <CardSkeleton />;
   }
-  const {
-    description,
-    //period
-  } = challenge;
-
+  const { description, period, goal, total_progress = 0, goal_progress = 1, duration } = challenge;
+  const performance: number = Math.round((+total_progress / +goal_progress) * 100);
   return (
     <div
       ref={wrapperRef}
@@ -63,26 +60,35 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
       onClick={() => {
         setIsChoosen(true);
         scrollToCenter();
-
         clearCurrentError();
       }}
     >
       <div className={styles.rowWrapper}>
-        <span className={styles.description}>{description}</span>
+        <div className={styles.columnWrapper}>
+          <span className={styles.description}>{description}</span>
+          <p className={styles.comments}>{`Note: ${goal} actions per ${period}`}</p>
+        </div>
         <EditChallengeIconButton challenge={challenge} />
       </div>
-      {/* <div className={styles.rowWrapper}>
-        <div className={styles.period}>
-          {isChoosen ? (
-            ''
-          ) : (
-            <>
-              {starts_at} <br /> {formatDate(challenge.started_at)}
-            </>
-          )}
+      {isChoosen ? (
+        <div className={`${styles.columnWrapper} ${styles.summary}`}>
+          <span className={styles.subtitle}>Summary</span>
+          <div className={styles.rowWrapper}>
+            <p className={styles.text}>Duration </p>
+            <p className={styles.text}> {duration} days</p>
+          </div>
+          <div className={styles.rowWrapper}>
+            <p className={styles.text}>Total result </p>
+            <p className={styles.text}>
+              {total_progress} of {goal_progress}
+            </p>
+          </div>
+          <div className={styles.rowWrapper}>
+            <p className={styles.text}>Performance </p>
+            <p className={styles.text}>{performance}%</p>
+          </div>
         </div>
-        <ProgressBar challenge={challenge} isMinimal={!isChoosen} />
-      </div> */}
+      ) : null}
       {isChoosen ? (
         <div className={styles.rowWrapper}>
           {errorData && <div className={styles.error}> {errorData.user_message}</div>}
