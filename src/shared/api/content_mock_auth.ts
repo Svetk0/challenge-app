@@ -1,5 +1,5 @@
-import { retrieveLaunchParams } from '@telegram-apps/sdk-react';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getAuthToken } from '@/shared/utils/auth';
 import { TChallenge, TCreateForm, TEditForm } from '@/shared/types';
 
 interface ResponseUser {
@@ -16,9 +16,10 @@ export const contentApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://challenge-app.site/api/',
     prepareHeaders: (headers) => {
-      const { initDataRaw: token } = retrieveLaunchParams();
+      const token = getAuthToken();
+
       if (token) {
-        headers.set('Authorization', `tma ${token}`);
+        headers.set('Authorization', token);
       }
       headers.set('Content-Type', 'application/json');
       return headers;
@@ -28,6 +29,14 @@ export const contentApi = createApi({
 
   endpoints: (builder) => ({
     //------------   GETS   ------------
+    //user info
+    getUserMe: builder.query({
+      query: () => ({
+        url: 'users/me/',
+        method: 'GET',
+      }),
+    }),
+
     // GET list of user's challenges
     getAllChallengeList: builder.query<TChallenge[], void>({
       query: () => ({
