@@ -116,7 +116,7 @@ export function MakeActiveChallengeButton({ challenge }: Props) {
     <Button
       type='button'
       text={'Make Active'}
-      color='control_purple'
+      color='control_green'
       onClick={(e) => handleActiveChallenge(e)}
     />
   );

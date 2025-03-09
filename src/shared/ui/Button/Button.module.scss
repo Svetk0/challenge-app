@@ -110,7 +110,7 @@
 
 .control,
 .control_red,
-.control_purple {
+.control_green {
   @include Flex($direction: row);
   width: 100px;
   height: 30px;
@@ -126,14 +126,14 @@
   background: $red-dark;
 }
 
-.control_purple {
-  color: $purple;
+.control_green {
+  color: $logo-green;
   background: transparent;
-  border: 1px solid $purple;
+  border: 1px solid $logo-green;
 
   &:hover {
-    color: $white;
-    background: $purple;
+    color: $deep-dark-purple;
+    background: $logo-green;
     opacity: 1;
   }
 }

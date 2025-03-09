@@ -50,8 +50,16 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
   if (isLoading || !challenge) {
     return <CardSkeleton />;
   }
-  const { description, period, goal, total_progress = 0, goal_progress = 1, duration } = challenge;
-  const performance: number = Math.round((+total_progress / +goal_progress) * 100);
+  const {
+    description,
+    period,
+    goal,
+    total_progress = 0,
+    goal_progress = 1,
+    duration = 0,
+  } = challenge;
+  const performance: number =
+    +goal_progress === 0 ? 0 : Math.round((+total_progress / +goal_progress) * 100);
   return (
     <div
       ref={wrapperRef}
@@ -75,12 +83,12 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
           <span className={styles.subtitle}>Summary</span>
           <div className={styles.rowWrapper}>
             <p className={styles.text}>Duration </p>
-            <p className={styles.text}> {duration} days</p>
+            <p className={styles.text}> {Math.abs(+duration)} days</p>
           </div>
           <div className={styles.rowWrapper}>
             <p className={styles.text}>Total result </p>
             <p className={styles.text}>
-              {total_progress} of {goal_progress}
+              {Math.abs(+total_progress)} of {Math.abs(+goal_progress)}
             </p>
           </div>
           <div className={styles.rowWrapper}>
