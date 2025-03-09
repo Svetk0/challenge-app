@@ -40,19 +40,31 @@
     "loading": "please, wait...",
     "buttons": {
       "complete": "Complete",
+      "incomplete": "Make Active",
       "remove": "Delete"
     },
     "period": {
       "every": "every",
       "starts_at": "starts at"
     },
+    "comments": {
+      "subtitle": "Note:",
+      "actions_per": "actions per"
+    },
+    "summary_labels": {
+      "duration_days": "Duration",
+      "total_result": "Total result",
+      "productivity": "Performance"
+    },
     "errors": {
       "progress": "Failed to update progress",
-      "complete": "Failed to complete challenge",
-      "delete": "Failed to DELETE challenge"
+      "complete": "Failed to complete the challenge",
+      "incomplete": "Failed to make the challenge active",
+      "delete": "Failed to DELETE the challenge"
     },
     "toasts": {
       "complete": "The challenge was completed successfully",
+      "incomplete": "The challenge is active",
       "delete": "The challenge was deleted successfully"
     }
   },
@@ -138,6 +150,12 @@
     "toasts": {
       "create": "The challenge was created successfully",
       "edit": "All changes were saved successfully"
+    }
+  },
+  "finished_challenges_list": {
+    "title": "Finished Challenges",
+    "errors": {
+      "get_all": "Failed to load list of challenges"
     }
   },
   "modals": {

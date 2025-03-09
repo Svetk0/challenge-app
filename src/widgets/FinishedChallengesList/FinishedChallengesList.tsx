@@ -18,7 +18,7 @@ import styles from './FinishedChallengesList.module.scss';
 const {
   title,
   errors: { get_all },
-} = staticData.challenges;
+} = staticData.finished_challenges_list;
 
 export function FinishedChallengesList() {
   const { clearCurrentNotification } = useNotificationHandler();

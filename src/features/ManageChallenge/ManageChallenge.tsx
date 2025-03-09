@@ -10,9 +10,9 @@ type Props = {
   challenge: TChallenge;
 };
 const {
-  buttons: { complete, remove },
-  errors: { complete: complete_error, delete: delete_error },
-  toasts: { complete: complete_toast, delete: delete_toast },
+  buttons: { complete, remove, incomplete },
+  errors: { complete: complete_error, incomplete: incomplete_error, delete: delete_error },
+  toasts: { complete: complete_toast, incomplete: incomplete_toast, delete: delete_toast },
 } = staticData.challenge_info;
 
 export function CompleteChallengeButton({ challenge }: Props) {
@@ -105,17 +105,17 @@ export function MakeActiveChallengeButton({ challenge }: Props) {
           finished_at: null,
         },
       }).unwrap();
-      handleNotification('challenge was moved to active group successfully');
+      handleNotification(incomplete_toast);
     } catch (error) {
       clearCurrentNotification();
-      handleError(error, 'Failed to activate challenge');
+      handleError(error, incomplete_error);
       throw error;
     }
   };
   return (
     <Button
       type='button'
-      text={'Make Active'}
+      text={incomplete}
       color='control_green'
       onClick={(e) => handleActiveChallenge(e)}
     />

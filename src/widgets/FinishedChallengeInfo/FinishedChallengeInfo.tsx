@@ -22,6 +22,8 @@ type Props = {
 };
 const {
   buttons: { remove },
+  comments: { subtitle, actions_per },
+  summary_labels: { duration_days, total_result, productivity },
 } = staticData.challenge_info;
 
 export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
@@ -34,7 +36,7 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
 
   const scrollToCenter = () => {
     setTimeout(() => {
-      const element = document.getElementById(`challenge-${challenge?.uuid}`);
+      const element = document.getElementById(`finished-${challenge?.uuid}`);
       if (element) {
         element.scrollIntoView({
           behavior: 'smooth',
@@ -63,7 +65,7 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
   return (
     <div
       ref={wrapperRef}
-      id={`challenge-${challenge?.uuid}`}
+      id={`finished-${challenge?.uuid}`}
       className={isChoosen ? `${styles.wrapper} ${styles.wrapper__active}` : `${styles.wrapper}`}
       onClick={() => {
         setIsChoosen(true);
@@ -74,28 +76,17 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
       <div className={styles.rowWrapper}>
         <div className={styles.columnWrapper}>
           <span className={styles.description}>{description}</span>
-          <p className={styles.comments}>{`Note: ${goal} actions per ${period}`}</p>
+          <p className={styles.comments}>{`${subtitle} ${goal} ${actions_per} ${period}`}</p>
         </div>
         <EditChallengeIconButton challenge={challenge} />
       </div>
       {isChoosen ? (
-        <div className={`${styles.columnWrapper} ${styles.summary}`}>
-          <span className={styles.subtitle}>Summary</span>
-          <div className={styles.rowWrapper}>
-            <p className={styles.text}>Duration </p>
-            <p className={styles.text}> {Math.abs(+duration)} days</p>
-          </div>
-          <div className={styles.rowWrapper}>
-            <p className={styles.text}>Total result </p>
-            <p className={styles.text}>
-              {Math.abs(+total_progress)} of {Math.abs(+goal_progress)}
-            </p>
-          </div>
-          <div className={styles.rowWrapper}>
-            <p className={styles.text}>Performance </p>
-            <p className={styles.text}>{performance}%</p>
-          </div>
-        </div>
+        <ChallengeSummary
+          duration={+duration}
+          total_progress={+total_progress}
+          goal_progress={+goal_progress}
+          performance={performance}
+        />
       ) : null}
       {isChoosen ? (
         <div className={styles.rowWrapper}>
@@ -120,3 +111,42 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
     </div>
   );
 }
+
+type SummaryItemProps = {
+  label: string;
+  value: string | number;
+};
+
+const SummaryItem = ({ label, value }: SummaryItemProps) => (
+  <div className={styles.rowWrapper}>
+    <p className={styles.text}>{label}</p>
+    <p className={styles.text}>{value}</p>
+  </div>
+);
+
+const ChallengeSummary = ({
+  duration,
+  total_progress,
+  goal_progress,
+  performance,
+}: {
+  duration: number;
+  total_progress: number;
+  goal_progress: number;
+  performance: number;
+}) => {
+  const summaryData = [
+    { label: duration_days, value: `${Math.abs(duration)} days` },
+    { label: total_result, value: `${Math.abs(total_progress)} of ${Math.abs(goal_progress)}` },
+    { label: productivity, value: `${performance}%` },
+  ];
+
+  return (
+    <div className={`${styles.columnWrapper} ${styles.summary}`}>
+      <span className={styles.subtitle}>Summary</span>
+      {summaryData.map((item) => (
+        <SummaryItem key={item.label} {...item} />
+      ))}
+    </div>
+  );
+};
