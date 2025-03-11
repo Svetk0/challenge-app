@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { TChallenge } from '@/shared/types';
+import { useDispatch } from 'react-redux';
+import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
 import { BarStackedChart, BarChart } from '@/features';
 import { Button, ChallengeStatistics, ToastError } from '@/shared/ui';
@@ -24,7 +26,7 @@ const {
 // };
 
 export function Dashboard() {
-  //const [errorCatched, setErrorCatched] = useState<string | null>(null);
+  const dispatch = useDispatch();
   const [isMore, setIsMore] = useState<boolean>(false);
   const {
     data,
@@ -33,6 +35,13 @@ export function Dashboard() {
   } = useGetOverallStatisticsQuery(undefined, {
     skip: false,
   });
+
+  useEffect(() => {
+    if (data?.periods) {
+      dispatch(setPeriods(data.periods));
+    }
+  }, [data, dispatch]);
+
   useEffect(() => {
     if (error) {
       if ('status' in error) {
@@ -52,7 +61,6 @@ export function Dashboard() {
   const {
     // days_since_registration = 0,
     // challenges: { all = 0, completed = 0 } = {},
-    // periods = {},
     effective_challenge: { percent = 0, challenge: challenge_effective = {} } = {},
     // longest_challenge: { duration = 0, challenge: challenge_longest = {} } = {},
   } = data || {};

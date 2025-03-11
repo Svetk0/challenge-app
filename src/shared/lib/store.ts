@@ -4,6 +4,7 @@ import { contentApi } from '@/shared/api/content';
 import challengeSlice from './features/challenges/challengeSlice';
 import errorSlice from './features/errors/errorSlice';
 import notificationSlice from './features/notifications/notificationSlice';
+import statisticsSlice from './features/statistics/statisticsSlice';
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
       challenge: challengeSlice,
       error: errorSlice,
       notification: notificationSlice,
+      statistics: statisticsSlice,
       [contentApi.reducerPath]: contentApi.reducer,
     },
     middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(contentApi.middleware),
