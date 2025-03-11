@@ -1,4 +1,4 @@
-import { TEditForm } from '.';
+import { TEditForm } from './';
 
 export type TChallenge = {
   id?: number;

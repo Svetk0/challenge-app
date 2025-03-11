@@ -1,0 +1,27 @@
+@use '@/shared/styles' as *;
+
+.columnWrapper {
+    width: 100%;
+    @include Flex;
+    gap: 5px;
+    background-color: $deep-dark-purple-30;
+    border-radius: 20px;
+    padding: 20px 5%;
+    transition: all 0.3s ease;
+
+    .subtitle {
+        @include Title($size: 16px);
+        color: $logo-yellow;
+        align-self: flex-start;
+    }
+}
+
+.rowWrapper {
+    @include Flex ($direction: row, $justify: space-between);
+    width: 100%;
+
+    .comments {
+        color: $grey;
+        align-self: center;
+    }
+}
