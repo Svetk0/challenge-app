@@ -12,7 +12,7 @@ import {
   MakeActiveChallengeButton,
   EditChallengeIconButton,
 } from '@/features/ManageChallenge/ManageChallenge';
-import { Button, CardSkeleton } from '@/shared/ui';
+import { Button, CardSkeleton, SummaryItem } from '@/shared/ui';
 
 import staticData from '@/shared/constants/data.json';
 import styles from './FinishedChallengeInfo.module.scss';
@@ -116,18 +116,6 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
     </div>
   );
 }
-
-type SummaryItemProps = {
-  label: string;
-  value: string | number;
-};
-
-const SummaryItem = ({ label, value }: SummaryItemProps) => (
-  <div className={styles.rowWrapper}>
-    <p className={styles.text}>{label}</p>
-    <p className={styles.text}>{value}</p>
-  </div>
-);
 
 const ChallengeSummary = ({
   duration,

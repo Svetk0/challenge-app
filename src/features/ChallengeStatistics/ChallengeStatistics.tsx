@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { formatDate } from '@/shared/utils';
 import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
-import { Button } from '@/shared/ui';
+import { Button, SummaryItem } from '@/shared/ui';
 import { ArrowIcon } from '@/shared/ui/Icons';
 
 import styles from './ChallengeStatistics.module.scss';
@@ -52,18 +52,6 @@ export function ChallengeStatistics({ nomination, challenge = null }: Props) {
     </div>
   );
 }
-
-type SummaryItemProps = {
-  label: string;
-  value: string | number;
-};
-
-const SummaryItem = ({ label, value = '' }: SummaryItemProps) => (
-  <div className={styles.rowWrapper}>
-    <p className={styles.text}>{label}</p>
-    <p className={styles.text}>{value}</p>
-  </div>
-);
 
 const ChallengeSummary = ({
   challenge,

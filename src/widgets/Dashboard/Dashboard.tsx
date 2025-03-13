@@ -7,8 +7,8 @@ import { RootState } from '@/shared/lib/store';
 import { TChallenge } from '@/shared/types';
 import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
-import { BarStackedSingleChart } from '@/features';
-import { ChallengeStatistics, ToastError } from '@/shared/ui';
+import { BarStackedSingleChart, ChallengeStatistics } from '@/features';
+import { ToastError } from '@/shared/ui';
 import staticData from '@/shared/constants/data.json';
 import styles from './Dashboard.module.scss';
 

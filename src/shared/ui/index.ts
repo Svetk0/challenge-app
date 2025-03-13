@@ -10,4 +10,4 @@ export { Loading } from './Loading/Loading';
 export { NotFound404 } from './NotFound404/NotFound404';
 export { Congratulations } from './Congratulations/Congratulations';
 export { ToastSuccess, ToastError } from './Toasts/Toasts';
-export { ChallengeStatistics } from './ChallengeStatistics/ChallengeStatistics';
+export { SummaryItem } from './SummaryItem/SummaryItem';
