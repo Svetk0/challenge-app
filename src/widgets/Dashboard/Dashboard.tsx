@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import {} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/shared/lib/store';
 import { TChallenge } from '@/shared/types';
-import { useDispatch } from 'react-redux';
 import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
-import { BarStackedChart, BarChart } from '@/features';
+import { BarStackedSingleChart } from '@/features';
 import { Button, ChallengeStatistics, ToastError } from '@/shared/ui';
 import { ArrowIcon } from '@/shared/ui/Icons';
 import staticData from '@/shared/constants/data.json';
@@ -15,15 +17,10 @@ const {
   title,
   summary: {
     periods: { title: periods_subtitle, comment: periods_comment },
-    challenges: { title: challenges_subtitle, comment: challenges_comment },
+    //challenges: { title: challenges_subtitle, comment: challenges_comment },
   },
   errors: { get_all: err_get_all },
 } = staticData.dashboard;
-
-// const error = {
-//   status: 500,
-//   message: "Server doesn't response",
-// };
 
 export function Dashboard() {
   const dispatch = useDispatch();
@@ -60,7 +57,7 @@ export function Dashboard() {
   }, [error]);
   const {
     // days_since_registration = 0,
-    // challenges: { all = 0, completed = 0 } = {},
+    challenges: { all = 0, completed = 0 } = {},
     effective_challenge: { percent = 0, challenge: challenge_effective = {} } = {},
     // longest_challenge: { duration = 0, challenge: challenge_longest = {} } = {},
   } = data || {};
@@ -69,16 +66,12 @@ export function Dashboard() {
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>Overview</h3>
-        {/* <div className={styles.rowWrapper}>
-          <p className={styles.comments}>The longest challenge:</p>
-          <p className={styles.comments}>92 days</p>
-          <Button
-            type='button'
-            text={<ArrowIcon />}
-            color='icon'
-            //onClick={(e) => handleOpenInfo(e)}
-          />
-        </div> */}
+        <div className={styles.rowWrapper}>
+          <p className={styles.comments}>Total completed challenges:</p>
+          <p className={styles.comments}>
+            {completed} of {all}
+          </p>
+        </div>
         <ChallengeStatistics
           nomination={{ title: 'effective', result: `${percent * 100}%` }}
           challenge={challenge_effective as TChallenge}
@@ -108,12 +101,9 @@ export function Dashboard() {
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>{periods_subtitle}</h3>
         <p className={styles.comments}>{periods_comment}</p>
-        <BarStackedChart />
-      </div>
-      <div className={styles.columnWrapper}>
-        <h3 className={styles.subtitle}>{challenges_subtitle}</h3>
-        <p className={styles.comments}>{challenges_comment}</p>
-        <BarChart />
+        <div className={styles.chartsContainer}>
+          <ChartsSummary />
+        </div>
       </div>
 
       <Toaster
@@ -126,3 +116,39 @@ export function Dashboard() {
     </section>
   );
 }
+
+const ChartsSummary = () => {
+  const periods = useSelector((state: RootState) => state.statistics.periods);
+  const summaryData = [
+    {
+      label: 'daily',
+      successfully: periods.successful_periods.day,
+      all: periods.all_periods.day,
+    },
+    {
+      label: 'weekly',
+      successfully: periods.successful_periods.week,
+      all: periods.all_periods.week,
+    },
+    {
+      label: 'monthly',
+      successfully: periods.successful_periods.month,
+      all: periods.all_periods.month,
+    },
+  ];
+
+  return (
+    <>
+      {summaryData.map((item) => (
+        <BarStackedSingleChart
+          key={item.label}
+          label={[item.label]}
+          dataset={{
+            successfully: item.successfully,
+            all: item.all,
+          }}
+        />
+      ))}
+    </>
+  );
+};

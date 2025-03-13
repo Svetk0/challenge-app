@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/shared/lib/store';
+import { useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -18,49 +17,62 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 type ExtendedContext = DataLabelsContext & {
   dataIndex: number;
 };
-export const options = {
-  plugins: {
-    legend: {
-      display: false,
-      position: 'bottom' as const,
-    },
-    datalabels: {
-      display: false,
-    },
-  },
-  responsive: true,
-  aspectRatio: 1,
-  interaction: {
-    intersect: false,
-  },
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-      ticks: {
-        stepSize: 1,
-      },
-    },
-  },
+
+type Props = {
+  label: string[];
+  dataset: {
+    successfully: number | undefined;
+    all: number | undefined;
+  };
 };
 
-const labels = ['day', 'week', 'month'];
-
-export function BarStackedChart() {
-  const periods = useSelector((state: RootState) => state.statistics.periods);
+export function BarStackedSingleChart({ label, dataset: { successfully = 0, all = 0 } }: Props) {
+  const missedData = all - successfully;
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+        position: 'bottom' as const,
+      },
+      datalabels: {
+        display: false,
+      },
+      tooltip: {
+        bodyFont: {
+          size: 10,
+        },
+      },
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      intersect: false,
+    },
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+        beginAtZero: true,
+        max: all === 0 ? 1 : all,
+        ticks: {
+          stepSize: all > 10 ? 10 : 1,
+          max: all === 0 ? 1 : all,
+          min: 0,
+        },
+      },
+    },
+  };
 
   const data = {
-    labels: ['daily', 'weekly', 'monthly'],
+    labels: label,
     datasets: [
       {
-        label: 'successfully',
-        data: labels.map(
-          (label) => periods.successful_periods[label as keyof typeof periods.successful_periods]
-        ),
+        label: 'done',
+        data: [successfully],
         backgroundColor: 'rgb(75, 192, 192)',
-        barPercentage: 0.8,
+        barPercentage: 0.9,
         borderRadius: 5,
         stack: 'Stack 0',
         datalabels: {
@@ -71,7 +83,7 @@ export function BarStackedChart() {
           labels: {
             value: {
               font: {
-                size: 16,
+                size: 14,
               },
             },
           },
@@ -91,18 +103,22 @@ export function BarStackedChart() {
       },
       {
         label: 'missed',
-        data: labels.map(
-          (label) =>
-            periods.all_periods[label as keyof typeof periods.all_periods] -
-            periods.successful_periods[label as keyof typeof periods.successful_periods]
-        ),
+        data: [missedData],
         backgroundColor: 'rgb(75, 192, 192,0.2)',
-        barPercentage: 0.8,
-        borderRadius: 10,
+        barPercentage: 0.9,
+        borderRadius: 8,
         stack: 'Stack 0',
       },
     ],
   };
 
-  return <Bar options={options} data={data} />;
+  useEffect(() => {
+    console.log('dataset', successfully, all);
+  }, [all]);
+
+  return (
+    <>
+      <Bar options={options} data={data} />
+    </>
+  );
 }

@@ -8,13 +8,13 @@ export type TStatistics = {
   };
   periods: {
     all_periods: {
-      week: number;
       day: number;
+      week: number;
       month: number;
     };
     successful_periods: {
-      week: number;
       day: number;
+      week: number;
       month: number;
     };
   };
