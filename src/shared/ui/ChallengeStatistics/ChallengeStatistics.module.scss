@@ -1,8 +1,15 @@
 @use '@/shared/styles' as *;
 
-.columnWrapper {
-    width: 100%;
+.container {
     @include Flex;
+    width: 100%;
+    transition: ease all 0.6s;
+    cursor: pointer;
+}
+
+.columnWrapper {
+    @include Flex;
+    width: 100%;
     gap: 5px;
     background-color: $deep-dark-purple-30;
     border-radius: 20px;

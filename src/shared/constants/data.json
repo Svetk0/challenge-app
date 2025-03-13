@@ -50,12 +50,16 @@
     },
     "comments": {
       "subtitle": "Note:",
-      "actions_per": "actions per"
+      "actions_per": "actions per",
+      "note_total_result": "Summary of all periods within all days (done of all)"
     },
     "summary_labels": {
+      "summary_title": "Summary",
       "duration_days": "Duration",
       "total_result": "Total result",
-      "productivity": "Performance"
+      "productivity": "Performance",
+      "started": "Started from",
+      "finished": "Finished at"
     },
     "errors": {
       "progress": "Failed to update progress",

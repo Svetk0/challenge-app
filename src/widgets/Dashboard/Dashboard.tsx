@@ -73,7 +73,7 @@ export function Dashboard() {
           </p>
         </div>
         <ChallengeStatistics
-          nomination={{ title: 'effective', result: `${percent * 100}%` }}
+          nomination={{ title: 'The most effective challenge', result: `${percent * 100}%` }}
           challenge={challenge_effective as TChallenge}
         />
 
@@ -87,7 +87,7 @@ export function Dashboard() {
             onClick={() => setIsMore(!isMore)}
           />
         </div>
-        {isMore && (
+        {isMore ? (
           <div className={styles.columnWrapper}>
             <h3 className={styles.subtitle}>Challenge: Gym 2 times per week</h3>
             <div>
@@ -96,7 +96,7 @@ export function Dashboard() {
               <br /> Missed periods: 1;
             </div>
           </div>
-        )}
+        ) : null}
       </div>
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>{periods_subtitle}</h3>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useErrorHandler } from '@/shared/utils/hooks';
 import { RootState } from '@/shared/lib/store';
+import { formatDate } from '@/shared/utils';
 import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 
@@ -22,8 +23,8 @@ type Props = {
 };
 const {
   buttons: { remove },
-  comments: { subtitle, actions_per },
-  summary_labels: { duration_days, total_result, productivity },
+  comments: { subtitle, actions_per, note_total_result },
+  summary_labels: { summary_title, duration_days, total_result, productivity, finished, started },
 } = staticData.challenge_info;
 
 export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
@@ -59,6 +60,8 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
     total_progress = 0,
     goal_progress = 1,
     duration = 0,
+    started_at = 'unknown',
+    finished_at = 'unknown',
   } = challenge;
   const performance: number =
     +goal_progress === 0 ? 0 : Math.round((+total_progress / +goal_progress) * 100);
@@ -86,6 +89,8 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
           total_progress={+total_progress}
           goal_progress={+goal_progress}
           performance={performance}
+          started_at={formatDate(started_at)}
+          finished_at={finished_at ? formatDate(finished_at) : 'unknown'}
         />
       ) : null}
       {isChoosen ? (
@@ -129,23 +134,36 @@ const ChallengeSummary = ({
   total_progress,
   goal_progress,
   performance,
+  started_at,
+  finished_at,
 }: {
   duration: number;
   total_progress: number;
   goal_progress: number;
   performance: number;
+  started_at: string;
+  finished_at: string;
 }) => {
   const summaryData = [
     { label: duration_days, value: `${Math.abs(duration)} days` },
-    { label: total_result, value: `${Math.abs(total_progress)} of ${Math.abs(goal_progress)}` },
+    {
+      label: total_result,
+      value: `${Math.abs(total_progress)} of ${Math.abs(goal_progress)}`,
+      comment: `${note_total_result}`,
+    },
     { label: productivity, value: `${performance}%` },
+    { label: started, value: ` ${started_at} ` },
+    { label: finished, value: ` ${finished_at} ` },
   ];
 
   return (
     <div className={`${styles.columnWrapper} ${styles.summary}`}>
-      <span className={styles.subtitle}>Summary</span>
+      <span className={styles.subtitle}>{summary_title}</span>
       {summaryData.map((item) => (
-        <SummaryItem key={item.label} {...item} />
+        <>
+          <SummaryItem key={item.label} {...item} />
+          {item.comment && <p className={styles.note}>{item.comment}</p>}
+        </>
       ))}
     </div>
   );
