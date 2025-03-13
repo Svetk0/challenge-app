@@ -8,6 +8,7 @@
     overflow-y: scroll;
     padding: 70px 20px 10px;
     gap: 30px;
+    transition: all 0.5s ease;
 }
 
 .title {
@@ -40,13 +41,12 @@
     .rowWrapper {
         @include Flex ($direction: row, $justify: space-between);
         width: 100%;
+        min-height: 40px;
 
         .comments {
             color: $grey;
             align-self: center;
         }
-
-
     }
 }
 

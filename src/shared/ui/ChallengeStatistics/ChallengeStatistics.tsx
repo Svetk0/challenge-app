@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { formatDate } from '@/shared/utils';
+import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button } from '@/shared/ui';
 import { ArrowIcon } from '@/shared/ui/Icons';
@@ -17,33 +19,36 @@ type Props = {
 export function ChallengeStatistics({ nomination, challenge = null }: Props) {
   const [_currentData, setCurrentData] = useState(challenge);
   const [isMore, setIsMore] = useState<boolean>(false);
+  const wrapperRef = useOutsideClick(() => setIsMore(false));
   useEffect(() => {
     setCurrentData(challenge);
   }, [challenge]);
 
   return (
-    <div className={styles.container} onClick={() => setIsMore(!isMore)}>
+    <div
+      ref={wrapperRef}
+      className={`${styles.container} ${isMore ? styles.container__active : ''}`}
+      onClick={() => setIsMore(!isMore)}
+    >
       <div className={styles.rowWrapper}>
         <p className={styles.comments}>{nomination.title}</p>
         <p className={styles.comments}>{nomination.result}</p>
         <Button
           type='button'
-          text={<ArrowIcon />}
+          text={
+            <div className={`${styles.arrowIcon} ${isMore ? styles.arrowIcon__active : ''}`}>
+              <ArrowIcon />
+            </div>
+          }
           color='icon'
           onClick={() => setIsMore(!isMore)}
         />
       </div>
-      {isMore && (
-        <div className={styles.columnWrapper}>
-          {/* <h3 className={styles.subtitle}> {challenge?.description}</h3>
-          <div>
-            Status: in-progress; <br /> Periodicity: weekly;
-            <br /> Successfully periods: 9;
-            <br /> Missed periods: 1;
-          </div> */}
-          <ChallengeSummary challenge={challenge} />
-        </div>
-      )}
+      {/* {isMore ?
+        (<div className={`${styles.columnWrapper}` >
+        </div>)
+        : null} */}
+      {isMore && <ChallengeSummary challenge={challenge} />}
     </div>
   );
 }
@@ -76,16 +81,15 @@ const ChallengeSummary = ({
   const summaryData = [
     { label: 'Status', value: challenge?.is_finished ? 'Finished' : 'In-progress' },
     { label: 'Periodicity:', value: `every ${challenge?.period}` },
-    { label: 'Dates:', value: `from ${challenge?.started_at} to ${challenge?.finished_at} ` },
-    // { label: started, value: ` ${started_at} ` },
-    // { label: finished, value: ` ${finished_at} ` },
+    { label: 'Started from', value: ` ${formatDate(challenge?.started_at || 'unknown')} ` },
+    { label: 'Finished at', value: ` ${formatDate(challenge?.finished_at || 'unknown')} ` },
     // { label: duration_days, value: `${Math.abs(duration)} days` },
     // { label: total_result, value: `${Math.abs(total_progress)} of ${Math.abs(goal_progress)}` },
     // { label: productivity, value: `${performance}%` },
   ];
 
   return (
-    <div className={`${styles.columnWrapper} ${styles.summary}`}>
+    <div className={styles.columnWrapper}>
       <span className={styles.subtitle}>{challenge?.description}</span>
       {summaryData.map((item) => (
         <SummaryItem key={item.label} {...item} />

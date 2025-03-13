@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import {} from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,8 +8,7 @@ import { TChallenge } from '@/shared/types';
 import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
 import { BarStackedSingleChart } from '@/features';
-import { Button, ChallengeStatistics, ToastError } from '@/shared/ui';
-import { ArrowIcon } from '@/shared/ui/Icons';
+import { ChallengeStatistics, ToastError } from '@/shared/ui';
 import staticData from '@/shared/constants/data.json';
 import styles from './Dashboard.module.scss';
 
@@ -24,7 +23,6 @@ const {
 
 export function Dashboard() {
   const dispatch = useDispatch();
-  const [isMore, setIsMore] = useState<boolean>(false);
   const {
     data,
     error,
@@ -56,10 +54,9 @@ export function Dashboard() {
     }
   }, [error]);
   const {
-    // days_since_registration = 0,
     challenges: { all = 0, completed = 0 } = {},
     effective_challenge: { percent = 0, challenge: challenge_effective = {} } = {},
-    // longest_challenge: { duration = 0, challenge: challenge_longest = {} } = {},
+    longest_challenge: { duration = 0, challenge: challenge_longest = {} } = {},
   } = data || {};
   return (
     <section className={styles.container}>
@@ -76,27 +73,10 @@ export function Dashboard() {
           nomination={{ title: 'The most effective challenge', result: `${percent * 100}%` }}
           challenge={challenge_effective as TChallenge}
         />
-
-        <div className={styles.rowWrapper}>
-          <p className={styles.comments}>The most effective challenge:</p>
-          <p className={styles.comments}>89%</p>
-          <Button
-            type='button'
-            text={<ArrowIcon />}
-            color='icon'
-            onClick={() => setIsMore(!isMore)}
-          />
-        </div>
-        {isMore ? (
-          <div className={styles.columnWrapper}>
-            <h3 className={styles.subtitle}>Challenge: Gym 2 times per week</h3>
-            <div>
-              Status: in-progress; <br /> Periodicity: weekly;
-              <br /> Successfully periods: 9;
-              <br /> Missed periods: 1;
-            </div>
-          </div>
-        ) : null}
+        <ChallengeStatistics
+          nomination={{ title: 'The most longest challenge', result: `${duration} days` }}
+          challenge={challenge_longest as TChallenge}
+        />
       </div>
       <div className={styles.columnWrapper}>
         <h3 className={styles.subtitle}>{periods_subtitle}</h3>
