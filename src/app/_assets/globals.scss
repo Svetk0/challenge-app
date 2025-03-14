@@ -35,8 +35,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-
-
   /* Scroll */
   /* Scroll for Firefox */
   scrollbar-width: thin;
@@ -63,9 +61,6 @@ body {
       background: var(--background);
     }
   }
-
-  /* visual borders for dev mode */
-  //background: var(--bgOpacity);
 }
 
 main {

@@ -26,6 +26,7 @@
       "signUp": "Sign Up"
     }
   },
+
   "challenges": {
     "title": "Daily Routine",
     "loading": "Your Challenges is loading...",
@@ -49,12 +50,19 @@
     },
     "comments": {
       "subtitle": "Note:",
-      "actions_per": "actions per"
+      "actions_per": "actions per",
+      "every": "every",
+      "note_total_result": "Summary of your total progress during challenge time"
     },
     "summary_labels": {
+      "summary_title": "Summary",
       "duration_days": "Duration",
       "total_result": "Total result",
-      "productivity": "Performance"
+      "productivity": "Performance",
+      "started": "Started from",
+      "finished": "Finished at",
+      "status": "Status",
+      "periodicity": "Periodicity"
     },
     "errors": {
       "progress": "Failed to update progress",
@@ -150,6 +158,28 @@
     "toasts": {
       "create": "The challenge was created successfully",
       "edit": "All changes were saved successfully"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Overview",
+    "loading": "Your statistics is loading...",
+    "summary": {
+      "periods": {
+        "title": "Summary of periods",
+        "comment": "Your successfully periods in all challenges"
+      }
+    },
+    "nominations": {
+      "total_completed_challenges": "Total completed challenges:",
+      "the_longest_challenge": "The longest challenge",
+      "most_effective_challenge": "The most effective challenge",
+      "notes": {
+        "effective_percent": "Percent of succefully periods during challenge time"
+      }
+    },
+    "errors": {
+      "get_all": "Failed to load statistics"
     }
   },
   "finished_challenges_list": {

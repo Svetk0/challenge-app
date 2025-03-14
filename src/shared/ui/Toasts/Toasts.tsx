@@ -14,3 +14,12 @@ export function ToastSuccess({ message }: Props) {
     </div>
   );
 }
+
+export function ToastError({ message }: Props) {
+  return (
+    <div className={styles.wrapperError}>
+      <p>{message}</p>
+      <p>Try again later</p>
+    </div>
+  );
+}

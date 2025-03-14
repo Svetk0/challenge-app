@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getAuthToken } from '@/shared/utils/auth';
-import { TChallenge, TCreateForm, TEditForm } from '@/shared/types';
+import { TChallenge, TStatistics, TCreateForm, TEditForm } from '@/shared/types';
 
 interface ResponseUser {
   id: number;
@@ -57,6 +57,14 @@ export const contentApi = createApi({
     getChallengeByID: builder.query<TChallenge, Partial<ResponseUser>>({
       query: ({ uuid }) => ({
         url: `challenges/${uuid}/`,
+        method: 'GET',
+      }),
+      providesTags: ['Actual', 'Finished'],
+    }),
+    // Get overall statistics data
+    getOverallStatistics: builder.query<TStatistics, void>({
+      query: () => ({
+        url: 'statistics/common/',
         method: 'GET',
       }),
       providesTags: ['Actual', 'Finished'],

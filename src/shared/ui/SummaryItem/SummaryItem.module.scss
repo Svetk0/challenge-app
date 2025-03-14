@@ -1,0 +1,6 @@
+@use '@/shared/styles/mixins' as *;
+
+.rowWrapper {
+    @include Flex ($direction: row, $justify: space-between);
+    width: 100%;
+}

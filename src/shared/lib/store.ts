@@ -6,6 +6,7 @@ import challengeSlice from './features/challenges/challengeSlice';
 import finishedChallengesSlice from './features/finished_challenges/finishedChallengesSlice';
 import errorSlice from './features/errors/errorSlice';
 import notificationSlice from './features/notifications/notificationSlice';
+import statisticsSlice from './features/statistics/statisticsSlice';
 
 export const makeStore = () => {
   return configureStore({
@@ -14,6 +15,7 @@ export const makeStore = () => {
       finished_challenges: finishedChallengesSlice,
       error: errorSlice,
       notification: notificationSlice,
+      statistics: statisticsSlice,
       [contentApi.reducerPath]: contentApi.reducer,
     },
     middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(contentApi.middleware),

@@ -5,3 +5,4 @@ export { ClipboardIcon } from './ClipboardIcon';
 export { CloseIcon } from './CloseIcon';
 export { HeroAstonishedIcon } from './HeroAstonishedIcon';
 export { HeroHappyIcon } from './HeroHappyIcon';
+export { ArrowIcon } from './ArrowIcon';
