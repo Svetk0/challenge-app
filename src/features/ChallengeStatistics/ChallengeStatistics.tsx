@@ -6,6 +6,7 @@ import { useOutsideClick } from '@/shared/utils/hooks';
 import { TChallenge } from '@/shared/types';
 import { Button, SummaryItem } from '@/shared/ui';
 import { ArrowIcon } from '@/shared/ui/Icons';
+import staticData from '@/shared/constants/data.json';
 
 import styles from './ChallengeStatistics.module.scss';
 
@@ -17,6 +18,11 @@ type Props = {
   };
   challenge: TChallenge | null;
 };
+const {
+  comments: { note_total_result, every },
+  summary_labels: { duration_days, total_result, finished, started, status, periodicity },
+} = staticData.challenge_info;
+
 export function ChallengeStatistics({ nomination, challenge = null }: Props) {
   const [_currentData, setCurrentData] = useState(challenge);
   const [isMore, setIsMore] = useState<boolean>(false);
@@ -53,17 +59,17 @@ export function ChallengeStatistics({ nomination, challenge = null }: Props) {
 
 const ChallengeSummary = ({ challenge }: { challenge: TChallenge | null }) => {
   const summaryData = [
-    { label: 'Status', value: challenge?.is_finished ? 'Finished' : 'In-progress' },
-    { label: 'Periodicity', value: `every ${challenge?.period}` },
+    { label: status, value: challenge?.is_finished ? 'Finished' : 'In-progress' },
+    { label: periodicity, value: `${every} ${challenge?.period}` },
     {
-      label: ' total_result',
+      label: total_result,
       value: `${Math.abs(challenge?.total_progress || 0)} of ${Math.abs(challenge?.goal_progress || 0)}`,
-      comment: `${'note_total_result'}`,
+      comment: `${note_total_result}`,
     },
-    { label: 'duration_days', value: `${Math.abs(challenge?.duration || 0)} days` },
-    { label: 'Started from', value: ` ${formatDate(challenge?.started_at || 'unknown')} ` },
+    { label: duration_days, value: `${Math.abs(challenge?.duration || 0)} days` },
+    { label: started, value: ` ${formatDate(challenge?.started_at || 'unknown')} ` },
     {
-      label: 'Finished at',
+      label: finished,
       value: challenge?.finished_at ? ` ${formatDate(challenge?.finished_at)} ` : 'unknown',
     },
   ];

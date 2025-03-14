@@ -1,7 +1,6 @@
 'use client';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import {} from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/store';
 import { TChallenge } from '@/shared/types';
@@ -14,9 +13,15 @@ import styles from './Dashboard.module.scss';
 
 const {
   title,
+  subtitle,
   summary: {
     periods: { title: periods_subtitle, comment: periods_comment },
-    //challenges: { title: challenges_subtitle, comment: challenges_comment },
+  },
+  nominations: {
+    total_completed_challenges,
+    most_effective_challenge,
+    the_longest_challenge,
+    notes,
   },
   errors: { get_all: err_get_all },
 } = staticData.dashboard;
@@ -62,23 +67,23 @@ export function Dashboard() {
     <section className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.columnWrapper}>
-        <h3 className={styles.subtitle}>Overview</h3>
+        <h3 className={styles.subtitle}>{subtitle}</h3>
         <div className={styles.rowWrapper}>
-          <p className={styles.comments}>Total completed challenges:</p>
+          <p className={styles.comments}>{total_completed_challenges}</p>
           <p className={styles.comments}>
             {completed} of {all}
           </p>
         </div>
         <ChallengeStatistics
           nomination={{
-            title: 'The most effective challenge',
+            title: most_effective_challenge,
             result: `${Math.round(percent * 100)}%`,
-            note: `Percent of succefully periods during challenge time`,
+            note: notes.effective_percent,
           }}
           challenge={challenge_effective as TChallenge}
         />
         <ChallengeStatistics
-          nomination={{ title: 'The most longest challenge', result: `${duration} days` }}
+          nomination={{ title: the_longest_challenge, result: `${duration} days` }}
           challenge={challenge_longest as TChallenge}
         />
       </div>

@@ -51,6 +51,7 @@
     "comments": {
       "subtitle": "Note:",
       "actions_per": "actions per",
+      "every": "every",
       "note_total_result": "Summary of your total progress during challenge time"
     },
     "summary_labels": {
@@ -161,21 +162,21 @@
   },
   "dashboard": {
     "title": "Dashboard",
+    "subtitle": "Overview",
     "loading": "Your statistics is loading...",
     "summary": {
       "periods": {
         "title": "Summary of periods",
         "comment": "Your successfully periods in all challenges"
-      },
-      "challenges": {
-        "title": "Summary of challenges",
-        "comment": "Your full statistics"
       }
     },
     "nominations": {
-      "total_completed_challenges": "Summary of periods",
-      "most_longest_challenge": "Your successfully periods in all challenges",
-      "most_effective_challenge": "Your successfully periods in all challenges"
+      "total_completed_challenges": "Total completed challenges:",
+      "the_longest_challenge": "The longest challenge",
+      "most_effective_challenge": "The most effective challenge",
+      "notes": {
+        "effective_percent": "Percent of succefully periods during challenge time"
+      }
     },
     "errors": {
       "get_all": "Failed to load statistics"
