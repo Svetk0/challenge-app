@@ -7,7 +7,7 @@ import { TChallenge } from '@/shared/types';
 import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
 import { BarStackedSingleChart, ChallengeStatistics } from '@/features';
-import { ToastError } from '@/shared/ui';
+import { ToastError, DashboardSkeleton } from '@/shared/ui';
 import staticData from '@/shared/constants/data.json';
 import styles from './Dashboard.module.scss';
 
@@ -28,11 +28,7 @@ const {
 
 export function Dashboard() {
   const dispatch = useDispatch();
-  const {
-    data,
-    error,
-    //isLoading
-  } = useGetOverallStatisticsQuery(undefined, {
+  const { data, error, isLoading } = useGetOverallStatisticsQuery(undefined, {
     skip: false,
   });
 
@@ -63,6 +59,7 @@ export function Dashboard() {
     effective_challenge: { percent = 0, challenge: challenge_effective = {} } = {},
     longest_challenge: { duration = 0, challenge: challenge_longest = {} } = {},
   } = data || {};
+  if (isLoading) return <DashboardSkeleton />;
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
