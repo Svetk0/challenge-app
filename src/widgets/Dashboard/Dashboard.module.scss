@@ -9,6 +9,12 @@
     padding: 70px 20px 10px;
     gap: 30px;
     transition: all 0.5s ease;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
 }
 
 .title {
