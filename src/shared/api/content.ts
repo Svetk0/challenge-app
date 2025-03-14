@@ -64,7 +64,7 @@ export const contentApi = createApi({
     // Get overall statistics data
     getOverallStatistics: builder.query<TStatistics, void>({
       query: () => ({
-        url: 'statistics/common/',
+        url: 'sstatistics/common/',
         method: 'GET',
       }),
       providesTags: ['Actual', 'Finished'],

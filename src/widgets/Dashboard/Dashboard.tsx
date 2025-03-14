@@ -1,13 +1,12 @@
 'use client';
 import { useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/store';
 import { TChallenge } from '@/shared/types';
 import { setPeriods } from '@/shared/lib/features/statistics/statisticsSlice';
 import { useGetOverallStatisticsQuery } from '@/shared/api/content';
 import { BarStackedSingleChart, ChallengeStatistics } from '@/features';
-import { ToastError, DashboardSkeleton } from '@/shared/ui';
+import { DashboardSkeleton } from '@/shared/ui';
 import staticData from '@/shared/constants/data.json';
 import styles from './Dashboard.module.scss';
 
@@ -37,23 +36,15 @@ export function Dashboard() {
       dispatch(setPeriods(data.periods));
     }
   }, [data, dispatch]);
-
   useEffect(() => {
     if (error) {
       if ('status' in error) {
-        //setErrorCatched(`${error.status}: Server doesn't response`);
-        const timer = setTimeout(() => {
-          const notify = () =>
-            toast.custom(<ToastError message={`${error.status}: ${err_get_all}` || err_get_all} />);
-          notify();
-          //setErrorCatched(null);
-        }, 400);
-        return () => clearTimeout(timer);
-        //throw new Error(`${error.status}: Server doesn't response`);
+        throw new Error(`${error.status}: ${err_get_all}`);
       }
-      //throw error;
+      throw error;
     }
   }, [error]);
+
   const {
     challenges: { all = 0, completed = 0 } = {},
     effective_challenge: { percent = 0, challenge: challenge_effective = {} } = {},
@@ -91,14 +82,6 @@ export function Dashboard() {
           <ChartsSummary />
         </div>
       </div>
-
-      <Toaster
-        containerClassName={styles.toastsWrapper}
-        toastOptions={{
-          duration: 5000,
-          position: 'bottom-center',
-        }}
-      />
     </section>
   );
 }
