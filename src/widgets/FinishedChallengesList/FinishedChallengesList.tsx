@@ -8,7 +8,7 @@ import { RootState } from '@/shared/lib/store';
 import { useGetAllFinishedChallengeListQuery } from '@/shared/api/content';
 import { setLocalStorage } from '@/shared/utils';
 import { useNotificationHandler } from '@/shared/utils/hooks';
-import { setChallenges } from '@/shared/lib/features/challenges/challengeSlice';
+import { setFinishedChallenges } from '@/shared/lib/features/finished_challenges/finishedChallengesSlice';
 
 import { ListChallenges, ToastSuccess } from '@/shared/ui';
 import { FinishedChallengeInfo } from '@/widgets';
@@ -44,7 +44,7 @@ export function FinishedChallengesList() {
   useEffect(() => {
     if (data) {
       setLocalStorage('finished_challenges', data);
-      dispatch(setChallenges(data));
+      dispatch(setFinishedChallenges(data));
     }
   }, [data, dispatch, challengeData]);
 
