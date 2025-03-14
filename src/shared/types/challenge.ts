@@ -4,7 +4,7 @@ export type TChallenge = {
   id?: number;
   uuid: string;
   period_finished_at?: string | null;
-  total_progress?: string;
-  goal_progress?: string;
-  duration?: string;
+  total_progress?: number;
+  goal_progress?: number;
+  duration?: number;
 } & TEditForm;

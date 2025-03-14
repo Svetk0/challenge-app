@@ -70,7 +70,11 @@ export function Dashboard() {
           </p>
         </div>
         <ChallengeStatistics
-          nomination={{ title: 'The most effective challenge', result: `${percent * 100}%` }}
+          nomination={{
+            title: 'The most effective challenge',
+            result: `${Math.round(percent * 100)}%`,
+            note: `Percent of succefully periods during challenge time`,
+          }}
           challenge={challenge_effective as TChallenge}
         />
         <ChallengeStatistics

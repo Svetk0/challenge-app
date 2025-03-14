@@ -13,6 +13,7 @@ type Props = {
   nomination: {
     title: string;
     result: string | null;
+    note?: string | null;
   };
   challenge: TChallenge | null;
 };
@@ -44,43 +45,37 @@ export function ChallengeStatistics({ nomination, challenge = null }: Props) {
           onClick={() => setIsMore(!isMore)}
         />
       </div>
-      {/* {isMore ?
-        (<div className={`${styles.columnWrapper}` >
-        </div>)
-        : null} */}
+      {nomination.note && <p className={styles.note}>{nomination.note}</p>}
       {isMore && <ChallengeSummary challenge={challenge} />}
     </div>
   );
 }
 
-const ChallengeSummary = ({
-  challenge,
-  //duration,
-  // total_progress,
-  // goal_progress,
-  // performance,
-}: {
-  challenge: TChallenge | null;
-  //duration: number;
-  // total_progress: number;
-  // goal_progress: number;
-  // performance: number;
-}) => {
+const ChallengeSummary = ({ challenge }: { challenge: TChallenge | null }) => {
   const summaryData = [
     { label: 'Status', value: challenge?.is_finished ? 'Finished' : 'In-progress' },
-    { label: 'Periodicity:', value: `every ${challenge?.period}` },
+    { label: 'Periodicity', value: `every ${challenge?.period}` },
+    {
+      label: ' total_result',
+      value: `${Math.abs(challenge?.total_progress || 0)} of ${Math.abs(challenge?.goal_progress || 0)}`,
+      comment: `${'note_total_result'}`,
+    },
+    { label: 'duration_days', value: `${Math.abs(challenge?.duration || 0)} days` },
     { label: 'Started from', value: ` ${formatDate(challenge?.started_at || 'unknown')} ` },
-    { label: 'Finished at', value: ` ${formatDate(challenge?.finished_at || 'unknown')} ` },
-    // { label: duration_days, value: `${Math.abs(duration)} days` },
-    // { label: total_result, value: `${Math.abs(total_progress)} of ${Math.abs(goal_progress)}` },
-    // { label: productivity, value: `${performance}%` },
+    {
+      label: 'Finished at',
+      value: challenge?.finished_at ? ` ${formatDate(challenge?.finished_at)} ` : 'unknown',
+    },
   ];
 
   return (
     <div className={styles.columnWrapper}>
       <span className={styles.subtitle}>{challenge?.description}</span>
       {summaryData.map((item) => (
-        <SummaryItem key={item.label} {...item} />
+        <>
+          <SummaryItem key={item.label} {...item} />
+          {item.comment && <p className={styles.note}>{item.comment}</p>}
+        </>
       ))}
     </div>
   );
