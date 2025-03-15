@@ -1,0 +1,18 @@
+{
+  "challenges": {
+    "active": "5",
+    "finished": "3"
+  },
+  "periods": {
+    "successfully": {
+      "daily": "5",
+      "weekly": "3",
+      "monthly": "0"
+    },
+    "missed": {
+      "daily": "1",
+      "weekly": "3",
+      "monthly": "1"
+    }
+  }
+}

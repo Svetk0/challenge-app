@@ -1,5 +1,6 @@
-import { ToastSuccess } from '@/shared/ui/';
+'use client';
+import { Loading } from '@/shared/ui';
 
 export default function TestPage() {
-  return <ToastSuccess message='my toast success' />;
+  return <Loading />;
 }

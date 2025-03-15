@@ -1,0 +1,90 @@
+@use '@/shared/styles/mixins' as *;
+
+.container {
+    @include Flex ($justify: flex-start);
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 150px);
+    overflow-y: scroll;
+    padding: 70px 20px 10px;
+    gap: 30px;
+    transition: all 0.5s ease;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+}
+
+.title {
+    @include Title;
+}
+
+.columnWrapper {
+    width: 100%;
+    @include Flex;
+    gap: 5px;
+    background-color: $deep-dark-purple-30;
+    border-radius: 20px;
+    padding: 20px 5%;
+
+    .subtitle {
+        @include Title($size: 18px);
+        color: $logo-purple;
+        align-self: flex-start;
+    }
+
+    .comments {
+        color: $grey;
+        align-self: flex-start;
+    }
+
+    >canvas {
+        margin-top: 30px;
+    }
+
+    .rowWrapper {
+        @include Flex ($direction: row, $justify: space-between);
+        width: 100%;
+        min-height: 40px;
+
+        .comments {
+            color: $grey;
+            align-self: center;
+        }
+    }
+}
+
+.chartsContainer {
+    @include Flex ($direction: row, $justify: space-between);
+    width: 100%;
+    height: 250px;
+
+    >:nth-child(1) {
+        flex: 1;
+    }
+
+    >canvas {
+        margin-top: 30px;
+        max-width: 33%;
+        height: clamp(150px, 100%, 300px);
+    }
+}
+
+.bottom {
+    width: 100%;
+    position: relative;
+    z-index: 100;
+}
+
+.error {
+    @include ErrorMessage ($size: 14px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.toastsWrapper {
+    margin-bottom: 10vh;
+}

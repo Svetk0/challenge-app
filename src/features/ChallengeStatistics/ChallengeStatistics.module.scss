@@ -1,0 +1,60 @@
+@use '@/shared/styles' as *;
+
+.container {
+    @include Flex;
+    width: 100%;
+    padding-block: 0px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &__active {
+        padding-block: 20px;
+    }
+
+    &:hover {
+        transform: scale(1.01);
+    }
+}
+
+.columnWrapper {
+    @include Flex;
+    width: 100%;
+    gap: 7px;
+    background-color: $deep-dark-purple-30;
+    border-radius: 8px;
+    padding: 20px 5%;
+    transition: all 0.3s ease;
+
+    .subtitle {
+        @include Title($size: 16px);
+        color: $logo-yellow;
+        align-self: flex-start;
+    }
+}
+
+.rowWrapper {
+    @include Flex ($direction: row, $justify: space-between);
+    width: 100%;
+
+    .comments {
+        color: $grey;
+        align-self: center;
+    }
+}
+
+.note {
+    font-size: 10px;
+    color: $grey;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+
+.arrowIcon {
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
+
+    &__active {
+        transform: rotate(180deg);
+    }
+}

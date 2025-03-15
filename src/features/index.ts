@@ -6,3 +6,5 @@ export {
   EditChallengeIconButton,
   MakeActiveChallengeButton,
 } from './ManageChallenge/ManageChallenge';
+export { BarChart, BarStackedChart, BarStackedSingleChart } from './Charts';
+export { ChallengeStatistics } from './ChallengeStatistics/ChallengeStatistics';

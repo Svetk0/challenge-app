@@ -32,12 +32,12 @@ export const Navigation = () => {
             dataListItem='/challenges'
           />
           <NavigationItem
-            href='/dashboards'
+            href='/dashboard'
             icon={<ChartIcon size={20} />}
-            text='Progress'
+            text='Dashboard'
             onClick={handleClick}
-            isSelected={selected === '/dashboards'}
-            dataListItem='/dashboards'
+            isSelected={selected === '/dashboard'}
+            dataListItem='/dashboard'
           />
           <NavigationItem
             href='/finished'

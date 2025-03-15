@@ -21,6 +21,8 @@ A Next.js application for tracking personal challenges and goals.
 - SCSS Modules
 - ESLint & Prettier
 - Telegram mini App
+- Chart.js
+- React Hot Toast
 
 ### [Backend:](https://github.com/Anna-Kolmychek/challenge_app)
 
