@@ -7,8 +7,7 @@ A Next.js application for tracking personal challenges and goals.
 - Create and manage personal challenges
 - Track progress over time
 - Set custom periods and amounts for each challenge
-- Responsive design
-- Local storage persistence
+- Get notifications
 
 ## 🛠️ Tech Stack
 
