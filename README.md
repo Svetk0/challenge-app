@@ -1,14 +1,14 @@
 # <img width='24' height='24' src='./src/app/favicon.ico'> Challenge App
 
 A Next.js application for tracking personal challenges and goals.
+Enjoy it: https://t.me/challengeUApp_bot/mychallenges
 
 ## ✨ Features
 
 - Create and manage personal challenges
 - Track progress over time
 - Set custom periods and amounts for each challenge
-- Responsive design
-- Local storage persistence
+- Get notifications
 
 ## 🛠️ Tech Stack
 

@@ -82,7 +82,9 @@ export function ChallengeInfo({ isLoading, challenge }: Props) {
       }}
     >
       <div className={styles.rowWrapper}>
-        <span className={styles.description}>{description}</span>
+        <span className={`${styles.description} ${isChoosen ? styles.description__active : ''}`}>
+          {description}
+        </span>
         <EditChallengeIconButton challenge={challenge} />
       </div>
       <div className={styles.rowWrapper}>

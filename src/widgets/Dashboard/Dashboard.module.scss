@@ -30,7 +30,7 @@
     padding: 20px 5%;
 
     .subtitle {
-        @include Title($size: 18px);
+        @include Title($size: 20px);
         color: $logo-purple;
         align-self: flex-start;
     }

@@ -40,7 +40,7 @@
   "challenge_info": {
     "loading": "please, wait...",
     "buttons": {
-      "complete": "Complete",
+      "complete": "Finish",
       "incomplete": "Make Active",
       "remove": "Delete"
     },
@@ -94,7 +94,7 @@
     },
     "goal": {
       "label": "How many actions",
-      "placeholder": "5",
+      "placeholder": "number",
       "error_message": "should be above 0",
       "require_message": "please, fill it"
     },
@@ -135,7 +135,7 @@
     },
     "switcher": {
       "label": "All time",
-      "label_complete": "Complete this challenge"
+      "label_complete": "Finish this challenge"
     },
     "buttons": {
       "back": "Back",
@@ -152,7 +152,7 @@
     },
     "warnings": {
       "end_required": "Fill the 'Finish date' of challenge",
-      "complete_today": "This challenge will be completed today",
+      "complete_today": "This challenge will be finished with today datetime",
       "all_time": "Your challenge is endless"
     },
     "toasts": {
@@ -171,7 +171,7 @@
       }
     },
     "nominations": {
-      "total_completed_challenges": "Total completed challenges:",
+      "total_completed_challenges": "Total finished challenges:",
       "the_longest_challenge": "The longest challenge",
       "most_effective_challenge": "The most effective challenge",
       "notes": {
