@@ -78,7 +78,9 @@ export function FinishedChallengeInfo({ isLoading, challenge }: Props) {
     >
       <div className={styles.rowWrapper}>
         <div className={styles.columnWrapper}>
-          <span className={styles.description}>{description}</span>
+          <span className={`${styles.description} ${isChoosen ? styles.description__active : ''}`}>
+            {description}
+          </span>
           <p className={styles.comments}>{`${subtitle} ${goal} ${actions_per} ${period}`}</p>
         </div>
         <EditChallengeIconButton challenge={challenge} />
