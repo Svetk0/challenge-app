@@ -16,22 +16,24 @@
 html {
   max-width: 100vw;
   overflow-x: hidden;
-  background-image: url('../../../public/background_first.svg');
+  background-color: var(--background);
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.2) 100%), url('../../../public/bg_space.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: var(--background);
   margin: 0 auto;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   @include Flex($justify: space-between);
+  font-family: var(--font-open-sans), sans-serif;
   width: 100%;
   max-width: 430px;
   height: 100vh;
   margin: 0 auto;
   color: var(--font-color);
+  backdrop-filter: blur(1px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -77,4 +79,9 @@ a {
 button {
   @include ResetButton;
   color: var(--font-color-alt);
+}
+
+h1,
+h2 {
+  font-family: var(--font-sniglet), sans-serif;
 }

@@ -49,7 +49,7 @@ export function ProgressBar({ challenge, isMinimal = false }: Props) {
       } else {
         setIsOpen(false);
       }
-    }, 1000);
+    }, 400);
     return () => clearTimeout(timer);
   }, [currentProgress]);
 

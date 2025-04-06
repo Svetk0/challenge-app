@@ -10,7 +10,7 @@
   margin: 0;
   border-radius: 12px;
   border: none;
-  @include Title ($size: 20px, $line-height: 32.68px);
+  @include TitleButton;
   color: $black;
   box-shadow: $shadow-box-button;
   transition: all 0.2s ease;
@@ -115,7 +115,7 @@
   width: 100px;
   height: 30px;
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 600;
   color: $white;
   padding: 5px;
   background: $deep-dark-gray;
