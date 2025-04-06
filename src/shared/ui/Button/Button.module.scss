@@ -11,6 +11,8 @@
   border-radius: 12px;
   border: none;
   @include Title ($size: 20px, $line-height: 32.68px);
+  font-family: var(--font-open-sans), sans-serif;
+  font-weight: 600;
   color: $black;
   box-shadow: $shadow-box-button;
   transition: all 0.2s ease;

@@ -27,6 +27,7 @@ html {
 
 body {
   @include Flex($justify: space-between);
+  font-family: var(--font-open-sans), sans-serif;
   width: 100%;
   max-width: 430px;
   height: 100vh;
@@ -78,4 +79,9 @@ a {
 button {
   @include ResetButton;
   color: var(--font-color-alt);
+}
+
+h1,
+h2 {
+  font-family: var(--font-sniglet), sans-serif;
 }

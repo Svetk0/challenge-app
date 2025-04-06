@@ -18,7 +18,6 @@
 
 @mixin ResetButton {
   background-color: inherit;
-  font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   color: inherit;
@@ -39,7 +38,9 @@
   font-size: $size;
   text-align: $align;
   line-height: $line-height;
-  font-family: inherit;
+  //font-family: inherit;
+  font-family: var(--font-sniglet), sans-serif;
+  font-weight: 400;
   color: $white;
 }
 
