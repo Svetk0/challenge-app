@@ -84,7 +84,7 @@
 }
 
 .subtitle {
-    @include Text;
+    @include Title($size: 20px);
     color: $purple;
     align-self: center;
 }

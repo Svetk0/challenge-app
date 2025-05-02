@@ -21,6 +21,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.4.0",
     "@telegram-apps/sdk-react": "^2.0.22",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "chart.js": "^4.4.8",
     "chartjs-plugin-datalabels": "^2.2.0",
     "eruda": "^3.0.1",

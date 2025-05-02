@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import StoreProvider from './StoreProvider';
 import { Sniglet, Open_Sans } from 'next/font/google';
 //import localFont from 'next/font/local';
@@ -43,6 +45,8 @@ export default function RootLayout({
             <Suspense fallback={<Loading />}>
               <main>{children}</main>
               <Footer />
+              <Analytics />
+              <SpeedInsights />
             </Suspense>
           </Root>
         </body>
