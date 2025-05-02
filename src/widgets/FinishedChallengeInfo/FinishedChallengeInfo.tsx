@@ -152,7 +152,7 @@ const ChallengeSummary = ({
       {summaryData.map((item) => (
         <>
           <SummaryItem key={item.label} {...item} />
-          {item.comment && <p className={styles.note}>{item.comment}</p>}
+          {item.comment && <p className={styles.note}> {item.comment}</p>}
         </>
       ))}
     </div>
